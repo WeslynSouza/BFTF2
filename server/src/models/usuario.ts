@@ -1,7 +1,8 @@
-import { Column, Entity, PrimaryColumn, ManyToMany, JoinTable, OneToMany, OneToOne } from 'typeorm';
+import { Column, Entity, PrimaryColumn, ManyToMany, JoinTable, OneToMany, OneToOne, ManyToOne } from 'typeorm';
 import Classe from './classe';
 import ImagemUser from './imagemUser';
 import Post from './post';
+import Time from './time';
 
 @Entity()
 export default class User {
@@ -23,12 +24,15 @@ export default class User {
     @JoinTable()
     avatar: ImagemUser;
 
-    @Column()
-    time: string;
+    @ManyToOne(() => Time, time => time.usuarios)
+    @JoinTable()
+    time: Time;
 
     @Column()
     acesso: string;
 
-    @OneToMany(() => Post, post => post.autor)
+    @OneToMany(() => Post, post => post.autor, {
+        cascade: ['update', 'remove']
+    })
     posts: Post[];
 }

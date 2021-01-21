@@ -6,7 +6,7 @@ import Usuario from './usuario';
 export default class Post {
 
     @PrimaryGeneratedColumn('increment')
-    postId: number;
+    postID: number;
 
     @ManyToOne(() => Usuario, usuario => usuario.posts)
     autor: string;
