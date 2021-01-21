@@ -7,7 +7,7 @@ export class createPost1611164388229 implements MigrationInterface {
             name: 'post',
             columns: [
                 {
-                    name: 'postID',
+                    name: 'id',
                     type: 'integer',
                     unsigned: true,
                     isPrimary: true,
@@ -32,7 +32,7 @@ export class createPost1611164388229 implements MigrationInterface {
                     name: 'idAutor',
                     columnNames: ['autor'],
                     referencedTableName: 'usuario',
-                    referencedColumnNames: ['steamID'],
+                    referencedColumnNames: ['steamId'],
                     onUpdate: 'CASCADE',
                     onDelete: 'CASCADE'
                 }

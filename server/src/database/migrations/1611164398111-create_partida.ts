@@ -7,7 +7,7 @@ export class createPartida1611164398111 implements MigrationInterface {
             name: 'partida',
             columns: [
                 {
-                    name: 'imagemID',
+                    name: 'id',
                     type: 'integer',
                     unsigned: true,
                     isPrimary: true,
@@ -28,7 +28,7 @@ export class createPartida1611164398111 implements MigrationInterface {
                     name: 'idDivisao',
                     columnNames: ['divisao'],
                     referencedTableName: 'divisao',
-                    referencedColumnNames: ['divisaoID'],
+                    referencedColumnNames: ['id'],
                     onUpdate: 'CASCADE',
                     onDelete: 'CASCADE'
                 }

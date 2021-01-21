@@ -4,7 +4,7 @@ import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 export default class ImagemTime {
 
     @PrimaryGeneratedColumn('increment')
-    imagemID: number;
+    id: number;
 
     @Column()
     path: string;

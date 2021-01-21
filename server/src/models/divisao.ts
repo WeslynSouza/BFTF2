@@ -6,7 +6,7 @@ import Time from './time';
 export default class Divisao {
 
     @PrimaryGeneratedColumn('increment')
-    divisaoID: number;
+    id: number;
 
     @Column()
     nome: string;

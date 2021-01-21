@@ -1,14 +1,14 @@
-import { Column, Entity, PrimaryColumn, ManyToMany, JoinTable, OneToMany, OneToOne, ManyToOne } from 'typeorm';
+import { Column, Entity, PrimaryColumn, ManyToMany, JoinTable, OneToMany, OneToOne, ManyToOne, JoinColumn } from 'typeorm';
 import Classe from './classe';
 import ImagemUser from './imagemUser';
 import Post from './post';
 import Time from './time';
 
 @Entity()
-export default class User {
+export default class Usuario {
 
     @PrimaryColumn()
-    steamID: string;
+    steamId: string;
      
     @Column()
     nick: string;
@@ -20,16 +20,8 @@ export default class User {
     @JoinTable()
     classes: Classe[];
 
-    @OneToOne(() => ImagemUser)
-    @JoinTable()
-    avatar: ImagemUser;
-
-    @ManyToOne(() => Time, time => time.usuarios)
-    @JoinTable()
-    time: Time;
-
     @Column()
-    acesso: string;
+    acesso: number;
 
     @OneToMany(() => Post, post => post.autor, {
         cascade: ['update', 'remove']

@@ -7,7 +7,7 @@ export class createImagemTime1611164424572 implements MigrationInterface {
             name: 'imagemTime',
             columns: [
                 {
-                    name: 'imagemID',
+                    name: 'id',
                     type: 'integer',
                     unsigned: true,
                     isPrimary: true,

@@ -7,7 +7,7 @@ export class createClasse1611164367447 implements MigrationInterface {
             name: 'classe',
             columns: [
                 {
-                    name: 'classeID',
+                    name: 'id',
                     type: 'integer',
                     unsigned: true,
                     isPrimary: true,

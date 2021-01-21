@@ -7,7 +7,7 @@ export class createUsuario1611164331692 implements MigrationInterface {
             name: "usuario",
             columns: [
                 {
-                    name: "steamID",
+                    name: "steamId",
                     type: "varchar",
                     isPrimary: true,
                 },
@@ -31,21 +31,8 @@ export class createUsuario1611164331692 implements MigrationInterface {
                 },
                 {
                     name: "acesso",
-                    type: "varchar",
-                }
-            ],
-            foreignKeys: [
-                {
-                    name: "idAvatar",
-                    columnNames: ['avatar'],
-                    referencedTableName: 'imagemUser',
-                    referencedColumnNames: ['imagemID'],
-                },
-                {
-                    name: "idTime",
-                    columnNames: ['time'],
-                    referencedTableName: 'time',
-                    referencedColumnNames: ['timeID'],
+                    type: "integer",
+                    isNullable: true,
                 }
             ]
         }));

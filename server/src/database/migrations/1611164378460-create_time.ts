@@ -7,7 +7,7 @@ export class createTime1611164378460 implements MigrationInterface {
             name: 'time',
             columns: [
                 {
-                    name: 'timeID',
+                    name: 'id',
                     type: 'integer',
                     unsigned: true,
                     isPrimary: true,
@@ -36,7 +36,7 @@ export class createTime1611164378460 implements MigrationInterface {
                     name: 'idLider',
                     columnNames: ['lider'],
                     referencedTableName: 'usuario',
-                    referencedColumnNames: ['steamID'],
+                    referencedColumnNames: ['steamId'],
                     onUpdate: 'CASCADE',
                     onDelete: 'CASCADE'
                 },
@@ -44,7 +44,7 @@ export class createTime1611164378460 implements MigrationInterface {
                     name: 'idDivisao',
                     columnNames: ['divisao'],
                     referencedTableName: 'divisao',
-                    referencedColumnNames: ['divisaoID'],
+                    referencedColumnNames: ['id'],
                 }
             ]
         }));

@@ -7,7 +7,7 @@ export class createImagemUser1611164430877 implements MigrationInterface {
             name: 'imagemUser',
             columns: [
                 {
-                    name: 'imagemID',
+                    name: 'id',
                     type: 'integer',
                     unsigned: true,
                     isPrimary: true,

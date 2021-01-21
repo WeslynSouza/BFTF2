@@ -6,7 +6,7 @@ import Time from './time';
 export default class Partida {
 
     @PrimaryGeneratedColumn('increment')
-    partidaID: number;
+    id: number;
 
     @ManyToMany(() => Time)
     @JoinTable()

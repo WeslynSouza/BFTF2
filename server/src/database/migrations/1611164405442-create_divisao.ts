@@ -7,7 +7,7 @@ export class createDivisao1611164405442 implements MigrationInterface {
             name: 'divisao',
             columns: [
                 {
-                    name: 'divisaoID',
+                    name: 'id',
                     type: 'integer',
                     unsigned: true,
                     isPrimary: true,

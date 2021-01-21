@@ -5,7 +5,7 @@ import Post from './post';
 export default class ImagemPost {
 
     @PrimaryGeneratedColumn('increment')
-    imagemID: number;
+    id: number;
 
     @Column()
     path: string;

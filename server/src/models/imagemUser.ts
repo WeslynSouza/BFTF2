@@ -1,10 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import Usuario from './usuario';
 
 @Entity()
 export default class ImagemUser {
 
     @PrimaryGeneratedColumn('increment')
-    imagemID: number;
+    id: number;
 
     @Column()
     path: string;

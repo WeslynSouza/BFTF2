@@ -7,7 +7,7 @@ export class createImagemPost1611164418356 implements MigrationInterface {
             name: 'imagemPost',
             columns: [
                 {
-                    name: 'imagemID',
+                    name: 'id',
                     type: 'integer',
                     unsigned: true,
                     isPrimary: true,
@@ -28,7 +28,7 @@ export class createImagemPost1611164418356 implements MigrationInterface {
                     name: 'idPost',
                     columnNames: ['post'],
                     referencedTableName: 'post',
-                    referencedColumnNames: ['postID'],
+                    referencedColumnNames: ['id'],
                     onUpdate: 'CASCADE',
                     onDelete: 'CASCADE'
                 }

@@ -8,7 +8,7 @@ import Usuario from './usuario';
 export default class Time {
 
     @PrimaryGeneratedColumn('increment')
-    timeID: number;
+    id: number;
 
     @OneToOne(() => Usuario)
     @JoinTable()
@@ -23,9 +23,6 @@ export default class Time {
 
     @ManyToOne(() => Divisao, divisao => divisao.times)
     divisao: Divisao;
-
-    @OneToMany(() => Usuario, usuario => usuario.time)
-    usuarios: Usuario[];
 
     @ManyToMany(() => Partida, partida => partida.times)
     partidas: Partida[];
