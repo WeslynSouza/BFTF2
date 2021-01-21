@@ -1,6 +1,6 @@
-import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import Divisao from './divisao';
-import ImagemTime from './imagemTime';
+import Logo from './logo';
 import Partida from './partida';
 import Usuario from './usuario';
 
@@ -10,16 +10,20 @@ export default class Time {
     @PrimaryGeneratedColumn('increment')
     id: number;
 
-    @OneToOne(() => Usuario)
-    @JoinTable()
+    @OneToOne(() => Usuario, {
+        cascade: ['update', 'remove']
+    })
+    @JoinColumn()
     lider: Usuario;
 
     @Column()
     nome: string;
 
-    @OneToOne(() => ImagemTime)
-    @JoinTable()
-    logo: ImagemTime;
+    @OneToOne(() => Logo, {
+        cascade: ['update', 'remove']
+    })
+    @JoinColumn()
+    logo: Logo;
 
     @ManyToOne(() => Divisao, divisao => divisao.times)
     divisao: Divisao;

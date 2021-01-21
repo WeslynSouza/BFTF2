@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryColumn, ManyToMany, JoinTable, OneToMany, OneToOne, ManyToOne, JoinColumn } from 'typeorm';
 import Classe from './classe';
-import ImagemUser from './imagemUser';
+import Avatar from './avatar';
 import Post from './post';
 import Time from './time';
 
@@ -19,6 +19,12 @@ export default class Usuario {
     @ManyToMany(() => Classe)
     @JoinTable()
     classes: Classe[];
+
+    @OneToOne(() => Avatar, {
+        cascade: ['update', 'remove']
+    })
+    @JoinColumn()
+    avatar: Avatar;
 
     @Column()
     acesso: number;

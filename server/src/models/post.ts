@@ -1,5 +1,5 @@
 import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import ImagemPost from './imagemPost';
+import Imagens from './imagens';
 import Usuario from './usuario';
 
 @Entity()
@@ -17,6 +17,6 @@ export default class Post {
     @Column()
     conteudo: string;
 
-    @OneToMany(() => ImagemPost, imagemPost => imagemPost.post)
-    imagens: ImagemPost[];
+    @OneToMany(() => Imagens, imagens => imagens.post)
+    imagens: Imagens[];
 }

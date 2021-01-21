@@ -23,7 +23,7 @@ export class createTime1611164378460 implements MigrationInterface {
                     type: 'varchar',
                 },
                 {
-                    name: 'logo',
+                    name: 'logoId',
                     type: 'integer',
                 },
                 {
@@ -32,6 +32,12 @@ export class createTime1611164378460 implements MigrationInterface {
                 }
             ],
             foreignKeys: [
+                {
+                    name: 'idLogo',
+                    columnNames: ['logoId'],
+                    referencedTableName: 'logo',
+                    referencedColumnNames: ['id'],
+                },
                 {
                     name: 'idLider',
                     columnNames: ['lider'],

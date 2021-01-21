@@ -20,7 +20,7 @@ export class createUsuario1611164331692 implements MigrationInterface {
                     type: "varchar",
                 },
                 {
-                    name: "avatar",
+                    name: "avatarId",
                     type: "integer",
                     isNullable: true,
                 },
@@ -33,6 +33,14 @@ export class createUsuario1611164331692 implements MigrationInterface {
                     name: "acesso",
                     type: "integer",
                     isNullable: true,
+                }
+            ],
+            foreignKeys: [
+                {
+                    name: 'idAvatar',
+                    columnNames: ['avatarId'],
+                    referencedTableName: 'avatar',
+                    referencedColumnNames: ['id'],
                 }
             ]
         }));
