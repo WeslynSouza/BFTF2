@@ -11,7 +11,9 @@ export default {
 
         const usuarioRepository = getRepository(Usuario);
 
-        const usuarios = await usuarioRepository.find();
+        const usuarios = await usuarioRepository.find({
+            relations: ['avatar']
+        });
 
         return res.status(200).json(usuarios);
     },
@@ -22,7 +24,9 @@ export default {
 
         const usuarioRepository = getRepository(Usuario);
 
-        const usuario = await usuarioRepository.findOneOrFail( id );
+        const usuario = await usuarioRepository.findOneOrFail( id , {
+            relations: ['avatar']
+        });
 
         return res.status(200).json(usuario);
     },
@@ -41,18 +45,26 @@ export default {
 
         const classeUsuario = await classeRepository.findOneOrFail(classeID);
 
+        const requestImages = req.files as Express.Multer.File[];
+        const avatar = {
+            path: requestImages[0].filename
+        };
+
         const data = {
             steamId,
             nick,
             senha,
-            acesso,
-            classes: [classeUsuario]
+            classes: [classeUsuario],
+            avatar,
+            acesso
         }
 
         const schema = yup.object().shape({
             steamId: yup.string().required(),
             nick: yup.string().required(),
             senha: yup.string().required(),
+            classes: yup.array(),
+            avatar: yup.object(),
             acesso: yup.number()
         })
 

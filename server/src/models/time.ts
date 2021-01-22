@@ -19,10 +19,7 @@ export default class Time {
     @Column()
     nome: string;
 
-    @OneToOne(() => Logo, {
-        cascade: ['update', 'remove']
-    })
-    @JoinColumn()
+    @OneToOne(() => Logo, logo => logo.time)
     logo: Logo;
 
     @ManyToOne(() => Divisao, divisao => divisao.times)

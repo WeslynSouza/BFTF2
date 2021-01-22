@@ -15,7 +15,7 @@ routes.post("/classe", ClasseController.create);
 routes.get("/classe", ClasseController.index);
 routes.get("/classe/:id", ClasseController.show)
 
-routes.post("/usuario", UsuarioController.create);
+routes.post("/usuario", upload.array('avatar'), UsuarioController.create);
 routes.get("/usuario", UsuarioController.index);
 routes.get("/usuario/:steamId", UsuarioController.show)
 
@@ -27,7 +27,7 @@ routes.post("/divisao", DivisaoController.create);
 routes.get("/divisao", DivisaoController.index);
 routes.get("/divisao/:id", DivisaoController.show)
 
-routes.post("/time", TimeController.create);
+routes.post("/time", upload.array('logo'), TimeController.create);
 routes.get("/time", TimeController.index);
 routes.get("/time/:id", TimeController.show)
 

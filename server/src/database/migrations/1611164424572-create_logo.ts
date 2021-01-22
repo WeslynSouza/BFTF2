@@ -17,6 +17,10 @@ export class createLogo1611164424572 implements MigrationInterface {
                 {
                     name: 'path',
                     type: 'varchar'
+                },
+                {
+                    name: 'timeId',
+                    type: 'varchar'
                 }
             ]
         }));

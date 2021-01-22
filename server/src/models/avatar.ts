@@ -1,4 +1,5 @@
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import Usuario from './usuario';
 
 @Entity()
 export default class ImagemUser {
@@ -8,4 +9,9 @@ export default class ImagemUser {
 
     @Column()
     path: string;
+
+    @OneToOne(() => Usuario, {
+        cascade: ['update', 'remove']
+    })
+    usuario: Usuario;
 }

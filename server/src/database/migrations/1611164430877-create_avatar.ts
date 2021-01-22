@@ -17,6 +17,20 @@ export class createavatar1611164430877 implements MigrationInterface {
                 {
                     name: 'path',
                     type: 'varchar'
+                },
+                {
+                    name: 'usuarioSteamId',
+                    type: 'varchar',
+                }
+            ],
+            foreignKeys: [
+                {
+                    name: 'idUsuario',
+                    columnNames: ['usuarioSteamId'],
+                    referencedTableName: 'usuario',
+                    referencedColumnNames: ['steamId'],
+                    onUpdate: 'CASCADE',
+                    onDelete: 'CASCADE'
                 }
             ]
         }));

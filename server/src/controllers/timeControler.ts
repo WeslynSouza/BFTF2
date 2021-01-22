@@ -12,7 +12,9 @@ export default {
 
         const timeRepository = getRepository(Time);
 
-        const times = await timeRepository.find();
+        const times = await timeRepository.find({
+            relations: ['logo']
+        });
 
         return res.status(200).json(times);
     },
@@ -23,7 +25,9 @@ export default {
 
         const timeRepository = getRepository(Time);
 
-        const time = await timeRepository.findOneOrFail( id );
+        const time = await timeRepository.findOneOrFail( id , {
+            relations: ['logo']
+        });
 
         return res.status(200).json(time);
     },
@@ -44,10 +48,16 @@ export default {
 
         const jogadores = [ lider ];
 
+        const requestImages = req.files as Express.Multer.File[];
+        const logo = {
+            path: requestImages[0].filename
+        };
+
         const data = {
             lider,
             nome,
             divisao,
+            logo,
             jogadores
         }
 
@@ -55,6 +65,7 @@ export default {
             lider: yup.object().required(),
             nome: yup.string().required(),
             divisao: yup.object().required(),
+            logo: yup.object(),
             jogadores: yup.array().required()
         })
 

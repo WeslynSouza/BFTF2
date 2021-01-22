@@ -23,22 +23,11 @@ export class createTime1611164378460 implements MigrationInterface {
                     type: 'varchar',
                 },
                 {
-                    name: 'logoId',
-                    type: 'integer',
-                    isNullable: true
-                },
-                {
                     name: 'divisaoId',
                     type: 'integer',
                 }
             ],
             foreignKeys: [
-                {
-                    name: 'idLogo',
-                    columnNames: ['logoId'],
-                    referencedTableName: 'logo',
-                    referencedColumnNames: ['id'],
-                },
                 {
                     name: 'idLider',
                     columnNames: ['liderSteamId'],

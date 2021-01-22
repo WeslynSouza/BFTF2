@@ -20,10 +20,7 @@ export default class Usuario {
     @JoinTable()
     classes: Classe[];
 
-    @OneToOne(() => Avatar, {
-        cascade: ['update', 'remove']
-    })
-    @JoinColumn()
+    @OneToOne(() => Avatar, avatar => avatar.usuario)
     avatar: Avatar;
 
     @Column()
