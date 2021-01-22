@@ -1,5 +1,5 @@
 <h1 align='center' >
-  Brasil Fortress - TF2
+  <img width='250px' alt='OffSession' src='https://github.com/WeslynSouza/BFTF2/blob/main/git/Icones-tipografia-bf2.png'/>
 </h1>
 
 <p align="center">
