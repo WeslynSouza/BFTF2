@@ -19,14 +19,14 @@ export class createImagens1611164418356 implements MigrationInterface {
                     type: 'varchar'
                 },
                 {
-                    name: 'post',
+                    name: 'postId',
                     type: 'integer'
                 }
             ],
             foreignKeys: [
                 {
                     name: 'idPost',
-                    columnNames: ['post'],
+                    columnNames: ['postId'],
                     referencedTableName: 'post',
                     referencedColumnNames: ['id'],
                     onUpdate: 'CASCADE',

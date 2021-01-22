@@ -9,7 +9,7 @@ export default class Post {
     id: number;
 
     @ManyToOne(() => Usuario, usuario => usuario.posts)
-    autor: string;
+    autor: Usuario;
 
     @Column()
     titulo: string;
