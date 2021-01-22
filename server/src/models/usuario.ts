@@ -20,13 +20,16 @@ export default class Usuario {
     @JoinTable()
     classes: Classe[];
 
-    @OneToOne(() => Avatar, avatar => avatar.usuario)
+    @OneToOne(() => Avatar, avatar => avatar.usuario, {
+        cascade: ['insert', 'update', 'remove']
+    })
     avatar: Avatar;
 
     @Column()
     acesso: number;
 
     @ManyToOne(() => Time, time => time.jogadores)
+    @JoinColumn()
     time: Time;
 
     @OneToMany(() => Post, post => post.autor, {

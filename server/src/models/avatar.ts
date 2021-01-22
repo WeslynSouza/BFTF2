@@ -1,8 +1,8 @@
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import Usuario from './usuario';
 
 @Entity()
-export default class ImagemUser {
+export default class Avatar {
 
     @PrimaryGeneratedColumn('increment')
     id: number;
@@ -10,8 +10,7 @@ export default class ImagemUser {
     @Column()
     path: string;
 
-    @OneToOne(() => Usuario, {
-        cascade: ['update', 'remove']
-    })
+    @OneToOne(() => Usuario, usuario => usuario.avatar)
+    @JoinColumn({ name: 'usuarioSteamId'})
     usuario: Usuario;
 }

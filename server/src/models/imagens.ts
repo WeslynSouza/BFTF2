@@ -1,8 +1,8 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import Post from './post';
 
 @Entity()
-export default class ImagemPost {
+export default class Imagens {
 
     @PrimaryGeneratedColumn('increment')
     id: number;
@@ -11,5 +11,6 @@ export default class ImagemPost {
     path: string;
 
     @ManyToOne(() => Post, post => post.imagens)
+    @JoinColumn({name: 'postId'})
     post: Post;
 }

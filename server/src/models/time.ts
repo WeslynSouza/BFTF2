@@ -19,13 +19,17 @@ export default class Time {
     @Column()
     nome: string;
 
-    @OneToOne(() => Logo, logo => logo.time)
+    @OneToOne(() => Logo, logo => logo.time, {
+        cascade: ['insert', 'update', 'remove']
+    })
     logo: Logo;
 
     @ManyToOne(() => Divisao, divisao => divisao.times)
     divisao: Divisao;
 
-    @OneToMany(() => Usuario, usuario => usuario.time)
+    @OneToMany(() => Usuario, usuario => usuario.time, {
+        cascade: ['insert', 'update']
+    })
     jogadores: Usuario[];
 
     @ManyToMany(() => Partida, partida => partida.times)

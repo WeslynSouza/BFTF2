@@ -22,6 +22,16 @@ export class createLogo1611164424572 implements MigrationInterface {
                     name: 'timeId',
                     type: 'varchar'
                 }
+            ],
+            foreignKeys: [
+                {
+                    name: 'idTime',
+                    columnNames: ['timeId'],
+                    referencedTableName: 'time',
+                    referencedColumnNames: ['id'],
+                    onUpdate: 'CASCADE',
+                    onDelete: 'CASCADE'
+                }
             ]
         }));
     }

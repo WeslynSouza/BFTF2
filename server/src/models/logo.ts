@@ -1,8 +1,8 @@
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import Time from './time';
 
 @Entity()
-export default class ImagemTime {
+export default class Logo {
 
     @PrimaryGeneratedColumn('increment')
     id: number;
@@ -10,8 +10,7 @@ export default class ImagemTime {
     @Column()
     path: string;
 
-    @OneToOne(() => Time, time => time.logo, {
-        cascade: ['update', 'remove']
-    })
+    @OneToOne(() => Time, time => time.logo)
+    @JoinColumn({ name: 'timeId'})
     time: Time;
 }
