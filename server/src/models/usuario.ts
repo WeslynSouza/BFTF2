@@ -29,6 +29,9 @@ export default class Usuario {
     @Column()
     acesso: number;
 
+    @ManyToOne(() => Time, time => time.jogadores)
+    time: Time;
+
     @OneToMany(() => Post, post => post.autor, {
         cascade: ['update', 'remove']
     })

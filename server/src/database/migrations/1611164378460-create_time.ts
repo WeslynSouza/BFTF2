@@ -15,7 +15,7 @@ export class createTime1611164378460 implements MigrationInterface {
                     generationStrategy: 'increment',
                 },
                 {
-                    name: 'lider',
+                    name: 'liderSteamId',
                     type: 'varchar',
                 },
                 {
@@ -25,9 +25,10 @@ export class createTime1611164378460 implements MigrationInterface {
                 {
                     name: 'logoId',
                     type: 'integer',
+                    isNullable: true
                 },
                 {
-                    name: 'divisao',
+                    name: 'divisaoId',
                     type: 'integer',
                 }
             ],
@@ -40,7 +41,7 @@ export class createTime1611164378460 implements MigrationInterface {
                 },
                 {
                     name: 'idLider',
-                    columnNames: ['lider'],
+                    columnNames: ['liderSteamId'],
                     referencedTableName: 'usuario',
                     referencedColumnNames: ['steamId'],
                     onUpdate: 'CASCADE',
@@ -48,7 +49,7 @@ export class createTime1611164378460 implements MigrationInterface {
                 },
                 {
                     name: 'idDivisao',
-                    columnNames: ['divisao'],
+                    columnNames: ['divisaoId'],
                     referencedTableName: 'divisao',
                     referencedColumnNames: ['id'],
                 }

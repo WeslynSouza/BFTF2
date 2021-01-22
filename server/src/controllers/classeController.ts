@@ -6,6 +6,26 @@ import Classe from '../models/classe';
 
 export default {
 
+    async index(req: Request, res: Response) {
+
+        const classeRepository = getRepository(Classe);
+
+        const classes = await classeRepository.find();
+
+        return res.status(200).json(classes);
+    },
+
+    async show(req: Request, res: Response) {
+
+        const { id } = req.params;
+
+        const classeRepository = getRepository(Classe);
+
+        const classe = await classeRepository.findOneOrFail( id );
+
+        return res.status(200).json(classe);
+    },
+
     async create(req: Request, res: Response){
 
         const {

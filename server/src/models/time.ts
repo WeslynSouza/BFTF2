@@ -28,6 +28,9 @@ export default class Time {
     @ManyToOne(() => Divisao, divisao => divisao.times)
     divisao: Divisao;
 
+    @OneToMany(() => Usuario, usuario => usuario.time)
+    jogadores: Usuario[];
+
     @ManyToMany(() => Partida, partida => partida.times)
     partidas: Partida[];
 }

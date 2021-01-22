@@ -7,9 +7,29 @@ import Usuario from '../models/usuario';
 
 export default {
 
+    async index(req: Request, res: Response) {
+
+        const usuarioRepository = getRepository(Usuario);
+
+        const usuarios = await usuarioRepository.find();
+
+        return res.status(200).json(usuarios);
+    },
+
+    async show(req: Request, res: Response) {
+
+        const { id } = req.params;
+
+        const usuarioRepository = getRepository(Usuario);
+
+        const usuario = await usuarioRepository.findOneOrFail( id );
+
+        return res.status(200).json(usuario);
+    },
+
     async create(req: Request, res: Response){
         const {
-            steamID,
+            steamId,
             nick,
             senha,
             acesso,
@@ -22,7 +42,7 @@ export default {
         const classeUsuario = await classeRepository.findOneOrFail(classeID);
 
         const data = {
-            steamID,
+            steamId,
             nick,
             senha,
             acesso,
@@ -30,7 +50,7 @@ export default {
         }
 
         const schema = yup.object().shape({
-            steamID: yup.string().required(),
+            steamId: yup.string().required(),
             nick: yup.string().required(),
             senha: yup.string().required(),
             acesso: yup.number()

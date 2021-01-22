@@ -33,6 +33,11 @@ export class createUsuario1611164331692 implements MigrationInterface {
                     name: "acesso",
                     type: "integer",
                     isNullable: true,
+                },
+                {
+                    name: 'timeId',
+                    type: 'integer',
+                    isNullable: true,
                 }
             ],
             foreignKeys: [
@@ -40,6 +45,12 @@ export class createUsuario1611164331692 implements MigrationInterface {
                     name: 'idAvatar',
                     columnNames: ['avatarId'],
                     referencedTableName: 'avatar',
+                    referencedColumnNames: ['id'],
+                },
+                {
+                    name: 'idTime',
+                    columnNames: ['timeId'],
+                    referencedTableName: 'time',
                     referencedColumnNames: ['id'],
                 }
             ]
