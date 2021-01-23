@@ -1,4 +1,4 @@
-import { Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import Divisao from './divisao';
 import Time from './time';
 
@@ -8,11 +8,15 @@ export default class Partida {
     @PrimaryGeneratedColumn('increment')
     id: number;
 
-    @ManyToMany(() => Time)
-    @JoinTable()
-    times: Time[];
+    @ManyToOne(() => Time, time => time.partidas1)
+    time1: Time;
+
+    @ManyToOne(() => Time, time => time.partidas2)
+    @JoinColumn()
+    time2: Time;
 
     @ManyToOne(() => Divisao, divisao => divisao.partidas)
+    @JoinColumn()
     divisao: Divisao;
 
     @Column()

@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import Divisao from './divisao';
 import Logo from './logo';
 import Partida from './partida';
@@ -32,6 +32,9 @@ export default class Time {
     })
     jogadores: Usuario[];
 
-    @ManyToMany(() => Partida, partida => partida.times)
-    partidas: Partida[];
+    @OneToMany(() => Partida, partida => partida.time1)
+    partidas1: Partida[];
+
+    @OneToMany(() => Partida, partida => partida.time2)
+    partidas2: Partida[];
 }
