@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import Partida from '../models/partida';
 import Time from '../models/time';
 import Divisao from '../models/divisao';
+import PartidaView from '../views/partidaView';
 
 export default {
 
@@ -16,7 +17,7 @@ export default {
             relations: ['time1', 'time2', 'divisao']
         });
 
-        return res.status(200).json(partidas);
+        return res.status(200).json(PartidaView.renderMany(partidas));
     },
 
     async show(req: Request, res: Response) {
@@ -29,7 +30,7 @@ export default {
             relations: ['time1', 'time2', 'divisao']
         });
 
-        return res.status(200).json(partida);
+        return res.status(200).json(PartidaView.render(partida));
     },
 
     async create(req: Request, res: Response){

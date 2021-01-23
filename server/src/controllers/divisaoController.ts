@@ -3,6 +3,7 @@ import { getRepository } from 'typeorm';
 import * as yup from 'yup';
 
 import Divisao from '../models/divisao';
+import DivisaoView from '../views/divisaoView';
 
 export default {
 
@@ -10,9 +11,11 @@ export default {
 
         const divisaoRepository = getRepository(Divisao);
 
-        const divisoes = await divisaoRepository.find();
+        const divisoes = await divisaoRepository.find({
+            relations: ['partidas']
+        });
 
-        return res.status(200).json(divisoes);
+        return res.status(200).json(DivisaoView.renderMany(divisoes));
     },
 
     async show(req: Request, res: Response) {
@@ -21,9 +24,11 @@ export default {
 
         const divisaoRepository = getRepository(Divisao);
 
-        const divisao = await divisaoRepository.findOneOrFail( id );
+        const divisao = await divisaoRepository.findOneOrFail( id , {
+            relations: ['partidas']
+        });
 
-        return res.status(200).json(divisao);
+        return res.status(200).json(DivisaoView.render(divisao));
     },
 
     async create(req: Request, res: Response){

@@ -5,6 +5,7 @@ import * as yup from 'yup';
 import Time from '../models/time';
 import Usuario from '../models/usuario';
 import Divisao from '../models/divisao';
+import TimeView from '../views/timeView';
 
 export default {
 
@@ -13,10 +14,10 @@ export default {
         const timeRepository = getRepository(Time);
 
         const times = await timeRepository.find({
-            relations: ['logo']
+            relations: ['lider', 'logo', 'divisao', 'jogadores']
         });
 
-        return res.status(200).json(times);
+        return res.status(200).json(TimeView.renderMany(times));
     },
 
     async show(req: Request, res: Response) {
@@ -26,10 +27,10 @@ export default {
         const timeRepository = getRepository(Time);
 
         const time = await timeRepository.findOneOrFail( id , {
-            relations: ['logo']
+            relations: ['lider', 'logo', 'divisao', 'jogadores']
         });
 
-        return res.status(200).json(time);
+        return res.status(200).json(TimeView.render(time));
     },
 
     async create(req: Request, res: Response){

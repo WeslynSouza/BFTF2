@@ -5,7 +5,7 @@ import uploadConfig from './config/uploads';
 import UsuarioController from './controllers/usuarioController';
 import ClasseController from './controllers/classeController';
 import DivisaoController from './controllers/divisaoController';
-import TimeController from './controllers/timeControler';
+import TimeController from './controllers/timeController';
 import PostController from './controllers/postController';
 import PartidaController from './controllers/partidaController';
 

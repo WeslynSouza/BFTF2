@@ -4,6 +4,7 @@ import * as yup from 'yup';
 
 import Post from '../models/post';
 import Usuario from '../models/usuario';
+import PostView from '../views/postView';
 
 export default {
 
@@ -12,10 +13,10 @@ export default {
         const postRepository = getRepository(Post);
 
         const posts = await postRepository.find({
-            relations: ['imagens']
+            relations: ['imagens', 'autor']
         });
 
-        return res.status(200).json(posts);
+        return res.status(200).json(PostView.renderMany(posts));
     },
 
     async show(req: Request, res: Response) {
@@ -28,7 +29,7 @@ export default {
             relations: ['imagens']
         });
 
-        return res.status(200).json(post);
+        return res.status(200).json(PostView.render(post));
     },
 
     async create(req: Request, res: Response){

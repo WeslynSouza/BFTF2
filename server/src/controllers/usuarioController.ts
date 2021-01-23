@@ -4,6 +4,7 @@ import * as yup from 'yup';
 import Classe from '../models/classe';
 
 import Usuario from '../models/usuario';
+import UsuarioView from '../views/usuarioView';
 
 export default {
 
@@ -12,10 +13,10 @@ export default {
         const usuarioRepository = getRepository(Usuario);
 
         const usuarios = await usuarioRepository.find({
-            relations: ['avatar', 'time']
+            relations: ['avatar', 'time', 'classes', 'posts']
         });
 
-        return res.status(200).json(usuarios);
+        return res.status(200).json(UsuarioView.renderMany(usuarios));
     },
 
     async show(req: Request, res: Response) {
@@ -25,10 +26,10 @@ export default {
         const usuarioRepository = getRepository(Usuario);
 
         const usuario = await usuarioRepository.findOneOrFail( id , {
-            relations: ['avatar', 'time']
+            relations: ['avatar', 'time', 'classes', 'posts']
         });
 
-        return res.status(200).json(usuario);
+        return res.status(200).json(UsuarioView.render(usuario));
     },
 
     async create(req: Request, res: Response){
@@ -37,13 +38,19 @@ export default {
             nick,
             senha,
             acesso,
-            classeID
+            classes
         } = req.body;
 
         const usuarioRepository = getRepository(Usuario);
         const classeRepository = getRepository(Classe);
 
-        const classeUsuario = await classeRepository.findOneOrFail(classeID);
+        const classeUsuario: Array<Classe> = [];
+
+        for (const i in classes) {
+            if (Object.prototype.hasOwnProperty.call(classes, i)) {    
+                classeUsuario.push( await classeRepository.findOneOrFail(classes[i]))
+            }
+        }
 
         const requestImages = req.files as Express.Multer.File[];
         const avatar = {
@@ -54,7 +61,7 @@ export default {
             steamId,
             nick,
             senha,
-            classes: [classeUsuario],
+            classes: classeUsuario,
             avatar,
             acesso
         }

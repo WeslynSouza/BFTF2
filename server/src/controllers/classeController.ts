@@ -3,6 +3,7 @@ import { getRepository } from 'typeorm';
 import * as yup from 'yup';
 
 import Classe from '../models/classe';
+import ClasseView from '../views/classeView';
 
 export default {
 
@@ -12,7 +13,7 @@ export default {
 
         const classes = await classeRepository.find();
 
-        return res.status(200).json(classes);
+        return res.status(200).json(ClasseView.renderMany(classes));
     },
 
     async show(req: Request, res: Response) {
@@ -23,7 +24,7 @@ export default {
 
         const classe = await classeRepository.findOneOrFail( id );
 
-        return res.status(200).json(classe);
+        return res.status(200).json(ClasseView.render(classe));
     },
 
     async create(req: Request, res: Response){
