@@ -13,7 +13,7 @@ export default {
         const partidaRepository = getRepository(Partida);
 
         const partidas = await partidaRepository.find({
-            relations: ['time', 'divisao']
+            relations: ['time1', 'time2', 'divisao']
         });
 
         return res.status(200).json(partidas);
@@ -26,7 +26,7 @@ export default {
         const partidaRepository = getRepository(Partida);
 
         const partida = await partidaRepository.findOneOrFail( id , {
-            relations: ['time', 'divisao']
+            relations: ['time1', 'time2', 'divisao']
         });
 
         return res.status(200).json(partida);

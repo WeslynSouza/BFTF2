@@ -12,7 +12,7 @@ export default {
         const usuarioRepository = getRepository(Usuario);
 
         const usuarios = await usuarioRepository.find({
-            relations: ['avatar']
+            relations: ['avatar', 'time']
         });
 
         return res.status(200).json(usuarios);
@@ -25,7 +25,7 @@ export default {
         const usuarioRepository = getRepository(Usuario);
 
         const usuario = await usuarioRepository.findOneOrFail( id , {
-            relations: ['avatar']
+            relations: ['avatar', 'time']
         });
 
         return res.status(200).json(usuario);
