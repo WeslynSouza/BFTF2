@@ -13,7 +13,7 @@ export default {
         const usuarioRepository = getRepository(Usuario);
 
         const usuarios = await usuarioRepository.find({
-            relations: ['avatar', 'time', 'classes', 'posts']
+            relations: ['time', 'classes', 'posts']
         });
 
         return res.status(200).json(UsuarioView.renderMany(usuarios));
@@ -26,7 +26,7 @@ export default {
         const usuarioRepository = getRepository(Usuario);
 
         const usuario = await usuarioRepository.findOneOrFail( id , {
-            relations: ['avatar', 'time', 'classes', 'posts']
+            relations: ['time', 'classes', 'posts']
         });
 
         return res.status(200).json(UsuarioView.render(usuario));
@@ -53,9 +53,8 @@ export default {
         }
 
         const requestImages = req.files as Express.Multer.File[];
-        const avatar = {
-            path: requestImages[0].filename
-        };
+        const avatar = requestImages[0].filename;
+        
 
         const data = {
             steamId,
@@ -71,7 +70,7 @@ export default {
             nick: yup.string().required(),
             senha: yup.string().required(),
             classes: yup.array(),
-            avatar: yup.object(),
+            avatar: yup.string(),
             acesso: yup.number()
         })
 

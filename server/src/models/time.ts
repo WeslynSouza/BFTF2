@@ -1,6 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import Divisao from './divisao';
-import Logo from './logo';
 import Partida from './partida';
 import Usuario from './usuario';
 
@@ -19,10 +18,8 @@ export default class Time {
     @Column()
     nome: string;
 
-    @OneToOne(() => Logo, logo => logo.time, {
-        cascade: ['insert', 'update', 'remove']
-    })
-    logo: Logo;
+    @Column()
+    logo: string;
 
     @ManyToOne(() => Divisao, divisao => divisao.times)
     divisao: Divisao;

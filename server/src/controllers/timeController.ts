@@ -14,7 +14,7 @@ export default {
         const timeRepository = getRepository(Time);
 
         const times = await timeRepository.find({
-            relations: ['lider', 'logo', 'divisao', 'jogadores']
+            relations: ['lider', 'divisao', 'jogadores']
         });
 
         return res.status(200).json(TimeView.renderMany(times));
@@ -27,7 +27,7 @@ export default {
         const timeRepository = getRepository(Time);
 
         const time = await timeRepository.findOneOrFail( id , {
-            relations: ['lider', 'logo', 'divisao', 'jogadores']
+            relations: ['lider', 'divisao', 'jogadores']
         });
 
         return res.status(200).json(TimeView.render(time));
@@ -50,9 +50,7 @@ export default {
         const jogadores = [ lider ];
 
         const requestImages = req.files as Express.Multer.File[];
-        const logo = {
-            path: requestImages[0].filename
-        };
+        const logo = requestImages[0].filename;
 
         const data = {
             lider,

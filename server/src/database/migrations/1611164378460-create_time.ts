@@ -23,8 +23,14 @@ export class createTime1611164378460 implements MigrationInterface {
                     type: 'varchar',
                 },
                 {
+                    name: 'logo',
+                    type: 'varchar',
+                    isNullable: true
+                },
+                {
                     name: 'divisaoId',
                     type: 'integer',
+                    isNullable: true
                 }
             ],
             foreignKeys: [
