@@ -25,6 +25,9 @@ export default class Usuario {
     @Column()
     acesso: number;
 
+    @Column()
+    elegivel: number;
+
     @ManyToOne(() => Time, time => time.jogadores)
     @JoinColumn()
     time: Time;

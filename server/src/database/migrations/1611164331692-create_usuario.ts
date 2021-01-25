@@ -33,6 +33,11 @@ export class createUsuario1611164331692 implements MigrationInterface {
                     name: "acesso",
                     type: "integer",
                     isNullable: true,
+                },
+                {
+                    name: "elegivel",
+                    type: "integer",
+                    isNullable: true
                 }
             ],
             foreignKeys: [
