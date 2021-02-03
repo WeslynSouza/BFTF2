@@ -4,12 +4,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './styles/global.css';
 
-import Forum from './pages/forum';
+import Routes from './routes';
 
 function App() {
   return (
     <div className="App">
-      <Forum />
+      <Routes />
     </div>
   );
 }

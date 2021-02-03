@@ -1,6 +1,6 @@
-import { FaChevronRight } from 'react-icons/fa';
 import Iframe from 'react-iframe';
 import Menu from '../../components/menu';
+import Cabecalho from '../../components/cabecalho';
 
 import img from '../../assets/banner.jpg';
 
@@ -11,15 +11,7 @@ export default () => {
         <div className='container'>
             
             <Menu/>
-            <div className="header">
-                <h1>Noticias</h1>
-
-                <ul className="navegacao">
-                    <li className="link">Home</li>
-                    <div className="link-divisao"><FaChevronRight/></div>
-                    <li className="link">Forum-feed</li>
-                </ul>
-            </div>
+            <Cabecalho titulo='Noticias' links={['home', 'forum-post']}/>
 
             <div className="conteudo">
                 <div className="conteudo-centro">
@@ -43,7 +35,7 @@ export default () => {
                 <div className="conteudo-lateral">
                     <button type='button' className='butao-criar'>criar post +</button>
 
-                  <Iframe src="https://discord.com/widget?id=649752881712332810&theme=dark" className='discord' url="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></Iframe>
+                    <Iframe src="https://discord.com/widget?id=649752881712332810&theme=dark" className='discord' url="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></Iframe>
                 </div>
             </div>
 

@@ -1,0 +1,28 @@
+.header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3rem;
+}
+
+.header h1 {
+    font-size: 3.9rem;
+    color: var(--color-blue-primary);
+}
+
+.header .navegacao {
+    width: 18rem;
+    padding: 1rem 0 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+    font-size: 2rem;
+    color: var(--color-blue-primary);
+    font-weight: 300;
+}
+
+.header .navegacao .link-divisao {
+    font-size: 1.3rem;
+}
