@@ -1,4 +1,5 @@
 import { FaRegUserCircle, FaRegBell, FaCogs } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import Logo from '../../assets/logo.svg';
 
 import './styles.css';
@@ -9,9 +10,15 @@ export default () => {
             <div className="cabecalho">
                 <ul className="menu">
                     <li className="menu-item">
-                        <img src={Logo} alt="Logo" className="logo"/>
+                        <Link to='/'>
+                            <img src={Logo} alt="Logo" className="logo"/>
+                        </Link>
                     </li>
-                    <li className="menu-item">Home</li>
+                    <li className="menu-item">
+                        <Link to='/'>
+                            Home
+                        </Link>
+                    </li>
                     <li className="menu-item">Forum</li>
                     <li className="menu-item">Times</li>
                     <li className="menu-item">Divisões</li>

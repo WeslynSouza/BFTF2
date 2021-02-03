@@ -1,4 +1,5 @@
 import Iframe from 'react-iframe';
+import { Link } from 'react-router-dom';
 import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
 
@@ -11,14 +12,18 @@ export default () => {
         <div className='container'>
             
             <Menu/>
-            <Cabecalho titulo='Noticias' links={['home', 'forum-post']}/>
+            <Cabecalho titulo='Noticias' links={[{url: '', titulo: 'Home'}, {url: '', titulo: 'Noticias-feed'}]}/>
 
             <div className="conteudo">
                 <div className="conteudo-centro">
                     <div className="post-caixa">
-                        <div className='post-img' style={{background: `url(${img})`}}/>
+                        <Link to='/NoticiaPost'>
+                            <div className='post-img' style={{background: `url(${img})`}}/>
+                        </Link>
                         <div className="post-conteudo">
-                            <h2>Titulo titulo titulo</h2>
+                            <Link to='/NoticiaPost'>
+                                <h2>Titulo titulo titulo</h2>
+                            </Link>
                         </div>
                     </div>
                     

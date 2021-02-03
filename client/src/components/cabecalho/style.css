@@ -12,7 +12,6 @@
 }
 
 .header .navegacao {
-    width: 18rem;
     padding: 1rem 0 0 0;
     display: flex;
     justify-content: space-between;
@@ -25,4 +24,5 @@
 
 .header .navegacao .link-divisao {
     font-size: 1.3rem;
+    margin: 0 1rem;
 }

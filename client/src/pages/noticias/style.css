@@ -41,7 +41,11 @@
     align-items: center;
 }
 
-.conteudo .conteudo-centro .post-caixa .post-conteudo h2 {
+.conteudo .conteudo-centro .post-caixa .post-conteudo a {
+    text-decoration: none;
+}
+
+.conteudo .conteudo-centro .post-caixa .post-conteudo a h2 {
     color: var(--color-blue-primary);
     font-size: 3.8rem;
     font-weight: 400;
