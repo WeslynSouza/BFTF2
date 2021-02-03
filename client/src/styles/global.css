@@ -1,0 +1,28 @@
+:root {
+    font-size: 60%;
+
+    --color-blue-primary: #287eb6; 
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: #e6e6e6;
+    font-family: Roboto;
+}
+
+body,
+input,
+button,
+textarea {
+    font-family: Roboto;
+}
+
+.container {
+    width: 1000px;
+    margin: 0 auto;
+}
