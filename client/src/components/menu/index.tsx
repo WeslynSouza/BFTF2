@@ -6,7 +6,7 @@ import './styles.css';
 export default () => {
     return (
         <div>
-            <div className="navbar">
+            <div className="cabecalho">
                 <ul className="menu">
                     <li className="menu-item">
                         <img src={Logo} alt="Logo" className="logo"/>

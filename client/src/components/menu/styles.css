@@ -1,4 +1,4 @@
-.navbar {
+.cabecalho {
     width: 1000px;
     height: 90px;
     background: #fff;
@@ -13,7 +13,7 @@
     box-shadow: 1px 1px 8px #888;
 }
 
-.navbar .menu {
+.cabecalho .menu {
     width: 560px;
     display: flex;
     justify-content: space-between;
@@ -21,19 +21,19 @@
     list-style: none;
 }
 
-.navbar .menu .menu-item {
+.cabecalho .menu .menu-item {
     font-size: 2.8rem;
     color: var(--color-blue-primary);
     font-weight: 400;
 }
 
-.navbar .menu .logo {
+.cabecalho .menu .logo {
     width: 170px;
     top: 0;
     transform: translate( -10px, -5%);
 }
 
-.navbar .menu-icon {
+.cabecalho .menu-icon {
     width: 150px;
     display: flex;
     justify-content: space-between;
@@ -42,7 +42,7 @@
     margin-top: 5px;
 }
 
-.navbar .menu-icon .menu-item {
+.cabecalho .menu-icon .menu-item {
     font-size: 3.4rem;
     color: var(--color-blue-primary);
 }

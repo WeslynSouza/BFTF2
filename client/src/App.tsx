@@ -1,13 +1,15 @@
 import React from 'react';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import './styles/global.css';
 
-import Noticia from './pages/noticias';
+import Forum from './pages/forum';
 
 function App() {
   return (
     <div className="App">
-      <Noticia />
+      <Forum />
     </div>
   );
 }

@@ -1,0 +1,52 @@
+import { FaChevronRight } from 'react-icons/fa';
+import Iframe from 'react-iframe';
+import Menu from '../../components/menu';
+
+import img from '../../assets/banner.jpg';
+
+import './style.css';
+
+export default () => {
+    return (
+        <div className='container'>
+            
+            <Menu/>
+            <div className="header">
+                <h1>Noticias</h1>
+
+                <ul className="navegacao">
+                    <li className="link">Home</li>
+                    <div className="link-divisao"><FaChevronRight/></div>
+                    <li className="link">Forum-feed</li>
+                </ul>
+            </div>
+
+            <div className="conteudo">
+                <div className="conteudo-centro">
+                    <div className="post-caixa">
+                        <div className='post-img' style={{background: `url(${img})`}}/>
+                        <div className="post-conteudo">
+                            <h2>Titulo titulo titulo</h2>
+                        </div>
+                    </div>
+                    
+                    <div className="post-caixa">
+                        <div className='post-img' style={{background: `url(${img})`}}/>
+                        <div className="post-conteudo">
+                            <h2>Titulo titulo titulo</h2>
+                        </div>
+                    </div>
+
+                    
+                </div>
+
+                <div className="conteudo-lateral">
+                    <button type='button' className='butao-criar'>criar post +</button>
+
+                  <Iframe src="https://discord.com/widget?id=649752881712332810&theme=dark" className='discord' url="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></Iframe>
+                </div>
+            </div>
+
+        </div>
+    )
+}
