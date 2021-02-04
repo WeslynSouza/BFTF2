@@ -41,8 +41,35 @@
     margin-bottom: 1.5rem;
 }
 
-.post-form form input[type="file"] {
-    
+.post-form form .imagens {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+  
+.post-form form .imagens img {
+    width: 15rem;
+    height: 96px;
+    object-fit: cover;
+    border-radius: 1rem;
+    margin-right: 2rem;
+}
+  
+.post-form form .imagens .new-image {
+    width: 15rem;
+    height: 96px;
+    background: #F5F8FA;
+    border: 1px dashed #96D2F0;
+    border-radius: 20px;
+    cursor: pointer;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.post-form form input[type=file]{
+    display: none;
 }
 
 .post-form form .butoes {
