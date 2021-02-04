@@ -42,7 +42,9 @@ export default function Noticias() {
                 </div>
 
                 <div className="conteudo-lateral">
-                    <button type='button' className='butao-criar'>criar post +</button>
+                    <Link to='/CriarPost'>
+                        <button type='button' className='butao-criar'>criar post +</button>
+                    </Link>
 
                     <Iframe src="https://discord.com/widget?id=649752881712332810&theme=dark" className='discord' url="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></Iframe>
                 </div>

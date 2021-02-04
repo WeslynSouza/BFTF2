@@ -4,6 +4,7 @@
     background-color: #fff;
     border-radius: .5rem;
     margin: 3rem 0;
+    box-shadow: 1px 3px 8px #888;
 }
 
 .post .post-img {
