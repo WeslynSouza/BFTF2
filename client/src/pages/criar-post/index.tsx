@@ -53,7 +53,7 @@ export default function CriarPost() {
             <Menu/>
             <Cabecalho 
                 titulo='Criar post' 
-                links={[{titulo: 'Home', url: '/'}, {titulo: 'Noticias-feed', url: '/Noticias'}]}/>
+                links={[{titulo: 'Home', url: '/'}, {titulo: 'Noticias', url: '/Noticias'}]}/>
 
             <div className="post-form">
                 <form onSubmit={handleSubmit}>

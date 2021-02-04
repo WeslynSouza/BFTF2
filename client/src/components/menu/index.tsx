@@ -19,7 +19,11 @@ export default function Menu() {
                             Home
                         </Link>
                     </li>
-                    <li className="menu-item">Forum</li>
+                    <li className="menu-item">
+                        <Link to='/Noticia'>
+                            Notícias
+                        </Link>
+                    </li>
                     <li className="menu-item">Times</li>
                     <li className="menu-item">Divisões</li>
                 </ul>

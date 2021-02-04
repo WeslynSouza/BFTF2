@@ -1,0 +1,19 @@
+
+.slide {
+    height: 50rem;
+    margin: 2rem 0;
+    border-radius: .5rem;
+    box-shadow: 1px 3px 8px #888;
+}
+
+.slide .slide-img {
+    height: 50rem;
+    border-radius: .5rem;
+}
+
+.home-titulo {
+    font-size: 3.9rem;
+    color: var(--color-blue-secundary);
+    text-align: center;
+    margin: 3rem 0;
+}

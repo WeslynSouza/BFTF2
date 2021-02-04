@@ -12,7 +12,7 @@ export default function Noticias() {
         <div className='container'>
             
             <Menu/>
-            <Cabecalho titulo='Noticias' links={[{url: '', titulo: 'Home'}, {url: '', titulo: 'Noticias-feed'}]}/>
+            <Cabecalho titulo='Noticias' links={[{url: '/', titulo: 'Home'}, {url: '/Noticias', titulo: 'Noticias'}]}/>
 
             <div className="conteudo">
                 <div className="conteudo-centro">
