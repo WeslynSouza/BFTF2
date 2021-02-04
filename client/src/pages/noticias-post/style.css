@@ -2,7 +2,7 @@
     width: 100%;
     min-height: 730px;
     background-color: #fff;
-    border-radius: 1.5rem;
+    border-radius: .5rem;
     margin: 3rem 0;
 }
 
@@ -12,8 +12,8 @@
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
-    border-top-left-radius: 1.5rem;
-    border-top-right-radius: 1.5rem;
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;
 }
 
 .post .imagens {
@@ -22,7 +22,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    border-bottom: .3rem solid var(--color-blue-secundary);
+    border-bottom: .3rem solid var(--color-blue-third);
 }
 
 .post .imagens img {
@@ -38,7 +38,7 @@
 
 .post .post-conteudo h1 {
     font-size: 3.9rem;
-    color: var(--color-blue-secundary);
+    color: var(--color-blue-third);
     padding: 1rem;
 }
 

@@ -1,11 +1,11 @@
 import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
 
-import Banner from '../../assets/banner.jpg';
+import Banner from '../../assets/banner1.jpg';
 
 import './style.css';
 
-export default () => {
+export default function NoticiaPost() {
     return (
         <div className="container">
             <Menu/>
@@ -15,9 +15,9 @@ export default () => {
                 <img src={Banner} alt="banner" className='post-img'/>
 
                 <div className="imagens">
-                    <img src={Banner}/>
-                    <img src={Banner}/>
-                    <img src={Banner}/>
+                    <img src={Banner} alt='img'/>
+                    <img src={Banner} alt='img'/>
+                    <img src={Banner} alt='img'/>
                 </div>
 
                 <div className="post-conteudo">

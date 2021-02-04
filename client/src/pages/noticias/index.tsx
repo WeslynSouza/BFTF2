@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
 
-import img from '../../assets/banner.jpg';
+import img from '../../assets/banner1.jpg';
 
 import './style.css';
 
-export default () => {
+export default function Noticias() {
     return (
         <div className='container'>
             
@@ -18,7 +18,7 @@ export default () => {
                 <div className="conteudo-centro">
                     <div className="post-caixa">
                         <Link to='/NoticiaPost'>
-                            <div className='post-img' style={{background: `url(${img})`}}/>
+                            <img className='post-img' src={img} alt='banner'/>
                         </Link>
                         <div className="post-conteudo">
                             <Link to='/NoticiaPost'>
@@ -28,9 +28,13 @@ export default () => {
                     </div>
                     
                     <div className="post-caixa">
-                        <div className='post-img' style={{background: `url(${img})`}}/>
+                        <Link to='/NoticiaPost'>
+                            <img className='post-img' src={img} alt='banner'/>
+                        </Link>
                         <div className="post-conteudo">
-                            <h2>Titulo titulo titulo</h2>
+                            <Link to='/NoticiaPost'>
+                                <h2>Titulo titulo titulo</h2>
+                            </Link>
                         </div>
                     </div>
 

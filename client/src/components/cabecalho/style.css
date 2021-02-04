@@ -18,11 +18,16 @@
     align-items: center;
     list-style: none;
     font-size: 2rem;
-    color: var(--color-blue-primary);
+    color: var(--color-blue-fourth);
     font-weight: 300;
 }
 
 .header .navegacao .link-divisao {
     font-size: 1.3rem;
     margin: 0 1rem;
+}
+
+.header .navegacao .link a {
+    text-decoration: none;
+    color: var(--color-blue-fourth);
 }

@@ -11,7 +11,7 @@ type CabecalhoProps = {
     }[]
 }
 
-export default ({ titulo, links }: CabecalhoProps) => {
+export default function Cabecalho({ titulo, links }: CabecalhoProps) {
 
     return (
         <div className="header">

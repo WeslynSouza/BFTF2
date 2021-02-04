@@ -18,7 +18,7 @@
     width: 70rem;
     height: 42rem;
     background: #fff;
-    border-radius: 1.5rem;
+    border-radius: .5rem;
     margin-bottom: 3rem;
     box-shadow: 1px 3px 8px #888;
 }
@@ -26,10 +26,13 @@
 .conteudo .conteudo-centro .post-caixa .post-img {
     width: 100%;
     height: 80%;
-    background-position: center;
-    background-size: contain;
-    border-top-left-radius: 1.5rem;
-    border-top-right-radius: 1.5rem;
+    border-top-left-radius: .5rem;
+    border-top-right-radius: .5rem;
+    transition: .3s;
+}
+
+.conteudo .conteudo-centro .post-caixa .post-img:hover {
+    opacity: .9;
 }
 
 .conteudo .conteudo-centro .post-caixa .post-conteudo {
@@ -46,10 +49,14 @@
 }
 
 .conteudo .conteudo-centro .post-caixa .post-conteudo a h2 {
-    color: var(--color-blue-primary);
+    color: var(--color-blue-secundary);
     font-size: 3.8rem;
     font-weight: 400;
+    transition: .2s;
+}
 
+.conteudo .conteudo-centro .post-caixa .post-conteudo a h2:hover {
+    color: var(--color-blue-third);
 }
 
 .conteudo .conteudo-lateral {
@@ -69,6 +76,11 @@
     border: 0;
     border-radius: 1.5rem;
     box-shadow: 1px 3px 6px #888;
+    transition: .3s;
+}
+
+.conteudo .conteudo-lateral .butao-criar:hover {
+    background: var(--color-green-secundary);
 }
 
 .conteudo .conteudo-lateral .discord {
@@ -76,6 +88,6 @@
     height: 36rem;
     border: 0;
     margin-top: 3rem;
-    border-radius: 1.5rem;
+    border-radius: .5rem;
     box-shadow: 1px 3px 6px #888;
 }

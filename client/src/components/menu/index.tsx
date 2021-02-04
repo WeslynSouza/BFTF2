@@ -4,7 +4,7 @@ import Logo from '../../assets/logo.svg';
 
 import './styles.css';
 
-export default () => {
+export default function Menu() {
     return (
         <div>
             <div className="cabecalho">

@@ -1,9 +1,13 @@
 :root {
     font-size: 60%;
 
-    --color-blue-primary: #287eb6; 
-    --color-blue-secundary: #6AAEDA;
+    --color-blue-primary: #09639E; 
+    --color-blue-secundary: #287eb6;
+    --color-blue-third: #4695c8 ;
+    --color-blue-fourth: #6AAEDA;
+    --color-blue-fifth: #9BCCEB;
     --color-green-primary: #21C275;
+    --color-green-secundary: #41d18c;
 }
 
 * {
