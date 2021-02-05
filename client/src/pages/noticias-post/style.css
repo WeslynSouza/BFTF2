@@ -19,7 +19,7 @@
 
 .post .imagens {
     width: 100%;
-    height: 10rem;
+    height: 11rem;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -27,9 +27,9 @@
 }
 
 .post .imagens img {
-    width: 90px;
-    height: 70px;
-    margin-left: 1rem;
+    width: 120px;
+    height: 9rem;
+    margin-left: 1.5rem;
     border-radius: 1.5rem;
 }
 

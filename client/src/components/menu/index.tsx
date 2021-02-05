@@ -20,7 +20,7 @@ export default function Menu() {
                         </Link>
                     </li>
                     <li className="menu-item">
-                        <Link to='/Noticia'>
+                        <Link to='/Noticias'>
                             Notícias
                         </Link>
                     </li>

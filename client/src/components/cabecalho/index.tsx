@@ -18,18 +18,18 @@ export default function Cabecalho({ titulo, links }: CabecalhoProps) {
             <h1>{ titulo }</h1>
 
             <ul className="navegacao">
-
-                <li className="link">
-                    <Link to={links[0].url}>
-                        {links[0].titulo}
-                    </Link>
-                </li>
-                <div className="link-divisao"><FaChevronRight/></div>
-                <li className="link">
-                    <Link to={links[0].url}>
-                        {links[1].titulo}
-                    </Link>
-                </li>
+                {links.map(link => {
+                    return (
+                        <div className='link-area'>
+                            <li className="link">
+                                <Link to={link.url}>
+                                    {link.titulo}
+                                </Link>
+                            </li>
+                            <div className="link-divisao"><FaChevronRight/></div>
+                        </div>
+                    )
+                })}
             </ul>
         </div>
     )

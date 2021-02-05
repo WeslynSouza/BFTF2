@@ -9,7 +9,7 @@ export default function NoticiaPost() {
     return (
         <div className="container">
             <Menu/>
-            <Cabecalho titulo="Post" links={[{url: '/', titulo: 'Home'}, {url: '/Noticias', titulo: 'Noticias'}]}/>
+            <Cabecalho titulo="Post" links={[{url: '/', titulo: 'Home'}, {url: '/Noticias', titulo: 'Noticias'}, {url: '/NoticiaPost', titulo: 'Post'}]}/>
 
             <div className="post">
                 <img src={Banner} alt="banner" className='post-img'/>

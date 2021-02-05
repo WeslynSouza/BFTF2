@@ -22,12 +22,21 @@
     font-weight: 300;
 }
 
-.header .navegacao .link-divisao {
+.header .navegacao .link-area {
+    display: flex;
+    align-items: center;
+}
+
+.header .navegacao .link-area .link-divisao {
     font-size: 1.3rem;
     margin: 0 1rem;
 }
 
-.header .navegacao .link a {
+.header .navegacao .link-area:last-child .link-divisao {
+    display: none;
+}
+
+.header .navegacao .link-area .link a {
     text-decoration: none;
     color: var(--color-blue-fourth);
 }
