@@ -39,4 +39,9 @@
 .header .navegacao .link-area .link a {
     text-decoration: none;
     color: var(--color-blue-fourth);
+    transition: .1s;
+}
+
+.header .navegacao .link-area .link a:hover {
+    color: var(--color-blue-secundary);
 }
