@@ -24,7 +24,11 @@ export default function Menu() {
                             Notícias
                         </Link>
                     </li>
-                    <li className="menu-item">Times</li>
+                    <li className="menu-item">
+                        <Link to='/Times'>
+                            Times
+                        </Link>
+                    </li>
                     <li className="menu-item">Divisões</li>
                 </ul>
 

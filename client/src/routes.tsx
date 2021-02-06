@@ -4,6 +4,7 @@ import Home from './pages/home';
 import Noticias from './pages/noticias';
 import NoticiaPost from './pages/noticias-post';
 import CriarPost from './pages/criar-post';
+import Times from './pages/times';
 
 function Routes() {
     return (
@@ -13,6 +14,7 @@ function Routes() {
                 <Route path='/Noticias' component={Noticias}/>
                 <Route path='/NoticiaPost' component={NoticiaPost}/>
                 <Route path='/CriarPost' component={CriarPost}/>
+                <Route path='/Times' component={Times}/>
             </Switch>
         </BrowserRouter>
     )
