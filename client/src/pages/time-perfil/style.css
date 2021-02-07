@@ -1,0 +1,115 @@
+
+.time-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 3rem;
+}
+
+.time-container .time-infos {
+    width: 25rem;
+    min-height: 33rem;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+    border-radius: .5rem;
+    box-shadow: 0px 3px 8px #888;
+}
+
+.time-container .time-infos img {
+    width: 19rem;
+    border-radius: 99999px;
+    margin-bottom: 2rem;
+    box-shadow: 0px 2px 8px #888;
+}
+
+.time-container .time-infos h2 {
+    font-size: 2.8rem;
+    font-weight: 400;
+    color: var(--color-blue-secundary);
+    margin-bottom: 1rem;
+}
+
+.time-container .time-conteudo {
+    width: 74rem;
+    height: 40rem;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    border-radius: .5rem;
+    box-shadow: 0px 2px 8px #888;
+}
+
+.time-container .time-conteudo .time-conteudo-cabecalho {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.time-container .time-conteudo .time-conteudo-cabecalho h2 {
+    font-size: 3.9rem;
+    color: var(--color-blue-secundary);
+}
+
+.time-container .time-conteudo .time-conteudo-cabecalho button {
+    width: 20rem;
+    height: 5.5rem;
+    background: #fff;
+    font-size: 1.8rem;
+    color: var(--color-blue-third);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 1.5rem;
+    border: 2px solid var(--color-blue-secundary);
+    border-radius: 1.5rem;
+    transition: .3s;
+}
+
+.time-container .time-conteudo .time-conteudo-cabecalho button:hover {
+    opacity: .7;
+}
+
+.time-container .time-conteudo table {
+    width: 100%;
+    font-size: 2.3rem;
+    color: #888;
+    border-collapse: collapse;
+}
+
+.time-container .time-conteudo th, td {
+    border: 2px solid var(--color-blue-secundary);
+}
+
+.time-container .time-conteudo th {
+    font-size: 2.4rem;
+}
+
+.time-container .time-conteudo td img {
+    width: 3.2rem;
+    margin-right: 1rem;
+}
+
+.time-container .time-conteudo td button {
+    width: 4rem;
+    height: 4rem;
+    background: var(--color-red-primary);
+    color: #fff;
+    border: 0;
+    border-radius: 1rem;
+    transition: background .2s;
+}
+
+.time-container .time-conteudo td button:hover {
+    background: var(--color-red-secundary);
+}
+
+
+

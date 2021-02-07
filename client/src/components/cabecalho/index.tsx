@@ -20,7 +20,7 @@ export default function Cabecalho({ titulo, links }: CabecalhoProps) {
             <ul className="navegacao">
                 {links.map(link => {
                     return (
-                        <div className='link-area'>
+                        <div key={link.titulo} className='link-area'>
                             <li className="link">
                                 <Link to={link.url}>
                                     {link.titulo}

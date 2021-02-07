@@ -1,5 +1,6 @@
 import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
+import { Link } from 'react-router-dom';
 import { FaSearch } from 'react-icons/fa';
 
 import './style.css';
@@ -25,24 +26,34 @@ export default function Times() {
 
             <ul className="time-lista">
                 <li className="time-lista-item">
-                    <img src={logo} alt="logo"/>
-                    <h2>Time nome</h2>
+                    <Link to='/TimePerfil'>
+                        <img src={logo} alt="logo"/>
+                        <h2>Time nome</h2>
+                    </Link>
                 </li>
                 <li className="time-lista-item">
-                    <img src={logo} alt="logo"/>
-                    <h2>Time nome</h2>
+                    <Link to='/TimePerfil'>
+                        <img src={logo} alt="logo"/>
+                        <h2>Time nome</h2>
+                    </Link>
                 </li>
                 <li className="time-lista-item">
-                    <img src={logo} alt="logo"/>
-                    <h2>Time nome</h2>
+                    <Link to='/TimePerfil'>
+                        <img src={logo} alt="logo"/>
+                        <h2>Time nome</h2>
+                    </Link>
                 </li>
                 <li className="time-lista-item">
-                    <img src={logo} alt="logo"/>
-                    <h2>Time nome</h2>
+                    <Link to='/TimePerfil'>
+                        <img src={logo} alt="logo"/>
+                        <h2>Time nome</h2>
+                    </Link>
                 </li>
                 <li className="time-lista-item">
-                    <img src={logo} alt="logo"/>
-                    <h2>Time nome</h2>
+                    <Link to='/TimePerfil'>
+                        <img src={logo} alt="logo"/>
+                        <h2>Time nome</h2>
+                    </Link>
                 </li>
             </ul>
         </div>
