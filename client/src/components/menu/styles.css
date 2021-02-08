@@ -1,7 +1,7 @@
 .cabecalho {
     width: 1000px;
     height: 90px;
-    background: #fff;
+    background: var(--color-background-secundary);
     padding: 0 2rem;
     margin: 0 auto;
     display: flex;

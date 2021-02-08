@@ -2,6 +2,7 @@ import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
 import { FaPlus, FaTrash } from 'react-icons/fa';
 import { Table } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import img from '../../assets/perfilPaula.jpg';
 import * as Classes from '../../assets/assets';
 
@@ -25,9 +26,11 @@ export default function TimePerfil() {
                 <div className="time-conteudo">
                     <div className="time-conteudo-cabecalho">
                         <h2>Jogadores</h2>
-                        <button type='button'>
-                            Adicionar jogador <FaPlus/>
-                        </button>
+                        <Link to='/Jogadores'>                            
+                            <button type='button'>
+                                Adicionar jogador <FaPlus/>
+                            </button>
+                        </Link>
                     </div>
                     
                     <Table>

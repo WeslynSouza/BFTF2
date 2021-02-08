@@ -9,7 +9,7 @@
 .time-container .time-infos {
     width: 25rem;
     min-height: 33rem;
-    background: #fff;
+    background: var(--color-background-secundary);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -36,7 +36,7 @@
 .time-container .time-conteudo {
     width: 74rem;
     height: 40rem;
-    background: #fff;
+    background: var(--color-background-secundary);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -58,10 +58,14 @@
     color: var(--color-blue-secundary);
 }
 
-.time-container .time-conteudo .time-conteudo-cabecalho button {
+.time-container .time-conteudo .time-conteudo-cabecalho a {
+    text-decoration: none;
+}
+
+.time-container .time-conteudo .time-conteudo-cabecalho a button {
     width: 20rem;
     height: 5.5rem;
-    background: #fff;
+    background: var(--color-background-third);
     font-size: 1.8rem;
     color: var(--color-blue-third);
     display: flex;
@@ -73,14 +77,15 @@
     transition: .3s;
 }
 
-.time-container .time-conteudo .time-conteudo-cabecalho button:hover {
+.time-container .time-conteudo .time-conteudo-cabecalho a button:hover {
     opacity: .7;
 }
 
 .time-container .time-conteudo table {
     width: 100%;
+    background: var(--color-background-third);
     font-size: 2.3rem;
-    color: #888;
+    color: var(--color-font-primary);
     border-collapse: collapse;
 }
 
@@ -101,13 +106,14 @@
     width: 4rem;
     height: 4rem;
     background: var(--color-red-primary);
-    color: #fff;
+    color: var(--color-font-secundary);
     border: 0;
     border-radius: 1rem;
     transition: background .2s;
 }
 
 .time-container .time-conteudo td button:hover {
+    width: 4.1rem;
     background: var(--color-red-secundary);
 }
 

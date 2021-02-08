@@ -6,6 +6,7 @@ import NoticiaPost from './pages/noticias-post';
 import CriarPost from './pages/criar-post';
 import Times from './pages/times';
 import TimePerfil from './pages/time-perfil';
+import Jogadores from './pages/jogadores';
 
 function Routes() {
     return (
@@ -17,6 +18,7 @@ function Routes() {
                 <Route path='/CriarPost' component={CriarPost}/>
                 <Route path='/Times' component={Times}/>
                 <Route path='/TimePerfil' component={TimePerfil}/>
+                <Route path='/Jogadores' component={Jogadores}/>
             </Switch>
         </BrowserRouter>
     )

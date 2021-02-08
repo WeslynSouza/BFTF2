@@ -1,6 +1,12 @@
 :root {
     font-size: 60%;
 
+    --color-background-primary: #EAECEF;
+    --color-background-secundary: #FFF;
+    --color-background-third: #FFF;
+    --color-background-input: #F5F8FA; 
+    --color-font-primary: #707070;
+    --color-font-secundary: #FFF;
     --color-blue-primary: #09639E; 
     --color-blue-secundary: #287eb6;
     --color-blue-third: #4695c8 ;
@@ -12,6 +18,14 @@
     --color-red-secundary: #ff7c7c;
 }
 
+.modo-dark:root {
+    --color-background-primary: #1E1E1E;
+    --color-background-secundary: #262626;
+    --color-background-third: #1E1E1E;
+    --color-background-input: #1E1E1E; 
+    --color-font-primary: #D6D6D6;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -19,7 +33,7 @@
 }
 
 body {
-    background: #e6e6e6;
+    background: var(--color-background-primary);
     font-family: Roboto;
     display: flex;
     align-items: center;

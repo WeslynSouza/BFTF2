@@ -5,7 +5,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background: #fff;
+    background: var(--color-background-secundary);
     margin: 3rem 0;
     padding: 2rem 2rem;
     border-radius: .5rem;
@@ -28,6 +28,7 @@
 .post-form form input {
     width: 100%;
     height: 6rem;
+    background: var(--color-background-input);
     border: .4rem solid var(--color-blue-fifth);
     border-radius: 1rem;
     margin-bottom: 1.5rem;
@@ -36,6 +37,7 @@
 .post-form form textarea {
     width: 100%;
     height: 22rem;
+    background: var(--color-background-input);
     border: .4rem solid var(--color-blue-fifth);
     border-radius: 1rem;
     margin-bottom: 1.5rem;
@@ -58,7 +60,7 @@
 .post-form form .imagens .new-image {
     width: 15rem;
     height: 96px;
-    background: #F5F8FA;
+    background: var(--color-background-input);
     border: 1px dashed #96D2F0;
     border-radius: 20px;
     cursor: pointer;
@@ -84,7 +86,7 @@
     height: 6.3rem;
     font-size: 3rem;
     font-weight: 500;
-    color: #fff;
+    color: var(--color-font-secundary);
     border: 0;
     border-radius: 1rem;
     margin: 2rem 0;
