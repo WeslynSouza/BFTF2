@@ -24,6 +24,13 @@ Este projeto foi desenvolvido com as seguintes tecnologias:
 - [Node.js](https://nodejs.org/en/)
 - [React](https://reactjs.org)
 
+## 🔖 Layout
+
+<p align='center'>
+  <img src='https://github.com/WeslynSouza/BFTF2/blob/main/github/Noticia.png'>
+  <img src='https://github.com/WeslynSouza/BFTF2/blob/main/github/NoticiaBlack.png'>
+</p>
+
 ## 📌 Como executar
 
 ```sh
