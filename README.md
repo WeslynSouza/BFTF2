@@ -27,7 +27,9 @@ Este projeto foi desenvolvido com as seguintes tecnologias:
 ## 🔖 Layout
 
 <p align='center'>
+  <h3>Página Noticas</h3>
   <img src='https://github.com/WeslynSouza/BFTF2/blob/main/github/Noticia.png'>
+  <h3>Página Noticas (modo Dark)</h3>
   <img src='https://github.com/WeslynSouza/BFTF2/blob/main/github/NoticiaBlack.png'>
 </p>
 
