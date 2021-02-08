@@ -37,9 +37,12 @@ Este projeto foi desenvolvido com as seguintes tecnologias:
 
 ```sh
 git clone hhttps://github.com/WeslynSouza/BFTF2
-cd backend
+cd server
 npm install
 npm run dev
+cd ../client
+npm install
+npm start
 ```
 
 ## 💡 Como contribuir
