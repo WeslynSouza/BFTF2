@@ -22,6 +22,62 @@
     font-weight: 300;
 }
 
+.header .navegacao .mododark {
+    width: 6.2rem;
+    height: 2.5rem;
+    background: var(--color-background-secundary);
+    display: flex;
+    align-items: center;
+    margin-right: 1.5rem;
+    border-radius: 9999px;
+}
+
+.header .navegacao .dark-on {
+    justify-content: flex-start;
+    border: 2px solid var(--color-blue-fourth);
+}
+
+.header .navegacao .dark-off {
+    justify-content: flex-end;
+    border: 2px solid var(--color-blue-primary);
+}
+
+.header .navegacao .dark-on button {
+    width: 3.2rem;
+    height: 3.2rem;
+    background: var(--color-blue-fourth);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: var(--color-font-secundary);
+    margin-left: -3px;
+    border: 0;
+    border-radius: 9999px;
+}
+
+.header .navegacao .dark-on button .moon {
+    display: none;
+}
+
+.header .navegacao .dark-off button {
+    width: 3.2rem;
+    height: 3.2rem;
+    background: var(--color-blue-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    color: var(--color-yellow-primary);
+    margin-right: -3px;
+    border: 0;
+    border-radius: 9999px;
+}
+
+.header .navegacao .dark-off button .sun {
+    display: none;
+}
+
 .header .navegacao .link-area {
     display: flex;
     align-items: center;

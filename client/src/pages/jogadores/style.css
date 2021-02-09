@@ -11,7 +11,7 @@
     justify-content: center;
     align-items: center;
     border-radius: 1rem;
-    box-shadow: 0px 3px 8px #888;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.16);
 }
 
 .jogadores-opcoes .input-grupo input {
@@ -54,7 +54,7 @@
     padding-top: 2rem;
     margin-top: 4rem;
     border-radius: .5rem;
-    box-shadow: 0px 3px 8px #888;
+    box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.16);
 }
 
 .jogadores-lista .jogadores-lista-item {
