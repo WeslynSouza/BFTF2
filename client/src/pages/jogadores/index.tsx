@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
 import { FaSearch, FaPlus } from 'react-icons/fa';
@@ -7,6 +8,8 @@ import img from '../../assets/perfilPaula.jpg';
 import './style.css';
 
 export default function Jogadores() {
+
+    const [ pesquisa, setPesquisa ] = useState('');
 
     return (
         <div className="container">
@@ -21,7 +24,7 @@ export default function Jogadores() {
 
             <div className="jogadores-opcoes">
                 <div className="input-grupo">
-                    <input type="text" placeholder="Pesquisar..."/>
+                    <input onChange={event => setPesquisa(event.target.value)} type="text" value={pesquisa} placeholder="Pesquisar..."/>
                     <button>
                         <FaSearch/>
                     </button>

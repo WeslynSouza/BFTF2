@@ -18,6 +18,8 @@
     width: 92.5%;
     height: 6rem;
     font-size: 2.5rem;
+    color: var(--color-font-primary);
+    background: var(--color-background-secundary);
     padding-left: 1rem;
     border: 0;
     border-top-left-radius: 1rem;

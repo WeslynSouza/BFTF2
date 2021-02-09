@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
 import { Link } from 'react-router-dom';
@@ -8,6 +9,9 @@ import './style.css';
 import logo from '../../assets/perfilPaula.jpg';
 
 export default function Times() {
+
+    const [ pesquisa, setPesquisa ] = useState('');
+
     return (
         <div className="container">
             <Menu/>
@@ -15,7 +19,7 @@ export default function Times() {
 
             <div className="times-opcoes">
                 <div className="input-grupo">
-                    <input type="text" placeholder="Pesquisar..."/>
+                    <input onChange={event  => setPesquisa(event.target.value)} type="text" value={pesquisa} placeholder="Pesquisar..."/>
                     <button>
                         <FaSearch/>
                     </button>

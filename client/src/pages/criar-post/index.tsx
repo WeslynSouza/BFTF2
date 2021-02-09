@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { FaPlus } from 'react-icons/fa';
+import { FaPlus, FaTimes } from 'react-icons/fa';
 import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
 
@@ -39,13 +39,24 @@ export default function CriarPost() {
     
         const selectedImages= Array.from(event.target.files);
 
-        setImages(selectedImages);
+        setImages(selectedImages.concat(images));
     
         const selectedImagesPreview = selectedImages.map(image => {
             return URL.createObjectURL(image);
         }).concat(previewImages);
     
         setPreviewImages(selectedImagesPreview);
+    }
+
+    function handleRemoveImage(indice: number) {
+        const imageArray = Array.from(previewImages);
+        const imagesFileArray = Array.from(images);
+
+        imageArray.splice(indice, 1);
+        imagesFileArray.splice(indice, 1);
+        
+        setPreviewImages(imageArray);
+        setImages(imagesFileArray);
     }
 
     return(
@@ -65,9 +76,14 @@ export default function CriarPost() {
 
                     <label htmlFor="imagens">Imagens</label>
                     <div className="imagens">
-                        {previewImages.map(image => {
+                        {previewImages.map((image, indice) => {
                             return (
-                                <img key={image} src={image} alt='imagem'/>
+                                <div className="image-area">
+                                    <img key={image} src={image} alt='imagem'/>
+                                    <button type='button' onClick={() => handleRemoveImage(indice)}>
+                                        <FaTimes/>
+                                    </button>
+                                </div>
                             )
                         })}
 
