@@ -29,7 +29,11 @@ export default function Menu() {
                             Times
                         </Link>
                     </li>
-                    <li className="menu-item">Divisões</li>
+                    <li className="menu-item">
+                        <Link to='/Divisoes'>
+                            Divisões
+                        </Link>
+                    </li>
                 </ul>
 
                 <ul className="menu-icon">
