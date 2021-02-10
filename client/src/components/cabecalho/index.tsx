@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import IndexedDb from '../../utils/indexedDB';
 import { FaChevronRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { FaRegSun, FaMoon } from 'react-icons/fa';
@@ -15,18 +16,36 @@ type CabecalhoProps = {
 
 export default function Cabecalho({ titulo, links }: CabecalhoProps) {
 
+    const indexedDb = new IndexedDb('BrasilFortress');
+    const $html = document.querySelector('html');
+
     const [ modoDark, setModoDark ] = useState('on');
 
-    function handleDarkMode() {
+    async function connection() {
+        await indexedDb.createObjectStore(['config']);
+        const retorno = await indexedDb.getValue('config', 'theme');
+        if(retorno === undefined || ''){
+            await indexedDb.putValue('config', {modoDark: 'on'}, 'theme');
+        }else{
+            if(retorno.modoDark === 'off'){
+                setModoDark('off');
+                $html?.classList.add('modo-dark');
+            }
+        }
+    }
 
-        const $html = document.querySelector('html');
+    connection();
+
+    async function handleDarkMode() {
 
         if(modoDark === 'on'){
             setModoDark('off');
             $html?.classList.toggle('modo-dark');
+            await indexedDb.putValue('config', {modoDark: 'off'}, 'theme');
         }else if(modoDark === 'off') {
             setModoDark('on');
             $html?.classList.toggle('modo-dark');
+            await indexedDb.putValue('config', {modoDark: 'on'}, 'theme');
         }
     }
 
