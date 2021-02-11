@@ -78,7 +78,9 @@
 }
 
 .time-container .time-conteudo .time-conteudo-cabecalho a button:hover {
-    opacity: .7;
+    background: var(--color-blue-third);
+    color: var(--color-font-secundary);
+
 }
 
 .time-container .time-conteudo table {
@@ -97,9 +99,16 @@
     font-size: 2.4rem;
 }
 
+.time-container .time-conteudo td div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
 .time-container .time-conteudo td img {
     width: 3.2rem;
-    margin-right: 1rem;
 }
 
 .time-container .time-conteudo td button {

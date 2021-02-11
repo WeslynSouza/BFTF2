@@ -48,15 +48,17 @@ export default function TimePerfil() {
                                     Nome jogador
                                 </td>
                                 <td>
-                                    <img src={Classes.scout} alt="classe"/>
-                                    <img src={Classes.soldierBlue} alt="classe"/>
-                                    <img src={Classes.pyro} alt="classe"/>
-                                    <img src={Classes.demoman} alt="classe"/>
-                                    <img src={Classes.heavyBlue} alt="classe"/>
-                                    <img src={Classes.engieneer} alt="classe"/>
-                                    <img src={Classes.sniper} alt="classe"/>
-                                    <img src={Classes.medic} alt="classe"/>
-                                    <img src={Classes.spy} alt="classe"/>
+                                    <div>
+                                        <img src={Classes.scout} alt="classe"/>
+                                        <img src={Classes.soldierBlue} alt="classe"/>
+                                        <img src={Classes.pyro} alt="classe"/>
+                                        <img src={Classes.demoman} alt="classe"/>
+                                        <img src={Classes.heavyBlue} alt="classe"/>
+                                        <img src={Classes.engieneer} alt="classe"/>
+                                        <img src={Classes.sniper} alt="classe"/>
+                                        <img src={Classes.medic} alt="classe"/>
+                                        <img src={Classes.spy} alt="classe"/>
+                                    </div>
                                 </td>
                                 <td>
                                     <button>
@@ -71,15 +73,17 @@ export default function TimePerfil() {
                                     Nome jogador
                                 </td>
                                 <td>
-                                    <img src={Classes.scout} alt="classe"/>
-                                    <img src={Classes.soldierBlue} alt="classe"/>
-                                    <img src={Classes.pyro} alt="classe"/>
-                                    <img src={Classes.demoman} alt="classe"/>
-                                    <img src={Classes.heavyBlue} alt="classe"/>
-                                    <img src={Classes.engieneer} alt="classe"/>
-                                    <img src={Classes.sniper} alt="classe"/>
-                                    <img src={Classes.medic} alt="classe"/>
-                                    <img src={Classes.spy} alt="classe"/>
+                                    <div>
+                                        <img src={Classes.scout} alt="classe"/>
+                                        <img src={Classes.soldierBlue} alt="classe"/>
+                                        <img src={Classes.pyro} alt="classe"/>
+                                        <img src={Classes.demoman} alt="classe"/>
+                                        <img src={Classes.heavyBlue} alt="classe"/>
+                                        <img src={Classes.engieneer} alt="classe"/>
+                                        <img src={Classes.sniper} alt="classe"/>
+                                        <img src={Classes.medic} alt="classe"/>
+                                        <img src={Classes.spy} alt="classe"/>
+                                    </div>
                                 </td>
                                 <td>
                                     <button>

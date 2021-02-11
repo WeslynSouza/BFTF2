@@ -39,12 +39,18 @@
     width: 7.5%;
     height: 6rem;
     background: var(--color-background-secundary);
-    color: var(--color-blue-fifth);
+    color: var(--color-blue-third);
     font-size: 3.2rem;
     border: 0;
-    border-left: 2px solid var(--color-blue-fifth);
+    border-left: 2px solid var(--color-blue-third);
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
+    transition: .3s;
+}
+
+.jogadores-opcoes .input-grupo button:hover {
+    background: var(--color-blue-third);
+    color: var(--color-font-secundary);
 }
 
 .jogadores-lista {
@@ -65,7 +71,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 1rem 2rem;
+    padding: 0 1.5rem 2rem 1rem;
     border-bottom: 2px solid var(--color-blue-fourth);
     margin-bottom: 2rem;
 }
