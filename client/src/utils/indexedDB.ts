@@ -31,7 +31,6 @@ class IndexedDb {
         const tx = this.db.transaction(tableName, 'readonly');
         const store = tx.objectStore(tableName);
         const result = await store.get(key);
-        console.log('Get Data ', JSON.stringify(result));
         return result;
     }
 
@@ -39,7 +38,6 @@ class IndexedDb {
         const tx = this.db.transaction(tableName, 'readwrite');
         const store = tx.objectStore(tableName);
         const result = await store.put(value, key);
-        console.log('Put Data ', JSON.stringify(result));
         return result;
     }
 
@@ -48,11 +46,9 @@ class IndexedDb {
         const store = tx.objectStore(tableName);
         const result = await store.get(id);
         if(!result) {
-            console.log('Id não encontrado ', id);
             return result;
         }
         await store.delete(id);
-        console.log('Delete Data ', id);
         return id;
     }
 }
