@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
+import InputPesquisa from '../../components/input-pesquisa';
 import { Link } from 'react-router-dom';
-import { FaSearch } from 'react-icons/fa';
 
 import './style.css';
 
@@ -18,12 +18,9 @@ export default function Times() {
             <Cabecalho titulo='Times' links={[{url: '/', titulo: 'Home'}, {url: '/Times', titulo: 'Times'}]} />
 
             <div className="times-opcoes">
-                <div className="input-grupo">
-                    <input onChange={event  => setPesquisa(event.target.value)} type="text" value={pesquisa} placeholder="Pesquisar..."/>
-                    <button>
-                        <FaSearch/>
-                    </button>
-                </div>
+                <InputPesquisa value={pesquisa} 
+                    setValue={setPesquisa} height='6rem' inputWidth='65rem' 
+                    buttonWidth='7rem' fontInput='2.5rem' fontButton='3.2rem'/>
 
                 <button className='butao-criar'>Criar Time +</button>
             </div>

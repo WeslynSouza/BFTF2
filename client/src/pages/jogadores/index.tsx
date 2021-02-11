@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
-import { FaSearch, FaPlus } from 'react-icons/fa';
+import InputPesquisa from '../../components/input-pesquisa';
+import { FaPlus } from 'react-icons/fa';
+
 
 import img from '../../assets/perfilPaula.jpg';
 
@@ -17,18 +19,15 @@ export default function Jogadores() {
             <Menu/>
             <Cabecalho titulo="Jogadores" links={[
                 {url: '/', titulo: 'Home'}, 
-                {url: '/Time', titulo: 'Times'}, 
+                {url: '/Times', titulo: 'Times'}, 
                 {url: '/TimePerfil', titulo: 'Perfil'}, 
                 {url: '/Jogadores', titulo: 'Jogadores'}]} />
 
 
             <div className="jogadores-opcoes">
-                <div className="input-grupo">
-                    <input onChange={event => setPesquisa(event.target.value)} type="text" value={pesquisa} placeholder="Pesquisar..."/>
-                    <button>
-                        <FaSearch/>
-                    </button>
-                </div>
+                <InputPesquisa value={pesquisa} 
+                    setValue={setPesquisa} height='6rem' inputWidth='97rem' 
+                    buttonWidth='7rem' fontInput='2.5rem' fontButton='3.2rem'/>
             </div>
 
             <ul className="jogadores-lista">
