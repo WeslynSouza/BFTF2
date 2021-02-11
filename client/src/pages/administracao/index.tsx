@@ -1,7 +1,6 @@
 import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
 import { Tabs, Tab } from 'react-bootstrap';
-import { FaSearch } from 'react-icons/fa';
 
 import Usuarios from './usuarios';
 import Times from './times';
@@ -19,13 +18,13 @@ export default function Administracao() {
             <div className="administracao-container">
                 <Tabs className='administracao-tab' defaultActiveKey='usuario' id='administracao-tab'>
                     <Tab className='administracao-tab-item' eventKey='usuario' title='Usuarios'>
-                        <h1>Usuarios</h1>
+                        <Usuarios/>
                     </Tab>
                     <Tab className='administracao-tab-item' eventKey='times' title='Times'>
-                        <h1>Times</h1>
+                        <Times/>
                     </Tab>
                     <Tab className='administracao-tab-item' eventKey='Divisoes' title='Divisões'>
-                        <h1>Divisões</h1>
+                        <Divisoes/>
                     </Tab>
                 </Tabs>
             </div>
