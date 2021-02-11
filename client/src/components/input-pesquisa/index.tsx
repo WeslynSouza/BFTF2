@@ -2,7 +2,7 @@ import { FaSearch } from 'react-icons/fa';
 
 import './style.css';
 
-type InputPesquisa = {
+type inputPesquisa = {
     value: string,
     setValue: Function,
     height: string,
@@ -12,7 +12,7 @@ type InputPesquisa = {
     fontButton: string
 }
 
-export default function InputPesquisa({value, setValue, height, inputWidth, buttonWidth, fontInput, fontButton}: InputPesquisa) {
+export default function InputPesquisa({value, setValue, height, inputWidth, buttonWidth, fontInput, fontButton}: inputPesquisa) {
     return (
         <div className="input-grupo">
             <input 
