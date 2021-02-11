@@ -44,7 +44,9 @@ export default function Menu() {
                         <FaRegBell/>
                     </li>
                     <li className="menu-item">
-                        <FaCogs/>
+                        <Link to='/administracao'>
+                            <FaCogs/>
+                        </Link>
                     </li>
                 </ul>
             </div>
