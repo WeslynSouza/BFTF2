@@ -1,4 +1,4 @@
-import { FaRegUserCircle, FaRegBell, FaCogs } from 'react-icons/fa';
+import { FaUserCircle, FaBell, FaCogs } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/logo.svg';
 
@@ -38,10 +38,10 @@ export default function Menu() {
 
                 <ul className="menu-icon">
                     <li className="menu-item">
-                        <FaRegUserCircle/>
+                        <FaUserCircle/>
                     </li>
                     <li className="menu-item">
-                        <FaRegBell/>
+                        <FaBell/>
                     </li>
                     <li className="menu-item">
                         <Link to='/administracao'>
