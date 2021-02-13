@@ -2,7 +2,7 @@ import { useState } from 'react';
 import IndexedDb from '../../utils/indexedDB';
 import { FaChevronRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import { FaRegSun, FaMoon } from 'react-icons/fa';
+import { FaSun, FaMoon } from 'react-icons/fa';
 
 import './style.css';
 
@@ -57,7 +57,7 @@ export default function Cabecalho({ titulo, links }: CabecalhoProps) {
 
                 <div className={modoDark === 'on' ? 'mododark dark-on' : 'mododark dark-off'}>
                     <button onClick={handleDarkMode} >
-                        <FaRegSun className='sun'/>
+                        <FaSun className='sun'/>
                         <FaMoon className='moon'/>
                     </button>
                 </div>

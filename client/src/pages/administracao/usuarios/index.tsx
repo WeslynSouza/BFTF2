@@ -5,15 +5,13 @@ import { Table } from 'react-bootstrap';
 import * as Classes from '../../../assets/assets';
 import img from '../../../assets/perfilPaula.jpg';
 
-import './style.css';
-
 export default function Usuarios() {
 
     const [ pesquisa, setPesquisa ] = useState('');
 
     return (
-        <div className='usuarios-tab-container'>
-            <div className="usuarios-tab-infos">
+        <div className='administracao-table-container'>
+            <div className="table-header">
                 <h2>Tabela usuarios</h2>
 
                 <InputPesquisa value={pesquisa}
@@ -21,7 +19,7 @@ export default function Usuarios() {
                     buttonWidth='5.7rem' fontInput='2.1rem' fontButton='2.6rem'/>
             </div>
 
-            <Table className='usuarios-tabela'>
+            <Table>
                 <thead>
                     <tr>
                         <th>Usuarios</th>
