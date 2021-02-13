@@ -1,0 +1,86 @@
+
+.usuarios-tab-container {
+    width: 104rem;
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+}
+
+.usuarios-tab-container .usuarios-tab-infos {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1rem 0 3rem;
+}
+
+.usuarios-tab-container .usuarios-tab-infos h2 {
+    font-size: 3.2rem;
+    color: var(--color-font-primary);
+}
+
+.usuarios-tab-container .usuarios-tab-infos .input-grupo {
+    background: var(--color-background-third);
+    border: 1px solid var(--color-blue-third);
+    border-radius: .5rem;
+    box-shadow: none;
+}
+
+.usuarios-tab-container .usuarios-tabela {
+    width: 100%;
+    background: var(--color-background-third);  
+    font-size: 2.3rem;
+    color: var(--color-font-primary);
+    border-collapse: collapse;
+}
+
+.usuarios-tab-container .usuarios-tabela th, .usuarios-tab-container .usuarios-tabela td {
+    vertical-align: middle;
+    border: 1px solid var(--color-blue-third);
+}
+
+.usuarios-tab-container .usuarios-tabela th {
+    font-size: 2.4rem;
+}
+
+.usuarios-tab-container .usuarios-tabela td div {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.usuarios-tab-container .usuarios-tabela td img {
+    width: 3.2rem;
+    margin-right: 1rem;
+}
+
+.usuarios-tab-container .usuarios-tabela td button {
+    width: 4rem;
+    height: 4rem;
+    color: var(--color-font-secundary);
+    margin: 0 .5rem;
+    border: 0;
+    border-radius: 1rem;
+    transition: background .2s;
+}
+
+.usuarios-tab-container .usuarios-tabela td .butao-alterar {
+    background: var(--color-yellow-primary);
+}
+
+.usuarios-tab-container .usuarios-tabela td button:hover {
+    width: 4.1rem;
+    background: var(--color-red-secundary);
+}
+
+.usuarios-tab-container .usuarios-tabela td .butao-excluir {
+    background: var(--color-red-primary);
+}
+
+.usuarios-tab-container .usuarios-tabela td button:hover {
+    width: 4.1rem;
+    background: var(--color-red-secundary);
+}

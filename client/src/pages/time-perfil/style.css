@@ -91,8 +91,9 @@
     border-collapse: collapse;
 }
 
-.time-container .time-conteudo th, td {
-    border: 2px solid var(--color-blue-secundary);
+.time-container .time-conteudo th, .time-container .time-conteudo td {
+    vertical-align: middle;
+    border: 1px solid var(--color-blue-secundary);
 }
 
 .time-container .time-conteudo th {
