@@ -126,3 +126,77 @@
 .administracao-container .administracao-table-container table td .butao-excluir:hover {
     background: var(--color-red-secundary);
 }
+
+.modal {
+    margin-top: -3rem;
+}
+
+.modal .modal-content {
+    background: var(--color-background-secundary);   
+    border-radius: 1.5rem;
+}
+
+.modal .modal-content .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    color: var(--color-font-secundary);
+}
+
+.modal .modal-content .modal-header .modal-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    color: var(--color-blue-secundary);
+    font-size: 3rem;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.modal .modal-content .modal-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    color: var(--color-font-primary);
+}
+
+.modal .modal-content .modal-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    margin: 1rem 0;
+}
+
+.modal .modal-content .modal-footer button {
+    width: 18rem;
+    height: 6rem;
+    font-size: 2.5rem;
+    color: var(--color-font-secundary);
+    border: 0;
+    border-radius: 1rem;
+    transition: .3s;
+}
+
+.modal .modal-content .modal-footer button:first-child {
+    margin-right: 2rem;
+}
+
+.modal .modal-content .modal-footer .butao-confirmar {
+    background: var(--color-green-primary);
+}
+
+.modal .modal-content .modal-footer .butao-confirmar:hover {
+    background: var(--color-green-secundary);
+}
+
+.modal .modal-content .modal-footer .butao-voltar {
+    background: var(--color-red-primary);
+}
+
+.modal .modal-content .modal-footer .butao-voltar:hover {
+    background: var(--color-red-secundary);
+}

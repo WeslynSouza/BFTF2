@@ -2,9 +2,9 @@ import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
 import { Tabs, Tab } from 'react-bootstrap';
 
-import Usuarios from './usuarios';
-import Times from './times';
-import Divisoes from './divisoes';
+import Usuarios from './tabelas/usuario-tab';
+import Times from './tabelas/times-tab';
+import Divisoes from './tabelas/divisao-tab';
 
 import './style.css';
 

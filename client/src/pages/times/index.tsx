@@ -22,7 +22,7 @@ export default function Times() {
                     setValue={setPesquisa} height='6rem' inputWidth='65rem' 
                     buttonWidth='7rem' fontInput='2.5rem' fontButton='3.2rem'/>
 
-                <button className='butao-criar'>Criar Time +</button>
+                <button className='butao-criar'>Criar time +</button>
             </div>
 
             <ul className="time-lista">

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import InputPesquisa from '../../../components/input-pesquisa';
-import { Table } from 'react-bootstrap';
+import { Table, Modal } from 'react-bootstrap';
 import { FaPen, FaTrash } from 'react-icons/fa';
 
 import img from '../../../assets/perfilPaula.jpg';
@@ -8,6 +8,10 @@ import img from '../../../assets/perfilPaula.jpg';
 export default function Times() {
 
     const [ pesquisa, setPesquisa ] = useState('');
+    const [ show, setShow ] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     return (
         <div className='administracao-table-container'>
@@ -46,7 +50,7 @@ export default function Times() {
                             <button className='butao-alterar'>
                                 <FaPen/>
                             </button>
-                            <button className='butao-excluir'>
+                            <button className='butao-excluir' onClick={handleShow}>
                                 <FaTrash/>
                             </button>
                         </td>
@@ -68,13 +72,24 @@ export default function Times() {
                             <button className='butao-alterar'>
                                 <FaPen/>
                             </button>
-                            <button className='butao-excluir'>
+                            <button className='butao-excluir' onClick={handleShow}>
                                 <FaTrash/>
                             </button>
                         </td>
                     </tr>
                 </tbody>
             </Table>
+
+            <Modal show={show} onHide={handleClose} centered>
+                <Modal.Header>
+                    <Modal.Title>Confirmar exclusão</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Deseja excluir o time: Nome Time?</Modal.Body>
+                <Modal.Footer>
+                    <button className="butao-confirmar">Confirmar</button>
+                    <button className="butao-voltar" onClick={handleClose}>Voltar</button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }

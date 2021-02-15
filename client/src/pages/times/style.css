@@ -6,8 +6,8 @@
 }
 
 .times-opcoes .butao-criar {
-    width: 25rem;
-    height: 6rem;
+    width: 27rem;
+    height: 60px;
     background: var(--color-green-primary);
     color: var(--color-font-secundary);
     font-size: 3rem;
