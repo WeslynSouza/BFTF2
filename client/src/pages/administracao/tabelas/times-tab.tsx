@@ -14,9 +14,9 @@ export default function Times() {
     const handleShow = () => setShow(true);
 
     return (
-        <div className='administracao-table-container'>
+        <div className='administracao-tab-container'>
 
-            <div className="table-header">
+            <div className="tab-header">
                 <h2>Tabela time </h2>
 
                 <InputPesquisa value={pesquisa}

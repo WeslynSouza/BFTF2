@@ -1,14 +1,25 @@
+import { useState } from 'react';
 import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
 import { Tabs, Tab } from 'react-bootstrap';
 
-import Usuarios from './tabelas/usuario-tab';
-import Times from './tabelas/times-tab';
-import Divisoes from './tabelas/divisao-tab';
+import UsuariosTabela from './tabelas/usuario-tab';
+import UsuarioForm from './formularios/usuario-form';
+import TimesTabela from './tabelas/times-tab';
+import DivisoesTabela from './tabelas/divisao-tab';
 
 import './style.css';
 
 export default function Administracao() {
+
+    const [ usuarioState, setUsuarioState ] = useState('tabela');
+
+    function handleUsuarioState() {
+        if(usuarioState === 'tabela') 
+            return <UsuariosTabela functionAlterar={setUsuarioState}/>
+        else
+            return <UsuarioForm/>
+    }
 
     return (
         <div className="container">
@@ -18,13 +29,13 @@ export default function Administracao() {
             <div className="administracao-container">
                 <Tabs className='administracao-tab' defaultActiveKey='usuario' id='administracao-tab'>
                     <Tab className='administracao-tab-item' eventKey='usuario' title='Usuarios'>
-                        <Usuarios/>
+                        {handleUsuarioState()}
                     </Tab>
                     <Tab className='administracao-tab-item' eventKey='times' title='Times'>
-                        <Times/>
+                        <TimesTabela/>
                     </Tab>
                     <Tab className='administracao-tab-item' eventKey='Divisoes' title='Divisões'>
-                        <Divisoes/>
+                        <DivisoesTabela/>
                     </Tab>
                 </Tabs>
             </div>

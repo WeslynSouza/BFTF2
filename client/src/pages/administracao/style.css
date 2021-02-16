@@ -43,7 +43,7 @@
 }
 
 
-.administracao-container .administracao-table-container{
+.administracao-container .administracao-tab-container{
     width: 104rem;
     min-height: 100%;
     display: flex;
@@ -51,7 +51,7 @@
     padding: 2rem;
 }
 
-.administracao-container .administracao-table-container .table-header {
+.administracao-container .administracao-tab-container .tab-header {
     width: 100%;
     display: flex;
     justify-content: space-between;
@@ -59,19 +59,19 @@
     margin: 1rem 0 3rem;
 }
 
-.administracao-container .administracao-table-container .table-header h2 {
+.administracao-container .administracao-tab-container .tab-header h2 {
     font-size: 3.2rem;
     color: var(--color-font-primary);
 }
 
-.administracao-container .administracao-table-container .table-header .input-grupo {
+.administracao-container .administracao-tab-container .tab-header .input-grupo {
     background: var(--color-background-third);
     border: 1px solid var(--color-blue-third);
     border-radius: .5rem;
     box-shadow: none;
 }
 
-.administracao-container .administracao-table-container table {
+.administracao-container .administracao-tab-container table {
     width: 100%;
     background: var(--color-background-third);  
     font-size: 2.3rem;
@@ -79,16 +79,16 @@
     border-collapse: collapse;
 }
 
-.administracao-container .administracao-table-container table th, .administracao-container .administracao-table-container table td {
+.administracao-container .administracao-tab-container table th, .administracao-container .administracao-tab-container table td {
     vertical-align: middle;
     border: 1px solid var(--color-blue-third);
 }
 
-.administracao-container .administracao-table-container table th {
+.administracao-container .administracao-tab-container table th {
     font-size: 2.4rem;
 }
 
-.administracao-container .administracao-table-container table td div {
+.administracao-container .administracao-tab-container table td div {
     width: 100%;
     height: 100%;
     display: flex;
@@ -96,12 +96,12 @@
     align-items: center;
 }
 
-.administracao-container .administracao-table-container table td img {
+.administracao-container .administracao-tab-container table td img {
     width: 3.2rem;
     margin-right: 1rem;
 }
 
-.administracao-container .administracao-table-container table td button {
+.administracao-container .administracao-tab-container table td button {
     width: 4rem;
     height: 4rem;
     color: var(--color-font-secundary);
@@ -111,19 +111,106 @@
     transition: background .2s;
 }
 
-.administracao-container .administracao-table-container table td .butao-alterar {
+.administracao-container .administracao-tab-container table td .butao-alterar {
     background: var(--color-yellow-primary);
 }
 
-.administracao-container .administracao-table-container table td .butao-alterar:hover {
+.administracao-container .administracao-tab-container table td .butao-alterar:hover {
     background: var(--color-yellow-secundary);
 }
 
-.administracao-container .administracao-table-container table td .butao-excluir {
+.administracao-container .administracao-tab-container table td .butao-excluir {
     background: var(--color-red-primary);
 }
 
-.administracao-container .administracao-table-container table td .butao-excluir:hover {
+.administracao-container .administracao-tab-container table td .butao-excluir:hover {
+    background: var(--color-red-secundary);
+}
+
+.administracao-container .administracao-tab-container form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.administracao-container .administracao-tab-container form fieldset {
+    width: 48.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.administracao-container .administracao-tab-container form fieldset label {
+    font-size: 3rem;
+    color: var(--color-font-primary);
+}
+
+.administracao-container .administracao-tab-container form fieldset input, 
+.administracao-container .administracao-tab-container form fieldset select {
+    width: 100%;
+    height: 5.5rem;
+    background: var(--color-background-third);
+    font-size: 3rem;
+    color: var(--color-font-third);
+    padding: 1rem;
+    margin: 1rem 0 2rem;
+    border: 1px solid var(--color-blue-secundary);
+    border-radius: .5rem;
+}
+
+.administracao-container .administracao-tab-container form fieldset input::placeholder {
+    background: transparent;
+    color: var(--color-font-third);
+    opacity: .5;
+}
+
+.administracao-container .administracao-tab-container form fieldset .botoes-classes {
+    width: 100%;
+    height: 8.3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.administracao-container .administracao-tab-container form fieldset .botoes-classes img {
+    width: 4.3rem;
+    height: 4.3rem;
+    margin: .5rem 0 2rem;
+}
+
+.administracao-container .administracao-tab-container form .botoes-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 3rem;
+}
+
+.administracao-container .administracao-tab-container form .botoes-container button {
+    width: 48.5%;
+    height: 5.5rem;
+    font-size: 3rem;
+    color: var(--color-font-secundary);
+    border: 0;
+    border-radius: 1rem;
+    transition: .3s;
+}
+
+.administracao-container .administracao-tab-container form .botoes-container .botao-alterar {
+    background: var(--color-yellow-primary);
+}
+
+.administracao-container .administracao-tab-container form .botoes-container .botao-alterar:hover {
+    background: var(--color-yellow-secundary);
+}
+
+.administracao-container .administracao-tab-container form .botoes-container .botao-voltar {
+    background: var(--color-red-primary);
+}
+
+.administracao-container .administracao-tab-container form .botoes-container .botao-voltar:hover {
     background: var(--color-red-secundary);
 }
 

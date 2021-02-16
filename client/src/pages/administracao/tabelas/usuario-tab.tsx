@@ -5,7 +5,11 @@ import { Table, Modal } from 'react-bootstrap';
 import * as Classes from '../../../assets/assets';
 import img from '../../../assets/perfilPaula.jpg';
 
-export default function Usuarios() {
+type usuaiosTabela = {
+    functionAlterar: Function
+}
+
+export default function UsuariosTabela({ functionAlterar }: usuaiosTabela) {
 
     const [ pesquisa, setPesquisa ] = useState('');
     const [ show, setShow ] = useState(false);
@@ -14,8 +18,8 @@ export default function Usuarios() {
     const handleShow = () => setShow(true);
 
     return (
-        <div className='administracao-table-container'>
-            <div className="table-header">
+        <div className='administracao-tab-container'>
+            <div className="tab-header">
                 <h2>Tabela usuarios</h2>
 
                 <InputPesquisa value={pesquisa}
@@ -56,7 +60,7 @@ export default function Usuarios() {
                             </div>
                         </td>
                         <td>
-                            <button className='butao-alterar'>
+                            <button className='butao-alterar' onClick={() => functionAlterar('formulario')}>
                                 <FaPen/>
                             </button>
                             <button className='butao-excluir' onClick={handleShow}>
@@ -88,7 +92,7 @@ export default function Usuarios() {
                             </div>
                         </td>
                         <td>
-                            <button className='butao-alterar'>
+                            <button className='butao-alterar' onClick={() => functionAlterar('formulario')}>
                                 <FaPen/>
                             </button>
                             <button className='butao-excluir' onClick={handleShow}>
