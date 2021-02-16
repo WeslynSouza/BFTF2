@@ -18,7 +18,7 @@ export default function Administracao() {
         if(usuarioState === 'tabela') 
             return <UsuariosTabela functionAlterar={setUsuarioState}/>
         else
-            return <UsuarioForm/>
+            return <UsuarioForm functionVoltar={setUsuarioState}/>
     }
 
     return (
@@ -36,6 +36,9 @@ export default function Administracao() {
                     </Tab>
                     <Tab className='administracao-tab-item' eventKey='Divisoes' title='Divisões'>
                         <DivisoesTabela/>
+                    </Tab>
+                    <Tab className='administracao-tab-item' eventKey='Posts' title='Posts'>
+                        
                     </Tab>
                 </Tabs>
             </div>
