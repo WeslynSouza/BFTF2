@@ -9,47 +9,48 @@ import './style.css';
 
 export default function Noticias() {
     return (
-        <div className='container'>
-            
+        <div>
             <Menu/>
-            <Cabecalho titulo='Noticias' links={[{url: '/', titulo: 'Home'}, {url: '/Noticias', titulo: 'Noticias'}]}/>
+            <div className='container'>
+                <Cabecalho titulo='Noticias' links={[{url: '/', titulo: 'Home'}, {url: '/Noticias', titulo: 'Noticias'}]}/>
 
-            <div className="conteudo">
-                <div className="conteudo-centro">
-                    <div className="post-caixa">
-                        <Link to='/NoticiaPost'>
-                            <img className='post-img' src={img} alt='banner'/>
-                        </Link>
-                        <div className="post-conteudo">
+                <div className="conteudo">
+                    <div className="conteudo-centro">
+                        <div className="post-caixa">
                             <Link to='/NoticiaPost'>
-                                <h2>Titulo titulo titulo</h2>
+                                <img className='post-img' src={img} alt='banner'/>
                             </Link>
+                            <div className="post-conteudo">
+                                <Link to='/NoticiaPost'>
+                                    <h2>Titulo titulo titulo</h2>
+                                </Link>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div className="post-caixa">
-                        <Link to='/NoticiaPost'>
-                            <img className='post-img' src={img} alt='banner'/>
-                        </Link>
-                        <div className="post-conteudo">
+                        
+                        <div className="post-caixa">
                             <Link to='/NoticiaPost'>
-                                <h2>Titulo titulo titulo</h2>
+                                <img className='post-img' src={img} alt='banner'/>
                             </Link>
+                            <div className="post-conteudo">
+                                <Link to='/NoticiaPost'>
+                                    <h2>Titulo titulo titulo</h2>
+                                </Link>
+                            </div>
                         </div>
+
+                        
                     </div>
 
-                    
+                    <div className="conteudo-lateral">
+                        <Link to='/CriarPost'>
+                            <button type='button' className='butao-criar'>Criar post +</button>
+                        </Link>
+
+                        <Iframe src="https://discord.com/widget?id=649752881712332810&theme=dark" className='discord' url="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></Iframe>
+                    </div>
                 </div>
 
-                <div className="conteudo-lateral">
-                    <Link to='/CriarPost'>
-                        <button type='button' className='butao-criar'>Criar post +</button>
-                    </Link>
-
-                    <Iframe src="https://discord.com/widget?id=649752881712332810&theme=dark" className='discord' url="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></Iframe>
-                </div>
             </div>
-
         </div>
     )
 }

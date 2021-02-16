@@ -60,44 +60,46 @@ export default function CriarPost() {
     }
 
     return(
-        <div className='cotainer'>
+        <div>
             <Menu/>
-            <Cabecalho 
-                titulo='Criar post' 
-                links={[{titulo: 'Home', url: '/'}, {titulo: 'Noticias', url: '/Noticias'}, {titulo: 'Criar post', url: '/CriarPost'}]}/>
+            <div className='cotainer'>
+                <Cabecalho 
+                    titulo='Criar post' 
+                    links={[{titulo: 'Home', url: '/'}, {titulo: 'Noticias', url: '/Noticias'}, {titulo: 'Criar post', url: '/CriarPost'}]}/>
 
-            <div className="post-form">
-                <form onSubmit={handleSubmit}>
-                    <label htmlFor="titulo">Titulo</label>
-                    <input onChange={event => setTitulo(event.target.value)} type="text" name='titulo' id='titulo'/>
+                <div className="post-form">
+                    <form onSubmit={handleSubmit}>
+                        <label htmlFor="titulo">Titulo</label>
+                        <input onChange={event => setTitulo(event.target.value)} type="text" name='titulo' id='titulo'/>
 
-                    <label htmlFor="conteudo">Conteudo</label>
-                    <textarea onChange={event => setConteudo(event.target.value)} name="conteudo" id="conteudo" cols={40} rows={10}></textarea>
+                        <label htmlFor="conteudo">Conteudo</label>
+                        <textarea onChange={event => setConteudo(event.target.value)} name="conteudo" id="conteudo" cols={40} rows={10}></textarea>
 
-                    <label htmlFor="imagens">Imagens</label>
-                    <div className="imagens">
-                        {previewImages.map((image, indice) => {
-                            return (
-                                <div className="image-area">
-                                    <img key={image} src={image} alt='imagem'/>
-                                    <button type='button' onClick={() => handleRemoveImage(indice)}>
-                                        <FaTimes/>
-                                    </button>
-                                </div>
-                            )
-                        })}
+                        <label htmlFor="imagens">Imagens</label>
+                        <div className="imagens">
+                            {previewImages.map((image, indice) => {
+                                return (
+                                    <div className="image-area">
+                                        <img key={image} src={image} alt='imagem'/>
+                                        <button type='button' onClick={() => handleRemoveImage(indice)}>
+                                            <FaTimes/>
+                                        </button>
+                                    </div>
+                                )
+                            })}
 
-                        <label htmlFor='image[]' className="new-image">
-                            <FaPlus size={24} color="#15b6d6" />
-                        </label> 
-                    </div>
-                    <input multiple onChange={handleSelectImage} type="file" id="image[]"/>
+                            <label htmlFor='image[]' className="new-image">
+                                <FaPlus size={24} color="#15b6d6" />
+                            </label> 
+                        </div>
+                        <input multiple onChange={handleSelectImage} type="file" id="image[]"/>
 
-                    <div className="butoes">
-                        <button type='submit' className='butao-enviar'>Enviar</button>
-                        <button type="reset" className='butao-reset'>Limpar</button>
-                    </div>
-                </form>
+                        <div className="butoes">
+                            <button type='submit' className='butao-enviar'>Enviar</button>
+                            <button type="reset" className='butao-reset'>Limpar</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     )

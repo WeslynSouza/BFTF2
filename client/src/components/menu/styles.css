@@ -1,7 +1,12 @@
 .cabecalho {
-    width: 1000px;
-    height: 90px;
+    width: 100vw;
+    height: 80px;
     background: var(--color-background-secundary);
+}
+
+.cabecalho-area {
+    width: 1000px;
+    height: 80px;
     padding: 0 2rem;
     margin: 0 auto;
     display: flex;
@@ -14,7 +19,7 @@
 }
 
 .cabecalho .menu {
-    width: 590px;
+    width: 540px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -34,7 +39,7 @@
 }
 
 .cabecalho .menu .logo {
-    width: 170px;
+    width: 133px;
     transform: translate( -10px, -8%);
 }
 

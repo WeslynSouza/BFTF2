@@ -22,26 +22,29 @@ export default function Administracao() {
     }
 
     return (
-        <div className="container">
+        <div>
             <Menu/>
-            <Cabecalho titulo='Administração' links={[{url: '/', titulo: 'Home'}, {url: '/administracao', titulo: 'Administração'}]}/>
+            <div className="container">
+                <Cabecalho titulo='Administração' links={[{url: '/', titulo: 'Home'}, {url: '/administracao', titulo: 'Administração'}]}/>
 
-            <div className="administracao-container">
-                <Tabs className='administracao-tab' defaultActiveKey='usuario' id='administracao-tab'>
-                    <Tab className='administracao-tab-item' eventKey='usuario' title='Usuarios'>
-                        {handleUsuarioState()}
-                    </Tab>
-                    <Tab className='administracao-tab-item' eventKey='times' title='Times'>
-                        <TimesTabela/>
-                    </Tab>
-                    <Tab className='administracao-tab-item' eventKey='Divisoes' title='Divisões'>
-                        <DivisoesTabela/>
-                    </Tab>
-                    <Tab className='administracao-tab-item' eventKey='Posts' title='Posts'>
-                        
-                    </Tab>
-                </Tabs>
+                <div className="administracao-container">
+                    <Tabs className='administracao-tab' defaultActiveKey='usuario' id='administracao-tab'>
+                        <Tab className='administracao-tab-item' eventKey='usuario' title='Usuarios'>
+                            {handleUsuarioState()}
+                        </Tab>
+                        <Tab className='administracao-tab-item' eventKey='times' title='Times'>
+                            <TimesTabela/>
+                        </Tab>
+                        <Tab className='administracao-tab-item' eventKey='Divisoes' title='Divisões'>
+                            <DivisoesTabela/>
+                        </Tab>
+                        <Tab className='administracao-tab-item' eventKey='Posts' title='Posts'>
+                            
+                        </Tab>
+                    </Tabs>
+                </div>
             </div>
         </div>
+        
     )
 }

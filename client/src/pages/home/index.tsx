@@ -10,24 +10,26 @@ import './style.css';
 export default function Home() {
 
     return (
-        <div className="container">
+        <div>
             <Menu/>
-            <Cabecalho titulo='Home' links={[{titulo: 'Home', url: '/'}, {titulo: '', url: ''}]}/>
+            <div className="container">
+                <Cabecalho titulo='Home' links={[{titulo: 'Home', url: '/'}, {titulo: '', url: ''}]}/>
 
-            <Carousel className='slide'>
-                <Carousel.Item>
-                    <img className="slide-img d-block w-100" src={Banner} alt="First slide" />
-                </Carousel.Item>
-                <Carousel.Item>
-                    <img className="slide-img d-block w-100" src={Banner1} alt="Third slide" />
-                </Carousel.Item>
-                <Carousel.Item>
-                    <img className="slide-img d-block w-100" src={Banner} alt="Third slide" />
-                </Carousel.Item>
-            </Carousel>
+                <Carousel className='slide'>
+                    <Carousel.Item>
+                        <img className="slide-img d-block w-100" src={Banner} alt="First slide" />
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img className="slide-img d-block w-100" src={Banner1} alt="Third slide" />
+                    </Carousel.Item>
+                    <Carousel.Item>
+                        <img className="slide-img d-block w-100" src={Banner} alt="Third slide" />
+                    </Carousel.Item>
+                </Carousel>
 
-            <h1 className='home-titulo'>Principais notícias</h1>
+                <h1 className='home-titulo'>Principais notícias</h1>
 
+            </div>
         </div>
     )
 }

@@ -6,8 +6,8 @@ import './styles.css';
 
 export default function Menu() {
     return (
-        <div>
-            <div className="cabecalho">
+        <div className='cabecalho'>
+            <div className="cabecalho-area">
                 <ul className="menu">
                     <li className="menu-item">
                         <Link to='/'>
