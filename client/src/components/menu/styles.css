@@ -2,20 +2,17 @@
     width: 100vw;
     height: 80px;
     background: var(--color-background-secundary);
+    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.16);
 }
 
 .cabecalho-area {
     width: 1000px;
     height: 80px;
-    padding: 0 2rem;
     margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    overflow: hidden;
-    border-bottom-right-radius: 15px;
-    border-bottom-left-radius: 15px;
-    box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.16);
+    overflow: hidden;    
 }
 
 .cabecalho .menu {
@@ -40,7 +37,7 @@
 
 .cabecalho .menu .logo {
     width: 133px;
-    transform: translate( -10px, -8%);
+    transform: translate( 0, -8%);
 }
 
 .cabecalho .menu-icon {
