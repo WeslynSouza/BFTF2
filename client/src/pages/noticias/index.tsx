@@ -2,6 +2,7 @@ import Iframe from 'react-iframe';
 import { Link } from 'react-router-dom';
 import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
+import Rodape from '../../components/rodape';
 
 import img from '../../assets/banner1.jpg';
 
@@ -51,6 +52,7 @@ export default function Noticias() {
                 </div>
 
             </div>
+            <Rodape/>
         </div>
     )
 }

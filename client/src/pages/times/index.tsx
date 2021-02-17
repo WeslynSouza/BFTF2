@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
+import Rodape from '../../components/rodape';
 import InputPesquisa from '../../components/input-pesquisa';
 import { Link } from 'react-router-dom';
 
@@ -59,6 +60,7 @@ export default function Times() {
                     </li>
                 </ul>
             </div>
+            <Rodape/>
         </div>
     )
 }

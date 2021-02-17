@@ -1,0 +1,85 @@
+.rodape {
+    width: 100vw;
+    height: 23rem;
+    background: var(--color-background-secundary);
+    margin-top: 5.2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+ 
+.rodape .rodape-conteudo {
+    width: 1000px;
+    height: 180px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.rodape .rodape-conteudo img {
+    width: 28rem;
+}
+
+.rodape .rodape-conteudo .rodape-sobrenos {
+    width: 32rem;
+    height: 12rem;
+    color: var(--color-font-primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.rodape .rodape-conteudo .rodape-sobrenos h2 {
+    font-size: 3.1rem;
+}
+
+.rodape .rodape-conteudo .rodape-sobrenos p {
+    font-size: 1.5rem;
+    text-align: center;
+    opacity: .8;
+}
+
+.rodape .rodape-conteudo .rodape-redeSociais {
+    width: 27rem;
+    height: 11rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--color-font-primary);
+}
+
+.rodape .rodape-conteudo .rodape-redeSociais h2 {
+    font-size: 3.1rem;
+}
+
+.rodape .rodape-conteudo .rodape-redeSociais .rodape-redeSociais-icons {
+    display: flex;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 5rem;
+}
+
+.rodape .rodape-copy {
+    width: 100%;
+    height: 5rem;
+    background: var(--color-background-fourth);
+    font-size: 2.3rem;
+    color: var(--color-font-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rodape .rodape-copy svg {
+    opacity: .7;
+}
+
+.rodape .rodape-copy div {
+    font-size: 2.1rem;
+    margin-left: 1rem;
+    opacity: .7;
+}

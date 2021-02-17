@@ -7,7 +7,7 @@ import CriarPost from './pages/criar-post';
 import Times from './pages/times';
 import TimePerfil from './pages/time-perfil';
 import Jogadores from './pages/jogadores';
-import Divisoes from './pages/Divisoes';
+import Divisoes from './pages/divisoes';
 import Administracao from './pages/administracao';
 
 function Routes() {

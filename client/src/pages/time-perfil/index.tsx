@@ -1,5 +1,6 @@
 import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
+import Rodape from '../../components/rodape';
 import { FaPlus, FaTrash } from 'react-icons/fa';
 import { Table } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
@@ -95,8 +96,8 @@ export default function TimePerfil() {
                         </Table>
                     </div>
                 </div>
-
             </div>
+            <Rodape/>
         </div>
     )
 }

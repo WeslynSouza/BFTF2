@@ -1,5 +1,6 @@
 import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
+import Rodape from '../../components/rodape';
 import { Carousel } from 'react-bootstrap';
 
 import Banner from '../../assets/banner1.jpg';
@@ -30,6 +31,7 @@ export default function Home() {
                 <h1 className='home-titulo'>Principais notícias</h1>
 
             </div>
+            <Rodape/>
         </div>
     )
 }

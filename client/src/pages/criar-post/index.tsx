@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { FaPlus, FaTimes } from 'react-icons/fa';
 import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
+import Rodape from '../../components/rodape';
 
 import './style.css';
 
@@ -62,7 +63,7 @@ export default function CriarPost() {
     return(
         <div>
             <Menu/>
-            <div className='cotainer'>
+            <div className='container'>
                 <Cabecalho 
                     titulo='Criar post' 
                     links={[{titulo: 'Home', url: '/'}, {titulo: 'Noticias', url: '/Noticias'}, {titulo: 'Criar post', url: '/CriarPost'}]}/>
@@ -101,6 +102,7 @@ export default function CriarPost() {
                     </form>
                 </div>
             </div>
+            <Rodape/>
         </div>
     )
 }

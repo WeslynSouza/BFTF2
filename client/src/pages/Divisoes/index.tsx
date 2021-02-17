@@ -1,5 +1,6 @@
 import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
+import Rodape from '../../components/rodape';
 import { Table } from 'react-bootstrap';
 
 import './style.css';
@@ -202,6 +203,7 @@ export default function Divisoes() {
                     </div>
                 </div>
             </div>
+            <Rodape/>
         </div>
     )
 }

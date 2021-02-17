@@ -1,5 +1,6 @@
 import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
+import Rodape from '../../components/rodape';
 
 import Banner from '../../assets/banner1.jpg';
 
@@ -32,6 +33,7 @@ export default function NoticiaPost() {
                     </div>
                 </div>
             </div>
+            <Rodape/>
         </div>
     )
 }

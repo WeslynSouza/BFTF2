@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
+import Rodape from '../../components/rodape';
 import { Tabs, Tab } from 'react-bootstrap';
 
 import UsuariosTabela from './tabelas/usuario-tab';
@@ -44,6 +45,7 @@ export default function Administracao() {
                     </Tabs>
                 </div>
             </div>
+            <Rodape/>
         </div>
         
     )

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
+import Rodape from '../../components/rodape';
 import InputPesquisa from '../../components/input-pesquisa';
 import { FaPlus } from 'react-icons/fa';
 
@@ -78,6 +79,7 @@ export default function Jogadores() {
                     </li>
                 </ul>
             </div>
+            <Rodape/>
         </div>
     )
 }

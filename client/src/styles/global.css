@@ -6,6 +6,7 @@
     --color-background-primary: #EAECEF;
     --color-background-secundary: #FFF;
     --color-background-third: #FFF;
+    --color-background-fourth: #F5F8FA; 
     --color-background-input: #F5F8FA; 
     --color-background-inputblock: #373737; 
     --color-font-primary: #707070;
@@ -27,6 +28,7 @@
     --color-background-primary: #1E1E1E;
     --color-background-secundary: #262626;
     --color-background-third: #1E1E1E;
+    --color-background-fourth: #373737;
     --color-background-input: #1E1E1E; 
     --color-font-primary: #D6D6D6;
     --color-font-third: #707070;
@@ -36,6 +38,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    transition: background .3s;
 }
 
 body {
@@ -56,5 +59,6 @@ textarea {
 
 .container {
     width: 1000px;
+    min-height: 62vh;
     padding: 0;
 }
