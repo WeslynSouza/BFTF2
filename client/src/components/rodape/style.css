@@ -1,6 +1,6 @@
 .rodape {
     width: 100vw;
-    height: 23rem;
+    height: 22vh;
     background: var(--color-background-secundary);
     margin-top: 5.2rem;
     display: flex;
@@ -81,6 +81,7 @@
 
 .rodape .rodape-copy div {
     font-size: 2.1rem;
+    font-weight: 500;
     margin-left: 1rem;
     opacity: .7;
 }

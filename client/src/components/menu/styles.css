@@ -1,6 +1,6 @@
 .cabecalho {
     width: 100vw;
-    height: 70px;
+    height: 7vh;
     background: var(--color-background-secundary);
     box-shadow: 0px 1px 8px rgba(0, 0, 0, 0.16);
 }
