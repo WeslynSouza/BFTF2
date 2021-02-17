@@ -8,6 +8,7 @@ import UsuariosTabela from './tabelas/usuario-tab';
 import UsuarioForm from './formularios/usuario-form';
 import TimesTabela from './tabelas/times-tab';
 import DivisoesTabela from './tabelas/divisao-tab';
+import PostTabela from './tabelas/post-tab';
 
 import './style.css';
 
@@ -40,7 +41,7 @@ export default function Administracao() {
                             <DivisoesTabela/>
                         </Tab>
                         <Tab className='administracao-tab-item' eventKey='Posts' title='Posts'>
-                            
+                            <PostTabela/>
                         </Tab>
                     </Tabs>
                 </div>

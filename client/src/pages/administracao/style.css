@@ -1,4 +1,6 @@
 
+/* CSS do container das tabs */
+
 .administracao-container {
     width: 100%;
     min-height: 67rem;
@@ -71,6 +73,8 @@
     box-shadow: none;
 }
 
+/* CSS do tabela */
+
 .administracao-container .administracao-tab-container table {
     width: 100%;
     background: var(--color-background-third);  
@@ -126,6 +130,63 @@
 .administracao-container .administracao-tab-container table td .butao-excluir:hover {
     background: var(--color-red-secundary);
 }
+
+/* CSS da lista */
+
+.administracao-container .administracao-tab-container ul {
+    width: 100%;
+    background: var(--color-background-third);
+    border: 1px solid var(--color-blue-secundary);
+}
+
+.administracao-container .administracao-tab-container ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--color-blue-primary);
+}
+
+.administracao-container .administracao-tab-container ul li h4 {
+    font-size: 2.6rem;
+    font-family: 400;
+    color: var(--color-font-primary);
+}
+
+.administracao-container .administracao-tab-container ul li .lista-botoes {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.administracao-container .administracao-tab-container ul li .lista-botoes button {
+    width: 4rem;
+    height: 4rem;
+    font-size: 2rem;
+    color: var(--color-font-secundary);
+    margin: 0 .5rem;
+    border: 0;
+    border-radius: 1rem;
+    transition: background .2s;
+}
+
+.administracao-container .administracao-tab-container ul li .lista-botoes .butao-alterar {
+    background: var(--color-yellow-primary);
+}
+
+.administracao-container .administracao-tab-container ul li .lista-botoes .butao-alterar:hover {
+    background: var(--color-yellow-secundary);
+}
+
+.administracao-container .administracao-tab-container ul li .lista-botoes .butao-excluir {
+    background: var(--color-red-primary);
+}
+
+.administracao-container .administracao-tab-container ul li .lista-botoes .butao-excluir:hover {
+    background: var(--color-red-secundary);
+}
+
+/* CSS do formulario */
 
 .administracao-container .administracao-tab-container form {
     display: flex;
@@ -218,6 +279,8 @@
 .administracao-container .administracao-tab-container form .botoes-container .botao-voltar:hover {
     background: var(--color-red-secundary);
 }
+
+/* CSS do modal */
 
 .modal {
     margin-top: -3rem;
