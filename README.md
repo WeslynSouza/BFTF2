@@ -20,9 +20,10 @@ Projeto de desenolvimento de uma plataforma para o gerenciamento de campeonatos 
 Este projeto foi desenvolvido com as seguintes tecnologias:
 
 - [TypeScript](https://www.typescriptlang.org)
-- [Sqlite3](https://www.sqlite.org/index.html)
+- [Sass](https://sass-lang.com)
 - [Node.js](https://nodejs.org/en/)
 - [React](https://reactjs.org)
+- [Sqlite3](https://www.sqlite.org/index.html)
 
 ## 🔖 Layout
 
