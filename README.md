@@ -1,5 +1,5 @@
 <h1 align='center' >
-  <img width='350px' alt='OffSession' src='https://github.com/WeslynSouza/BFTF2/blob/main/github/logo-2.png'/>
+  <img width='350px' alt='OffSession' src='https://github.com/WeslynSouza/BFTF2/blob/main/github/logo.svg'/>
 </h1>
 
 <p align="center">
