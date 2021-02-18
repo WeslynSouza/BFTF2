@@ -2,7 +2,7 @@ import { FaUserCircle, FaBell, FaCogs } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/logo.svg';
 
-import './styles.css';
+import './styles.scss';
 
 export default function Menu() {
     return (

@@ -1,6 +1,6 @@
 import { FaSearch } from 'react-icons/fa';
 
-import './style.css';
+import './style.scss';
 
 type inputPesquisa = {
     value: string,

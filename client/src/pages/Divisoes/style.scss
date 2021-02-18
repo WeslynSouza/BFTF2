@@ -1,0 +1,99 @@
+
+@import '../../styles/mixins';
+
+.table-container {
+    width: 100%;
+    background: var(--color-background-secundary);
+    border-radius: .5rem;
+    margin: 3rem 0;
+    @include sombra;
+
+    table {
+        width: 100%;
+        @include texto(2.3rem, var(--color-font-primary));
+        border-collapse: collapse;
+
+        th, td {
+            padding-left: 2rem;
+            border: 0;
+            border-bottom: 1px solid var(--color-blue-third);
+        }
+
+        tr{
+            &:last-child td {
+                border-bottom: 0;
+            }
+        }
+    }
+}
+
+.titulo-partidas {
+    @include texto(3.4rem, var(--color-blue-secundary));
+    font-weight: 500;
+    margin: 3rem 0;
+}
+
+.partidas-container {
+    width: 100%;
+    @include displayFlex(space-between, center);
+
+    .semana-container {
+        @include displayFlex(space-between, center);
+        flex-direction: column;
+
+        h3 {
+            @include texto(2.5rem, var(--color-blue-third));
+            font-weight: 400;
+            margin-bottom: 2rem;
+        }
+
+        .partida-box {
+            width: 30.3rem;
+            height: 9.8rem;
+            background: var(--color-blue-fourth);
+            @include displayFlex(space-between, center);
+            flex-direction: column;
+            margin-bottom: 4rem;
+            border-radius: 1.9rem;
+            @include sombra;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            %time {
+                width: 100%;
+                height: 4.8rem;
+                background: var(--color-background-secundary);
+                @include displayFlex(space-between, none);
+                padding: 0 1.5rem;
+
+                h4 {
+                    height: 100%;
+                    @include texto(2.4rem, --color-font-primary);
+                    font-weight: 400;
+                    padding-top: 1rem;
+
+                    &:last-child {
+                        border-left: 2px solid var(--color-blue-fourth);
+                        padding-left: 1rem;
+                    }
+                }
+            }
+
+            .time1 {
+                @extend %time;
+
+                border-top-left-radius: 1.5rem;
+                border-top-right-radius: 1.5rem;
+            }
+
+            .time2 {
+                @extend %time;
+
+                border-bottom-left-radius: 1.5rem;
+                border-bottom-right-radius: 1.5rem;
+            }
+        }
+    }
+}

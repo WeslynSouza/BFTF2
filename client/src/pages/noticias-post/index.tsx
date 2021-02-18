@@ -4,7 +4,7 @@ import Rodape from '../../components/rodape';
 
 import Banner from '../../assets/banner1.jpg';
 
-import './style.css';
+import './style.scss';
 
 export default function NoticiaPost() {
     return (

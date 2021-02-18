@@ -2,7 +2,7 @@ import React from 'react';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import './styles/global.css';
+import './styles/global.scss';
 
 import Routes from './routes';
 

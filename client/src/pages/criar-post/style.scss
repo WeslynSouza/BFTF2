@@ -1,0 +1,109 @@
+
+@import '../../styles/mixins';
+
+.post-form {
+    width: 100%;
+    min-height: 600px;
+    @include displayFlex(none, center);
+    flex-direction: column;
+    background: var(--color-background-secundary);
+    margin: 3rem 0 0;
+    padding: 2rem 2rem;
+    border-radius: .5rem;
+    @include sombra;
+
+    form {
+        width: 100%;
+        height: 100%;
+        @include displayFlex(space-between, none);
+        flex-direction: column;
+
+        label {
+            @include texto(3.4rem, var(--color-blue-secundary));
+        }
+
+        %input-textarea {
+            width: 100%;
+            height: 6rem;
+            background: var(--color-background-input);
+            border: .2rem solid var(--color-blue-fifth);
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        input {
+            @extend %input-textarea;
+            height: 6rem;
+        }
+
+        textarea {
+            @extend %input-textarea;
+            height: 22rem;
+        }
+
+        input[type=file]{
+            display: none;
+        }
+
+        .imagens {
+            width: 100%;
+            @include displayFlex(flex-start, none);
+
+            .image-area {
+                width: 15rem;
+                height: 9.8rem;
+                margin-right: 2rem;
+
+                img {
+                    width: 15rem;
+                    height: 9.8rem;
+                    object-fit: cover;
+                    border: 2px solid var(--color-blue-fourth);
+                    border-radius: 1rem;
+                }
+
+                button {
+                    position: relative;
+                    width: 3rem;
+                    height: 3rem;
+                    background: var(--color-blue-fourth);
+                    @include texto(1.4rem, var(--color-font-secundary));
+                    top: -9.8rem;
+                    right: -12rem;
+                    border: 0;
+                    border-bottom-left-radius: .5rem;
+                    border-top-right-radius: 1rem;
+                    transition: .3s;
+
+                    &:hover {
+                        background: var(--color-blue-fifth);
+                    }
+                }
+            }
+
+            .new-image {
+                width: 15rem;
+                height: 9.6rem;
+                background: var(--color-background-input);
+                @include displayFlex(center, center);
+                border: 1px dashed #96D2F0;
+                border-radius: 20px;
+                cursor: pointer;
+            }
+        }
+
+        .botoes {
+            width: 100%;
+            @include displayFlex(space-between, center);
+
+            .botao-enviar {
+                @include button(var(--color-green-primary), 3rem, 47.5%, 6.3rem, var(--color-green-secundary));
+                background: var(--color-green-primary);
+            }
+
+            .botao-reset {
+                @include button(var(--color-red-primary), 3rem, 47.5%, 6.3rem, var(--color-red-secundary));
+            }
+        }
+    }
+}

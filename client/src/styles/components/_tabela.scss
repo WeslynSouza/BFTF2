@@ -1,0 +1,44 @@
+
+@import '../mixins';
+
+/* CSS do tabela */
+
+table {
+    width: 100%;
+    background: var(--color-background-third);  
+    @include texto(2.3rem, var(--color-font-primary));
+    border-collapse: collapse;
+
+    %border-and-align {
+        vertical-align: middle;
+        border: 1px solid var(--color-blue-third);
+    }
+
+    th {
+        @extend %border-and-align;
+        font-size: 2.4rem;
+    }
+
+    td  {
+        @extend %border-and-align;
+
+        div {
+            @include displayFlex(space-between, center);
+            width: 100%;
+            height: 100%;
+        }
+
+        img {
+            width: 3.2rem;
+            margin-right: 1rem;
+        }
+
+        .botao-alterar {
+            @include button(var(--color-yellow-primary), 2.3rem, 4rem, 4rem, var(--color-yellow-secundary));
+        }
+
+        .botao-excluir {
+            @include button(var(--color-red-primary), 2.3rem, 4rem, 4rem, var(--color-red-secundary));
+        }
+    }
+}

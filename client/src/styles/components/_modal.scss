@@ -1,0 +1,41 @@
+.modal {
+    margin-top: -3rem;
+
+    .modal-content {
+        background: var(--color-background-secundary);   
+        border-radius: 1.5rem;
+
+        .modal-header {
+            color: var(--color-font-secundary);
+            @include displayFlex(center, center);
+            border: 0;
+
+            .modal-title {
+                position: relative;
+                @include texto(3rem, var(--color-blue-secundary));
+                text-align: center;
+                @include displayFlex(center, center);
+                margin-top: 1rem;
+            }
+        }
+
+        .modal-body {
+            @include displayFlex(center, center);
+            @include texto(2.5rem, var(--color-font-primary));
+        }
+
+        .modal-footer {
+            @include displayFlex(center, center);
+            border: 0;
+            margin: 1rem 0;
+
+            .botao-confirmar {
+                @include button(--color-green-primary, 2.5rem, 18rem, 6rem, var(--color-green-secundary));
+            }
+
+            .botao-voltar {
+                @include button(--color-green-primary, 2.5rem, 18rem, 6rem, var(--color-green-secundary));
+            }
+        }
+    }
+}

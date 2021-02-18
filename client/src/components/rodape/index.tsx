@@ -1,7 +1,7 @@
 import { FaRegCopyright, FaDiscord, FaFacebook, FaTwitter, FaYoutube } from 'react-icons/fa';
 import logo from '../../assets/logo.svg';
 
-import './style.css';
+import './style.scss';
 
 export default function Rodape() {
     return (

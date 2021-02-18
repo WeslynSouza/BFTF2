@@ -1,0 +1,30 @@
+
+@mixin displayFlex($justify, $align) {
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+@mixin texto($size, $color) {
+    font-size: $size;
+    color: $color;
+}
+
+@mixin sombra {
+    box-shadow: 0px 3px 8px rgba($color: #000000, $alpha: 0.16);
+}
+
+@mixin button($background, $font, $width, $height, $hover) {
+    width: $width;
+    height: $height;
+    background: $background;
+    @include texto($font, var(--color-font-secundary));
+    margin: 0 .5rem;
+    border: 0;
+    border-radius: 1rem;
+    transition: background .2s;
+
+    &:hover {
+        background: $hover;
+    }
+}

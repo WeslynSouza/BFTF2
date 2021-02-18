@@ -4,7 +4,7 @@ import { FaChevronRight } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { FaSun, FaMoon } from 'react-icons/fa';
 
-import './style.css';
+import './style.scss';
 
 type CabecalhoProps = {
     titulo: string,

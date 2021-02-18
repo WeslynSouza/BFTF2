@@ -1,0 +1,79 @@
+
+@import '../../styles/mixins';
+
+.time-container {
+    @include displayFlex(space-between, flex-start);
+    margin-top: 3rem;
+
+    .time-infos {
+        width: 25rem;
+        min-height: 33rem;
+        background: var(--color-background-secundary);
+        @include displayFlex(center, center);
+        flex-direction: column;
+        padding-top: 1rem;
+        border-radius: .5rem;
+        @include sombra;
+
+        img {
+            width: 19rem;
+            border-radius: 99999px;
+            margin-bottom: 2rem;
+            @include sombra;
+        }
+
+        h2 {
+            @include texto(2.8rem, var(--color-blue-secundary));
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+    }
+
+    .time-conteudo {
+        width: 74rem;
+        height: 40rem;
+        background: var(--color-background-secundary);
+        @include displayFlex(none, center);
+        flex-direction: column;
+        padding: 2rem;
+        border-radius: .5rem;
+        @include sombra;
+
+        .time-conteudo-cabecalho {
+            width: 100%;
+            @include displayFlex(space-between, center);
+            margin-bottom: 2rem;
+
+            h2 {
+                @include texto(3.9rem, var(--color-blue-secundary));
+            }
+
+            a {
+                text-decoration: none;
+
+                button {
+                    width: 20rem;
+                    height: 5.5rem;
+                    background: var(--color-background-third);
+                    @include texto(1.8rem, var(--color-blue-third));
+                    @include displayFlex(space-around, center);
+                    padding: 0 1.5rem;
+                    border: 2px solid var(--color-blue-secundary);
+                    border-radius: 1.5rem;
+                    transition: .2s;
+
+                    &:hover {
+                        background: var(--color-blue-third);
+                        color: var(--color-font-secundary);
+                    }
+                }
+            }
+        }
+
+        @import '../../styles/components/tabela';
+    }
+}
+
+
+
+

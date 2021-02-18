@@ -6,7 +6,7 @@ import { Carousel } from 'react-bootstrap';
 import Banner from '../../assets/banner1.jpg';
 import Banner1 from '../../assets/banner2.png';
 
-import './style.css';
+import './style.scss';
 
 export default function Home() {
 
@@ -14,7 +14,7 @@ export default function Home() {
         <div>
             <Menu/>
             <div className="container">
-                <Cabecalho titulo='Home' links={[{titulo: 'Home', url: '/'}, {titulo: '', url: ''}]}/>
+                <Cabecalho titulo='Home' links={[{titulo: 'Home', url: '/'}]}/>
 
                 <Carousel className='slide'>
                     <Carousel.Item>

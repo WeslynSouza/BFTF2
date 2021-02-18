@@ -1,0 +1,41 @@
+ 
+@import '../../styles/mixins';
+
+.input-grupo {
+    background: var(--color-background-secundary);
+    @include displayFlex(center, center);
+    overflow: hidden;
+    border-radius: 1rem;
+    @include sombra();
+
+    input {
+        background: transparent;
+        color: var(--color-font-primary);
+        padding-left: 1rem;
+        border: 0;
+
+        &::placeholder {
+            background: transparent;
+            color: var(--color-blue-secundary);
+            opacity: .5;
+        }
+    
+        &:hover {
+            border: 0;
+        }
+    }
+
+    button {
+        background: transparent;
+        color: var(--color-blue-fourth);
+        @include displayFlex(center, center);
+        border: 0;
+        border-left: 2px solid var(--color-blue-third);
+        transition: .3s;
+
+        &:hover {
+            background: var(--color-blue-third);
+            color: var(--color-font-secundary);
+        }
+    }
+}

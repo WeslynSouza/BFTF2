@@ -1,0 +1,101 @@
+@import '../../styles/mixins';
+
+@mixin modoDark($modo) {
+    @if($modo == 'on'){
+        justify-content: flex-start;
+        border: 2px solid var(--color-blue-fourth);
+    } @else {
+        justify-content: flex-end;
+        border: 2px solid var(--color-blue-primary);
+    }
+}
+
+.header {
+    width: 100%;
+    margin-top: 3rem;
+    @include displayFlex(space-between, center);
+
+    h1 {
+        @include texto(3.9rem, var(--color-blue-primary));
+    }
+
+    .navegacao {
+        padding: 1rem 0 0 0;
+        list-style: none;
+        @include texto(2rem, var(--color-blue-fourth));
+        font-weight: 300;
+        @include displayFlex(space-between, center);
+
+        .mododark {
+            width: 6.2rem;
+            height: 2.5rem;
+            background: var(--color-background-secundary);
+            @include displayFlex(flex-start, center);
+            margin-right: 1.5rem;
+            border-radius: 9999px;
+        }
+
+        %botaoDarkMode {
+            width: 3.2rem;
+            height: 3.2rem;
+            font-size: 2rem;
+            @include displayFlex(center, center);
+            border: 0;
+            border-radius: 9999px;
+        }
+
+        .dark-on {
+            @include modoDark('on');
+
+            button {
+                @extend %botaoDarkMode;
+                background: var(--color-blue-fourth);
+                color: var(--color-font-secundary);
+                margin-left: -3px;
+
+                .moon {
+                    display: none;
+                }
+            }
+        }
+
+        .dark-off {
+            @include modoDark('off');
+
+            button {
+                @extend %botaoDarkMode;
+                background: var(--color-blue-primary);
+                color: var(--color-yellow-primary);
+                margin-right: -3px;
+
+                .sun {
+                    display: none;
+                }
+            }
+        }
+
+        .link-area {
+            @include displayFlex(none, center);
+
+            .link-divisao {
+                font-size: 1.3rem;
+                margin: 0 1rem;
+            }
+
+            &:only-child .link-divisao,
+            &:last-child .link-divisao {
+                display: none;
+            }
+
+            .link a {
+                text-decoration: none;
+                color: var(--color-blue-fourth);
+                transition: .1s;
+            }
+
+            &:hover {
+                color: var(--color-blue-secundary);
+            }
+        }
+    }
+}

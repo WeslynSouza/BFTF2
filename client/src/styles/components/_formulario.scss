@@ -1,0 +1,73 @@
+
+@import '../mixins';
+
+form {
+    @include displayFlex(space-between, center);
+    flex-wrap: wrap;
+
+    fieldset {
+        width: 48.5%;
+        @include displayFlex(flex-start, flex-start);
+        flex-direction: column;
+
+        label {
+            @include texto(3rem, var(--color-font-primary));
+        }
+
+        %input-select {
+            width: 100%;
+            height: 5.5rem;
+            background: var(--color-background-third);
+            @include texto(3rem, var(--color-font-third));
+            padding: 1rem;
+            margin: 1rem 0 2rem;
+            border: 1px solid var(--color-blue-secundary);
+            border-radius: .5rem;
+        }
+
+        select {
+            @extend %input-select;
+        }
+
+        input {
+            @extend %input-select;
+
+            &::placeholder {
+                background: transparent;
+                color: var(--color-font-third);
+                opacity: .5;
+            }
+
+            &:read-only {
+                background: var(--color-background-inputblock);
+                color: var(--color-font-third);
+            }
+        }
+
+        .botoes-classes {
+            width: 100%;
+            height: 8.3rem;
+            @include displayFlex(space-between, center);
+
+            img {
+                width: 4.3rem;
+                height: 4.3rem;
+                margin: .5rem 0 2rem;
+            }
+        }
+    }
+
+    .botoes-container {
+        @include displayFlex(space-between, center);
+        width: 100%;
+        margin: 2rem 0;
+
+        .botao-alterar {
+            @include button(var(--color-yellow-primary), 3rem, 48.5%, 5.5rem, var(--color-yellow-secundary));
+        }
+
+        .botao-voltar {
+            @include button(var(--color-red-primary), 3rem, 48.5%, 5.5rem, var(--color-red-secundary));
+        }
+    }
+}

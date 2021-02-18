@@ -5,7 +5,7 @@ import Rodape from '../../components/rodape';
 import InputPesquisa from '../../components/input-pesquisa';
 import { Link } from 'react-router-dom';
 
-import './style.css';
+import './style.scss';
 
 import logo from '../../assets/perfilPaula.jpg';
 

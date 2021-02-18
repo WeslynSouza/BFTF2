@@ -1,0 +1,20 @@
+
+@import '../../styles/mixins';
+
+.slide {
+    height: 50rem;
+    margin: 2rem 0;
+    border-radius: .5rem;
+    @include sombra;
+
+    .slide-img {
+        height: 50rem;
+        border-radius: .5rem;
+    }
+}
+
+.home-titulo {
+    @include texto(3.9rem, var(--color-blue-secundary));
+    text-align: center;
+    margin: 3rem 0;
+}

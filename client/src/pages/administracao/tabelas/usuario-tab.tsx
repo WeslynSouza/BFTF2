@@ -60,10 +60,10 @@ export default function UsuariosTabela({ functionAlterar }: usuaiosTabela) {
                             </div>
                         </td>
                         <td>
-                            <button className='butao-alterar' onClick={() => functionAlterar('formulario')}>
+                            <button className='botao-alterar' onClick={() => functionAlterar('formulario')}>
                                 <FaPen/>
                             </button>
-                            <button className='butao-excluir' onClick={handleShow}>
+                            <button className='botao-excluir' onClick={handleShow}>
                                 <FaTrash/>
                             </button>
                         </td>
@@ -92,10 +92,10 @@ export default function UsuariosTabela({ functionAlterar }: usuaiosTabela) {
                             </div>
                         </td>
                         <td>
-                            <button className='butao-alterar' onClick={() => functionAlterar('formulario')}>
+                            <button className='botao-alterar' onClick={() => functionAlterar('formulario')}>
                                 <FaPen/>
                             </button>
-                            <button className='butao-excluir' onClick={handleShow}>
+                            <button className='botao-excluir' onClick={handleShow}>
                                 <FaTrash/>
                             </button>
                         </td>
@@ -109,8 +109,8 @@ export default function UsuariosTabela({ functionAlterar }: usuaiosTabela) {
                 </Modal.Header>
                 <Modal.Body>Deseja excluir o usuario: Nome usuario?</Modal.Body>
                 <Modal.Footer>
-                    <button className="butao-confirmar">Confirmar</button>
-                    <button className="butao-voltar" onClick={handleClose}>Voltar</button>
+                    <button className="botao-confirmar">Confirmar</button>
+                    <button className="botao-voltar" onClick={handleClose}>Voltar</button>
                 </Modal.Footer>
             </Modal>
         </div>

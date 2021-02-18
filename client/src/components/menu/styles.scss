@@ -1,0 +1,55 @@
+
+@import '../../styles/mixins';
+
+.cabecalho {
+    width: 100vw;
+    height: 7vh;
+    background: var(--color-background-secundary);
+    @include sombra;
+
+    .cabecalho-area {
+        width: 1000px;
+        height: 70px;
+        @include displayFlex(space-between, center);
+        margin: 0 auto;
+        overflow: hidden;    
+    
+        .menu {
+            width: 540px;
+            list-style: none;
+            margin-top: 1.5rem;
+            @include displayFlex(space-between, center);
+        
+            .menu-item {
+                @include texto(2.8rem, var(--color-blue-secundary));
+                font-weight: 400;
+            
+                a {
+                    text-decoration: none;
+                    color: var(--color-blue-secundary);
+                }
+            }
+        
+            .logo {
+                width: 123px;
+                transform: translate( 0, -8%);
+            }
+        
+        }
+    
+        .menu-icon {
+            width: 150px;
+            @include displayFlex(space-between, center);
+            list-style: none;
+            margin-top: 1rem;
+        
+            .menu-item {
+                @include texto(3.4rem, var(--color-blue-secundary));
+            
+                a {
+                    color: var(--color-blue-secundary);
+                }
+            }
+        }
+    }
+}

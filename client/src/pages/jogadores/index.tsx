@@ -8,7 +8,7 @@ import { FaPlus } from 'react-icons/fa';
 
 import img from '../../assets/perfilPaula.jpg';
 
-import './style.css';
+import './style.scss';
 
 export default function Jogadores() {
 

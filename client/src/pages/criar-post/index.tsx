@@ -5,7 +5,7 @@ import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
 import Rodape from '../../components/rodape';
 
-import './style.css';
+import './style.scss';
 
 export default function CriarPost() {
 
@@ -95,9 +95,9 @@ export default function CriarPost() {
                         </div>
                         <input multiple onChange={handleSelectImage} type="file" id="image[]"/>
 
-                        <div className="butoes">
-                            <button type='submit' className='butao-enviar'>Enviar</button>
-                            <button type="reset" className='butao-reset'>Limpar</button>
+                        <div className="botoes">
+                            <button type='submit' className='botao-enviar'>Enviar</button>
+                            <button type="reset" className='botao-reset'>Limpar</button>
                         </div>
                     </form>
                 </div>

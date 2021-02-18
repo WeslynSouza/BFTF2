@@ -6,7 +6,7 @@ import Rodape from '../../components/rodape';
 
 import img from '../../assets/banner1.jpg';
 
-import './style.css';
+import './style.scss';
 
 export default function Noticias() {
     return (
@@ -44,7 +44,7 @@ export default function Noticias() {
 
                     <div className="conteudo-lateral">
                         <Link to='/CriarPost'>
-                            <button type='button' className='butao-criar'>Criar post +</button>
+                            <button type='button' className='botao-criar'>Criar post +</button>
                         </Link>
 
                         <Iframe src="https://discord.com/widget?id=649752881712332810&theme=dark" className='discord' url="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></Iframe>

@@ -47,10 +47,10 @@ export default function Times() {
                             Nome
                         </td>
                         <td>
-                            <button className='butao-alterar'>
+                            <button className='botao-alterar'>
                                 <FaPen/>
                             </button>
-                            <button className='butao-excluir' onClick={handleShow}>
+                            <button className='botao-excluir' onClick={handleShow}>
                                 <FaTrash/>
                             </button>
                         </td>
@@ -69,10 +69,10 @@ export default function Times() {
                             Nome
                         </td>
                         <td>
-                            <button className='butao-alterar'>
+                            <button className='botao-alterar'>
                                 <FaPen/>
                             </button>
-                            <button className='butao-excluir' onClick={handleShow}>
+                            <button className='botao-excluir' onClick={handleShow}>
                                 <FaTrash/>
                             </button>
                         </td>
@@ -86,8 +86,8 @@ export default function Times() {
                 </Modal.Header>
                 <Modal.Body>Deseja excluir o time: Nome Time?</Modal.Body>
                 <Modal.Footer>
-                    <button className="butao-confirmar">Confirmar</button>
-                    <button className="butao-voltar" onClick={handleClose}>Voltar</button>
+                    <button className="botao-confirmar">Confirmar</button>
+                    <button className="botao-voltar" onClick={handleClose}>Voltar</button>
                 </Modal.Footer>
             </Modal>
         </div>

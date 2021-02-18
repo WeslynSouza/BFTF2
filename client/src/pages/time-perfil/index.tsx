@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import img from '../../assets/perfilPaula.jpg';
 import * as Classes from '../../assets/assets';
 
-import './style.css';
+import './style.scss';
 
 export default function TimePerfil() {
 
@@ -62,7 +62,7 @@ export default function TimePerfil() {
                                         </div>
                                     </td>
                                     <td>
-                                        <button>
+                                        <button className='botao-excluir'>
                                             <FaTrash/>
                                         </button>
                                     </td>
@@ -87,7 +87,7 @@ export default function TimePerfil() {
                                         </div>
                                     </td>
                                     <td>
-                                        <button>
+                                        <button className='botao-excluir'>
                                             <FaTrash/>
                                         </button>
                                     </td>
