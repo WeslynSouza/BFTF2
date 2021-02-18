@@ -27,14 +27,15 @@
         .modal-footer {
             @include displayFlex(center, center);
             border: 0;
-            margin: 1rem 0;
+            margin: 2rem 0;
 
             .botao-confirmar {
-                @include button(--color-green-primary, 2.5rem, 18rem, 6rem, var(--color-green-secundary));
+                @include button(var(--color-green-primary), 2.5rem, 18rem, 6rem, var(--color-green-secundary));
+                margin-right: 1rem;
             }
 
             .botao-voltar {
-                @include button(--color-green-primary, 2.5rem, 18rem, 6rem, var(--color-green-secundary));
+                @include button(var(--color-red-primary), 2.5rem, 18rem, 6rem, var(--color-red-secundary));
             }
         }
     }
