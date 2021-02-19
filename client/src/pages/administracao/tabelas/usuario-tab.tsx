@@ -81,7 +81,7 @@ export default function UsuariosTabela({ functionAlterar }: usuaiosTabela) {
             return (
                 <div className='tab-placeholder'>
                     <img src={Placeholder} alt="barreira"/>
-                    <h2>Nenhum post foi cadastrado no sistema</h2>
+                    <h2>Nenhum usuário foi cadastrado no sistema</h2>
                 </div>
             )
         }

@@ -63,7 +63,7 @@ export default function Times() {
             return (
                 <div className='tab-placeholder'>
                     <img src={Placeholder} alt="barreira"/>
-                    <h2>Nenhum post foi cadastrado no sistema</h2>
+                    <h2>Nenhum time foi cadastrado no sistema</h2>
                 </div>
             )
         }
