@@ -1,3 +1,5 @@
+import { useState, FormEvent } from 'react';
+import { useHistory } from 'react-router-dom';
 import * as Classes from '../../../assets/assets';
 
 type usuarioForm = {
@@ -6,21 +8,50 @@ type usuarioForm = {
 
 export default function UsuarioForm({ functionVoltar }: usuarioForm) {
 
+    const history = useHistory();
+
+    const [ nome, setNome ] = useState('');
+    const [ steamId, setSteamId ] = useState('');
+    const [ avatar, setAvatar ] = useState<File[]>([]);
+    const [ elegivel, setElegivel ] = useState('');
+    const [ classes, setClasses ] = useState<string[]>([]);
+
+    async function handleSubmit(event: FormEvent){
+        event.preventDefault();
+
+        const data = new FormData();
+
+        data.append('nome', nome);
+        data.append('steamId', steamId);
+        avatar.forEach(avatar => {
+            data.append('avatar', avatar);
+        })
+        data.append('elegivel', elegivel);
+        classes.forEach(classe => {
+            data.append('classes', classe);
+        })
+
+        alert('Cadastro realizado com sucesso!');
+
+        history.push('/');
+    }
+
     return (
         <div className="administracao-tab-container">
             <div className="tab-header">
                 <h2>Alterar usuario</h2>
             </div>
 
-            <form>
+            <form className='form-secundary' onSubmit={handleSubmit}>
                 <fieldset>
                     <label htmlFor="nome">Nome</label>
-                    <input type="text" value='Nome' id='nome'/>
+                    <input type="text" value={nome} placeholder='Nome' 
+                        id='nome' onChange={event => setNome(event.target.value)}/>
                 </fieldset>
                 
                 <fieldset>
                     <label htmlFor="steamId">SteamId</label>
-                    <input type="text" value='12893781273' id='steamId' readOnly/>
+                    <input type="text" value={steamId} placeholder='SteamId' id='steamId' readOnly/>
                 </fieldset>
                 
                 <fieldset>
@@ -30,7 +61,7 @@ export default function UsuarioForm({ functionVoltar }: usuarioForm) {
                 
                 <fieldset>
                     <label htmlFor="elegivel">Elegivel</label>
-                    <select name="elegivel" id="elegivel">
+                    <select name="elegivel" id="elegivel" value={elegivel} onChange={event => setElegivel(event.target.value)}>
                         <option value="nao-elegivel">Não elegivel</option>
                         <option value="elegivel">Elegivel</option>
                     </select>

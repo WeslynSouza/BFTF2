@@ -64,6 +64,21 @@
             }
         }
 
+        .tab-placeholder {
+            width: 100%;
+            height: 100%;
+            @include displayFlex(center, center);
+            flex-direction: column;
+            margin-top: 5rem;
+
+            h2 {
+                width: 50rem;
+                @include texto(3.5rem, var(--color-blue-secundary));
+                text-align: center;
+                margin-top: 2rem
+            }
+        }
+
         @import '../../styles/components/tabela';
         @import '../../styles/components/formulario';
         @import '../../styles/components/lista';

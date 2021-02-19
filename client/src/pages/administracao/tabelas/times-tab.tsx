@@ -4,14 +4,70 @@ import { Table, Modal } from 'react-bootstrap';
 import { FaPen, FaTrash } from 'react-icons/fa';
 
 import img from '../../../assets/perfilPaula.jpg';
+import Placeholder from '../../../assets/barreira.svg';
 
 export default function Times() {
 
+    type Time = {
+        nome: string,
+        lider: string,
+        divisao: string
+    }
+
     const [ pesquisa, setPesquisa ] = useState('');
+    const [ times, setTimes ] = useState<Time[]>([]);
     const [ show, setShow ] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    function renderTab() {
+        if(times.length !== 0) {
+            return (
+                <Table>
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Lider</th>
+                            <th>Divisão</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {times.map(time => {
+                            return (
+                                <tr key={time.nome}>
+                                    <td>
+                                        <img src={img} alt="Avatar"/>
+                                        {time.nome}
+                                    </td>
+                                    <td>
+                                        <img src={img} alt="Avatar"/>
+                                        {time.lider}
+                                    </td>
+                                    <td>
+                                        {time.divisao}
+                                    </td>
+                                    <td>
+                                        <button className='botao-excluir' onClick={handleShow}>
+                                            <FaTrash/>
+                                        </button>
+                                    </td>
+                                </tr>
+                            )
+                        })}
+                    </tbody>
+                </Table>
+            )
+        } else {
+            return (
+                <div className='tab-placeholder'>
+                    <img src={Placeholder} alt="barreira"/>
+                    <h2>Nenhum post foi cadastrado no sistema</h2>
+                </div>
+            )
+        }
+    }
 
     return (
         <div className='administracao-tab-container'>
@@ -24,61 +80,7 @@ export default function Times() {
                     buttonWidth='5.7rem' fontInput='2.1rem' fontButton='2.6rem'/>
             </div>
 
-            <Table>
-                <thead>
-                    <tr>
-                        <th>Usuarios</th>
-                        <th>Time</th>
-                        <th>Divisão</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>
-                            <img src={img} alt="Avatar"/>
-                            Nome jogador
-                        </td>
-                        <td>
-                            <img src={img} alt="Avatar"/>
-                            Nome jogador
-                        </td>
-                        <td>
-                            Nome
-                        </td>
-                        <td>
-                            <button className='botao-alterar'>
-                                <FaPen/>
-                            </button>
-                            <button className='botao-excluir' onClick={handleShow}>
-                                <FaTrash/>
-                            </button>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <img src={img} alt="Avatar"/>
-                            Nome jogador
-                        </td>
-                        <td>
-                            <img src={img} alt="Avatar"/>
-                            Nome jogador
-                        </td>
-                        <td>
-                            Nome
-                        </td>
-                        <td>
-                            <button className='botao-alterar'>
-                                <FaPen/>
-                            </button>
-                            <button className='botao-excluir' onClick={handleShow}>
-                                <FaTrash/>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </Table>
+            {renderTab()}
 
             <Modal show={show} onHide={handleClose} centered>
                 <Modal.Header>

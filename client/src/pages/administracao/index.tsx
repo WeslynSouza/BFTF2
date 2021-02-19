@@ -29,7 +29,7 @@ export default function Administracao() {
         if(postState === 'lista') 
             return <PostList functionAlterar={setPostState}/>
         else
-            return <PostForm/>
+            return <PostForm functionVoltar={setPostState}/>
     }
 
     return (

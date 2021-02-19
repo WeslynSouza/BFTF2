@@ -3,56 +3,65 @@ import { Modal } from 'react-bootstrap';
 import { FaPen, FaTrash } from 'react-icons/fa';
 import InputPesquisa from '../../../components/input-pesquisa';
 
+import Placeholder from '../../../assets/barreira.svg';
+
 type postTabela = {
     functionAlterar: Function;
 }
 
 export default function PostTabela({ functionAlterar }: postTabela) {
 
-    const [ pesquisa, setPesquisa ] = useState('tabela');
+    const [ pesquisa, setPesquisa ] = useState('');
+    const [ posts, setPosts ] = useState<Object[]>([]);
     const [ show, setShow ] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    function renderTab() {
+        if(posts.length !== 0) {
+            return (
+                <ul>
+                    {posts.map(post => {
+                        return (
+                            <li>
+                                <h4>Titulo do post</h4>
+
+                                <div className='lista-botoes'>
+                                    <button className='botao-alterar' onClick={() => functionAlterar('formulario')}>
+                                        <FaPen/>
+                                    </button>
+                                    <button className='botao-excluir' onClick={() => handleShow()}>
+                                        <FaTrash/>
+                                    </button>
+                                </div>
+                            </li>
+                        )
+                    })}
+                </ul>
+            )
+        }else {
+            return (
+                <div className='tab-placeholder'>
+                    <img src={Placeholder} alt="barreira"/>
+                    <h2>Nenhum post foi cadastrado no sistema</h2>
+                </div>
+            )
+        }
+    }
+
     return (
         <div className='administracao-tab-container'>
 
             <div className="tab-header">
-                <h2>Tabela time </h2>
+                <h2>Lista posts</h2>
 
                 <InputPesquisa value={pesquisa}
                     setValue={setPesquisa} height='4rem' inputWidth='23.53rem' 
                     buttonWidth='5.7rem' fontInput='2.1rem' fontButton='2.6rem'/>
             </div>
 
-            <ul>
-                <li>
-                    <h4>Titulo do post</h4>
-
-                    <div className='lista-botoes'>
-                        <button className='botao-alterar'>
-                            <FaPen onClick={() => functionAlterar('formulario')}/>
-                        </button>
-                        <button className='botao-excluir' onClick={() => handleShow()}>
-                            <FaTrash/>
-                        </button>
-                    </div>
-                </li>
-
-                <li>
-                    <h4>Titulo do post</h4>
-
-                    <div className='lista-botoes'>
-                        <button className='botao-alterar'>
-                            <FaPen onClick={() => functionAlterar('formulario')}/>
-                        </button>
-                        <button className='botao-excluir' onClick={() => handleShow()}>
-                            <FaTrash/>
-                        </button>
-                    </div>
-                </li>
-            </ul>
+            {renderTab()}
 
             <Modal show={show} onHide={handleClose} centered>
                 <Modal.Header>
