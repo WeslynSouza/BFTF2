@@ -70,7 +70,7 @@
 
                 h4 {
                     height: 100%;
-                    @include texto(2.4rem, --color-font-primary);
+                    @include texto(2.4rem, var(--color-font-primary));
                     font-weight: 400;
                     padding-top: 1rem;
 
