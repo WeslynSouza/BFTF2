@@ -9,18 +9,27 @@ import UsuarioForm from './formularios/usuario-form';
 import TimesTabela from './tabelas/times-tab';
 import DivisoesTabela from './tabelas/divisao-tab';
 import PostList from './listas/post-list';
+import PostForm from './formularios/post-form';
 
 import './style.scss';
 
 export default function Administracao() {
 
     const [ usuarioState, setUsuarioState ] = useState('tabela');
+    const [ postState, setPostState ] = useState('lista');
 
     function handleUsuarioState() {
         if(usuarioState === 'tabela') 
             return <UsuariosTabela functionAlterar={setUsuarioState}/>
         else
             return <UsuarioForm functionVoltar={setUsuarioState}/>
+    }
+
+    function handlePostState() {
+        if(postState === 'lista') 
+            return <PostList functionAlterar={setPostState}/>
+        else
+            return <PostForm/>
     }
 
     return (
@@ -41,7 +50,7 @@ export default function Administracao() {
                             <DivisoesTabela/>
                         </Tab>
                         <Tab className='administracao-tab-item' eventKey='Posts' title='Posts'>
-                            <PostList/>
+                            {handlePostState()}
                         </Tab>
                     </Tabs>
                 </div>

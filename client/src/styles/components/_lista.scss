@@ -3,7 +3,7 @@
 
 ul {
     width: 100%;
-    background: var(--color-background-third);
+    background: var(--color-background-input);
     border: 1px solid var(--color-blue-secundary);
 
     li {
@@ -26,6 +26,10 @@ ul {
             .botao-excluir {
                 @include button(var(--color-red-primary), 2rem, 4rem, 4rem, var(--color-red-secundary));
             }
+        }
+
+        &:last-child {
+            border-bottom: 0;
         }
     }
 }

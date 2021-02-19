@@ -3,7 +3,11 @@ import { Modal } from 'react-bootstrap';
 import { FaPen, FaTrash } from 'react-icons/fa';
 import InputPesquisa from '../../../components/input-pesquisa';
 
-export default function PostTabela() {
+type postTabela = {
+    functionAlterar: Function;
+}
+
+export default function PostTabela({ functionAlterar }: postTabela) {
 
     const [ pesquisa, setPesquisa ] = useState('tabela');
     const [ show, setShow ] = useState(false);
@@ -28,7 +32,7 @@ export default function PostTabela() {
 
                     <div className='lista-botoes'>
                         <button className='botao-alterar'>
-                            <FaPen/>
+                            <FaPen onClick={() => functionAlterar('formulario')}/>
                         </button>
                         <button className='botao-excluir' onClick={() => handleShow()}>
                             <FaTrash/>
@@ -41,7 +45,7 @@ export default function PostTabela() {
 
                     <div className='lista-botoes'>
                         <button className='botao-alterar'>
-                            <FaPen/>
+                            <FaPen onClick={() => functionAlterar('formulario')}/>
                         </button>
                         <button className='botao-excluir' onClick={() => handleShow()}>
                             <FaTrash/>
