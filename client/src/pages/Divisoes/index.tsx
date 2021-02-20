@@ -1,22 +1,21 @@
 import { useState } from 'react';
+import { Table } from 'react-bootstrap';
 import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
 import Rodape from '../../components/rodape';
-import { Table } from 'react-bootstrap';
 
 import './style.scss';
 
-export default function Divisoes() {
 
-    type Time = {
+type Divisao = {
+    nome: string, 
+    times: Array<{
         nome: string
-    }
+    }>,
+    rodadas: Array<string> 
+}
 
-    type Divisao = {
-        nome: string, 
-        times: Array<Time>,
-        rodadas: Array<string> 
-    }
+export default function Divisoes() {
 
     const [ divisoes, setDivisoes ] = useState<Divisao[]>([{nome: 'teste', times: [{nome: 'teste'}], rodadas: []}]);
     const [ divisao, setDivisao ] = useState<Divisao>({nome: 'teste', times: [{nome: 'teste'}], rodadas: []});
