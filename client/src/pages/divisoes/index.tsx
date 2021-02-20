@@ -15,7 +15,7 @@ type Divisao = {
     rodadas: Array<string> 
 }
 
-export default function Divisoes() {
+export default function PageDivisoes() {
 
     const [ divisoes, setDivisoes ] = useState<Divisao[]>([{nome: 'teste', times: [{nome: 'teste'}], rodadas: []}]);
     const [ divisao, setDivisao ] = useState<Divisao>({nome: 'teste', times: [{nome: 'teste'}], rodadas: []});
