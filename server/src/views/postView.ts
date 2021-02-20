@@ -1,4 +1,5 @@
 import Post from '../models/post';
+import ImagemView from './imagemView';
 
 export default {
 
@@ -8,7 +9,7 @@ export default {
             Autor: post.autor.nick,
             Titulo: post.titulo,
             Conteudo: post.conteudo,
-            Imagens: post.imagens.map(imagem =>  imagem.path)
+            Imagens: ImagemView.renderMany(post.imagens)
         }
     },
 

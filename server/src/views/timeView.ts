@@ -1,16 +1,31 @@
 import Time from '../models/time';
 
+const url = 'http://localhost:3333/uploads/';
+
 export default {
 
     render(time: Time){
 
+        let divisao;
+        if(time.divisao === null){
+            divisao = '';
+        }else {
+            divisao = time.divisao.nome;
+        }
+
         return {
-            Id: time.id,
-            Nome: time.nome,
-            Divisao: time.divisao.nome,
-            Lider: time.lider.nick,
-            Logo: time.logo,
-            Jogadores: time.jogadores.map(jogador => jogador.nick),
+            id: time.id,
+            nome: time.nome,
+            lider: time.lider.nick,
+            divisao,
+            logo: `${url}${time.logo}`,
+            jogadores: time.jogadores.map(jogador => {
+                const jogadorObjeto = {
+                    nick: jogador.nick,
+                    avatar: `${url}${jogador.avatar}`
+                }
+                return jogadorObjeto;
+            }),
         }
     },
 

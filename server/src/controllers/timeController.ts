@@ -63,8 +63,8 @@ export default {
         const schema = yup.object().shape({
             lider: yup.object().required(),
             nome: yup.string().required(),
-            divisao: yup.object().required(),
-            logo: yup.object(),
+            divisao: yup.object(),
+            logo: yup.string(),
             jogadores: yup.array().required()
         })
 

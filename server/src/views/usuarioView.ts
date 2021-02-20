@@ -6,7 +6,7 @@ export default {
         return {
             SteamId: usuario.steamId,
             Nick: usuario.nick,
-            Avatar: usuario.avatar,
+            Avatar: `http://localhost:3333/uploads/${usuario.avatar}`,
             Classes: usuario.classes.map(classe => classe.nome),
             Posts: usuario.posts.map(post => {
                 return {
