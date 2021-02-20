@@ -23,9 +23,14 @@
         }
 
         h2 {
-            @include texto(2.8rem, var(--color-blue-secundary));
+            @include texto(2.8rem, var(--color-font-primary));
             font-weight: 400;
             margin-bottom: 1rem;
+
+            &:last-child {
+                @include texto(2.3rem, var(--color-font-primary));
+                margin-bottom: 1.5rem;
+            }
         }
     }
 

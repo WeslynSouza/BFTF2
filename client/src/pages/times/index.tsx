@@ -1,17 +1,54 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
 import Rodape from '../../components/rodape';
 import InputPesquisa from '../../components/input-pesquisa';
-import { Link } from 'react-router-dom';
+import Placeholder from '../../components/placeholder';
+import api from '../../services/api';
 
 import './style.scss';
 
-import logo from '../../assets/perfilPaula.jpg';
-
 export default function Times() {
 
+    type Time = {
+        id: number,
+        nome: string,
+        logo: string
+    }
+
     const [ pesquisa, setPesquisa ] = useState('');
+    const [ times, setTimes ] = useState<Time[]>([]);
+
+    useEffect(() => {
+        api.get('/time').then(res => {
+            setTimes(res.data);
+        })
+    }, []);
+
+    function renderLista() {
+        if(times.length !== 0) {
+            return (
+                <ul className='time-lista'>
+                    {times.map(time => {
+                        return (
+                            <li className="time-lista-item" key={time.id}>
+                                <Link to={`/TimePerfil/${time.id}`}>
+                                    <img src={time.logo} alt="logo"/>
+                                    <h2>{time.nome}</h2>
+                                </Link>
+                            </li>
+                        )
+                    })}
+                </ul>
+            )
+        } else {
+            return (
+                <Placeholder texto='Nenhum time foi encontrado no sistema!'/>
+            )
+        }
+    }
 
     return (
         <div>
@@ -27,38 +64,8 @@ export default function Times() {
                     <button className='butao-criar'>Criar time +</button>
                 </div>
 
-                <ul className="time-lista">
-                    <li className="time-lista-item">
-                        <Link to='/TimePerfil'>
-                            <img src={logo} alt="logo"/>
-                            <h2>Time nome</h2>
-                        </Link>
-                    </li>
-                    <li className="time-lista-item">
-                        <Link to='/TimePerfil'>
-                            <img src={logo} alt="logo"/>
-                            <h2>Time nome</h2>
-                        </Link>
-                    </li>
-                    <li className="time-lista-item">
-                        <Link to='/TimePerfil'>
-                            <img src={logo} alt="logo"/>
-                            <h2>Time nome</h2>
-                        </Link>
-                    </li>
-                    <li className="time-lista-item">
-                        <Link to='/TimePerfil'>
-                            <img src={logo} alt="logo"/>
-                            <h2>Time nome</h2>
-                        </Link>
-                    </li>
-                    <li className="time-lista-item">
-                        <Link to='/TimePerfil'>
-                            <img src={logo} alt="logo"/>
-                            <h2>Time nome</h2>
-                        </Link>
-                    </li>
-                </ul>
+                {renderLista()}
+                       
             </div>
             <Rodape/>
         </div>

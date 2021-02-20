@@ -3,7 +3,7 @@
 
 .times-opcoes {
     @include displayFlex(space-between, center);
-    margin: 2rem 0 0;
+    margin: 2rem 0 9rem;
 
     .butao-criar {
         @include button(var(--color-green-primary), 3rem, 27rem, 6.2rem, var(--color-green-secundary));
@@ -14,10 +14,10 @@
 .time-lista {
     width: 100%;
     background-color: var(--color-background-secundary);
-    @include displayFlex(none, center);
+    @include displayFlex(flex-start, center);
     flex-direction: column;
+    margin-top: -4rem;
     padding-top: 2rem;
-    margin-top: 4rem;
     border-radius: .5rem;
     @include sombra;
 

@@ -1,27 +1,90 @@
+import { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import { FaPlus, FaTimes } from 'react-icons/fa';
+import { Table } from 'react-bootstrap';
+
 import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
 import Rodape from '../../components/rodape';
-import { FaPlus, FaTrash } from 'react-icons/fa';
-import { Table } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import img from '../../assets/perfilPaula.jpg';
 import * as Classes from '../../assets/assets';
 
 import './style.scss';
+import api from '../../services/api';
 
 export default function TimePerfil() {
+
+    type TimeParams = {
+        id: string
+    }
+
+    type Jogador = {
+        nick: string,
+        avatar: string,
+    }
+
+    type Time = {
+        nome: string,
+        logo: string,
+        divisao: string,
+        jogadores: Array<Jogador>
+    }
+
+    const params = useParams<TimeParams>();
+    const [ time, setTime ] = useState<Time>(Object);
+
+    useEffect(() => {
+        api.get(`/Time/${params.id}`).then(res => {
+            setTime(res.data);
+        })
+    }, [params.id])
+
+    function renderTabela() {
+        if(time.nome === undefined){
+            return '';
+        }
+        return (
+            time.jogadores.map(jogador => {
+                return (
+                    <tr key={jogador.nick}>
+                        <td>
+                            <img src={jogador.avatar} alt="Avatar"/>
+                            {jogador.nick}
+                        </td>
+                        <td>
+                            <div>
+                                <img src={Classes.scout} alt="classe"/>
+                                <img src={Classes.soldierBlue} alt="classe"/>
+                                <img src={Classes.pyro} alt="classe"/>
+                                <img src={Classes.demoman} alt="classe"/>
+                                <img src={Classes.heavyBlue} alt="classe"/>
+                                <img src={Classes.engieneer} alt="classe"/>
+                                <img src={Classes.sniper} alt="classe"/>
+                                <img src={Classes.medic} alt="classe"/>
+                                <img src={Classes.spy} alt="classe"/>
+                            </div>
+                        </td>
+                        <td>
+                            <button className='botao-excluir'>
+                                <FaTimes/>
+                            </button>
+                        </td>
+                    </tr>
+                )
+            })
+        )
+    }
 
     return (
         <div>
             <Menu/>
             <div className="container">
-                <Cabecalho titulo="Nome Time" links={[{titulo: 'Home', url:'/'}, {titulo: 'Times', url: '/Times'}, {titulo: 'Perfil', url: '/TimePerfil'}]} />
+                <Cabecalho titulo="Time perfil" links={[{titulo: 'Home', url:'/'}, {titulo: 'Times', url: '/Times'}, {titulo: 'Perfil', url: '/TimePerfil'}]} />
 
                 <div className="time-container">
                     <div className="time-infos">
-                        <img src={img} alt="Logo"/>
-                        <h2>Divisão: Nome</h2>
-                        <h2>Lider: Nome</h2>
+                        <img src={time.logo} alt="Logo"/>
+                        <h2>Nome: {time.nome}</h2>
+                        <h2>{time.divisao === '' ? 'Sem divisao' : `Divisao: ${time.divisao}`}</h2>
                     </div>
 
                     <div className="time-conteudo">
@@ -43,55 +106,7 @@ export default function TimePerfil() {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <img src={img} alt="Avatar"/>
-                                        Nome jogador
-                                    </td>
-                                    <td>
-                                        <div>
-                                            <img src={Classes.scout} alt="classe"/>
-                                            <img src={Classes.soldierBlue} alt="classe"/>
-                                            <img src={Classes.pyro} alt="classe"/>
-                                            <img src={Classes.demoman} alt="classe"/>
-                                            <img src={Classes.heavyBlue} alt="classe"/>
-                                            <img src={Classes.engieneer} alt="classe"/>
-                                            <img src={Classes.sniper} alt="classe"/>
-                                            <img src={Classes.medic} alt="classe"/>
-                                            <img src={Classes.spy} alt="classe"/>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <button className='botao-excluir'>
-                                            <FaTrash/>
-                                        </button>
-                                    </td>
-                                </tr>
-
-                                <tr>
-                                    <td>
-                                        <img src={img} alt="Avatar"/>
-                                        Nome jogador
-                                    </td>
-                                    <td>
-                                        <div>
-                                            <img src={Classes.scout} alt="classe"/>
-                                            <img src={Classes.soldierBlue} alt="classe"/>
-                                            <img src={Classes.pyro} alt="classe"/>
-                                            <img src={Classes.demoman} alt="classe"/>
-                                            <img src={Classes.heavyBlue} alt="classe"/>
-                                            <img src={Classes.engieneer} alt="classe"/>
-                                            <img src={Classes.sniper} alt="classe"/>
-                                            <img src={Classes.medic} alt="classe"/>
-                                            <img src={Classes.spy} alt="classe"/>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <button className='botao-excluir'>
-                                            <FaTrash/>
-                                        </button>
-                                    </td>
-                                </tr>
+                                {renderTabela()}
                             </tbody>
                         </Table>
                     </div>
