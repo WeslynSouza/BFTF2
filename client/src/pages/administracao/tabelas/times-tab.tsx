@@ -1,16 +1,17 @@
 import { useState } from 'react';
 import InputPesquisa from '../../../components/input-pesquisa';
+import Placeholder from '../../../components/placeholder';
 import { Table, Modal } from 'react-bootstrap';
 import { FaPen, FaTrash } from 'react-icons/fa';
 
 import img from '../../../assets/perfilPaula.jpg';
-import Placeholder from '../../../assets/barreira.svg';
 
 export default function Times() {
 
     type Time = {
         nome: string,
-        lider: string,
+        logo: string,
+        lider: object,
         divisao: string
     }
 
@@ -61,10 +62,7 @@ export default function Times() {
             )
         } else {
             return (
-                <div className='tab-placeholder'>
-                    <img src={Placeholder} alt="barreira"/>
-                    <h2>Nenhum time foi cadastrado no sistema</h2>
-                </div>
+                <Placeholder texto='Nenhum time foi cadastrado no sistema!'/>
             )
         }
     }

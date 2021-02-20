@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
 import Rodape from '../../components/rodape';
@@ -7,6 +8,15 @@ import Banner from '../../assets/banner1.jpg';
 import './style.scss';
 
 export default function NoticiaPost() {
+
+    type Post = {
+        titulo: string,
+        conteudo: string,
+        imagens: Array<string>,
+    }
+
+    const [ post, setPost ] = useState<Post>({titulo: 'teste', conteudo: 'teste', imagens: []});
+
     return (
         <div>
             <Menu/>
@@ -23,13 +33,8 @@ export default function NoticiaPost() {
                     </div>
 
                     <div className="post-conteudo">
-                        <h1 className="titulo">Titulo da noticia</h1>
-                        <p>Texto texto Texto texto Texto texto Texto texto Texto texto Texto texto 
-                            Texto texto Texto texto Texto texto Texto texto Texto texto Texto texto 
-                            Texto texto Texto texto Texto texto Texto texto Texto texto Texto texto
-                            Texto texto Texto texto Texto texto Texto texto Texto texto Texto texto
-                            Texto texto Texto texto Texto texto Texto texto Texto texto Texto texto
-                            Texto texto Texto texto Texto texto Texto texto Texto texto Texto texto</p>
+                        <h1 className="titulo">{post.titulo}</h1>
+                        <p>{post.conteudo}</p>
                     </div>
                 </div>
             </div>

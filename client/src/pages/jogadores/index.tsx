@@ -3,8 +3,8 @@ import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
 import Rodape from '../../components/rodape';
 import InputPesquisa from '../../components/input-pesquisa';
+import Placeholder from '../../components/placeholder';
 import { FaPlus } from 'react-icons/fa';
-
 
 import img from '../../assets/perfilPaula.jpg';
 
@@ -12,7 +12,39 @@ import './style.scss';
 
 export default function Jogadores() {
 
+    type Jogador = {
+        nome: string, 
+        avatar: string
+    }
+
     const [ pesquisa, setPesquisa ] = useState('');
+    const [ jogadores, setJogadores ] = useState<Jogador[]>([]);
+
+    function renderLista() {
+        if(jogadores.length !== 0) {
+            return (
+                <ul className="jogadores-lista">
+                    {jogadores.map(jogador => {
+                        return (
+                            <li className="jogadores-lista-item" key={jogador.nome}>
+                                <div className="jogador-info">
+                                    <img src={img} alt="logo"/>
+                                    <h2>{jogador.nome}</h2>
+                                </div>
+                                <button>
+                                    <FaPlus/>
+                                </button>
+                            </li>
+                        )
+                    })}
+                </ul>
+            )
+        } else {
+            return (
+                <Placeholder texto='Nenhum jogador foi encontrado no sistema!'/>
+            )
+        }
+    }
 
     return (
         <div>
@@ -31,53 +63,7 @@ export default function Jogadores() {
                         buttonWidth='7rem' fontInput='2.5rem' fontButton='3.2rem'/>
                 </div>
 
-                <ul className="jogadores-lista">
-                    <li className="jogadores-lista-item">
-                        <div className="jogador-info">
-                            <img src={img} alt="logo"/>
-                            <h2>Jogadores nome</h2>
-                        </div>
-                        <button>
-                            <FaPlus/>
-                        </button>
-                    </li>
-                    <li className="jogadores-lista-item">
-                        <div className="jogador-info">
-                            <img src={img} alt="logo"/>
-                            <h2>Jogadores nome</h2>
-                        </div>
-                        <button>
-                            <FaPlus/>
-                        </button>
-                    </li>
-                    <li className="jogadores-lista-item">
-                        <div className="jogador-info">
-                            <img src={img} alt="logo"/>
-                            <h2>Jogadores nome</h2>
-                        </div>
-                        <button>
-                            <FaPlus/>
-                        </button>
-                    </li>
-                    <li className="jogadores-lista-item">
-                        <div className="jogador-info">
-                            <img src={img} alt="logo"/>
-                            <h2>Jogadores nome</h2>
-                        </div>
-                        <button>
-                            <FaPlus/>
-                        </button>
-                    </li>
-                    <li className="jogadores-lista-item">
-                        <div className="jogador-info">
-                            <img src={img} alt="logo"/>
-                            <h2>Jogadores nome</h2>
-                        </div>
-                        <button>
-                            <FaPlus/>
-                        </button>
-                    </li>
-                </ul>
+                {renderLista()}
             </div>
             <Rodape/>
         </div>

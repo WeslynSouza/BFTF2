@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import InputPesquisa from '../../../components/input-pesquisa';
+import Placeholder from '../../../components/placeholder';
 import { FaPen, FaTrash } from 'react-icons/fa';
 import { Table, Modal } from 'react-bootstrap';
 import * as Classes from '../../../assets/assets';
 import img from '../../../assets/perfilPaula.jpg';
-
-import Placeholder from '../../../assets/barreira.svg';
 
 type usuaiosTabela = {
     functionAlterar: Function
@@ -15,7 +14,8 @@ export default function UsuariosTabela({ functionAlterar }: usuaiosTabela) {
 
     type Usuario = {
         nome: string, 
-        time: string, 
+        avatar: string,
+        time: object, 
         classes: [],
     }
 
@@ -79,10 +79,7 @@ export default function UsuariosTabela({ functionAlterar }: usuaiosTabela) {
             )
         } else {
             return (
-                <div className='tab-placeholder'>
-                    <img src={Placeholder} alt="barreira"/>
-                    <h2>Nenhum usuário foi cadastrado no sistema</h2>
-                </div>
+                <Placeholder texto='Nenhum usuário foi cadastrado no sistema!'/>
             )
         }
     }

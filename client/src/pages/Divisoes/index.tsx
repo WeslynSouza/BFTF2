@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
 import Rodape from '../../components/rodape';
@@ -6,6 +7,36 @@ import { Table } from 'react-bootstrap';
 import './style.scss';
 
 export default function Divisoes() {
+
+    type Time = {
+        nome: string
+    }
+
+    type Divisao = {
+        nome: string, 
+        times: Array<Time>,
+        rodadas: Array<string> 
+    }
+
+    const [ divisoes, setDivisoes ] = useState<Divisao[]>([{nome: 'teste', times: [{nome: 'teste'}], rodadas: []}]);
+    const [ divisao, setDivisao ] = useState<Divisao>({nome: 'teste', times: [{nome: 'teste'}], rodadas: []});
+
+    function renderTabela() {
+        return (    
+            divisao.times.map(time => {
+                return (
+                    <tr key={time.nome}>
+                        <td>1</td>
+                        <td>{time.nome}</td>
+                        <td>30</td>
+                        <td>10</td>
+                        <td>8</td>
+                        <td>2</td>
+                    </tr>
+                )
+            })
+        )
+    }
 
     return (
         <div>
@@ -32,46 +63,7 @@ export default function Divisoes() {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Nome</td>
-                                <td>30</td>
-                                <td>10</td>
-                                <td>8</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Nome</td>
-                                <td>30</td>
-                                <td>10</td>
-                                <td>8</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Nome</td>
-                                <td>30</td>
-                                <td>10</td>
-                                <td>8</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Nome</td>
-                                <td>30</td>
-                                <td>10</td>
-                                <td>8</td>
-                                <td>2</td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>Nome</td>
-                                <td>30</td>
-                                <td>10</td>
-                                <td>8</td>
-                                <td>2</td>
-                            </tr>
+                            {renderTabela()}
                         </tbody>
                     </Table>
                 </div>
