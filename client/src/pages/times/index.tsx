@@ -10,13 +10,13 @@ import api from '../../services/api';
 
 import './style.scss';
 
-export default function Times() {
+type Time = {
+    id: number,
+    nome: string,
+    logo: string
+}
 
-    type Time = {
-        id: number,
-        nome: string,
-        logo: string
-    }
+export default function Times() {
 
     const [ pesquisa, setPesquisa ] = useState('');
     const [ times, setTimes ] = useState<Time[]>([]);

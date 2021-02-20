@@ -26,7 +26,7 @@ export default {
         const postRepository = getRepository(Post);
 
         const post = await postRepository.findOneOrFail( id , {
-            relations: ['imagens']
+            relations: ['imagens', 'autor']
         });
 
         return res.status(200).json(PostView.render(post));

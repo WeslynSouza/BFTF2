@@ -11,23 +11,23 @@ import * as Classes from '../../assets/assets';
 import './style.scss';
 import api from '../../services/api';
 
+type TimeParams = {
+    id: string
+}
+
+type Jogador = {
+    nick: string,
+    avatar: string,
+}
+
+type Time = {
+    nome: string,
+    logo: string,
+    divisao: string,
+    jogadores: Array<Jogador>
+}
+
 export default function TimePerfil() {
-
-    type TimeParams = {
-        id: string
-    }
-
-    type Jogador = {
-        nick: string,
-        avatar: string,
-    }
-
-    type Time = {
-        nome: string,
-        logo: string,
-        divisao: string,
-        jogadores: Array<Jogador>
-    }
 
     const params = useParams<TimeParams>();
     const [ time, setTime ] = useState<Time>(Object);

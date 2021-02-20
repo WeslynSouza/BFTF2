@@ -42,6 +42,8 @@
             @include displayFlex(center, center);
             border: 0;
             border-radius: 9999px;
+            transition: .2s;
+
         }
 
         .dark-on {
@@ -55,6 +57,10 @@
 
                 .moon {
                     display: none;
+                }
+
+                &:hover {
+                    background: var(--color-blue-fifth);
                 }
             }
         }
@@ -70,6 +76,10 @@
 
                 .sun {
                     display: none;
+                }
+
+                &:hover {
+                    background: var(--color-blue-secundary);
                 }
             }
         }

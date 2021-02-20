@@ -16,7 +16,7 @@ function Routes() {
             <Switch>
                 <Route path='/' exact component={Home}/>
                 <Route path='/Noticias' component={Noticias}/>
-                <Route path='/NoticiaPost' component={NoticiaPost}/>
+                <Route path='/NoticiaPost/:id' component={NoticiaPost}/>
                 <Route path='/CriarPost' component={CriarPost}/>
                 <Route path='/Times' component={Times}/>
                 <Route path='/TimePerfil/:id' component={TimePerfil}/>

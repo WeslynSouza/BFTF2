@@ -5,11 +5,11 @@ export default {
 
     render(post: Post){
         return {
-            Id: post.id,
-            Autor: post.autor.nick,
-            Titulo: post.titulo,
-            Conteudo: post.conteudo,
-            Imagens: ImagemView.renderMany(post.imagens)
+            id: post.id,
+            autor: post.autor.nick,
+            titulo: post.titulo,
+            conteudo: post.conteudo,
+            imagens: ImagemView.renderMany(post.imagens)
         }
     },
 
