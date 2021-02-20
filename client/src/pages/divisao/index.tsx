@@ -6,7 +6,6 @@ import Rodape from '../../components/rodape';
 
 import './style.scss';
 
-
 type Divisao = {
     nome: string, 
     times: Array<{
@@ -15,9 +14,8 @@ type Divisao = {
     rodadas: Array<string> 
 }
 
-export default function PageDivisoes() {
+export default function PageDivisao() {
 
-    const [ divisoes, setDivisoes ] = useState<Divisao[]>([{nome: 'teste', times: [{nome: 'teste'}], rodadas: []}]);
     const [ divisao, setDivisao ] = useState<Divisao>({nome: 'teste', times: [{nome: 'teste'}], rodadas: []});
 
     function renderTabela() {
