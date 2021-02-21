@@ -1,18 +1,18 @@
 import { useState } from 'react';
 import Placeholder from '../../../components/placeholder';
 
-export default function Divisoes() {
+type Divisao = {
+    nome: string,
+    times: [],
+    rodadas: [],
+}
 
-    type Divisao = {
-        nome: string,
-        times: [],
-        rodadas: [],
-    }
+export default function Divisoes() {
 
     const [ divisao, setDivisao ] = useState<Divisao>(Object);
 
     function renderTab() {
-        if(divisao.nome !== '') {
+        if(divisao.nome === '') {
 
         } else {
             return (

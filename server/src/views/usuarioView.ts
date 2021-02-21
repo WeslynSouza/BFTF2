@@ -1,14 +1,24 @@
-import Time from '../models/time';
 import Usuario from '../models/usuario';
 
 export default {
+
     render(usuario: Usuario){
+        const url = 'http://localhost:3333/uploads/';
+        let time;
+
+        if(!usuario.time){
+            time = '';
+        } else {
+            time = {nome: usuario.time.nome, logo: `${url}${usuario.time.logo}`}
+        }
+
         return {
-            SteamId: usuario.steamId,
-            Nick: usuario.nick,
-            Avatar: `http://localhost:3333/uploads/${usuario.avatar}`,
-            Classes: usuario.classes.map(classe => classe.nome),
-            Posts: usuario.posts.map(post => {
+            steamId: usuario.steamId,
+            nick: usuario.nick,
+            avatar: `${url}${usuario.avatar}`,
+            time,
+            classes: usuario.classes.map(classe => classe.nome),
+            posts: usuario.posts.map(post => {
                 return {
                     titulo: post.titulo
                 }

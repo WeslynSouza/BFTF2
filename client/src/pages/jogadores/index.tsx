@@ -1,24 +1,30 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { FaPlus } from 'react-icons/fa';
 import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
 import Rodape from '../../components/rodape';
 import InputPesquisa from '../../components/input-pesquisa';
 import Placeholder from '../../components/placeholder';
-import { FaPlus } from 'react-icons/fa';
-
-import img from '../../assets/perfilPaula.jpg';
+import api from '../../services/api';
 
 import './style.scss';
 
+type Usuario = {
+    steamId: number,
+    nick: string, 
+    avatar: string
+}
+
 export default function Jogadores() {
 
-    type Jogador = {
-        nome: string, 
-        avatar: string
-    }
-
     const [ pesquisa, setPesquisa ] = useState('');
-    const [ jogadores, setJogadores ] = useState<Jogador[]>([]);
+    const [ jogadores, setJogadores ] = useState<Usuario[]>([]);
+
+    useEffect(() => {
+        api.get('/usuario').then(res => {
+            setJogadores(res.data);
+        });
+    }, []);
 
     function renderLista() {
         if(jogadores.length !== 0) {
@@ -26,10 +32,10 @@ export default function Jogadores() {
                 <ul className="jogadores-lista">
                     {jogadores.map(jogador => {
                         return (
-                            <li className="jogadores-lista-item" key={jogador.nome}>
+                            <li className="jogadores-lista-item" key={jogador.steamId}>
                                 <div className="jogador-info">
-                                    <img src={img} alt="logo"/>
-                                    <h2>{jogador.nome}</h2>
+                                    <img src={jogador.avatar} alt="logo"/>
+                                    <h2>{jogador.nick}</h2>
                                 </div>
                                 <button>
                                     <FaPlus/>

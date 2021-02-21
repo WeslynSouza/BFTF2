@@ -1,27 +1,37 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import InputPesquisa from '../../../components/input-pesquisa';
 import Placeholder from '../../../components/placeholder';
 import { FaPen, FaTrash } from 'react-icons/fa';
 import { Table, Modal } from 'react-bootstrap';
 import * as Classes from '../../../assets/assets';
-import img from '../../../assets/perfilPaula.jpg';
+import api from '../../../services/api';
 
 type usuaiosTabela = {
     functionAlterar: Function
 }
 
-export default function UsuariosTabela({ functionAlterar }: usuaiosTabela) {
+type Usuario = {
+    steamId: number
+    nick: string, 
+    avatar: string,
+    time: {
+        nome: string,
+        logo: string
+    }, 
+    classes: [],
+}
 
-    type Usuario = {
-        nome: string, 
-        avatar: string,
-        time: object, 
-        classes: [],
-    }
+export default function UsuariosTabela({ functionAlterar }: usuaiosTabela) {
 
     const [ pesquisa, setPesquisa ] = useState('');
     const [ usuarios, setUsuarios ] = useState<Usuario[]>([]);
     const [ show, setShow ] = useState(false);
+
+    useEffect(() => {
+        api.get('/usuario').then(res => {
+            setUsuarios(res.data);
+        })
+    }, []);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -41,14 +51,14 @@ export default function UsuariosTabela({ functionAlterar }: usuaiosTabela) {
                 <tbody>
                     {usuarios.map(usuario => {
                         return (
-                            <tr key={usuario.nome}>
+                            <tr key={usuario.steamId}>
                                 <td>
-                                    <img src={img} alt="Avatar"/>
-                                    {usuario.nome}
+                                    <img src={usuario.avatar} alt="Avatar"/>
+                                    {usuario.nick}
                                 </td>
                                 <td>
-                                    <img src={img} alt="Avatar"/>
-                                    {usuario.time}
+                                    <img src={usuario.time.logo} alt="logo"/>
+                                    {usuario.time.nome}
                                 </td>
                                 <td>
                                     <div>

@@ -1,19 +1,30 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { FaPen, FaTrash } from 'react-icons/fa';
 import InputPesquisa from '../../../components/input-pesquisa';
-
 import Placeholder from '../../../assets/barreira.svg';
+import api from '../../../services/api';
 
 type postTabela = {
     functionAlterar: Function;
 }
 
+type Post = {
+    id: number,
+    titulo: string
+}
+
 export default function PostTabela({ functionAlterar }: postTabela) {
 
     const [ pesquisa, setPesquisa ] = useState('');
-    const [ posts, setPosts ] = useState<Object[]>([]);
+    const [ posts, setPosts ] = useState<Post[]>([]);
     const [ show, setShow ] = useState(false);
+
+    useEffect(() => {
+        api.get("/post").then(res => {
+            setPosts(res.data);
+        })
+    }, [])
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -24,8 +35,8 @@ export default function PostTabela({ functionAlterar }: postTabela) {
                 <ul>
                     {posts.map(post => {
                         return (
-                            <li>
-                                <h4>Titulo do post</h4>
+                            <li key={post.id}>
+                                <h4>{post.titulo}</h4>
 
                                 <div className='lista-botoes'>
                                     <button className='botao-alterar' onClick={() => functionAlterar('formulario')}>

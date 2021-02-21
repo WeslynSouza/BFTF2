@@ -1,23 +1,32 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Table, Modal } from 'react-bootstrap';
+import { FaTrash } from 'react-icons/fa';
 import InputPesquisa from '../../../components/input-pesquisa';
 import Placeholder from '../../../components/placeholder';
-import { Table, Modal } from 'react-bootstrap';
-import { FaPen, FaTrash } from 'react-icons/fa';
+import api from '../../../services/api';
 
-import img from '../../../assets/perfilPaula.jpg';
+type Time = {
+    id: number,
+    nome: string,
+    logo: string,
+    lider: {
+        nick: string,
+        avatar: string,
+    },
+    divisao: string
+}
 
 export default function Times() {
-
-    type Time = {
-        nome: string,
-        logo: string,
-        lider: object,
-        divisao: string
-    }
 
     const [ pesquisa, setPesquisa ] = useState('');
     const [ times, setTimes ] = useState<Time[]>([]);
     const [ show, setShow ] = useState(false);
+
+    useEffect(() => {
+        api.get("/time").then(res => {
+            setTimes(res.data);
+        });
+    }, [])
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -37,14 +46,14 @@ export default function Times() {
                     <tbody>
                         {times.map(time => {
                             return (
-                                <tr key={time.nome}>
+                                <tr key={time.id}>
                                     <td>
-                                        <img src={img} alt="Avatar"/>
+                                        <img src={time.logo} alt="logo"/>
                                         {time.nome}
                                     </td>
                                     <td>
-                                        <img src={img} alt="Avatar"/>
-                                        {time.lider}
+                                        <img src={time.lider.avatar} alt="Avatar"/>
+                                        {time.lider.nick}
                                     </td>
                                     <td>
                                         {time.divisao}

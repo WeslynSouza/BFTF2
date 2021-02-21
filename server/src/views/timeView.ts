@@ -16,7 +16,10 @@ export default {
         return {
             id: time.id,
             nome: time.nome,
-            lider: time.lider.nick,
+            lider: {
+                nick: time.lider.nick,
+                avatar: `${url}${time.lider.avatar}`
+            },
             divisao,
             logo: `${url}${time.logo}`,
             jogadores: time.jogadores.map(jogador => {
