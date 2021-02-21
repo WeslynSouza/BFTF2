@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getRepository } from 'typeorm';
+import { getRepository, Like } from 'typeorm';
 import * as yup from 'yup';
 import Classe from '../models/classe';
 
@@ -25,11 +25,25 @@ export default {
 
         const usuarioRepository = getRepository(Usuario);
 
-        const usuario = await usuarioRepository.findOneOrFail( id , {
+        const usuario = await usuarioRepository.findOneOrFail( id, {
             relations: ['time', 'classes', 'posts']
         });
 
         return res.status(200).json(UsuarioView.render(usuario));
+    },
+
+    async showMany(req: Request, res: Response) {
+
+        const { nick } = req.params;
+
+        const usuarioRepository = getRepository(Usuario);
+
+        const usuario = await usuarioRepository.find({
+           where:{ nick: Like(`${nick}%`) },
+            relations: ['time', 'classes', 'posts']
+        });
+
+        return res.status(200).json(UsuarioView.renderMany(usuario));
     },
 
     async create(req: Request, res: Response){

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getRepository } from 'typeorm';
+import { getRepository, Like } from 'typeorm';
 import * as yup from 'yup';
 
 import Time from '../models/time';
@@ -31,6 +31,20 @@ export default {
         });
 
         return res.status(200).json(TimeView.render(time));
+    },
+
+    async showMany(req: Request, res: Response) {
+
+        const { nome } = req.params;
+
+        const timeRepository = getRepository(Time);
+
+        const time = await timeRepository.find({
+            where: { nome: Like(`${nome}%`) },
+            relations: ['lider', 'divisao', 'jogadores']
+        });
+
+        return res.status(200).json(TimeView.renderMany(time));
     },
 
     async create(req: Request, res: Response){

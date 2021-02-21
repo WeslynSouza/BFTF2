@@ -23,10 +23,10 @@ export default function Times() {
     const [ show, setShow ] = useState(false);
 
     useEffect(() => {
-        api.get("/time").then(res => {
+        api.get(`/times/${pesquisa}`).then(res => {
             setTimes(res.data);
         });
-    }, [])
+    }, [pesquisa])
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -56,7 +56,7 @@ export default function Times() {
                                         {time.lider.nick}
                                     </td>
                                     <td>
-                                        {time.divisao}
+                                        {time.divisao === '' ? 'Sem divisão' : time.divisao}
                                     </td>
                                     <td>
                                         <button className='botao-excluir' onClick={handleShow}>

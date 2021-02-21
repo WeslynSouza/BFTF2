@@ -14,23 +14,26 @@ const upload = multer(uploadConfig);
 
 routes.post("/classe", ClasseController.create);
 routes.get("/classe", ClasseController.index);
-routes.get("/classe/:id", ClasseController.show);
+routes.get("/classe/:nick", ClasseController.show);
 
 routes.post("/usuario", upload.array('avatar'), UsuarioController.create);
-routes.get("/usuario", UsuarioController.index);
-routes.get("/usuario/:steamId", UsuarioController.show);
+routes.get("/usuarios", UsuarioController.index);
+routes.get("/usuarios/:nick", UsuarioController.showMany);
+routes.get("/usuario/:id", UsuarioController.show);
 
 routes.post("/post", upload.array('imagens'), PostController.create);
-routes.get("/post", PostController.index);
+routes.get("/posts", PostController.index);
 routes.get("/post/:id",  PostController.show);
+routes.get("/posts/:titulo", PostController.showMany);
 
 routes.post("/divisao", DivisaoController.create);
 routes.get("/divisao", DivisaoController.index);
 routes.get("/divisao/:id", DivisaoController.show);
 
 routes.post("/time", upload.array('logo'), TimeController.create);
-routes.get("/time", TimeController.index);
+routes.get("/times", TimeController.index);
 routes.get("/time/:id", TimeController.show);
+routes.get("/times/:nome", TimeController.showMany);
 
 routes.post("/partida", PartidaController.create);
 routes.get("/partida", PartidaController.index);

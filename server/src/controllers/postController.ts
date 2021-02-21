@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getRepository } from 'typeorm';
+import { getRepository, Like } from 'typeorm';
 import * as yup from 'yup';
 
 import Post from '../models/post';
@@ -30,6 +30,20 @@ export default {
         });
 
         return res.status(200).json(PostView.render(post));
+    },
+
+    async showMany(req: Request, res: Response) {
+
+        const { titulo } = req.params;
+
+        const postRepository = getRepository(Post);
+
+        const post = await postRepository.find({
+            where: { titulo: Like(`${titulo}%`)},
+            relations: ['imagens', 'autor']
+        });
+
+        return res.status(200).json(PostView.renderMany(post));
     },
 
     async create(req: Request, res: Response){

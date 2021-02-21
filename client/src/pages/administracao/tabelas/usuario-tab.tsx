@@ -29,10 +29,10 @@ export default function UsuariosTabela({ functionUsuarioId, functionAlterar }: u
     const [ show, setShow ] = useState(false);
 
     useEffect(() => {
-        api.get('/usuario').then(res => {
+        api.get(`/usuarios/${pesquisa}`).then(res => {
             setUsuarios(res.data);
         })
-    }, []);
+    }, [pesquisa]);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -58,7 +58,7 @@ export default function UsuariosTabela({ functionUsuarioId, functionAlterar }: u
                                     {usuario.nick}
                                 </td>
                                 <td>
-                                    <img src={usuario.time.logo} alt="logo"/>
+                                    {usuario.time.logo === undefined ? 'Sem time' : <img src={usuario.time.logo} alt="logo"/> }
                                     {usuario.time.nome}
                                 </td>
                                 <td>

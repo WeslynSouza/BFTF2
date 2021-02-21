@@ -22,10 +22,10 @@ export default function PostTabela({ functionAlterar, functionPostId }: postTabe
     const [ show, setShow ] = useState(false);
 
     useEffect(() => {
-        api.get("/post").then(res => {
+        api.get(`/posts/${pesquisa}`).then(res => {
             setPosts(res.data);
         })
-    }, [])
+    }, [pesquisa])
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
