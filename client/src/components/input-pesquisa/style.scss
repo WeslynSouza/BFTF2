@@ -14,12 +14,16 @@
         padding-left: 1rem;
         border: 0;
 
+        &:focus {
+            outline: none;
+        }
+
         &::placeholder {
             background: transparent;
             color: var(--color-blue-secundary);
             opacity: .5;
         }
-    
+
         &:hover {
             border: 0;
         }

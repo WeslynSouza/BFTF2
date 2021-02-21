@@ -22,10 +22,10 @@ export default function Times() {
     const [ times, setTimes ] = useState<Time[]>([]);
 
     useEffect(() => {
-        api.get('/time').then(res => {
+        api.get(`/times/${pesquisa}`).then(res => {
             setTimes(res.data);
         })
-    }, []);
+    }, [pesquisa]);
 
     function renderLista() {
         if(times.length !== 0) {

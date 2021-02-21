@@ -21,10 +21,10 @@ export default function Jogadores() {
     const [ jogadores, setJogadores ] = useState<Usuario[]>([]);
 
     useEffect(() => {
-        api.get('/usuario').then(res => {
+        api.get(`/usuarios/${pesquisa}`).then(res => {
             setJogadores(res.data);
         });
-    }, []);
+    }, [pesquisa]);
 
     function renderLista() {
         if(jogadores.length !== 0) {
