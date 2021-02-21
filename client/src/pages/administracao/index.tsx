@@ -15,21 +15,46 @@ import './style.scss';
 
 export default function Administracao() {
 
-    const [ usuarioState, setUsuarioState ] = useState('tabela');
-    const [ postState, setPostState ] = useState('lista');
+    const [ state, setState ] = useState('tabInicial');
+    const [ usuarioId, setUsuarioId ] = useState('');
+    const [ postId, setPostId ] = useState('');
 
-    function handleUsuarioState() {
-        if(usuarioState === 'tabela') 
-            return <UsuariosTabela functionAlterar={setUsuarioState}/>
-        else
-            return <UsuarioForm functionVoltar={setUsuarioState}/>
-    }
-
-    function handlePostState() {
-        if(postState === 'lista') 
-            return <PostList functionAlterar={setPostState}/>
-        else
-            return <PostForm functionVoltar={setPostState}/>
+    function handleState() {
+        switch(state) {
+            case "tabInicial":
+                return (
+                    <Tabs className='administracao-tab' defaultActiveKey='usuario' id='administracao-tab'>
+                        <Tab className='administracao-tab-item' eventKey='usuario' title='Usuarios'>
+                            <UsuariosTabela functionUsuarioId={setUsuarioId} functionAlterar={setState}/>
+                        </Tab>
+                        <Tab className='administracao-tab-item' eventKey='times' title='Times'>
+                            <TimesTabela/>
+                        </Tab>
+                        <Tab className='administracao-tab-item' eventKey='Divisoes' title='Divisões'>
+                            <DivisoesTabela/>
+                        </Tab>
+                        <Tab className='administracao-tab-item' eventKey='posts' title='Posts'>
+                            <PostList functionPostId={setPostId} functionAlterar={setState}/>
+                        </Tab>
+                    </Tabs>
+                );
+            case "usuarioForm":
+                return (
+                    <Tabs className='administracao-tab' defaultActiveKey='usuario' id='administracao-tab'>
+                        <Tab className='administracao-tab-item' eventKey='usuario' title='Alterar'>
+                            <UsuarioForm functionVoltar={setState} usuarioId={usuarioId}/>
+                        </Tab>
+                    </Tabs>
+                );
+            case "postForm":
+                return (
+                    <Tabs className='administracao-tab' defaultActiveKey='posts' id='administracao-tab'>
+                        <Tab className='administracao-tab-item' eventKey='posts' title='Alterar'>
+                            <PostForm functionVoltar={setState} postId={postId}/>
+                        </Tab>
+                    </Tabs>
+                );
+        }
     }
 
     return (
@@ -39,20 +64,7 @@ export default function Administracao() {
                 <Cabecalho titulo='Administração' links={[{url: '/', titulo: 'Home'}, {url: '/administracao', titulo: 'Administração'}]}/>
 
                 <div className="administracao-container">
-                    <Tabs className='administracao-tab' defaultActiveKey='usuario' id='administracao-tab'>
-                        <Tab className='administracao-tab-item' eventKey='usuario' title='Usuarios'>
-                            {handleUsuarioState()}
-                        </Tab>
-                        <Tab className='administracao-tab-item' eventKey='times' title='Times'>
-                            <TimesTabela/>
-                        </Tab>
-                        <Tab className='administracao-tab-item' eventKey='Divisoes' title='Divisões'>
-                            <DivisoesTabela/>
-                        </Tab>
-                        <Tab className='administracao-tab-item' eventKey='Posts' title='Posts'>
-                            {handlePostState()}
-                        </Tab>
-                    </Tabs>
+                    {handleState()}
                 </div>
             </div>
             <Rodape/>

@@ -5,8 +5,6 @@ import Cabecalho from '../../components/cabecalho';
 import Rodape from '../../components/rodape';
 import api from '../../services/api';
 
-import Banner from '../../assets/banner1.jpg';
-
 import './style.scss';
 
 type Post = {
@@ -70,7 +68,7 @@ export default function NoticiaPost() {
                             <h5 className='autor'>Escrito por: {post.autor}</h5>
                         </div>
                         
-                        <p>{post.conteudo}</p>
+                        <pre>{post.conteudo}</pre>
                     </div>
                 </div>
             </div>

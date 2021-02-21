@@ -7,6 +7,7 @@ import * as Classes from '../../../assets/assets';
 import api from '../../../services/api';
 
 type usuaiosTabela = {
+    functionUsuarioId: Function,
     functionAlterar: Function
 }
 
@@ -21,7 +22,7 @@ type Usuario = {
     classes: [],
 }
 
-export default function UsuariosTabela({ functionAlterar }: usuaiosTabela) {
+export default function UsuariosTabela({ functionUsuarioId, functionAlterar }: usuaiosTabela) {
 
     const [ pesquisa, setPesquisa ] = useState('');
     const [ usuarios, setUsuarios ] = useState<Usuario[]>([]);
@@ -74,7 +75,7 @@ export default function UsuariosTabela({ functionAlterar }: usuaiosTabela) {
                                     </div>
                                 </td>
                                 <td>
-                                    <button className='botao-alterar' onClick={() => functionAlterar('formulario')}>
+                                    <button className='botao-alterar' onClick={() => [functionAlterar('usuarioForm'), functionUsuarioId(usuario.steamId)]}>
                                         <FaPen/>
                                     </button>
                                     <button className='botao-excluir' onClick={handleShow}>

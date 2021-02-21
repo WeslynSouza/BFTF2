@@ -6,6 +6,7 @@ import Placeholder from '../../../assets/barreira.svg';
 import api from '../../../services/api';
 
 type postTabela = {
+    functionPostId: Function,
     functionAlterar: Function;
 }
 
@@ -14,7 +15,7 @@ type Post = {
     titulo: string
 }
 
-export default function PostTabela({ functionAlterar }: postTabela) {
+export default function PostTabela({ functionAlterar, functionPostId }: postTabela) {
 
     const [ pesquisa, setPesquisa ] = useState('');
     const [ posts, setPosts ] = useState<Post[]>([]);
@@ -39,7 +40,7 @@ export default function PostTabela({ functionAlterar }: postTabela) {
                                 <h4>{post.titulo}</h4>
 
                                 <div className='lista-botoes'>
-                                    <button className='botao-alterar' onClick={() => functionAlterar('formulario')}>
+                                    <button className='botao-alterar' onClick={() => [functionAlterar('postForm'), functionPostId(post.id)]}>
                                         <FaPen/>
                                     </button>
                                     <button className='botao-excluir' onClick={() => handleShow()}>

@@ -1,19 +1,34 @@
-import { useState, FormEvent, ChangeEvent } from 'react';
+import { useState, FormEvent, ChangeEvent, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import {FaTimes, FaPlus} from 'react-icons/fa';
+import api from '../../../services/api';
 
 type postForm = {
+    postId: string,
     functionVoltar: Function;
 }
 
-export default function PostForm({ functionVoltar }: postForm) {
+type Image = { 
+    url: string
+}
+
+export default function PostForm({ functionVoltar, postId }: postForm) {
 
     const history = useHistory();
 
     const [ titulo, setTitulo ] = useState('');
     const [ conteudo, setConteudo ] = useState('');
-    const [ images, setImages ] = useState<File[]>([]);
-    const [ previewImages, setPreviewImages ] = useState<string[]>([]);
+    const [ images, setImages ] = useState<Image[]>([]);
+    const [ previewImages, setPreviewImages ] = useState<Image[]>([]);
+
+    useEffect(() => {
+        api.get(`/post/${postId}`).then(res => {
+            setTitulo(res.data.titulo);
+            setConteudo(res.data.conteudo);
+            setImages(res.data.imagens);
+            setPreviewImages(res.data.imagens);
+        }) 
+    }, [])
 
     async function handleSubmit(event: FormEvent){
         event.preventDefault();
@@ -23,7 +38,7 @@ export default function PostForm({ functionVoltar }: postForm) {
         data.append('titulo', titulo);
         data.append('conteudo', conteudo);
         images.forEach(image => {
-            data.append('images', image);
+            data.append('images', image.url);
         })
 
         alert('Cadastro realizado com sucesso!');
@@ -37,13 +52,13 @@ export default function PostForm({ functionVoltar }: postForm) {
             return;
         }
     
-        const selectedImages= Array.from(event.target.files);
+        const selectedImages = Array.from(event.target.files).map(image => {
+            return { url: URL.createObjectURL(image) }
+        });
 
         setImages(selectedImages.concat(images));
     
-        const selectedImagesPreview = selectedImages.map(image => {
-            return URL.createObjectURL(image);
-        }).concat(previewImages);
+        const selectedImagesPreview = selectedImages.concat(previewImages);
     
         setPreviewImages(selectedImagesPreview);
     }
@@ -65,7 +80,7 @@ export default function PostForm({ functionVoltar }: postForm) {
                 <h2>Alterar post</h2>
             </div>
 
-            <form className='form-primary'>
+            <form className='form-primary' onSubmit={handleSubmit}>
                 <fieldset>
                     <label htmlFor="Titulo">Titulo</label>
                     <input type="text" id='Titulo' placeholder='Titulo' value={titulo} 
@@ -83,8 +98,8 @@ export default function PostForm({ functionVoltar }: postForm) {
                     <div className="imagens">
                         {previewImages.map((image, indice) => {
                             return (
-                                <div className="image-area">
-                                    <img key={image} src={image} alt='imagem'/>
+                                <div className="image-area" key={image.url}>
+                                    <img src={image.url} alt='imagem'/>
                                     <button type='button' onClick={() => handleRemoveImage(indice)}>
                                         <FaTimes/>
                                     </button>
@@ -96,14 +111,14 @@ export default function PostForm({ functionVoltar }: postForm) {
                             <FaPlus size={24} color="#15b6d6" />
                         </label> 
                     </div>
-                    <input multiple onChange={handleSelectImage} type="file" id="image[]"/>
+                    <input multiple onChange={handleSelectImage} accept="image/*" type="file" id="image[]"/>
                 </fieldset>
 
                 <div className="botoes-container">
                     <button className="botao-alterar">
                         Alterar
                     </button>
-                    <button className="botao-voltar" onClick={() => functionVoltar('lista')}>
+                    <button className="botao-voltar" onClick={() => functionVoltar('tabInicial')}>
                         voltar
                     </button>
                 </div>

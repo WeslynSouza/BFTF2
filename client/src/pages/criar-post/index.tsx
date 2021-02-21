@@ -93,7 +93,7 @@ export default function CriarPost() {
                                 <FaPlus size={24} color="#15b6d6" />
                             </label> 
                         </div>
-                        <input multiple onChange={handleSelectImage} type="file" id="image[]"/>
+                        <input multiple onChange={handleSelectImage} accept="image/*" type="file" id="image[]"/>
 
                         <div className="botoes">
                             <button type='submit' className='botao-enviar'>Enviar</button>

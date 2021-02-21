@@ -62,7 +62,8 @@ export default {
             senha,
             classes: classeUsuario,
             avatar,
-            acesso
+            acesso,
+            elegivel: 0,
         }
 
         const schema = yup.object().shape({
@@ -71,7 +72,8 @@ export default {
             senha: yup.string().required(),
             classes: yup.array(),
             avatar: yup.string(),
-            acesso: yup.number()
+            acesso: yup.number(),
+            elegivel: yup.number()
         })
 
         await schema.validate(data, {

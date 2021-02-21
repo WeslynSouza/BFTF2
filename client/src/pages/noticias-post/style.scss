@@ -59,8 +59,9 @@
             }
         }
 
-        p {
+        pre {
             @include texto(2.8rem, var(--color-font-primary));
+            font-family: Roboto;
             padding: 2rem;
         }
     }

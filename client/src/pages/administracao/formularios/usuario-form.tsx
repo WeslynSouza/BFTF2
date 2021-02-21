@@ -1,31 +1,41 @@
-import { useState, FormEvent } from 'react';
+import { useState, FormEvent, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import * as Classes from '../../../assets/assets';
+import api from '../../../services/api';
 
 type usuarioForm = {
+    usuarioId: string,
     functionVoltar: Function
 }
 
-export default function UsuarioForm({ functionVoltar }: usuarioForm) {
+export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioForm) {
 
     const history = useHistory();
 
-    const [ nome, setNome ] = useState('');
+    const [ nick, setNick ] = useState('');
     const [ steamId, setSteamId ] = useState('');
-    const [ avatar, setAvatar ] = useState<File[]>([]);
+    const [ avatar, setAvatar ] = useState('');
     const [ elegivel, setElegivel ] = useState('');
     const [ classes, setClasses ] = useState<string[]>([]);
+
+    useEffect(() => {
+        api.get(`/usuario/${usuarioId}`).then(res => {
+            setNick(res.data.nick);
+            setSteamId(res.data.steamId);
+            setAvatar(res.data.avatar);
+            setElegivel(res.data.elegivel);
+            setClasses(res.data.classes);
+        })
+    }, [])
 
     async function handleSubmit(event: FormEvent){
         event.preventDefault();
 
         const data = new FormData();
 
-        data.append('nome', nome);
+        data.append('nick', nick);
         data.append('steamId', steamId);
-        avatar.forEach(avatar => {
-            data.append('avatar', avatar);
-        })
+        data.append('avatar', avatar);
         data.append('elegivel', elegivel);
         classes.forEach(classe => {
             data.append('classes', classe);
@@ -44,9 +54,9 @@ export default function UsuarioForm({ functionVoltar }: usuarioForm) {
 
             <form className='form-secundary' onSubmit={handleSubmit}>
                 <fieldset>
-                    <label htmlFor="nome">Nome</label>
-                    <input type="text" value={nome} placeholder='Nome' 
-                        id='nome' onChange={event => setNome(event.target.value)}/>
+                    <label htmlFor="nick">Nick</label>
+                    <input type="text" value={nick} placeholder='Nick' 
+                        id='nome' onChange={event => setNick(event.target.value)}/>
                 </fieldset>
                 
                 <fieldset>
@@ -56,12 +66,12 @@ export default function UsuarioForm({ functionVoltar }: usuarioForm) {
                 
                 <fieldset>
                     <label htmlFor="avatar">Avatar</label>
-                    <input type="text" value='Nome Imagem' id='avatar'/>
+                    <input type="text" value={avatar} id='avatar'/>
                 </fieldset>
                 
                 <fieldset>
                     <label htmlFor="elegivel">Elegivel</label>
-                    <select name="elegivel" id="elegivel" value={elegivel} onChange={event => setElegivel(event.target.value)}>
+                    <select name="elegivel" id="elegivel">
                         <option value="nao-elegivel">Não elegivel</option>
                         <option value="elegivel">Elegivel</option>
                     </select>
@@ -86,7 +96,7 @@ export default function UsuarioForm({ functionVoltar }: usuarioForm) {
                     <button className="botao-alterar">
                         Alterar
                     </button>
-                    <button className="botao-voltar" onClick={() => functionVoltar('tabela')}>
+                    <button className="botao-voltar" onClick={() => functionVoltar('tabInicial')}>
                         voltar
                     </button>
                 </div>
