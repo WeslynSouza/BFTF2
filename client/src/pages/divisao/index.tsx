@@ -1,8 +1,10 @@
 import { useState } from 'react';
-import { Table } from 'react-bootstrap';
+import { Table, Form } from 'react-bootstrap';
 import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
 import Rodape from '../../components/rodape';
+
+import chevronDown from '../../assets/chevronDown.svg';
 
 import './style.scss';
 
@@ -41,11 +43,14 @@ export default function PageDivisao() {
             <div className="container">
                 <Cabecalho titulo='Divisões' links={[{url: '/', titulo: 'Home'},{url: '/Divisoes', titulo: 'Divisões'}]} />
 
-                <div className="divisao-select">
-                    <select name="Divisoes" id="Divisoes">
+                <Form className="divisao-select">
+                    <Form.Control as="select" name="Divisoes" id="Divisoes" custom style={{background: `var(--color-background-secundary) url(${chevronDown}) right 1.3rem center/5rem 95.0% no-repeat`}}>
                         <option value="Divisao-academy">Divisão academy</option>
-                    </select>
-                </div>
+                        <option value="Divisao-academy">Opcao 2</option>
+                        <option value="Divisao-academy">Opcao 2</option>
+                    </Form.Control>
+                </Form>
+                
 
                 <div className="table-container">
                     <Table>
