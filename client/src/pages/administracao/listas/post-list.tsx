@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { FaPen, FaTrash } from 'react-icons/fa';
 import InputPesquisa from '../../../components/input-pesquisa';
-import Placeholder from '../../../assets/barreira.svg';
+import Placeholder from '../../../components/placeholder';
 import api from '../../../services/api';
 
 type postTabela = {
@@ -54,10 +54,7 @@ export default function PostTabela({ functionAlterar, functionPostId }: postTabe
             )
         }else {
             return (
-                <div className='tab-placeholder'>
-                    <img src={Placeholder} alt="barreira"/>
-                    <h2>Nenhum post foi cadastrado no sistema</h2>
-                </div>
+                <Placeholder texto='Nenhum post foi cadastrado no sistema!'/>
             )
         }
     }

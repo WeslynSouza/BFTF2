@@ -9,7 +9,7 @@ type placeholder = {
 
 export default function Placeholder({ texto }: placeholder) {
     return (
-        <div className='tab-placeholder'>
+        <div className='placeholder'>
             <img src={Img} alt="barreira"/>
             <h2>{texto}</h2>
         </div>

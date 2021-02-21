@@ -8,20 +8,20 @@
 
     .conteudo-centro {
         width: 70rem;
-        @include displayFlex(none, center);
+        @include displayFlex(initial, center);
         flex-direction: column;
+
+        .placeholder {
+            margin-top: 8rem;
+        }
 
         .post-caixa {
             width: 70rem;
             height: 42rem;
             background: var(--color-background-secundary);
             border-radius: .5rem;
-            margin-bottom: 3rem;
+            margin-top: 4rem;
             @include sombra;
-
-            &:last-child {
-                margin-bottom: 0;
-            }
 
             .post-img {
                 width: 100%;
@@ -71,7 +71,7 @@
             width: 27rem;
             height: 36rem;
             border: 0;
-            margin-top: 3rem;
+            margin-top: 4rem;
             border-radius: .5rem;
             @include sombra;
         }
