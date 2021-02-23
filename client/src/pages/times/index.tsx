@@ -58,7 +58,7 @@ export default function Times() {
 
                 <div className="times-opcoes">
                     <InputPesquisa value={pesquisa} 
-                        setValue={setPesquisa} height='6rem' inputWidth='65rem' 
+                        setValue={setPesquisa} height='6rem' inputWidth='63rem' 
                         buttonWidth='7rem' fontInput='2.5rem' fontButton='3.2rem'/>
 
                     <button className='butao-criar'>Criar time +</button>
