@@ -99,5 +99,71 @@ export default {
         await usuarioRepository.save(usuario);
 
         return res.status(201).json(usuario);
+    },
+
+    async update(req: Request, res: Response) {
+
+        const { steamId } = req.params;
+
+        const {
+            nick,
+            senha,
+            acesso,
+            classes,
+            elegivel
+        } = req.body;
+
+        const usuarioRepository = getRepository(Usuario);
+        const classeRepository = getRepository(Classe);
+
+        const usuario = await usuarioRepository.findOneOrFail( steamId, {
+            relations: ['time', 'classes', 'posts']
+        });
+
+        const classeUsuario: Array<Classe> = [];
+
+        if(classes) {
+            for (const i in classes) {
+                if (Object.prototype.hasOwnProperty.call(classes, i)) {    
+                    classeUsuario.push( await classeRepository.findOneOrFail(classes[i]))
+                }
+            }
+        }
+
+        let avatar = usuario.avatar;
+        const requestImages = req.files as Express.Multer.File[];
+        if(requestImages.length !== 0){
+            avatar = requestImages[0].filename;
+        }
+
+        const data = {
+            steamId,
+            nick: nick || usuario.nick,
+            senha: senha || usuario.senha,
+            acesso: acesso || usuario.acesso,
+            avatar,
+            classes: classeUsuario || usuario.classes,
+            elegivel: elegivel || usuario.elegivel
+        }
+
+        const schema = yup.object().shape({
+            steamId: yup.string().required(),
+            nick: yup.string().required(),
+            senha: yup.string().required(),
+            classes: yup.array(),
+            avatar: yup.string(),
+            acesso: yup.number(),
+            elegivel: yup.number()
+        });
+
+        await schema.validate(data, {
+            abortEarly: false,
+        });
+
+        const newUsuario = usuarioRepository.create(data);
+
+        await usuarioRepository.save(newUsuario);
+
+        return res.status(201).json(newUsuario);
     }
 }

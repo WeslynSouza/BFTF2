@@ -20,11 +20,13 @@ routes.post("/usuario", upload.array('avatar'), UsuarioController.create);
 routes.get("/usuarios", UsuarioController.index);
 routes.get("/usuarios/:nick", UsuarioController.showMany);
 routes.get("/usuario/:id", UsuarioController.show);
+routes.put("/usuario/id", upload.array('avatar'), UsuarioController.update);
 
 routes.post("/post", upload.array('imagens'), PostController.create);
 routes.get("/posts", PostController.index);
 routes.get("/post/:id",  PostController.show);
 routes.get("/posts/:titulo", PostController.showMany);
+routes.put("/post/:id", upload.array('imagens'), PostController.update);
 
 routes.post("/divisao", DivisaoController.create);
 routes.get("/divisao", DivisaoController.index);
@@ -34,6 +36,7 @@ routes.post("/time", upload.array('logo'), TimeController.create);
 routes.get("/times", TimeController.index);
 routes.get("/time/:id", TimeController.show);
 routes.get("/times/:nome", TimeController.showMany);
+routes.put("/time/:id", upload.array('logo'), TimeController.update);
 
 routes.post("/partida", PartidaController.create);
 routes.get("/partida", PartidaController.index);

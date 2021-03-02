@@ -6,6 +6,7 @@ import Time from '../models/time';
 import Usuario from '../models/usuario';
 import Divisao from '../models/divisao';
 import TimeView from '../views/timeView';
+import { number } from 'yup/lib/locale';
 
 export default {
 
@@ -51,15 +52,12 @@ export default {
         const {
             liderId,
             nome,
-            divisaoId,
         } = req.body;
 
         const timeRepository = getRepository(Time);
         const usuarioRepository = getRepository(Usuario);
-        const divisaoRepository = getRepository(Divisao);
 
         const lider = await usuarioRepository.findOneOrFail( liderId );
-        const divisao = await divisaoRepository.findOneOrFail( divisaoId );
 
         const jogadores = [ lider ];
 
@@ -69,7 +67,6 @@ export default {
         const data = {
             lider,
             nome,
-            divisao,
             logo,
             jogadores
         }
@@ -77,7 +74,6 @@ export default {
         const schema = yup.object().shape({
             lider: yup.object().required(),
             nome: yup.string().required(),
-            divisao: yup.object(),
             logo: yup.string(),
             jogadores: yup.array().required()
         })
@@ -91,5 +87,75 @@ export default {
         await timeRepository.save(time);
 
         return res.status(201).json(time);
+    },
+
+    async update(req: Request, res: Response) {
+
+        const { id } = req.params;
+
+        const {
+            liderId,
+            nome,
+            divisaoId,
+            jogador
+        } = req.body;
+
+        const timeRepository = getRepository(Time);    
+        const usuarioRepository = getRepository(Usuario);
+        const divisaoRepository = getRepository(Divisao);
+
+        const time = await timeRepository.findOneOrFail( id, {
+            relations: ['lider', 'divisao', 'jogadores']
+        })
+
+        let lider = time.lider;
+        let divisao = time.divisao;
+        let jogadores = time.jogadores;
+
+        if( liderId !== undefined ) {
+            lider = await usuarioRepository.findOneOrFail( liderId );
+        }
+
+        if(divisaoId !== undefined) {
+            divisao = await divisaoRepository.findOneOrFail( divisaoId );
+        }
+
+        if(jogador.length !== undefined){
+            jogadores.concat(jogador);
+        }
+        
+        const requestImages = req.files as Express.Multer.File[];
+        let logo = time.logo;
+        if(requestImages.length !== 0) {
+            logo = requestImages[0].filename;
+        }
+        
+        const data = {
+                id: Number(id),
+                lider,
+                nome,
+                divisao,
+                logo,
+                jogadores
+            }
+
+        const schema = yup.object().shape({
+            id: yup.number().required(),
+            lider: yup.object().required(),
+            nome: yup.string().required(),
+            divisao: yup.object(),
+            logo: yup.string(),
+            jogadores: yup.array().required()
+        });
+
+        await schema.validate(data, {
+            abortEarly: false,
+        });
+
+        const newTime = timeRepository.create(data);
+
+        await timeRepository.save(newTime);
+
+        return res.status(201).json(newTime);
     }
 }

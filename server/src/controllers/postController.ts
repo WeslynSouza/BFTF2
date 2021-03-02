@@ -88,5 +88,59 @@ export default {
         await postRepository.save(post);
 
         return res.status(201).json(post);
+    },
+
+    async update(req: Request, res: Response) {
+
+        const { id } = req.params;
+
+        const {
+            titulo,
+            conteudo
+        } = req.body;
+
+        const postRepository = getRepository(Post);
+
+        const post = await postRepository.findOneOrFail( id, {
+            relations: ['imagens', 'autor']
+        });
+
+        const requestImages = req.files as Express.Multer.File[];
+        let imagens
+        if(requestImages.length !== 0){
+            imagens = requestImages.map(image => {
+                return {
+                    path: image.filename
+                }
+            });
+        } else {
+            imagens = post.imagens
+        }
+
+        const data = {
+            id: Number(id),
+            autor: post.autor,
+            titulo: titulo === "" ? post.titulo : titulo,
+            conteudo: conteudo === "" ? post.conteudo : conteudo,
+            imagens
+        }
+
+        const schema = yup.object().shape({
+            id: yup.number().required(),
+            autor: yup.object().required(),
+            titulo: yup.string().required(),
+            conteudo: yup.string().required(),
+            imagens: yup.array()
+        })
+
+        await schema.validate(data, {
+            abortEarly: false,
+        })
+
+        const newPost = postRepository.create(data);
+
+        await postRepository.save(newPost);
+
+        return res.status(201).json(newPost);
     }
 }
