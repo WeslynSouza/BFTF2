@@ -12,7 +12,7 @@ export default {
         const divisaoRepository = getRepository(Divisao);
 
         const divisoes = await divisaoRepository.find({
-            relations: ['partidas']
+            relations: ['partidas', 'times']
         });
 
         return res.status(200).json(DivisaoView.renderMany(divisoes));
@@ -25,7 +25,7 @@ export default {
         const divisaoRepository = getRepository(Divisao);
 
         const divisao = await divisaoRepository.findOneOrFail( id , {
-            relations: ['partidas']
+            relations: ['partidas', 'times']
         });
 
         return res.status(200).json(DivisaoView.render(divisao));

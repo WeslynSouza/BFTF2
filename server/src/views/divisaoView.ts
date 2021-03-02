@@ -6,6 +6,7 @@ export default {
         return {
             Id: divisao.id,
             Nome: divisao.nome,
+            Times: divisao.times.map(time => time.nome),
             Partidas: divisao.partidas.map(partida => partida.id)
         }
     },
