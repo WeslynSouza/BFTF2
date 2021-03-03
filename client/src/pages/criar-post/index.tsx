@@ -4,6 +4,7 @@ import { FaPlus, FaTimes } from 'react-icons/fa';
 import Menu from '../../components/menu';
 import Cabecalho from '../../components/cabecalho';
 import Rodape from '../../components/rodape';
+import api from '../../services/api';
 
 import './style.scss';
 
@@ -21,15 +22,33 @@ export default function CriarPost() {
 
         const data = new FormData();
 
+        if(titulo === ''){
+            alert('Você deve informar o titulo antes de realizar o envio.');
+            return;
+        }
+
+        if(conteudo === ''){
+            alert('Você deve informar o conteudo antes de realizar o envio.');
+            return;
+        }
+
+        if(images.length === 0){
+            alert('Você deve informar pelo menos uma imagem para realizar o envio.');
+            return;
+        }
+
+        data.append('autorId', 'steamidteste');
         data.append('titulo', titulo);
         data.append('conteudo', conteudo);
         images.forEach(image => {
-            data.append('images', image);
+            data.append('imagens', image);
         })
+
+        await api.post("post", data);
 
         alert('Cadastro realizado com sucesso!');
 
-        history.push('/');
+        history.push('/Noticias');
     }
 
     function handleSelectImage(event: ChangeEvent<HTMLInputElement>){
@@ -81,7 +100,7 @@ export default function CriarPost() {
                             {previewImages.map((image, indice) => {
                                 return (
                                     <div className="image-area">
-                                        <img key={image} src={image} alt='imagem'/>
+                                        <img key={indice} src={image} alt='imagem'/>
                                         <button type='button' onClick={() => handleRemoveImage(indice)}>
                                             <FaTimes/>
                                         </button>

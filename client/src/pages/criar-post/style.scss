@@ -27,8 +27,11 @@
             height: 6rem;
             background: var(--color-background-input);
             border: .2rem solid var(--color-blue-third);
+            @include texto(2.4rem, var(--color-font-primary));
             border-radius: 1rem;
             margin-bottom: 1.5rem;
+            padding: 1rem;
+            
         }
 
         input {
