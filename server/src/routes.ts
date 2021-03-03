@@ -20,7 +20,7 @@ routes.post("/usuario", upload.array('avatar'), UsuarioController.create);
 routes.get("/usuarios", UsuarioController.index);
 routes.get("/usuarios/:nick", UsuarioController.showMany);
 routes.get("/usuario/:id", UsuarioController.show);
-routes.put("/usuario/id", upload.array('avatar'), UsuarioController.update);
+routes.put("/usuario/:steamId", upload.array('avatar'), UsuarioController.update);
 
 routes.post("/post", upload.array('imagens'), PostController.create);
 routes.get("/posts", PostController.index);
