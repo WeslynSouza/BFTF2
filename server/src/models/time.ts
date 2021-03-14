@@ -7,31 +7,31 @@ import Usuario from './usuario';
 export default class Time {
 
     @PrimaryGeneratedColumn('increment')
-    id: number;
+    id!: number;
 
     @OneToOne(() => Usuario, {
         cascade: ['update', 'remove']
     })
     @JoinColumn()
-    lider: Usuario;
+    lider!: Usuario;
 
     @Column()
-    nome: string;
+    nome!: string;
 
     @Column()
-    logo: string;
+    logo!: string;
 
     @ManyToOne(() => Divisao, divisao => divisao.times)
-    divisao: Divisao;
+    divisao!: Divisao;
 
     @OneToMany(() => Usuario, usuario => usuario.time, {
         cascade: ['insert', 'update']
     })
-    jogadores: Usuario[];
+    jogadores!: Usuario[];
 
     @OneToMany(() => Partida, partida => partida.time1)
-    partidas1: Partida[];
+    partidas1!: Partida[];
 
     @OneToMany(() => Partida, partida => partida.time2)
-    partidas2: Partida[];
+    partidas2!: Partida[];
 }

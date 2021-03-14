@@ -6,14 +6,14 @@ import Time from './time';
 export default class Divisao {
 
     @PrimaryGeneratedColumn('increment')
-    id: number;
+    id!: number;
 
     @Column()
-    nome: string;
+    nome!: string;
 
     @OneToMany(() => Time, time => time.divisao)
-    times: Time[];
+    times!: Time[];
 
     @OneToMany(() => Partida, partida => partida.divisao)
-    partidas: Partida[];
+    partidas!: Partida[];
 }

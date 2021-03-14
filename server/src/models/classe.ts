@@ -4,8 +4,8 @@ import { Column, Entity, PrimaryGeneratedColumn,  } from 'typeorm';
 export default class Classe {
 
     @PrimaryGeneratedColumn('increment')
-    id: number;
+    id!: number;
 
     @Column()
-    nome: string;
+    nome!: string;
 }

@@ -7,33 +7,33 @@ import Time from './time';
 export default class Usuario {
 
     @PrimaryColumn()
-    steamId: string;
+    steamId!: string;
      
     @Column()
-    nick: string;
+    nick!: string;
 
     @Column()
-    senha: string;
+    senha!: string;
 
     @ManyToMany(() => Classe)
     @JoinTable()
-    classes: Classe[];
+    classes!: Classe[];
 
     @Column()
-    avatar: string;
+    avatar!: string;
 
     @Column()
-    acesso: number;
+    acesso!: number;
 
     @Column()
-    elegivel: number;
+    elegivel!: number;
 
     @ManyToOne(() => Time, time => time.jogadores)
     @JoinColumn()
-    time: Time;
+    time!: Time;
 
     @OneToMany(() => Post, post => post.autor, {
         cascade: ['update', 'remove']
     })
-    posts: Post[];
+    posts!: Post[];
 }

@@ -6,19 +6,19 @@ import Time from './time';
 export default class Partida {
 
     @PrimaryGeneratedColumn('increment')
-    id: number;
+    id!: number;
 
     @ManyToOne(() => Time, time => time.partidas1)
-    time1: Time;
+    time1!: Time;
 
     @ManyToOne(() => Time, time => time.partidas2)
     @JoinColumn()
-    time2: Time;
+    time2!: Time;
 
     @ManyToOne(() => Divisao, divisao => divisao.partidas)
     @JoinColumn()
-    divisao: Divisao;
+    divisao!: Divisao;
 
     @Column()
-    dataHora: string;
+    dataHora!: string;
 }

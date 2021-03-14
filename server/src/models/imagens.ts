@@ -5,12 +5,12 @@ import Post from './post';
 export default class Imagens {
 
     @PrimaryGeneratedColumn('increment')
-    id: number;
+    id!: number;
 
     @Column()
-    path: string;
+    path!: string;
 
     @ManyToOne(() => Post, post => post.imagens)
     @JoinColumn({name: 'postId'})
-    post: Post;
+    post!: Post;
 }

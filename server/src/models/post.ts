@@ -6,19 +6,19 @@ import Usuario from './usuario';
 export default class Post {
 
     @PrimaryGeneratedColumn('increment')
-    id: number;
+    id!: number;
 
     @ManyToOne(() => Usuario, usuario => usuario.posts)
-    autor: Usuario;
+    autor!: Usuario;
 
     @Column()
-    titulo: string;
+    titulo!: string;
 
     @Column()
-    conteudo: string;
+    conteudo!: string;
 
     @OneToMany(() => Imagens, imagens => imagens.post, {
         cascade: ['insert', 'update', 'remove']
     })
-    imagens: Imagens[];
+    imagens!: Imagens[];
 }
