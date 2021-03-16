@@ -19,7 +19,7 @@ export default {
             time,
             elegivel: usuario.elegivel,
             classes: usuario.classes.map(classe => {
-                return { nome: classe.nome }
+                return { id: classe.id ,nome: classe.nome }
             }),
             posts: usuario.posts.map(post => {
                 return {
