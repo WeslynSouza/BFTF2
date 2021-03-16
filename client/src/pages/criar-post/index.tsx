@@ -99,8 +99,8 @@ export default function CriarPost() {
                         <div className="imagens">
                             {previewImages.map((image, indice) => {
                                 return (
-                                    <div className="image-area">
-                                        <img key={indice} src={image} alt='imagem'/>
+                                    <div className="image-area" key={indice}>
+                                        <img src={image} alt='imagem'/>
                                         <button type='button' onClick={() => handleRemoveImage(indice)}>
                                             <FaTimes/>
                                         </button>
