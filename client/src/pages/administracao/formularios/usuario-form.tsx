@@ -3,6 +3,11 @@ import { useHistory } from 'react-router-dom';
 import * as Classes from '../../../assets/assets';
 import api from '../../../services/api';
 
+interface Classe {
+    id: number;
+    nome: string
+}
+
 type usuarioForm = {
     usuarioId: string,
     functionVoltar: Function
@@ -16,7 +21,17 @@ export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioForm) 
     const [ steamId, setSteamId ] = useState('');
     const [ avatar, setAvatar ] = useState('');
     const [ elegivel, setElegivel ] = useState('');
-    const [ classes, setClasses ] = useState<string[]>([]);
+    const [ classes, setClasses ] = useState<Classe[]>([{ id: 1, nome: ''}]);
+
+    const [ classeScout, setClasseScout ] = useState(Classes.scout);
+    const [ classeSoldier, setClasseSoldier ] = useState(Classes.soldier);
+    const [ classePyro, setClassePyro ] = useState(Classes.pyro);
+    const [ classeDemoman, setClasseDemoman ] = useState(Classes.demoman);
+    const [ classeHeavy, setClasseHeavy ] = useState(Classes.heavy);
+    const [ classeEngieneer, setClasseEngieneer ] = useState(Classes.engieneer);
+    const [ classeSniper, setClasseSniper ] = useState(Classes.sniper);
+    const [ classeMedic, setClasseMedic ] = useState(Classes.medic);
+    const [ classeSpy, setClasseSpy ] = useState(Classes.spy);
 
     useEffect(() => {
         api.get(`/usuario/${usuarioId}`).then(res => {
@@ -26,7 +41,41 @@ export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioForm) 
             setElegivel(res.data.elegivel);
             setClasses(res.data.classes);
         })
-    }, [])
+    }, []);
+
+    useEffect(() => {
+        classes.forEach(classe => {
+            switch(classe.nome) {
+                case 'scout':
+                    setClasseScout(Classes.scoutBlue);
+                    break;
+                case 'soldier':
+                    setClasseSoldier(Classes.soldierBlue);
+                    break;
+                case 'pyro':
+                    setClassePyro(Classes.pyroBlue);
+                    break;
+                case 'demoman':
+                    setClasseDemoman(Classes.demomanBlue);
+                    break;
+                case 'heavy':
+                    setClasseHeavy(Classes.heavyBlue);
+                    break;
+                case 'engieneer':
+                    setClasseEngieneer(Classes.engieneerBlue);
+                    break;
+                case 'sniper':
+                    setClasseSniper(Classes.sniperBlue);
+                    break;
+                case 'medic':
+                    setClasseMedic(Classes.medicBlue);
+                    break;
+                case 'spy':
+                    setClasseSpy(Classes.spyBlue);
+                    break;
+            }
+        })
+    }, [classes])
 
     async function handleSubmit(event: FormEvent){
         event.preventDefault();
@@ -37,9 +86,6 @@ export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioForm) 
         data.append('steamId', steamId);
         data.append('avatar', avatar);
         data.append('elegivel', elegivel);
-        classes.forEach(classe => {
-            data.append('classes', classe);
-        })
 
         alert('Cadastro realizado com sucesso!');
 
@@ -80,15 +126,15 @@ export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioForm) 
                 <fieldset>
                     <label htmlFor="Classes">Classes</label>
                     <div className="botoes-classes">
-                        <img src={Classes.demoman} alt="classe"/>
-                        <img src={Classes.spy} alt="classe"/>
-                        <img src={Classes.engieneer} alt="classe"/>
-                        <img src={Classes.soldier} alt="classe"/>
-                        <img src={Classes.medic} alt="classe"/>
-                        <img src={Classes.heavy} alt="classe"/>
-                        <img src={Classes.sniper} alt="classe"/>
-                        <img src={Classes.scout} alt="classe"/>
-                        <img src={Classes.pyro} alt="classe"/>
+                        <img src={classeScout} alt="classe"/>
+                        <img src={classeSoldier} alt="classe"/>
+                        <img src={classePyro} alt="classe"/>
+                        <img src={classeDemoman} alt="classe"/>
+                        <img src={classeHeavy} alt="classe"/>
+                        <img src={classeEngieneer} alt="classe"/>
+                        <img src={classeMedic} alt="classe"/>
+                        <img src={classeSniper} alt="classe"/>
+                        <img src={classeSpy} alt="classe"/>
                     </div>
                 </fieldset>
 
