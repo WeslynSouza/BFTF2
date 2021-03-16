@@ -20,8 +20,8 @@ export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioForm) 
     const [ nick, setNick ] = useState('');
     const [ steamId, setSteamId ] = useState('');
     const [ avatar, setAvatar ] = useState('');
-    const [ elegivel, setElegivel ] = useState('');
-    const [ classes, setClasses ] = useState<Classe[]>([{ id: 1, nome: ''}]);
+    const [ elegivel, setElegivel ] = useState('0');
+    const [ classes, setClasses ] = useState<Classe[]>([{id: 0, nome: ''}]);
 
     const [ classeScout, setClasseScout ] = useState(Classes.scout);
     const [ classeSoldier, setClasseSoldier ] = useState(Classes.soldier);
@@ -86,10 +86,15 @@ export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioForm) 
         data.append('steamId', steamId);
         data.append('avatar', avatar);
         data.append('elegivel', elegivel);
+        classes.forEach(classe => {
+            data.append('classes', String(classe.id));
+        })
+
+        await api.put(`usuario/${steamId}`, data);
 
         alert('Cadastro realizado com sucesso!');
 
-        history.push('/');
+        functionVoltar('tabInicial');
     }
 
     return (
@@ -118,8 +123,8 @@ export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioForm) 
                 <fieldset>
                     <label htmlFor="elegivel">Elegivel</label>
                     <select name="elegivel" id="elegivel">
-                        <option value="nao-elegivel">Não elegivel</option>
-                        <option value="elegivel">Elegivel</option>
+                        <option value="0">Não elegivel</option>
+                        <option value="1">Elegivel</option>
                     </select>
                 </fieldset>
 

@@ -107,11 +107,12 @@ export default {
 
         const {
             nick,
-            senha,
             acesso,
             classes,
             elegivel
         } = req.body;
+
+        console.log(classes);
 
         const usuarioRepository = getRepository(Usuario);
         const classeRepository = getRepository(Classe);
@@ -125,7 +126,7 @@ export default {
         if(classes) {
             for (const i in classes) {
                 if (Object.prototype.hasOwnProperty.call(classes, i)) {    
-                    classeUsuario.push( await classeRepository.findOneOrFail(classes[i]))
+                    classeUsuario.push( await classeRepository.findOneOrFail(Number(classes[i])))
                 }
             }
         }
@@ -139,11 +140,11 @@ export default {
         const data = {
             steamId,
             nick: nick || usuario.nick,
-            senha: senha || usuario.senha,
+            senha: usuario.senha,
             acesso: acesso || usuario.acesso,
             avatar,
             classes: classeUsuario || usuario.classes,
-            elegivel: elegivel || usuario.elegivel
+            elegivel: Number(elegivel) || usuario.elegivel
         }
 
         const schema = yup.object().shape({
