@@ -18,7 +18,9 @@ export default {
             avatar: `${url}${usuario.avatar}`,
             time,
             elegivel: usuario.elegivel,
-            classes: usuario.classes.map(classe => classe.nome),
+            classes: usuario.classes.map(classe => {
+                return { nome: classe.nome }
+            }),
             posts: usuario.posts.map(post => {
                 return {
                     titulo: post.titulo
