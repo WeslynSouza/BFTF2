@@ -37,6 +37,8 @@ Este projeto foi desenvolvido com as seguintes tecnologias:
 ## 📌 Como executar
 
 ```sh
+Instalar o Node.js
+
 git clone hhttps://github.com/WeslynSouza/BFTF2
 cd server
 npm install
