@@ -3,25 +3,25 @@
 
 .cabecalho {
     width: 100vw;
-    height: 7vh;
+    height: 8vh;
     background: var(--color-background-secundary);
     @include sombra;
 
     .cabecalho-area {
         width: 1000px;
-        height: 70px;
+        height: 8vh;
         @include displayFlex(space-between, center);
         margin: 0 auto;
         overflow: hidden;    
     
         .menu {
-            width: 540px;
+            width: 50rem;
             list-style: none;
             margin-top: 1.5rem;
             @include displayFlex(space-between, center);
         
             .menu-item {
-                @include texto(2.8rem, var(--color-blue-secundary));
+                @include texto(2.4rem, var(--color-blue-secundary));
                 font-weight: 400;
             
                 a {
@@ -31,20 +31,20 @@
             }
         
             .logo {
-                width: 123px;
+                height: 6.75vh;
                 transform: translate( 0, -8%);
             }
         
         }
     
         .menu-icon {
-            width: 150px;
+            width: 130px;
             @include displayFlex(space-between, center);
             list-style: none;
             margin-top: 1rem;
         
             .menu-item {
-                @include texto(3.4rem, var(--color-blue-secundary));
+                @include texto(3.2rem, var(--color-blue-secundary));
             
                 a {
                     color: var(--color-blue-secundary);

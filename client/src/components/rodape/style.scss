@@ -3,7 +3,7 @@
 
 .rodape {
     width: 100vw;
-    height: 22vh;
+    height: 23vh;
     @include displayFlex(none, center);
     flex-direction: column;
     background: var(--color-background-secundary);
@@ -16,7 +16,7 @@
         @include displayFlex(space-between, center);
 
         img {
-            width: 28rem;
+            height: 15vh;
         }
 
         .rodape-sobrenos {
@@ -58,9 +58,9 @@
 
     .rodape-copy {
         width: 100%;
-        height: 5rem;
+        height: 6vh;
         background: var(--color-background-fourth);
-        @include texto(2.3rem, var(--color-font-primary));
+        @include texto(2rem, var(--color-font-primary));
         @include displayFlex(center, center);
 
         svg {
