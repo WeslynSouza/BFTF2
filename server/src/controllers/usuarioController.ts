@@ -112,8 +112,6 @@ export default {
             elegivel
         } = req.body;
 
-        console.log(classes);
-
         const usuarioRepository = getRepository(Usuario);
         const classeRepository = getRepository(Classe);
 
@@ -144,7 +142,7 @@ export default {
             acesso: acesso || usuario.acesso,
             avatar,
             classes: classeUsuario || usuario.classes,
-            elegivel: Number(elegivel) || usuario.elegivel
+            elegivel: elegivel == '' ? usuario.elegivel : elegivel
         }
 
         const schema = yup.object().shape({

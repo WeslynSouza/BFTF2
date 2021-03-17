@@ -40,6 +40,8 @@ export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioForm) 
             setAvatar(res.data.avatar);
             setElegivel(res.data.elegivel);
             setClasses(res.data.classes);
+
+            console.log(elegivel)
         })
     }, []);
 
@@ -122,9 +124,9 @@ export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioForm) 
                 
                 <fieldset>
                     <label htmlFor="elegivel">Elegivel</label>
-                    <select name="elegivel" id="elegivel">
-                        <option value="0">Não elegivel</option>
-                        <option value="1">Elegivel</option>
+                    <select name="elegivel" id="elegivel" onChange={event => setElegivel(event.target.value)} value={elegivel}>
+                        <option value={0}>Não elegivel</option>
+                        <option value={1}>Elegivel</option>
                     </select>
                 </fieldset>
 
