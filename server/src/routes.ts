@@ -14,7 +14,7 @@ const upload = multer(uploadConfig);
 
 routes.post("/classe", ClasseController.create);
 routes.get("/classe", ClasseController.index);
-routes.get("/classe/:nick", ClasseController.show);
+routes.get("/classe/:id", ClasseController.show);
 
 routes.post("/usuario", upload.array('avatar'), UsuarioController.create);
 routes.get("/usuarios", UsuarioController.index);
