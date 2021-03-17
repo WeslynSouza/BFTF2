@@ -119,12 +119,12 @@ export default {
             relations: ['time', 'classes', 'posts']
         });
 
-        const classeUsuario: Array<Classe> = [];
+        const classesAtualizadas: Array<Classe> = [];
 
         if(classes) {
             for (const i in classes) {
                 if (Object.prototype.hasOwnProperty.call(classes, i)) {    
-                    classeUsuario.push( await classeRepository.findOneOrFail(Number(classes[i])))
+                    classesAtualizadas.push( await classeRepository.findOneOrFail(Number(classes[i])))
                 }
             }
         }
@@ -141,7 +141,7 @@ export default {
             senha: usuario.senha,
             acesso: acesso || usuario.acesso,
             avatar,
-            classes: classeUsuario || usuario.classes,
+            classes: classesAtualizadas.length == 0 ? usuario.classes : classesAtualizadas,
             elegivel: elegivel == '' ? usuario.elegivel : elegivel
         }
 

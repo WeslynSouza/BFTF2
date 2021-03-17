@@ -40,8 +40,6 @@ export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioForm) 
             setAvatar(res.data.avatar);
             setElegivel(res.data.elegivel);
             setClasses(res.data.classes);
-
-            console.log(elegivel)
         })
     }, []);
 
@@ -82,14 +80,44 @@ export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioForm) 
     async function handleSubmit(event: FormEvent){
         event.preventDefault();
 
+        const arrayClasses = [classeScout, classeSoldier, classePyro, classeDemoman, classeHeavy, classeEngieneer, classeMedic, classeSniper, classeSpy]
+
         const data = new FormData();
 
         data.append('nick', nick);
         data.append('steamId', steamId);
         data.append('avatar', avatar);
         data.append('elegivel', elegivel);
-        classes.forEach(classe => {
-            data.append('classes', String(classe.id));
+        arrayClasses.forEach(classe => {
+            switch(classe) {
+                case Classes.scoutBlue: 
+                    data.append('classes', '1');
+                    break;
+                case Classes.soldierBlue:
+                    data.append('classes', '2'); 
+                    break;
+                case Classes.pyroBlue: 
+                    data.append('classes', '3');
+                    break;
+                case Classes.demomanBlue:
+                    data.append('classes', '4'); 
+                    break;
+                case Classes.heavyBlue: 
+                    data.append('classes', '5');
+                    break;
+                case Classes.engieneerBlue:
+                    data.append('classes', '6'); 
+                    break;
+                case Classes.medicBlue:
+                    data.append('classes', '7'); 
+                    break;
+                case Classes.sniperBlue: 
+                    data.append('classes', '8');
+                    break;
+                case Classes.spyBlue:
+                    data.append('classes', '9'); 
+                    break;
+            }
         })
 
         await api.put(`usuario/${steamId}`, data);
@@ -133,15 +161,42 @@ export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioForm) 
                 <fieldset>
                     <label htmlFor="Classes">Classes</label>
                     <div className="botoes-classes">
-                        <img src={classeScout} alt="classe"/>
-                        <img src={classeSoldier} alt="classe"/>
-                        <img src={classePyro} alt="classe"/>
-                        <img src={classeDemoman} alt="classe"/>
-                        <img src={classeHeavy} alt="classe"/>
-                        <img src={classeEngieneer} alt="classe"/>
-                        <img src={classeMedic} alt="classe"/>
-                        <img src={classeSniper} alt="classe"/>
-                        <img src={classeSpy} alt="classe"/>
+                        <img src={classeScout} 
+                            onClick={() => 
+                                setClasseScout(classeScout == Classes.scout ? Classes.scoutBlue : Classes.scout)
+                            } alt="classe"/>
+                        <img src={classeSoldier} 
+                            onClick={() => 
+                                setClasseSoldier(classeSoldier == Classes.soldier ? Classes.soldierBlue : Classes.soldier)
+                            } alt="classe"/>
+                        <img src={classePyro} 
+                            onClick={() => 
+                                setClassePyro(classePyro == Classes.pyro ? Classes.pyroBlue : Classes.pyro)
+                            } alt="classe"/>
+                        <img src={classeDemoman} 
+                            onClick={() => 
+                                setClasseDemoman(classeDemoman == Classes.demoman ? Classes.demomanBlue : Classes.demoman)
+                            } alt="classe"/>
+                        <img src={classeHeavy} 
+                            onClick={() => 
+                                setClasseHeavy(classeHeavy == Classes.heavy ? Classes.heavyBlue : Classes.heavy)
+                            } alt="classe"/>
+                        <img src={classeEngieneer} 
+                            onClick={() => 
+                                setClasseEngieneer(classeEngieneer == Classes.engieneer ? Classes.engieneerBlue : Classes.engieneer)
+                            } alt="classe"/>
+                        <img src={classeMedic} 
+                            onClick={() => 
+                                setClasseMedic(classeMedic == Classes.medic ? Classes.medicBlue : Classes.medic)
+                            } alt="classe"/>
+                        <img src={classeSniper} 
+                            onClick={() => 
+                                setClasseSniper(classeSniper == Classes.sniper ? Classes.sniperBlue : Classes.sniper)
+                            } alt="classe"/>
+                        <img src={classeSpy} 
+                            onClick={() => 
+                                setClasseSpy(classeSpy == Classes.spy ? Classes.spyBlue : Classes.spy)
+                            } alt="classe"/>
                     </div>
                 </fieldset>
 
