@@ -1,4 +1,5 @@
 import { useState, FormEvent, useEffect } from 'react';
+import { FaTimes } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
 import * as Classes from '../../../assets/assets';
 import api from '../../../services/api';
@@ -134,22 +135,33 @@ export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioForm) 
             </div>
 
             <form className='form-secundary' onSubmit={handleSubmit}>
+
+                <div className='fieldset-group'>
+                    <fieldset>
+                        <label htmlFor="nick">Nick</label>
+                        <input type="text" value={nick} placeholder='Nick' 
+                            id='nome' onChange={event => setNick(event.target.value)}/>
+                    </fieldset>
+                    
+                    <fieldset>
+                        <label htmlFor="steamId">SteamId</label>
+                        <input type="text" value={steamId} placeholder='SteamId' id='steamId' readOnly/>
+                    </fieldset>
+                </div>
+
+                <div className='form-image'>
+                    <img src={avatar} alt="Imagem de perfil"/>
+                    <div className='form-excluir-imagem'>
+                        <h1><FaTimes/></h1>
+                        <h3>Excluir imagem do usuário</h3>
+                    </div>
+                </div>
+
                 <fieldset>
-                    <label htmlFor="nick">Nick</label>
-                    <input type="text" value={nick} placeholder='Nick' 
-                        id='nome' onChange={event => setNick(event.target.value)}/>
+                    <label htmlFor="elegivel">Senha</label>
+                    <input type="text" value="***************" placeholder='SteamId' id='steamId' readOnly/>
                 </fieldset>
-                
-                <fieldset>
-                    <label htmlFor="steamId">SteamId</label>
-                    <input type="text" value={steamId} placeholder='SteamId' id='steamId' readOnly/>
-                </fieldset>
-                
-                <fieldset>
-                    <label htmlFor="avatar">Avatar</label>
-                    <input type="text" value={avatar} id='avatar'/>
-                </fieldset>
-                
+
                 <fieldset>
                     <label htmlFor="elegivel">Elegivel</label>
                     <select name="elegivel" id="elegivel" onChange={event => setElegivel(event.target.value)} value={elegivel}>
@@ -159,7 +171,7 @@ export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioForm) 
                 </fieldset>
 
                 <fieldset>
-                    <label htmlFor="Classes">Classes</label>
+                    <label htmlFor="Classes">Classes <i>(selecione as classes)</i></label>
                     <div className="botoes-classes">
                         <img src={classeScout} 
                             onClick={() => 
