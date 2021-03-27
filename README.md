@@ -37,7 +37,7 @@ Este projeto foi desenvolvido com as seguintes tecnologias:
 ## 📌 Como executar
 
 ```sh
-Instalar o Node.js
+Instalar o Node.js acima da 14
 
 git clone hhttps://github.com/WeslynSouza/BFTF2
 cd server
