@@ -15,7 +15,7 @@ export default {
         return {
             steamId: usuario.steamId,
             nick: usuario.nick,
-            avatar: `${url}${usuario.avatar}`,
+            avatar: usuario.avatar !== '' ? `${url}${usuario.avatar}` : '',
             time,
             elegivel: usuario.elegivel,
             classes: usuario.classes.map(classe => {

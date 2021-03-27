@@ -1,5 +1,6 @@
 import { useState, FormEvent, useEffect } from 'react';
-import { FaTimes } from 'react-icons/fa';
+import { Modal } from 'react-bootstrap';
+import { FaTimes, FaUserCircle } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
 import * as Classes from '../../../assets/assets';
 import api from '../../../services/api';
@@ -17,6 +18,8 @@ type usuarioForm = {
 export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioForm) {
 
     const history = useHistory();
+
+    const [ show, setShow ] = useState(false);
 
     const [ nick, setNick ] = useState('');
     const [ steamId, setSteamId ] = useState('');
@@ -76,7 +79,12 @@ export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioForm) 
                     break;
             }
         })
-    }, [classes])
+    }, [classes]);
+
+    console.log(avatar)
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     async function handleSubmit(event: FormEvent){
         event.preventDefault();
@@ -150,11 +158,16 @@ export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioForm) 
                 </div>
 
                 <div className='form-image'>
-                    <img src={avatar} alt="Imagem de perfil"/>
-                    <div className='form-excluir-imagem'>
-                        <h1><FaTimes/></h1>
-                        <h3>Excluir imagem do usuário</h3>
-                    </div>
+                    {avatar == '' ? 
+                        <div className='form-image-area'>
+                            <FaUserCircle/>
+                        </div> : <div className='form-image-area'>
+                            <img src={avatar} alt="Imagem de perfil"/>
+                            <div className='form-excluir-imagem' onClick={() => handleShow()}>
+                                <h1><FaTimes/></h1>
+                                <h3>Excluir imagem do usuário</h3>
+                            </div>
+                        </div>}
                 </div>
 
                 <fieldset>
@@ -221,6 +234,17 @@ export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioForm) 
                     </button>
                 </div>
             </form>
+
+            <Modal show={show} onHide={handleClose} centered>
+                <Modal.Header>
+                    <Modal.Title>Confirmar exclusão</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Deseja o avatar do usuário: {nick}?</Modal.Body>
+                <Modal.Footer>
+                    <button className="botao-confirmar" onClick={() => [setAvatar(''), handleClose()]}>Confirmar</button>
+                    <button className="botao-voltar" onClick={handleClose}>Voltar</button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }

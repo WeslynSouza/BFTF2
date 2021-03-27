@@ -108,6 +108,7 @@ export default {
         const {
             nick,
             acesso,
+            avatar,
             classes,
             elegivel
         } = req.body;
@@ -129,10 +130,13 @@ export default {
             }
         }
 
-        let avatar = usuario.avatar;
+        let newAvatar = usuario.avatar;
         const requestImages = req.files as Express.Multer.File[];
+        if(avatar == ''){
+            newAvatar = '';
+        }
         if(requestImages.length !== 0){
-            avatar = requestImages[0].filename;
+            newAvatar = requestImages[0].filename;
         }
 
         const data = {
@@ -140,7 +144,7 @@ export default {
             nick: nick || usuario.nick,
             senha: usuario.senha,
             acesso: acesso || usuario.acesso,
-            avatar,
+            avatar: newAvatar,
             classes: classesAtualizadas.length == 0 ? usuario.classes : classesAtualizadas,
             elegivel: elegivel == '' ? usuario.elegivel : elegivel
         }
