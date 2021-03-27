@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import InputPesquisa from '../../../components/input-pesquisa';
 import Placeholder from '../../../components/placeholder';
-import { FaPen, FaTrash } from 'react-icons/fa';
+import { FaPen, FaQuestion, FaTrash, FaUserCircle } from 'react-icons/fa';
 import { Table, Modal } from 'react-bootstrap';
 import * as Classes from '../../../assets/assets';
 import api from '../../../services/api';
@@ -93,8 +93,15 @@ export default function UsuariosTabela({ functionUsuarioId, functionAlterar }: u
                         return (
                             <tr key={usuario.steamId}>
                                 <td>
-                                    <img src={usuario.avatar} alt="Avatar"/>
-                                    {usuario.nick}
+                                    <div className='avatar-nick'>
+                                        {usuario.avatar == '' ? 
+                                            <div>
+                                                <FaQuestion/>
+                                            </div> : 
+                                            <img src={usuario.avatar} alt="Avatar"/>
+                                        }
+                                        {usuario.nick}
+                                    </div>
                                 </td>
                                 <td>
                                     {usuario.time.logo === undefined ? 'Sem time' : <img src={usuario.time.logo} alt="logo"/> }
