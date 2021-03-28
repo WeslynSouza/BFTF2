@@ -161,9 +161,10 @@ export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioForm) 
                     {avatar == '' ? 
                         <div className='form-image-area'>
                             <FaUserCircle/>
-                        </div> : <div className='form-image-area'>
+                        </div> : 
+                        <div className='form-image-area'>
                             <img src={avatar} alt="Imagem de perfil"/>
-                            <div className='form-excluir-imagem' onClick={() => handleShow()}>
+                            <div className='form-excluir-imagem' onClick={handleShow}>
                                 <h1><FaTimes/></h1>
                                 <h3>Excluir imagem do usuário</h3>
                             </div>

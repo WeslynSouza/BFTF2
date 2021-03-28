@@ -70,7 +70,7 @@ export default function Noticias() {
 
         await api.post("post", data);
 
-        alert('Cadastro realizado com sucesso!');
+        alert('Post enviado com sucesso!');
 
         setReSearchActive(true);
         handleClose();

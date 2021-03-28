@@ -173,6 +173,11 @@
                 border-radius: 20px;
                 margin-top: 1.5rem;
                 cursor: pointer;
+                transition: filter 0.3s;
+
+                &:hover {
+                    filter: brightness(1.1);
+                }
             }
         }
     }
