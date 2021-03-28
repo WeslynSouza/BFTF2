@@ -20,11 +20,11 @@ ul {
             @include displayFlex(center, center);
 
             .botao-alterar {
-                @include button(var(--color-yellow-primary), 2rem, 4rem, 4rem, var(--color-yellow-secundary));
+                @include button(var(--color-yellow-primary), 2.3rem, 4rem, 4rem, var(--color-yellow-secundary));
             }
 
             .botao-excluir {
-                @include button(var(--color-red-primary), 2rem, 4rem, 4rem, var(--color-red-secundary));
+                @include button(var(--color-red-primary), 2.3rem, 4rem, 4rem, var(--color-red-secundary));
             }
         }
 
