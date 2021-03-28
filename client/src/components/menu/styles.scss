@@ -15,7 +15,7 @@
         overflow: hidden;    
     
         .menu {
-            width: 51vh;
+            width: 68vh;
             list-style: none;
             margin-top: 1.5rem;
             @include displayFlex(space-between, center);
@@ -39,7 +39,7 @@
         }
     
         .menu-icon {
-            width: 130px;
+            width: 80px;
             @include displayFlex(space-between, center);
             list-style: none;
             margin-top: 1rem;

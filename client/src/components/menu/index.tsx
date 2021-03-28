@@ -34,6 +34,11 @@ export default function Menu() {
                             Divisões
                         </Link>
                     </li>
+                    <li className="menu-item">
+                        <Link to='/Administracao'>
+                            Adiministração
+                        </Link>
+                    </li>
                 </ul>
 
                 <ul className="menu-icon">
@@ -42,11 +47,6 @@ export default function Menu() {
                     </li>
                     <li className="menu-item">
                         <FaBell/>
-                    </li>
-                    <li className="menu-item">
-                        <Link to='/administracao'>
-                            <FaCogs/>
-                        </Link>
                     </li>
                 </ul>
             </div>
