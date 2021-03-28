@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Modal } from 'react-bootstrap';
+import { FaTimes, FaPlus, FaFlag } from 'react-icons/fa';
 
 import Menu from '../components/menu';
 import Cabecalho from '../components/cabecalho';
@@ -18,12 +20,62 @@ export default function Times() {
 
     const [ pesquisa, setPesquisa ] = useState('');
     const [ times, setTimes ] = useState<Time[]>([]);
+    const [ show, setShow ] = useState(false);
+    const [ reSearchActive, setReSearchActive ] = useState(false);
+
+    const [ nome, setNome ] = useState('');
+    const [ logo, setLogo ] = useState<File[]>([]);
+    const [ previewLogo, setPreviewLogo ] = useState('');
 
     useEffect(() => {
         api.get(`/times/${pesquisa}`).then(res => {
             setTimes(res.data);
         })
-    }, [pesquisa]);
+    }, [pesquisa, reSearchActive]);
+
+    async function handleSubmit(event: FormEvent){
+        event.preventDefault();
+
+        const data = new FormData();
+
+        data.append('liderId', '1teste');
+        data.append('nome', nome);
+        data.append('logo', logo[0]);
+
+        await api.post("/time", data);
+
+        alert('Time cadastrado com sucesso!');
+
+        setReSearchActive(true);
+        handleClose();
+    }
+
+    
+    function handleSelectImage(event: ChangeEvent<HTMLInputElement>){
+
+        if(!event.target.files){
+            return;
+        }
+    
+        const selectedLogo = Array.from(event.target.files);
+
+        setLogo(selectedLogo);
+    
+        const selectedlogoPreview = selectedLogo.map(logo => {
+            return URL.createObjectURL(logo);
+        }).concat(previewLogo);
+    
+        setPreviewLogo(selectedlogoPreview[0]);
+    }
+
+    function handleRemoveImage() {
+      
+        setPreviewLogo('');
+        setLogo([]);
+    }
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
     function renderLista() {
         if(times.length !== 0) {
@@ -59,10 +111,8 @@ export default function Times() {
                         setValue={setPesquisa} height='6rem' inputWidth='63rem' 
                         buttonWidth='7rem' fontInput='2.5rem' fontButton='3.2rem'/>
 
-                    <button className='butao-criar'>
-                        <Link to='criarTime'>
-                            Criar time +
-                        </Link>
+                    <button className='butao-criar' onClick={handleShow}>
+                        Criar time +
                     </button>
                 </div>
 
@@ -70,6 +120,43 @@ export default function Times() {
                        
             </div>
             <Rodape/>
+
+            <Modal show={show} onHide={handleClose} centered>
+                <Modal.Header>
+                    <Modal.Title>Criar Time</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <div className="time-form">
+                        <form>
+                            <label htmlFor="imagens">Icone do time</label>
+                            <div className="imagens">
+                                {previewLogo == '' ? 
+                                    <div>
+                                        <label htmlFor='image[]' className="new-image">
+                                            <FaFlag size={54} color="#15b6d6" />
+                                        </label> 
+                                        <input onChange={handleSelectImage} accept="image/*" type="file" id="image[]"/>
+                                    </div> :  
+                                    <div className="image-area" key={previewLogo}>
+                                        <img src={previewLogo} alt='imagem'/>
+                                        <button className='excluir-logo' type='button' onClick={handleRemoveImage}>
+                                            <h1><FaTimes/></h1>
+                                        </button>
+                                    </div>
+                                }
+                            </div>     
+
+                            <label htmlFor="titulo">Nome do time</label>
+                            <input onChange={event => setNome(event.target.value)} type="text" name='nome' id='nome'/>
+
+                        </form>
+                    </div>
+                </Modal.Body>
+                <Modal.Footer>
+                    <button className='botao-enviar' onClick={handleSubmit}>Enviar</button>
+                    <button className='botao-resetar' onClick={handleClose}>Voltar</button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }

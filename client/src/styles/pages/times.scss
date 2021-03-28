@@ -60,3 +60,117 @@
         }
     }
 }
+
+
+.time-form {
+    width: 100%;
+    min-height: 300px;
+    @include displayFlex(none, center);
+    flex-direction: column;
+    background: var(--color-background-secundary);
+    padding: 0rem .7rem;
+
+    form {
+        width: 100%;
+        height: 100%;
+        @include displayFlex(space-between, center);
+        flex-direction: column;
+
+        label {
+            @include texto(3.4rem, var(--color-font-primary));
+        }
+
+        %input-textarea {
+            width: 95%;
+            height: 6rem;
+            background: var(--color-background-input);
+            border: .2rem solid var(--color-blue-third);
+            @include texto(2.4rem, var(--color-font-primary));
+            border-radius: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+        }
+
+        input {
+            @extend %input-textarea;
+            height: 6rem;
+        }
+
+        input[type=file]{
+            display: none;
+        }
+
+        .imagens {
+            width: 100%;
+            position: relative;
+            @include displayFlex(center, none);
+            flex-wrap: wrap;
+
+            .image-area {
+                width: 17rem;
+                height: 17rem;
+                position: relative;
+                margin-bottom: 1.5rem;
+                border-radius: 99990px;
+                overflow: hidden;
+                @include displayFlex(center, center);
+
+                img {
+                    width: 17rem;
+                    height: 17rem;
+                    object-fit: cover;
+                    border: 2px solid var(--color-blue-third);
+                    border-radius: 1rem;
+                    border-radius: 99990px;
+                }
+
+                .excluir-logo{
+                    height: 17rem;
+                    width: 17rem;
+                    background: transparent;
+                    position: absolute;  
+                    cursor: pointer;
+        
+                    @include displayFlex(center, center);
+                    flex-direction: column;
+        
+                    border: 2px solid var(--color-blue-secundary);
+                    border-radius: 9999px;
+        
+                    h1 {
+                        display: none;
+                        text-align: center;
+                        @include texto(7rem, var(--color-red-secundary));
+                        margin-bottom: 1rem
+                    }
+        
+                    &:hover {
+                        background: rgba($color: #000000, $alpha: 0.5);
+                        border: 2px solid var(--color-red-primary);
+        
+                        h1 {
+                            display: initial;
+                        }
+                    }
+                }
+            }
+
+            .new-image {
+                width: 17rem;
+                height: 17rem;
+                background: var(--color-background-input);
+                @include displayFlex(center, center);
+                border: 2px solid var(--color-blue-third);
+                border-radius: 20px;
+                margin-bottom: 1.5rem;
+                cursor: pointer;
+                border-radius: 99990px;
+                transition: filter 0.3s;
+
+                &:hover {
+                    filter: brightness(1.1);
+                }
+            }
+        }
+    }
+}
