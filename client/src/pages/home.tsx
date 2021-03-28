@@ -1,12 +1,10 @@
-import Menu from '../../components/menu';
-import Cabecalho from '../../components/cabecalho';
-import Rodape from '../../components/rodape';
+import Menu from '../components/menu';
+import Cabecalho from '../components/cabecalho';
+import Rodape from '../components/rodape';
 import { Carousel } from 'react-bootstrap';
 
-import Banner from '../../assets/banner1.jpg';
-import Banner1 from '../../assets/banner2.png';
-
-import './style.scss';
+import Banner from '../assets/banner1.jpg';
+import Banner1 from '../assets/banner2.png';
 
 export default function Home() {
 

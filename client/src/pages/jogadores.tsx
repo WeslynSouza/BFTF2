@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
 import { FaPlus } from 'react-icons/fa';
-import Menu from '../../components/menu';
-import Cabecalho from '../../components/cabecalho';
-import Rodape from '../../components/rodape';
-import InputPesquisa from '../../components/input-pesquisa';
-import Placeholder from '../../components/placeholder';
-import api from '../../services/api';
-
-import './style.scss';
+import Menu from '../components/menu';
+import Cabecalho from '../components/cabecalho';
+import Rodape from '../components/rodape';
+import InputPesquisa from '../components/input-pesquisa';
+import Placeholder from '../components/placeholder';
+import api from '../services/api';
 
 type Usuario = {
     steamId: number,

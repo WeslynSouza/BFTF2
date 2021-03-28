@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import Menu from '../../components/menu';
-import Cabecalho from '../../components/cabecalho';
-import Rodape from '../../components/rodape';
-import InputPesquisa from '../../components/input-pesquisa';
-import Placeholder from '../../components/placeholder';
-import api from '../../services/api';
-
-import './style.scss';
+import Menu from '../components/menu';
+import Cabecalho from '../components/cabecalho';
+import Rodape from '../components/rodape';
+import InputPesquisa from '../components/input-pesquisa';
+import Placeholder from '../components/placeholder';
+import api from '../services/api';
 
 type Time = {
     id: number,
@@ -61,7 +59,11 @@ export default function Times() {
                         setValue={setPesquisa} height='6rem' inputWidth='63rem' 
                         buttonWidth='7rem' fontInput='2.5rem' fontButton='3.2rem'/>
 
-                    <button className='butao-criar'>Criar time +</button>
+                    <button className='butao-criar'>
+                        <Link to='criarTime'>
+                            Criar time +
+                        </Link>
+                    </button>
                 </div>
 
                 {renderLista()}

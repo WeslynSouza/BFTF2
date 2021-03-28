@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
-import InputPesquisa from '../../../components/input-pesquisa';
-import Placeholder from '../../../components/placeholder';
+import InputPesquisa from '../input-pesquisa';
+import Placeholder from '../placeholder';
 import { FaPen, FaQuestion, FaTrash, FaUserCircle } from 'react-icons/fa';
 import { Table, Modal } from 'react-bootstrap';
-import * as Classes from '../../../assets/assets';
-import api from '../../../services/api';
+import * as Classes from '../../assets/assets';
+import api from '../../services/api';
 
 interface usuaiosTabela {
     functionUsuarioId: Function,

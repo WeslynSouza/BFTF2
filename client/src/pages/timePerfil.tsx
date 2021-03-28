@@ -3,13 +3,12 @@ import { Link, useParams } from 'react-router-dom';
 import { FaPlus, FaTimes } from 'react-icons/fa';
 import { Table } from 'react-bootstrap';
 
-import Menu from '../../components/menu';
-import Cabecalho from '../../components/cabecalho';
-import Rodape from '../../components/rodape';
-import * as Classes from '../../assets/assets';
+import Menu from '../components/menu';
+import Cabecalho from '../components/cabecalho';
+import Rodape from '../components/rodape';
+import * as Classes from '../assets/assets';
 
-import './style.scss';
-import api from '../../services/api';
+import api from '../services/api';
 
 type TimeParams = {
     id: string

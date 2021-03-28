@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Placeholder from '../../../components/placeholder';
+import Placeholder from '../placeholder';
 
 type Divisao = {
     nome: string,

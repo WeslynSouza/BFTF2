@@ -1,14 +1,14 @@
 import { useState, FormEvent, ChangeEvent, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import {FaTimes, FaPlus} from 'react-icons/fa';
-import api from '../../../services/api';
+import api from '../../services/api';
 
 type postForm = {
     postId: string,
     functionVoltar: Function;
 }
 
-type Image = { 
+interface image {
     url: string
 }
 
@@ -18,17 +18,31 @@ export default function PostForm({ functionVoltar, postId }: postForm) {
 
     const [ titulo, setTitulo ] = useState('');
     const [ conteudo, setConteudo ] = useState('');
-    const [ images, setImages ] = useState<Image[]>([]);
-    const [ previewImages, setPreviewImages ] = useState<Image[]>([]);
+    const [ images, setImages ] = useState<File[]>([]);
+    const [ previewImages, setPreviewImages ] = useState<string[]>([]);
+
+    async function handleFilePromise(url: string){
+        return await fetch(url).then(res => res.blob().then(blob => new File([blob], url.split('-')[1], { type: 'image/png'})));
+    }
 
     useEffect(() => {
-        api.get(`/post/${postId}`).then(res => {
+        api.get(`/post/${postId}`).then(async res => {
             setTitulo(res.data.titulo);
             setConteudo(res.data.conteudo);
-            setImages(res.data.imagens);
-            setPreviewImages(res.data.imagens);
+
+            await res.data.imagens.forEach(async (postImage: image) => {
+                const image = [await handleFilePromise(postImage.url)]
+                setImages(images.concat(image));
+            });
+            
+            const postImagesPreview = res.data.imagens.map((postImage: image) => new File([postImage.url.split('-', 2)[1]], postImage.url, {type: "image/png"}).name);
+            setPreviewImages(postImagesPreview);
         }) 
     }, [])
+
+    useEffect(() => {
+        console.log(images);
+    }, [images])
 
     async function handleSubmit(event: FormEvent){
         event.preventDefault();
@@ -38,12 +52,15 @@ export default function PostForm({ functionVoltar, postId }: postForm) {
         data.append('titulo', titulo);
         data.append('conteudo', conteudo);
         images.forEach(image => {
-            data.append('images', image.url);
+            data.append('imagens', image);
         })
 
-        alert('Cadastro realizado com sucesso!');
+        await api.put(`post/${postId}`, data);
 
-        history.push('/');
+        alert('Cadastro realizado com sucesso!');
+        console.log(images);
+
+        functionVoltar('tabInicial');
     }
 
     function handleSelectImage(event: ChangeEvent<HTMLInputElement>){
@@ -52,13 +69,13 @@ export default function PostForm({ functionVoltar, postId }: postForm) {
             return;
         }
     
-        const selectedImages = Array.from(event.target.files).map(image => {
-            return { url: URL.createObjectURL(image) }
-        });
+        const selectedImages= Array.from(event.target.files);
 
         setImages(selectedImages.concat(images));
     
-        const selectedImagesPreview = selectedImages.concat(previewImages);
+        const selectedImagesPreview = selectedImages.map(image => {
+            return URL.createObjectURL(image);
+        }).concat(previewImages);
     
         setPreviewImages(selectedImagesPreview);
     }
@@ -96,16 +113,16 @@ export default function PostForm({ functionVoltar, postId }: postForm) {
                 <fieldset>
                     <label htmlFor="imagens">Imagens</label>
                     <div className="imagens">
-                        {previewImages.map((image, indice) => {
-                            return (
-                                <div className="image-area" key={image.url}>
-                                    <img src={image.url} alt='imagem'/>
-                                    <button type='button' onClick={() => handleRemoveImage(indice)}>
-                                        <FaTimes/>
-                                    </button>
-                                </div>
-                            )
-                        })}
+                            {previewImages.map((image, indice) => {
+                                return (
+                                    <div className="image-area" key={indice}>
+                                        <img src={image} alt='imagem'/>
+                                        <button type='button' onClick={() => handleRemoveImage(indice)}>
+                                            <FaTimes/>
+                                        </button>
+                                    </div>
+                                )
+                            })}
 
                         <label htmlFor='image[]' className="new-image">
                             <FaPlus size={24} color="#15b6d6" />

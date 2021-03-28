@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Menu from '../../components/menu';
-import Cabecalho from '../../components/cabecalho';
-import Rodape from '../../components/rodape';
-import api from '../../services/api';
-
-import './style.scss';
+import Menu from '../components/menu';
+import Cabecalho from '../components/cabecalho';
+import Rodape from '../components/rodape';
+import api from '../services/api';
 
 type Post = {
     titulo: string,

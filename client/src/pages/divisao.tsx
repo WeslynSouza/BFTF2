@@ -1,12 +1,10 @@
 import { useState } from 'react';
 import { Table, Form } from 'react-bootstrap';
-import Menu from '../../components/menu';
-import Cabecalho from '../../components/cabecalho';
-import Rodape from '../../components/rodape';
+import Menu from '../components/menu';
+import Cabecalho from '../components/cabecalho';
+import Rodape from '../components/rodape';
 
-import chevronDown from '../../assets/chevronDown.svg';
-
-import './style.scss';
+import chevronDown from '../assets/chevronDown.svg';
 
 type Divisao = {
     nome: string, 

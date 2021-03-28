@@ -1,8 +1,7 @@
-import React from 'react';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import './styles/global.scss';
+import './styles/styles.scss';
 
 import Routes from './routes';
 

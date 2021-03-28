@@ -9,6 +9,11 @@
         @include button(var(--color-green-primary), 3rem, 27rem, 6.2rem, var(--color-green-secundary));
         border-radius: 1.5rem;
         @include sombra;
+
+        a {
+            color: var(--color-font-secundary);
+            text-decoration: none;
+        }
     }
 }
 

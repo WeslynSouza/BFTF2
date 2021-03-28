@@ -1,16 +1,91 @@
 
 @import '../../styles/mixins';
 
+.conteudo {
+    width: 100%;
+    @include displayFlex(space-between, flex-start);
+    margin-top: 3rem;
+
+    .conteudo-centro {
+        width: 70rem;
+        @include displayFlex(initial, center);
+        flex-direction: column;
+
+        .placeholder {
+            margin-top: 8rem;
+        }
+
+        .post-caixa {
+            width: 70rem;
+            height: 42rem;
+            background: var(--color-background-secundary);
+            border-radius: .5rem;
+            margin-top: 4rem;
+            @include sombra;
+
+            .post-img {
+                width: 100%;
+                height: 80%;
+                border-top-left-radius: .5rem;
+                border-top-right-radius: .5rem;
+
+                &:hover {
+                    opacity: .9;
+                }
+            }
+
+            .post-conteudo {
+                width: 100%;
+                height: 20%;
+                padding: 0 2rem;
+                @include displayFlex(initial, center);
+
+                a {
+                    text-decoration: none;
+
+                    h2 {
+                        @include texto(3.8rem, var(--color-blue-secundary));
+                        font-weight: 400;
+                        transition: .2s;
+
+                        &:hover {
+                            color: var(--color-blue-third);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .conteudo-lateral {
+        width: 27rem;
+        @include displayFlex(space-between, flex-end);
+        flex-direction: column;
+
+        .botao-criar {
+            @include button(var(--color-green-primary), 3rem, 27rem, 6.2rem, var(--color-green-secundary));
+            border-radius: 1.5rem;
+        }
+
+        .discord {
+            width: 27rem;
+            height: 36rem;
+            border: 0;
+            margin-top: 4rem;
+            border-radius: .5rem;
+            @include sombra;
+        }
+    }
+}
+
+
 .post-form {
     width: 100%;
-    min-height: 600px;
+    min-height: 500px;
     @include displayFlex(none, center);
     flex-direction: column;
     background: var(--color-background-secundary);
-    margin: 3rem 0 0;
-    padding: 2rem 2rem;
-    border-radius: .5rem;
-    @include sombra;
+    padding: 0rem .7rem;
 
     form {
         width: 100%;
@@ -31,7 +106,6 @@
             border-radius: 1rem;
             margin-bottom: 1.5rem;
             padding: 1rem;
-            
         }
 
         input {
@@ -51,11 +125,13 @@
         .imagens {
             width: 100%;
             @include displayFlex(flex-start, none);
+            flex-wrap: wrap;
 
             .image-area {
                 width: 15rem;
                 height: 9.8rem;
-                margin-right: 2rem;
+                margin-right: 1.7rem;
+                margin-top: 1.5rem;
 
                 img {
                     width: 15rem;
@@ -71,7 +147,7 @@
                     height: 3rem;
                     background: var(--color-blue-third);
                     @include texto(1.4rem, var(--color-font-secundary));
-                    top: -9.8rem;
+                    top: -10.4rem;
                     right: -12rem;
                     border: 0;
                     border-bottom-left-radius: .5rem;
@@ -82,6 +158,10 @@
                         background: var(--color-blue-fourth);
                     }
                 }
+
+                &:nth-child(3n){
+                    margin-right: 0;
+                }
             }
 
             .new-image {
@@ -91,23 +171,8 @@
                 @include displayFlex(center, center);
                 border: 1px dashed var(--color-blue-third);
                 border-radius: 20px;
+                margin-top: 1.5rem;
                 cursor: pointer;
-            }
-        }
-
-        .botoes {
-            width: 100%;
-            @include displayFlex(space-between, center);
-            margin-top: 3rem;
-            margin-bottom: 1rem;
-
-            .botao-enviar {
-                @include button(var(--color-green-primary), 3rem, 47.5%, 6.3rem, var(--color-green-secundary));
-                background: var(--color-green-primary);
-            }
-
-            .botao-reset {
-                @include button(var(--color-red-primary), 3rem, 47.5%, 6.3rem, var(--color-red-secundary));
             }
         }
     }

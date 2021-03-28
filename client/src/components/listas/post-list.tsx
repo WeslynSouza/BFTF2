@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import { FaPen, FaTrash } from 'react-icons/fa';
-import InputPesquisa from '../../../components/input-pesquisa';
-import Placeholder from '../../../components/placeholder';
-import api from '../../../services/api';
+import InputPesquisa from '../input-pesquisa';
+import Placeholder from '../placeholder';
+import api from '../../services/api';
 
 type postTabela = {
     functionPostId: Function,

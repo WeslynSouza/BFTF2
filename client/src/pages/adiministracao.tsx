@@ -1,17 +1,15 @@
 import { useState } from 'react';
-import Menu from '../../components/menu';
-import Cabecalho from '../../components/cabecalho';
-import Rodape from '../../components/rodape';
+import Menu from '../components/menu';
+import Cabecalho from '../components/cabecalho';
+import Rodape from '../components/rodape';
 import { Tabs, Tab } from 'react-bootstrap';
 
-import UsuariosTabela from './tabelas/usuario-tab';
-import UsuarioForm from './formularios/usuario-form';
-import TimesTabela from './tabelas/times-tab';
-import DivisoesTabela from './tabelas/divisao-tab';
-import PostList from './listas/post-list';
-import PostForm from './formularios/post-form';
-
-import './style.scss';
+import UsuariosTabela from '../components/tabelas/usuario-tab';
+import UsuarioForm from '../components/formularios/usuario-form';
+import TimesTabela from '../components/tabelas/times-tab';
+import DivisoesTabela from '../components/tabelas/divisao-tab';
+import PostList from '../components/listas/post-list';
+import PostForm from '../components/formularios/post-form';
 
 export default function Administracao() {
 

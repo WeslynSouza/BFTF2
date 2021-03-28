@@ -2,8 +2,8 @@ import { useState, FormEvent, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import { FaTimes, FaUserCircle } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
-import * as Classes from '../../../assets/assets';
-import api from '../../../services/api';
+import * as Classes from '../../assets/assets';
+import api from '../../services/api';
 
 interface Classe {
     id: number;
