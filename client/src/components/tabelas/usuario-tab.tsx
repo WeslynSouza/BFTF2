@@ -93,9 +93,9 @@ export default function UsuariosTabela({ functionUsuarioId, functionAlterar }: u
                         return (
                             <tr key={usuario.steamId}>
                                 <td>
-                                    <div className='avatar-nick'>
+                                    <div className='img-text'>
                                         {usuario.avatar == '' ? 
-                                            <div>
+                                            <div className='imageless'>
                                                 <FaQuestion/>
                                             </div> : 
                                             <img src={usuario.avatar} alt="Avatar"/>
@@ -104,8 +104,16 @@ export default function UsuariosTabela({ functionUsuarioId, functionAlterar }: u
                                     </div>
                                 </td>
                                 <td>
-                                    {usuario.time.logo === undefined ? 'Sem time' : <img src={usuario.time.logo} alt="logo"/> }
-                                    {usuario.time.nome}
+                                    {usuario.time.nome === undefined ? 'Sem time' : 
+                                        <div className='img-text'>
+                                            {usuario.time.logo === undefined ? 
+                                                <div className='imageless'>
+                                                    <FaQuestion/>
+                                                </div> : 
+                                                <img src={usuario.time.logo} alt="logo"/> }
+                                            {usuario.time.nome}
+                                        </div>
+                                    }
                                 </td>
                                 <td>
                                     <div>

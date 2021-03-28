@@ -18,14 +18,14 @@ export default {
             nome: time.nome,
             lider: {
                 nick: time.lider.nick,
-                avatar: `${url}${time.lider.avatar}`
+                avatar: time.lider.avatar !== '' ? `${url}${time.lider.avatar}` : ''
             },
             divisao,
-            logo: `${url}${time.logo}`,
+            logo: time.logo !== '' ? `${url}${time.logo}`: '',
             jogadores: time.jogadores.map(jogador => {
                 const jogadorObjeto = {
                     nick: jogador.nick,
-                    avatar: `${url}${jogador.avatar}`
+                    avatar: time.lider.avatar !== '' ? `${url}${time.lider.avatar}` : ''
                 }
                 return jogadorObjeto;
             }),

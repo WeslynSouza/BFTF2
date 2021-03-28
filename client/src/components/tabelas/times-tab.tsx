@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Table, Modal } from 'react-bootstrap';
-import { FaTrash } from 'react-icons/fa';
+import { FaTrash, FaQuestion } from 'react-icons/fa';
 import InputPesquisa from '../input-pesquisa';
 import Placeholder from '../placeholder';
 import api from '../../services/api';
@@ -48,12 +48,26 @@ export default function Times() {
                             return (
                                 <tr key={time.id}>
                                     <td>
-                                        <img src={time.logo} alt="logo"/>
-                                        {time.nome}
+                                        <div className='img-text'>
+                                            {time.logo == '' ? 
+                                                <div className='imageless'>
+                                                    <FaQuestion/>
+                                                </div> : 
+                                                <img src={time.logo} alt="Avatar"/>
+                                            }
+                                            {time.nome}
+                                        </div>                                    
                                     </td>
                                     <td>
-                                        <img src={time.lider.avatar} alt="Avatar"/>
-                                        {time.lider.nick}
+                                        <div className='img-text'>
+                                            {time.lider.avatar == '' ? 
+                                                <div className='imageless'>
+                                                    <FaQuestion/>
+                                                </div> : 
+                                                <img src={time.lider.avatar} alt="Avatar"/>
+                                            }
+                                            {time.lider.nick}
+                                        </div>   
                                     </td>
                                     <td>
                                         {time.divisao === '' ? 'Sem divisão' : time.divisao}
