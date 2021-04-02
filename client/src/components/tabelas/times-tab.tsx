@@ -1,9 +1,14 @@
 import { useEffect, useState } from 'react';
 import { Table, Modal } from 'react-bootstrap';
-import { FaTrash, FaQuestion } from 'react-icons/fa';
+import { FaTrash, FaQuestion, FaPen } from 'react-icons/fa';
 import InputPesquisa from '../input-pesquisa';
 import Placeholder from '../placeholder';
 import api from '../../services/api';
+
+interface timesTabela {
+    functionTimeId: Function,
+    functionAlterar: Function
+}
 
 type Time = {
     id: number,
@@ -16,7 +21,7 @@ type Time = {
     divisao: string
 }
 
-export default function Times() {
+export default function Times({ functionTimeId, functionAlterar }: timesTabela) {
 
     const [ pesquisa, setPesquisa ] = useState('');
     const [ times, setTimes ] = useState<Time[]>([]);
@@ -73,6 +78,9 @@ export default function Times() {
                                         {time.divisao === '' ? 'Sem divisão' : time.divisao}
                                     </td>
                                     <td>
+                                        <button className='botao-alterar' onClick={() => [functionAlterar('usuarioForm'), functionTimeId(time.id)]}>
+                                            <FaPen/>
+                                        </button>
                                         <button className='botao-excluir' onClick={handleShow}>
                                             <FaTrash/>
                                         </button>

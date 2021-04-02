@@ -7,6 +7,7 @@ import { Tabs, Tab } from 'react-bootstrap';
 import UsuariosTabela from '../components/tabelas/usuario-tab';
 import UsuarioForm from '../components/formularios/usuario-form';
 import TimesTabela from '../components/tabelas/times-tab';
+import TimeForm from '../components/formularios/time-form';
 import DivisoesTabela from '../components/tabelas/divisao-tab';
 import PostList from '../components/listas/post-list';
 import PostForm from '../components/formularios/post-form';
@@ -15,6 +16,7 @@ export default function Administracao() {
 
     const [ state, setState ] = useState('tabInicial');
     const [ usuarioId, setUsuarioId ] = useState('');
+    const [ timeId, setTimeId ]  = useState('');
     const [ postId, setPostId ] = useState('');
 
     function handleState() {
@@ -26,7 +28,7 @@ export default function Administracao() {
                             <UsuariosTabela functionUsuarioId={setUsuarioId} functionAlterar={setState}/>
                         </Tab>
                         <Tab className='administracao-tab-item' eventKey='times' title='Times'>
-                            <TimesTabela/>
+                            <TimesTabela functionTimeId={setTimeId} functionAlterar={setState}/>
                         </Tab>
                         <Tab className='administracao-tab-item' eventKey='Divisoes' title='Divisões'>
                             <DivisoesTabela/>
@@ -49,6 +51,14 @@ export default function Administracao() {
                     <Tabs className='administracao-tab' defaultActiveKey='posts' id='administracao-tab'>
                         <Tab className='administracao-tab-item' eventKey='posts' title='Alterar'>
                             <PostForm functionVoltar={setState} postId={postId}/>
+                        </Tab>
+                    </Tabs>
+                );
+            case "postForm":
+                return (
+                    <Tabs className='administracao-tab' defaultActiveKey='time' id='administracao-tab'>
+                        <Tab className='administracao-tab-item' eventKey='time' title='Alterar'>
+                            <TimeForm functionVoltar={setState} postId={timeId}/>
                         </Tab>
                     </Tabs>
                 );
