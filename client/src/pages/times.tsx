@@ -30,6 +30,7 @@ export default function Times() {
     useEffect(() => {
         api.get(`/times/${pesquisa}`).then(res => {
             setTimes(res.data);
+            setReSearchActive(false);
         })
     }, [pesquisa, reSearchActive]);
 
@@ -90,7 +91,7 @@ export default function Times() {
                                 </Link>
                             </li>
                         )
-                    })}
+                    }).reverse()}
                 </ul>
             )
         } else {
