@@ -44,7 +44,7 @@ export default {
         });
 
         await schema.validate(data, {
-            abortEarly: false
+            abortEarly: true
         });
 
         const classe = classeRepository.create(data);

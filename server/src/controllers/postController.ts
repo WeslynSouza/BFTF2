@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { getRepository, Like } from 'typeorm';
 import * as yup from 'yup';
+import Imagens from '../models/imagens';
 
 import Post from '../models/post';
 import Usuario from '../models/usuario';
@@ -80,7 +81,7 @@ export default {
         })
 
         await schema.validate(data, {
-            abortEarly: false,
+            abortEarly: true,
         })
 
         const post = postRepository.create(data);
@@ -96,26 +97,27 @@ export default {
 
         const {
             titulo,
-            conteudo
+            conteudo,
         } = req.body;
 
         const postRepository = getRepository(Post);
+        const imagesRepository = getRepository(Imagens);
 
         const post = await postRepository.findOneOrFail( id, {
             relations: ['imagens', 'autor']
         });
 
+        post.imagens.forEach(async image => {
+            const oldImage = await imagesRepository.findOneOrFail(image.id);
+            imagesRepository.delete(oldImage);
+        })
+
         const requestImages = req.files as Express.Multer.File[];
-        let imagens
-        if(requestImages.length !== 0){
-            imagens = requestImages.map(image => {
-                return {
-                    path: image.filename
-                }
-            });
-        } else {
-            imagens = post.imagens
-        }
+        const imagens = requestImages.map(image => {
+            return {
+                path: image.filename
+            }
+        })
 
         const data = {
             id: Number(id),
@@ -134,7 +136,7 @@ export default {
         })
 
         await schema.validate(data, {
-            abortEarly: false,
+            abortEarly: true,
         })
 
         const newPost = postRepository.create(data);

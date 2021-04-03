@@ -65,7 +65,7 @@ export default {
         })
 
         await schema.validate(data, {
-            abortEarly: false,
+            abortEarly: true,
         })
 
         const partida = partidaRepository.create(data);

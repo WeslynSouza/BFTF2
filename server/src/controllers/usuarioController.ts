@@ -56,49 +56,56 @@ export default {
         } = req.body;
 
         const usuarioRepository = getRepository(Usuario);
-        const classeRepository = getRepository(Classe);
-
-        const classeUsuario: Array<Classe> = [];
-
-        for (const i in classes) {
-            if (Object.prototype.hasOwnProperty.call(classes, i)) {    
-                classeUsuario.push( await classeRepository.findOneOrFail(classes[i]))
-            }
-        }
-
-        const requestImages = req.files as Express.Multer.File[];
-        const avatar = requestImages[0].filename;
         
+        try {
+            const verificaUsuario = await usuarioRepository.findOneOrFail(steamId);
 
-        const data = {
-            steamId,
-            nick,
-            senha,
-            classes: classeUsuario,
-            avatar,
-            acesso,
-            elegivel: 0,
+            return res.status(400).send("O usuário já está cadastrado no sistema!");
+        } catch {
+            const classeRepository = getRepository(Classe);
+
+            const classeUsuario: Array<Classe> = [];
+    
+            for (const i in classes) {
+                if (Object.prototype.hasOwnProperty.call(classes, i)) {    
+                    classeUsuario.push( await classeRepository.findOneOrFail(classes[i]))
+                }
+            }
+    
+            const requestImages = req.files as Express.Multer.File[];
+            const avatar = requestImages[0].filename;
+            
+    
+            const data = {
+                steamId,
+                nick,
+                senha,
+                classes: classeUsuario,
+                avatar,
+                acesso,
+                elegivel: 0,
+            }
+    
+            const schema = yup.object().shape({
+                steamId: yup.string().required(),
+                nick: yup.string().required(),
+                senha: yup.string().required(),
+                classes: yup.array(),
+                avatar: yup.string(),
+                acesso: yup.number(),
+                elegivel: yup.number()
+            })
+    
+            await schema.validate(data, {
+                abortEarly: true,
+            })
+    
+            const usuario = usuarioRepository.create(data);
+    
+            await usuarioRepository.save(usuario);
+    
+            return res.status(201).json(usuario);
         }
-
-        const schema = yup.object().shape({
-            steamId: yup.string().required(),
-            nick: yup.string().required(),
-            senha: yup.string().required(),
-            classes: yup.array(),
-            avatar: yup.string(),
-            acesso: yup.number(),
-            elegivel: yup.number()
-        })
-
-        await schema.validate(data, {
-            abortEarly: false,
-        })
-
-        const usuario = usuarioRepository.create(data);
-
-        await usuarioRepository.save(usuario);
-
-        return res.status(201).json(usuario);
     },
 
     async update(req: Request, res: Response) {
@@ -160,7 +167,7 @@ export default {
         });
 
         await schema.validate(data, {
-            abortEarly: false,
+            abortEarly: true,
         });
 
         const newUsuario = usuarioRepository.create(data);

@@ -6,7 +6,6 @@ import Time from '../models/time';
 import Usuario from '../models/usuario';
 import Divisao from '../models/divisao';
 import TimeView from '../views/timeView';
-import { number } from 'yup/lib/locale';
 
 export default {
 
@@ -57,7 +56,13 @@ export default {
         const timeRepository = getRepository(Time);
         const usuarioRepository = getRepository(Usuario);
 
-        const lider = await usuarioRepository.findOneOrFail( liderId );
+        const lider = await usuarioRepository.findOneOrFail( liderId, {
+            relations: ['time']
+        } );
+
+        if(lider.time) {
+            return res.status(500).send('O jogador já está como lider de um time e por isso não pode cadastrar outro time.');
+        }
 
         const jogadores = [ lider ];
 
@@ -79,7 +84,7 @@ export default {
         })
 
         await schema.validate(data, {
-            abortEarly: false,
+            abortEarly: true,
         })
 
         const time = timeRepository.create(data);
@@ -114,6 +119,9 @@ export default {
 
         if( liderId !== undefined ) {
             lider = await usuarioRepository.findOneOrFail( liderId );
+            if(lider.time) {
+                return res.status(500).send('O jogador já está como lider de um time e por isso não pode cadastrar outro time.');
+            }
         }
 
         if(divisaoId !== undefined) {
@@ -149,7 +157,7 @@ export default {
         });
 
         await schema.validate(data, {
-            abortEarly: false,
+            abortEarly: true,
         });
 
         const newTime = timeRepository.create(data);
@@ -157,5 +165,18 @@ export default {
         await timeRepository.save(newTime);
 
         return res.status(201).json(newTime);
+    },
+
+    async delete(req: Request, res: Response) {
+
+        const { id } = req.params;
+
+        const timeRepository = getRepository(Time);
+
+        const time = await timeRepository.findOneOrFail(id);
+
+        await timeRepository.remove(time);
+
+        return res.status(200).json(time);
     }
 }
