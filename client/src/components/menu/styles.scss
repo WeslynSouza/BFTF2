@@ -21,7 +21,7 @@
             @include displayFlex(space-between, center);
         
             .menu-item {
-                @include texto(2.4rem, var(--color-blue-secundary));
+                @include texto(2.3vh, var(--color-blue-secundary));
                 font-weight: 400;
             
                 a {
