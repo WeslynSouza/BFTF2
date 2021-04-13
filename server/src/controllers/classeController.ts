@@ -35,23 +35,30 @@ export default {
 
         const classeRepository = getRepository(Classe);
 
-        const data = { 
-            nome 
-        };
+        try {
+            await classeRepository.findOneOrFail({
+                where: { nome }
+            })
 
-        const schema = yup.object().shape({
-            nome: yup.string().required()
-        });
-
-        await schema.validate(data, {
-            abortEarly: true
-        });
-
-        const classe = classeRepository.create(data);
-
-        await classeRepository.save(classe);
-
-        return res.status(201).json(classe);
-
+            return res.status(400).send("Já existe uma classe com este nome!");
+        } catch {
+            const data = { 
+                nome 
+            };
+    
+            const schema = yup.object().shape({
+                nome: yup.string().required()
+            });
+    
+            await schema.validate(data, {
+                abortEarly: true
+            });
+    
+            const classe = classeRepository.create(data);
+    
+            await classeRepository.save(classe);
+    
+            return res.status(201).json(classe);
+        }
     }
 }

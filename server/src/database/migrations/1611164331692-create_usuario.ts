@@ -26,8 +26,8 @@ export class createUsuario1611164331692 implements MigrationInterface {
                 },
                 {
                     name: "timeId",
-                    type: "varchar",
-                    isNullable: true,
+                    type: "integer",
+                    isNullable: true
                 },
                 {
                     name: "acesso",

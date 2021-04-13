@@ -29,6 +29,7 @@ export default {
                 }
                 return jogadorObjeto;
             }),
+            ativo: time.ativo
         }
     },
 

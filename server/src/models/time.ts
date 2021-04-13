@@ -10,7 +10,7 @@ export default class Time {
     id!: number;
 
     @OneToOne(() => Usuario, {
-        cascade: ['update', 'remove']
+        cascade: ['update']
     })
     @JoinColumn()
     lider!: Usuario;
@@ -21,12 +21,13 @@ export default class Time {
     @Column()
     logo!: string;
 
+    @Column()
+    ativo!: boolean;
+
     @ManyToOne(() => Divisao, divisao => divisao.times)
     divisao!: Divisao;
 
-    @OneToMany(() => Usuario, usuario => usuario.time, {
-        cascade: ['insert', 'update']
-    })
+    @OneToMany(() => Usuario, usuario => usuario.time)
     jogadores!: Usuario[];
 
     @OneToMany(() => Partida, partida => partida.time1)

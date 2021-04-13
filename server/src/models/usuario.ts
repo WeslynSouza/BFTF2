@@ -29,7 +29,6 @@ export default class Usuario {
     elegivel!: number;
 
     @ManyToOne(() => Time, time => time.jogadores)
-    @JoinColumn()
     time!: Time;
 
     @OneToMany(() => Post, post => post.autor, {

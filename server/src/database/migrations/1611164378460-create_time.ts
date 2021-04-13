@@ -28,9 +28,12 @@ export class createTime1611164378460 implements MigrationInterface {
                     isNullable: true
                 },
                 {
+                    name: 'ativo',
+                    type: 'boolean',
+                },
+                {
                     name: 'divisaoId',
                     type: 'integer',
-                    isNullable: true
                 }
             ],
             foreignKeys: [
@@ -39,8 +42,6 @@ export class createTime1611164378460 implements MigrationInterface {
                     columnNames: ['liderSteamId'],
                     referencedTableName: 'usuario',
                     referencedColumnNames: ['steamId'],
-                    onUpdate: 'CASCADE',
-                    onDelete: 'CASCADE'
                 },
                 {
                     name: 'idDivisao',

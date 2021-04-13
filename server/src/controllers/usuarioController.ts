@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
-import { getRepository, Like } from 'typeorm';
+import { getRepository, Like, Not } from 'typeorm';
 import * as yup from 'yup';
 import Classe from '../models/classe';
+import Time from '../models/time';
 
 import Usuario from '../models/usuario';
 import UsuarioView from '../views/usuarioView';
@@ -13,6 +14,7 @@ export default {
         const usuarioRepository = getRepository(Usuario);
 
         const usuarios = await usuarioRepository.find({
+            where: { steamId: Not('0') },
             relations: ['time', 'classes', 'posts']
         });
 
@@ -26,6 +28,7 @@ export default {
         const usuarioRepository = getRepository(Usuario);
 
         const usuario = await usuarioRepository.findOneOrFail( id, {
+            where: { steamId: Not('0') },
             relations: ['time', 'classes', 'posts']
         });
 
@@ -39,7 +42,7 @@ export default {
         const usuarioRepository = getRepository(Usuario);
 
         const usuario = await usuarioRepository.find({
-           where:{ nick: Like(`${nick}%`) },
+           where:{ steamId: Not('0'), nick: Like(`${nick}%`) },
             relations: ['time', 'classes', 'posts']
         });
 
@@ -58,11 +61,14 @@ export default {
         const usuarioRepository = getRepository(Usuario);
         
         try {
-            const verificaUsuario = await usuarioRepository.findOneOrFail(steamId);
+            await usuarioRepository.findOneOrFail(steamId);
 
             return res.status(400).send("O usuário já está cadastrado no sistema!");
         } catch {
             const classeRepository = getRepository(Classe);
+            const timeRepository = getRepository(Time);
+
+            const timePadrao = await timeRepository.findOneOrFail(1);
 
             const classeUsuario: Array<Classe> = [];
     
@@ -73,7 +79,10 @@ export default {
             }
     
             const requestImages = req.files as Express.Multer.File[];
-            const avatar = requestImages[0].filename;
+            let avatar = '';
+            if(requestImages.length > 0) {
+                avatar = requestImages[0].filename;
+            } 
             
     
             const data = {
@@ -84,6 +93,7 @@ export default {
                 avatar,
                 acesso,
                 elegivel: 0,
+                time: timePadrao
             }
     
             const schema = yup.object().shape({
@@ -93,7 +103,8 @@ export default {
                 classes: yup.array(),
                 avatar: yup.string(),
                 acesso: yup.number(),
-                elegivel: yup.number()
+                elegivel: yup.number(),
+                time: yup.object().required()
             })
     
             await schema.validate(data, {
@@ -124,6 +135,7 @@ export default {
         const classeRepository = getRepository(Classe);
 
         const usuario = await usuarioRepository.findOneOrFail( steamId, {
+            where: { steamId: Not('0') },
             relations: ['time', 'classes', 'posts']
         });
 
@@ -153,7 +165,8 @@ export default {
             acesso: acesso || usuario.acesso,
             avatar: newAvatar,
             classes: classesAtualizadas.length == 0 ? usuario.classes : classesAtualizadas,
-            elegivel: elegivel == '' ? usuario.elegivel : elegivel
+            elegivel: elegivel == '' ? usuario.elegivel : elegivel,
+            time: usuario.time
         }
 
         const schema = yup.object().shape({
@@ -163,7 +176,8 @@ export default {
             classes: yup.array(),
             avatar: yup.string(),
             acesso: yup.number(),
-            elegivel: yup.number()
+            elegivel: yup.number(),
+            time: yup.object().required(),
         });
 
         await schema.validate(data, {
