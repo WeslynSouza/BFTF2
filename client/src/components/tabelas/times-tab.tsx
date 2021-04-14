@@ -41,9 +41,14 @@ export default function Times({ functionTimeId, functionAlterar }: timesTabela) 
     const handleClose = () => [setShow(false), setIdTimeModal(0), setNomeTimeModal('')];
     const handleShow = () => setShow(true);
 
-    const handleDeleteTime = async (id: number) => {
+    const handleDeleteTime = async (id: Number) => {
 
         handleClose();
+
+        if(id == 0) {
+            alert("Não foi possível realizar a exclusão do time!");
+            return;
+        }
         
         await api.delete(`/time/${id}`);
 

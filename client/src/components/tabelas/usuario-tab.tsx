@@ -51,6 +51,11 @@ export default function UsuariosTabela({ functionUsuarioId, functionAlterar }: u
 
         handleClose();
 
+        if(steamId == '') {
+            alert("Não foi possível realizar a exclusão do usuário!");
+            return;
+        }
+
         await api.delete(`/usuario/${steamId}`);
 
         alert('O usuário foi excluído com sucesso!');
