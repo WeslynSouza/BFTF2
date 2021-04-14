@@ -9,7 +9,7 @@ export default {
         if(!usuario.time){
             time = '';
         } else {
-            time = {nome: usuario.time.nome, logo: `${url}${usuario.time.logo}`}
+            time = {nome: usuario.time.nome, logo: usuario.time.logo !== '' ? `${url}${usuario.time.logo}` : ''}
         }
 
         return {
