@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { FaPlus } from 'react-icons/fa';
+import { FaPlus, FaQuestion } from 'react-icons/fa';
 import Menu from '../components/menu';
 import Cabecalho from '../components/cabecalho';
 import Rodape from '../components/rodape';
@@ -32,7 +32,12 @@ export default function Jogadores() {
                         return (
                             <li className="jogadores-lista-item" key={jogador.steamId}>
                                 <div className="jogador-info">
-                                    <img src={jogador.avatar} alt="logo"/>
+                                    {jogador.avatar == '' ? 
+                                        <div className='imageless'>
+                                            <FaQuestion/>
+                                        </div> : 
+                                        <img src={jogador.avatar} alt="avatar"/>
+                                    }
                                     <h2>{jogador.nick}</h2>
                                 </div>
                                 <button>

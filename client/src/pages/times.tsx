@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
-import { FaTimes, FaPlus, FaFlag } from 'react-icons/fa';
+import { FaTimes, FaQuestion, FaFlag } from 'react-icons/fa';
 
 import Menu from '../components/menu';
 import Cabecalho from '../components/cabecalho';
@@ -100,7 +100,12 @@ export default function Times() {
                         return (
                             <li className="time-lista-item" key={time.id}>
                                 <Link to={`/TimePerfil/${time.id}`}>
-                                    <img src={time.logo} alt="logo"/>
+                                        {time.logo == '' ? 
+                                            <div className='imageless'>
+                                                <FaQuestion/>
+                                            </div> : 
+                                            <img src={time.logo} alt="logo"/>
+                                        }
                                     <h2>{time.nome}</h2>
                                 </Link>
                             </li>
