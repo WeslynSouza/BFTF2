@@ -222,7 +222,9 @@ export default {
             return res.status(400).send("O time já está participando ativamente de um campeonato, por isso não poder sofrer alterações!");
         }
 
-        const timePadrao = await timeRepository.findOneOrFail(1);
+        const timePadrao = await timeRepository.findOneOrFail(1, {
+            where: { id: Not(1) } 
+        });
 
         for (const i in time.jogadores) {
             if (Object.prototype.hasOwnProperty.call(time.jogadores, i)) {
