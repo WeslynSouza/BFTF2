@@ -39,16 +39,30 @@ export default function Times() {
 
         const data = new FormData();
 
-        data.append('liderId', '1teste');
+        data.append('liderId', 'steamTeste');
         data.append('nome', nome);
         data.append('logo', logo[0]);
 
-        await api.post("/time", data);
+        try {
+            await api.post("/time", data);
 
-        alert('Time cadastrado com sucesso!');
+            alert('Time cadastrado com sucesso!');
 
-        setReSearchActive(true);
-        handleClose();
+            setLogo([]);
+            setNome('');
+            setPreviewLogo('');
+            setReSearchActive(true);
+            handleClose();
+        } catch {
+            alert('Não foi possível realizar a criação do time!');
+
+            setLogo([]);
+            setNome('');
+            setPreviewLogo('');
+            handleClose();
+            return;
+        }
+
     }
 
     
