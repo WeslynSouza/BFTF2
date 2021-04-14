@@ -28,6 +28,7 @@ routes.get("/posts", PostController.index);
 routes.get("/post/:id",  PostController.show);
 routes.get("/posts/:titulo", PostController.showMany);
 routes.put("/post/:id", upload.array('imagens'), PostController.update);
+routes.delete("/post/:id", PostController.delete);
 
 routes.post("/divisao", DivisaoController.create);
 routes.get("/divisao", DivisaoController.index);

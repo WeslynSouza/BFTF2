@@ -144,5 +144,19 @@ export default {
         await postRepository.save(newPost);
 
         return res.status(201).json(newPost);
+    },
+
+    async delete(req: Request, res: Response) {
+
+        const { id } = req.params;
+
+        const postRepository = getRepository(Post);
+
+        const post = await postRepository.findOneOrFail( id );
+
+        await postRepository.remove(post);
+
+        return res.status(200).send("Post excluído com sucesso!");
+
     }
 }
