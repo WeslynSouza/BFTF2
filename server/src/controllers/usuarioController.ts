@@ -189,5 +189,20 @@ export default {
         await usuarioRepository.save(newUsuario);
 
         return res.status(201).json(newUsuario);
+    },
+
+    async delete(req: Request, res: Response) {
+
+        const { steamId } = req.params;
+
+        const usuarioRepository = getRepository(Usuario);
+
+        const usuario = await usuarioRepository.findOneOrFail( steamId, {
+            where: { steamId: Not('0') },
+        });
+
+        await usuarioRepository.remove(usuario);
+
+        return res.status(200).send('O usuário foi excluído com sucesso!');
     }
 }

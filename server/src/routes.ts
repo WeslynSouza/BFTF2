@@ -21,6 +21,7 @@ routes.get("/usuarios", UsuarioController.index);
 routes.get("/usuarios/:nick", UsuarioController.showMany);
 routes.get("/usuario/:id", UsuarioController.show);
 routes.put("/usuario/:steamId", upload.array('avatar'), UsuarioController.update);
+routes.delete("/usuario/:steamId", UsuarioController.delete);
 
 routes.post("/post", upload.array('imagens'), PostController.create);
 routes.get("/posts", PostController.index);
