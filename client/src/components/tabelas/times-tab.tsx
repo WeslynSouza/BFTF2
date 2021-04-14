@@ -24,17 +24,33 @@ type Time = {
 export default function Times({ functionTimeId, functionAlterar }: timesTabela) {
 
     const [ pesquisa, setPesquisa ] = useState('');
+    const [ atualiarLista, setAtualizarLista ] = useState(false);
     const [ times, setTimes ] = useState<Time[]>([]);
     const [ show, setShow ] = useState(false);
+    
+    const [ idTimeModal, setIdTimeModal ] = useState(0);
+    const [ nomeTimeModal, setNomeTimeModal ] = useState('');
 
     useEffect(() => {
         api.get(`/times/${pesquisa}`).then(res => {
             setTimes(res.data);
         });
-    }, [pesquisa])
+        setAtualizarLista(false);
+    }, [pesquisa, atualiarLista])
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => [setShow(false), setIdTimeModal(0), setNomeTimeModal('')];
     const handleShow = () => setShow(true);
+
+    const handleDeleteTime = async (id: number) => {
+
+        handleClose();
+        
+        await api.delete(`/time/${id}`);
+
+        alert('O time foi excluído com sucesso!');
+
+        setAtualizarLista(true);
+    }
 
     function renderTab() {
         if(times.length !== 0) {
@@ -78,10 +94,10 @@ export default function Times({ functionTimeId, functionAlterar }: timesTabela) 
                                         {time.divisao === '' ? 'Sem divisão' : time.divisao}
                                     </td>
                                     <td>
-                                        <button className='botao-alterar' onClick={() => [functionAlterar('usuarioForm'), functionTimeId(time.id)]}>
+                                        <button className='botao-alterar' onClick={() => [functionAlterar('timeForm'), functionTimeId(time.id)]}>
                                             <FaPen/>
                                         </button>
-                                        <button className='botao-excluir' onClick={handleShow}>
+                                        <button className='botao-excluir' onClick={() => [handleShow(), setIdTimeModal(time.id), setNomeTimeModal(time.nome)]}>
                                             <FaTrash/>
                                         </button>
                                     </td>
@@ -115,9 +131,9 @@ export default function Times({ functionTimeId, functionAlterar }: timesTabela) 
                 <Modal.Header>
                     <Modal.Title>Confirmar exclusão</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Deseja excluir o time: Nome Time?</Modal.Body>
+                <Modal.Body>Deseja excluir o time: {nomeTimeModal}?</Modal.Body>
                 <Modal.Footer>
-                    <button className="botao-confirmar">Confirmar</button>
+                    <button className="botao-confirmar" onClick={() => handleDeleteTime(idTimeModal)}>Confirmar</button>
                     <button className="botao-voltar" onClick={handleClose}>Voltar</button>
                 </Modal.Footer>
             </Modal>

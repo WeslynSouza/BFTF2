@@ -16,7 +16,7 @@ interface Classe {
 }
 
 interface Usuario {
-    steamId: number
+    steamId: string
     nick: string, 
     avatar: string,
     time: {
@@ -29,17 +29,34 @@ interface Usuario {
 export default function UsuariosTabela({ functionUsuarioId, functionAlterar }: usuaiosTabela) {
 
     const [ pesquisa, setPesquisa ] = useState('');
+    const [ atualizarLista, setAtualizarLista ] = useState(false);
     const [ usuarios, setUsuarios ] = useState<Usuario[]>([]);
     const [ show, setShow ] = useState(false);
+
+    const [ steamIdUsuarioModal, setSteamIdUsuarioModal ] = useState('');
+    const [ nickUsuarioModal, setNickUsuarioModal ] = useState('');
 
     useEffect(() => {
         api.get(`/usuarios/${pesquisa}`).then(res => {
             setUsuarios(res.data);
-        })
-    }, [pesquisa]);
+        });
 
-    const handleClose = () => setShow(false);
+        setAtualizarLista(false);
+    }, [pesquisa, atualizarLista]);
+
+    const handleClose = () => [setShow(false), setSteamIdUsuarioModal(''), setNickUsuarioModal('')];
     const handleShow = () => setShow(true);
+
+    const handleUsuarioDelete = async (steamId: string) => {
+
+        handleClose();
+
+        await api.delete(`/usuario/${steamId}`);
+
+        alert('O usuário foi excluído com sucesso!');
+
+        setAtualizarLista(true);
+    }
 
     function renderTab() {
         if(usuarios.length !== 0){
@@ -106,7 +123,7 @@ export default function UsuariosTabela({ functionUsuarioId, functionAlterar }: u
                                 <td>
                                     {usuario.time.nome === undefined ? 'Sem time' : 
                                         <div className='img-text'>
-                                            {usuario.time.logo === undefined ? 
+                                            {usuario.time.logo == '' ? 
                                                 <div className='imageless'>
                                                     <FaQuestion/>
                                                 </div> : 
@@ -132,7 +149,7 @@ export default function UsuariosTabela({ functionUsuarioId, functionAlterar }: u
                                     <button className='botao-alterar' onClick={() => [functionAlterar('usuarioForm'), functionUsuarioId(usuario.steamId)]}>
                                         <FaPen/>
                                     </button>
-                                    <button className='botao-excluir' onClick={handleShow}>
+                                    <button className='botao-excluir' onClick={() => [handleShow(), setSteamIdUsuarioModal(usuario.steamId), setNickUsuarioModal(usuario.nick)]}>
                                         <FaTrash/>
                                     </button>
                                 </td>
@@ -165,9 +182,9 @@ export default function UsuariosTabela({ functionUsuarioId, functionAlterar }: u
                 <Modal.Header>
                     <Modal.Title>Confirmar exclusão</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Deseja excluir o usuario: Nome usuario?</Modal.Body>
+                <Modal.Body>Deseja excluir o usuario: {nickUsuarioModal}?</Modal.Body>
                 <Modal.Footer>
-                    <button className="botao-confirmar">Confirmar</button>
+                    <button className="botao-confirmar" onClick={() => handleUsuarioDelete(steamIdUsuarioModal)}>Confirmar</button>
                     <button className="botao-voltar" onClick={handleClose}>Voltar</button>
                 </Modal.Footer>
             </Modal>
