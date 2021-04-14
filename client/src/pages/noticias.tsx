@@ -113,7 +113,7 @@ export default function Noticias() {
                 posts.map(post => {
                     return(
                         <div className="post-caixa">
-                            <Link to={`/NoticiaPost/2`}>
+                            <Link to={`/NoticiaPost/${post.id}`}>
                                 <img className='post-img' src={post.imagens[0].url} alt='banner'/>
                             </Link>
                             <div className="post-conteudo">
