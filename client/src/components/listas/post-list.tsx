@@ -18,17 +18,39 @@ type Post = {
 export default function PostTabela({ functionAlterar, functionPostId }: postTabela) {
 
     const [ pesquisa, setPesquisa ] = useState('');
+    const [ atualizarList, setAtualizarLista ] = useState(false);
     const [ posts, setPosts ] = useState<Post[]>([]);
     const [ show, setShow ] = useState(false);
+
+    const [ idPostModal, setIdPostModal ] = useState(0);
+    const [ tituloPostModal, setTituloPostModal ] = useState('');
 
     useEffect(() => {
         api.get(`/posts/${pesquisa}`).then(res => {
             setPosts(res.data);
-        })
-    }, [pesquisa])
+        });
 
-    const handleClose = () => setShow(false);
+        setAtualizarLista(false);
+    }, [pesquisa, atualizarList])
+
+    const handleClose = () => [setShow(false), setIdPostModal(0), setTituloPostModal('')];
     const handleShow = () => setShow(true);
+
+    const handlePostDelete = async (id: Number) => {
+
+        handleClose();
+
+        if(id === 0){
+            alert("Não foi possível realizar a exclusão!");
+            return;
+        }
+
+        await api.delete(`/post/${id}`);
+
+        alert("O post foi excluído com sucesso!");
+
+        setAtualizarLista(true);
+    }
 
     function renderTab() {
         if(posts.length !== 0) {
@@ -43,7 +65,7 @@ export default function PostTabela({ functionAlterar, functionPostId }: postTabe
                                     <button className='botao-alterar' onClick={() => [functionAlterar('postForm'), functionPostId(post.id)]}>
                                         <FaPen/>
                                     </button>
-                                    <button className='botao-excluir' onClick={() => handleShow()}>
+                                    <button className='botao-excluir' onClick={() => [handleShow(), setIdPostModal(post.id), setTituloPostModal(post.titulo)]}>
                                         <FaTrash/>
                                     </button>
                                 </div>
@@ -76,9 +98,9 @@ export default function PostTabela({ functionAlterar, functionPostId }: postTabe
                 <Modal.Header>
                     <Modal.Title>Confirmar exclusão</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Deseja excluir o post: Titulo do post?</Modal.Body>
+                <Modal.Body>Deseja excluir o post: {tituloPostModal}?</Modal.Body>
                 <Modal.Footer>
-                    <button className="botao-confirmar">Confirmar</button>
+                    <button className="botao-confirmar" onClick={() => handlePostDelete(idPostModal)}>Confirmar</button>
                     <button className="botao-voltar" onClick={handleClose}>Voltar</button>
                 </Modal.Footer>
             </Modal>
