@@ -30,14 +30,10 @@
                 @include displayFlex(initial, center);
     
                 .imageless { 
-                    @include displayFlex(center, center);
-                    @include texto( 2.4rem , var(--color-font-primary));
-                    padding: .5rem 1rem;
-                    width: 3.4rem;
-                    height: 3.4rem;
-                    border: 1px solid var(--color-blue-third);
-                    border-radius: .3rem;
-                    margin-right: 1rem;
+                    @extend %imageless;
+
+                    width: 3.2rem;
+                    height: 3.2rem;
                 }
     
                 img {
