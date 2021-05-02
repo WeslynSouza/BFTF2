@@ -17,11 +17,11 @@
         border-bottom: 1px solid var(--color-blue-third);
 
         .nav-item {
-            width: 12rem;
+            min-width: 12rem;
             background: var(--color-blue-third);
             @include texto(2.5rem, var(--color-font-secundary));
             @include displayFlex(center, center);
-            padding: 0;
+            padding: 0 2rem;
             margin-right: 1rem;
 
             &:first-child {
@@ -63,9 +63,5 @@
                 box-shadow: none;
             }
         }
-
-        @import '../../styles/components/tabela';
-        @import '../../styles/components/formulario';
-        @import '../../styles/components/lista';
     }
 }

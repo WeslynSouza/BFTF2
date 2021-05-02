@@ -1,71 +1,75 @@
 
 @import '../mixins';
 
-/* CSS do tabela */
+/* CSS base das tabelas */
 
-table {
-    width: 100%;
-    background: var(--color-background-input);  
-    @include texto(2.3rem, var(--color-font-primary));
-    border-collapse: collapse;
-
-    %border-and-align {
-        vertical-align: middle;
-        border: 1px solid var(--color-blue-third);
-    }
-
-    th {
-        @extend %border-and-align;
-        padding-left: 1rem;
-        font-size: 2.4rem;
-    }
-
-    td  {
-        @extend %border-and-align;
-        padding-left: 1rem;
-
-        .img-text {
-            @include texto( 2.4rem , var(--color-font-primary));
-            @include displayFlex(initial, center);
-
-            .imageless { 
-                @include displayFlex(center, center);
+%tabela {
+    table {
+        width: 100%;
+        background: var(--color-background-input);  
+        @include texto(2.3rem, var(--color-font-primary));
+        border-collapse: collapse;
+    
+        %border-and-align {
+            vertical-align: middle;
+            border: 1px solid var(--color-blue-third);
+        }
+    
+        th {
+            @extend %border-and-align;
+            padding-left: 1rem;
+            font-size: 2.4rem;
+        }
+    
+        td  {
+            @extend %border-and-align;
+            padding-left: 1rem;
+    
+            .img-text {
                 @include texto( 2.4rem , var(--color-font-primary));
-                padding: .5rem 1rem;
-                width: 3.4rem;
-                height: 3.4rem;
-                border: 1px solid var(--color-blue-third);
-                border-radius: .3rem;
-                margin-right: 1rem;
+                @include displayFlex(initial, center);
+    
+                .imageless { 
+                    @include displayFlex(center, center);
+                    @include texto( 2.4rem , var(--color-font-primary));
+                    padding: .5rem 1rem;
+                    width: 3.4rem;
+                    height: 3.4rem;
+                    border: 1px solid var(--color-blue-third);
+                    border-radius: .3rem;
+                    margin-right: 1rem;
+                }
+    
+                img {
+                    width: 3.4rem;
+                    border-radius: .3rem; 
+                    margin-right: 0;
+                    border: 1px solid var(--color-blue-third);
+                    margin-right: 1rem;
+                }
             }
-
+    
+            div {
+                @include displayFlex(space-between, center);
+                width: 100%;
+                height: 100%;
+            }
+    
             img {
                 width: 3.4rem;
-                border-radius: .3rem; 
-                margin-right: 0;
-                border: 1px solid var(--color-blue-third);
                 margin-right: 1rem;
+                border-radius: .3rem; 
             }
-        }
-
-        div {
-            @include displayFlex(space-between, center);
-            width: 100%;
-            height: 100%;
-        }
-
-        img {
-            width: 3.4rem;
-            margin-right: 1rem;
-            border-radius: .3rem; 
-        }
-
-        .botao-alterar {
-            @include button(var(--color-yellow-primary), 2.3rem, 4rem, 4rem, var(--color-yellow-secundary));
-        }
-
-        .botao-excluir {
-            @include button(var(--color-red-primary), 2.3rem, 4rem, 4rem, var(--color-red-secundary));
+    
+            .botao-alterar {
+                @include button(var(--color-yellow-primary), 2.3rem, 4rem, 4rem, var(--color-yellow-secundary));
+            }
+    
+            .botao-excluir {
+                @include button(var(--color-red-primary), 2.3rem, 4rem, 4rem, var(--color-red-secundary));
+            }
         }
     }
 }
+
+

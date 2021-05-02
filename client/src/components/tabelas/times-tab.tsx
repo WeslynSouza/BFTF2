@@ -5,6 +5,8 @@ import InputPesquisa from '../input-pesquisa';
 import Placeholder from '../placeholder';
 import api from '../../services/api';
 
+import '../../styles/pages/admTimeTabela.scss';
+
 interface timesTabela {
     functionTimeId: Function,
     functionAlterar: Function
@@ -60,57 +62,59 @@ export default function Times({ functionTimeId, functionAlterar }: timesTabela) 
     function renderTab() {
         if(times.length !== 0) {
             return (
-                <Table>
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Lider</th>
-                            <th>Divisão</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {times.map(time => {
-                            return (
-                                <tr key={time.id}>
-                                    <td>
-                                        <div className='img-text'>
-                                            {time.logo == '' ? 
-                                                <div className='imageless'>
-                                                    <FaQuestion/>
-                                                </div> : 
-                                                <img src={time.logo} alt="Avatar"/>
-                                            }
-                                            {time.nome}
-                                        </div>                                    
-                                    </td>
-                                    <td>
-                                        <div className='img-text'>
-                                            {time.lider.avatar == '' ? 
-                                                <div className='imageless'>
-                                                    <FaQuestion/>
-                                                </div> : 
-                                                <img src={time.lider.avatar} alt="Avatar"/>
-                                            }
-                                            {time.lider.nick}
-                                        </div>   
-                                    </td>
-                                    <td>
-                                        {time.divisao === '' ? 'Sem divisão' : time.divisao}
-                                    </td>
-                                    <td>
-                                        <button className='botao-alterar' onClick={() => [functionAlterar('timeForm'), functionTimeId(time.id)]}>
-                                            <FaPen/>
-                                        </button>
-                                        <button className='botao-excluir' onClick={() => [handleShow(), setIdTimeModal(time.id), setNomeTimeModal(time.nome)]}>
-                                            <FaTrash/>
-                                        </button>
-                                    </td>
-                                </tr>
-                            )
-                        })}
-                    </tbody>
-                </Table>
+                <div className="timeTabela">
+                    <Table>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Lider</th>
+                                <th>Divisão</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {times.map(time => {
+                                return (
+                                    <tr key={time.id}>
+                                        <td>
+                                            <div className='img-text'>
+                                                {time.logo == '' ? 
+                                                    <div className='imageless'>
+                                                        <FaQuestion/>
+                                                    </div> : 
+                                                    <img src={time.logo} alt="Avatar"/>
+                                                }
+                                                {time.nome}
+                                            </div>                                    
+                                        </td>
+                                        <td>
+                                            <div className='img-text'>
+                                                {time.lider.avatar == '' ? 
+                                                    <div className='imageless'>
+                                                        <FaQuestion/>
+                                                    </div> : 
+                                                    <img src={time.lider.avatar} alt="Avatar"/>
+                                                }
+                                                {time.lider.nick}
+                                            </div>   
+                                        </td>
+                                        <td>
+                                            {time.divisao === '' ? 'Sem divisão' : time.divisao}
+                                        </td>
+                                        <td>
+                                            <button className='botao-alterar' onClick={() => [functionAlterar('timeForm'), functionTimeId(time.id)]}>
+                                                <FaPen/>
+                                            </button>
+                                            <button className='botao-excluir' onClick={() => [handleShow(), setIdTimeModal(time.id), setNomeTimeModal(time.nome)]}>
+                                                <FaTrash/>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                )
+                            })}
+                        </tbody>
+                    </Table>
+                </div>
             )
         } else {
             return (

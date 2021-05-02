@@ -1,135 +1,97 @@
-import { useState, FormEvent, ChangeEvent, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
-import {FaTimes, FaPlus} from 'react-icons/fa';
+import { FormEvent } from 'react';
+import { useState, useEffect } from 'react';
+import { FaTimes, FaTrash, FaUserCircle } from 'react-icons/fa';
 import api from '../../services/api';
 
-type postForm = {
-    postId: string,
+import '../../styles/pages/admTimeForm.scss';
+
+interface timeFormProps {
+    timeId: string;
     functionVoltar: Function;
 }
 
-interface image {
-    url: string
+interface Jogadores {
+    steamId: string;
+    nick: string;
+    avatar: string;
 }
 
-export default function PostForm({ functionVoltar, postId }: postForm) {
+export default function PostForm({ functionVoltar, timeId }: timeFormProps) {
 
-    const history = useHistory();
+    const [ show, setShow ] = useState(false);
 
-    const [ titulo, setTitulo ] = useState('');
-    const [ conteudo, setConteudo ] = useState('');
-    const [ images, setImages ] = useState<File[]>([]);
-    const [ previewImages, setPreviewImages ] = useState<string[]>([]);
-
-    async function handleFilePromise(url: string){
-        return await fetch(url).then(res => res.blob().then(blob => new File([blob], url.split('-')[1], { type: 'image/png'})));
-    }
+    const [ nomeTime, setNomeTime ] = useState('');
+    const [ logoTime, setLogoTime ] = useState('');
+    const [ jogadoresTime, setJogadoresTime ] = useState<Jogadores[]>([]);
+    const [ liderTime, setLiderTime ] = useState<Jogadores>();
 
     useEffect(() => {
-        api.get(`/post/${postId}`).then(async res => {
-            setTitulo(res.data.titulo);
-            setConteudo(res.data.conteudo);
+        api.get(`/time/${timeId}`).then(res => {
+            const { nome, logo, jogadores, lider } = res.data;
 
-            await res.data.imagens.forEach(async (postImage: image) => {
-                const image = [await handleFilePromise(postImage.url)]
-                setImages(images.concat(image));
-            });
-            
-            const postImagesPreview = res.data.imagens.map((postImage: image) => new File([postImage.url.split('-', 2)[1]], postImage.url, {type: "image/png"}).name);
-            setPreviewImages(postImagesPreview);
-        }) 
-    }, [])
-
-    useEffect(() => {
-        console.log(images);
-    }, [images])
-
-    async function handleSubmit(event: FormEvent){
-        event.preventDefault();
-
-        const data = new FormData();
-
-        data.append('titulo', titulo);
-        data.append('conteudo', conteudo);
-        images.forEach(image => {
-            data.append('imagens', image);
+            setNomeTime(nome);
+            setLogoTime(logo);
+            setJogadoresTime(jogadores);
+            setLiderTime(lider);
         })
+    }, []);
 
-        await api.put(`post/${postId}`, data);
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
 
-        alert('Cadastro realizado com sucesso!');
-        console.log(images);
-
-        functionVoltar('tabInicial');
-    }
-
-    function handleSelectImage(event: ChangeEvent<HTMLInputElement>){
-
-        if(!event.target.files){
-            return;
-        }
-    
-        const selectedImages= Array.from(event.target.files);
-
-        setImages(selectedImages.concat(images));
-    
-        const selectedImagesPreview = selectedImages.map(image => {
-            return URL.createObjectURL(image);
-        }).concat(previewImages);
-    
-        setPreviewImages(selectedImagesPreview);
-    }
-
-    function handleRemoveImage(indice: number) {
-        const imageArray = Array.from(previewImages);
-        const imagesFileArray = Array.from(images);
-
-        imageArray.splice(indice, 1);
-        imagesFileArray.splice(indice, 1);
+    function handleSubmit(event: FormEvent) {
         
-        setPreviewImages(imageArray);
-        setImages(imagesFileArray);
     }
 
     return (
         <div className="administracao-tab-container">
             <div className="tab-header">
-                <h2>Alterar post</h2>
+                <h2>Alterar time</h2>
             </div>
 
-            <form className='form-primary' onSubmit={handleSubmit}>
-                <fieldset>
-                    <label htmlFor="Titulo">Titulo</label>
-                    <input type="text" id='Titulo' placeholder='Titulo' value={titulo} 
-                        name='Titulo' onChange={event => setTitulo(event.target.value)}/>
-                </fieldset>
+            <form className='timeForm'>
 
-                <fieldset>
-                    <label htmlFor="Conteudo">Conteudo</label>
-                    <textarea name="Conteudo" placeholder='Conteudo' value={conteudo}
-                        id="Conteudo" onChange={event => setConteudo(event.target.value)}></textarea>
-                </fieldset>
+                <div className="form-time-area">
 
-                <fieldset>
-                    <label htmlFor="imagens">Imagens</label>
-                    <div className="imagens">
-                            {previewImages.map((image, indice) => {
-                                return (
-                                    <div className="image-area" key={indice}>
-                                        <img src={image} alt='imagem'/>
-                                        <button type='button' onClick={() => handleRemoveImage(indice)}>
-                                            <FaTimes/>
-                                        </button>
+                    <div className="form-time-logo-nome">
+                        <div className='form-image'>
+                            {logoTime == '' ? 
+                                <div className='form-image-area'>
+                                    <FaUserCircle/>
+                                </div> : 
+                                <div className='form-image-area'>
+                                    <img src={logoTime} alt="Imagem de perfil"/>
+                                    <div className='form-excluir-imagem' onClick={handleShow}>
+                                        <h1><FaTimes/></h1>
+                                        <h3>Excluir imagem do usuário</h3>
                                     </div>
-                                )
-                            })}
+                                </div>}
+                        </div>
 
-                        <label htmlFor='image[]' className="new-image">
-                            <FaPlus size={24} color="#15b6d6" />
-                        </label> 
+                        <fieldset>
+                            <label htmlFor="">Nome</label>
+                            <input type="text" value={nomeTime} placeholder='Nick' 
+                                id='nome' onChange={event => setNomeTime(event.target.value)}/>
+                        </fieldset>
                     </div>
-                    <input multiple onChange={handleSelectImage} accept="image/*" type="file" id="image[]"/>
-                </fieldset>
+
+                    <div className="form-time-lista">
+                        <ul>
+                            {jogadoresTime.map(jogador => (
+                                <li>
+                                    <h4>{jogador.nick}</h4>
+
+                                    <div className="lista-botoes">
+                                        <button className="botao-excluir">
+                                            <FaTrash/>
+                                        </button>
+                                    </div>                             
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                </div>
 
                 <div className="botoes-container">
                     <button className="botao-alterar">

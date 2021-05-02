@@ -1,10 +1,11 @@
 import { useState, FormEvent, ChangeEvent, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import {FaTimes, FaPlus} from 'react-icons/fa';
 import api from '../../services/api';
 
-type postForm = {
-    postId: string,
+import '../../styles/pages/admPostForm.scss';
+
+interface postFormProps {
+    postId: string;
     functionVoltar: Function;
 }
 
@@ -12,13 +13,11 @@ interface image {
     url: string
 }
 
-export default function PostForm({ functionVoltar, postId }: postForm) {
+export default function PostForm({ functionVoltar, postId }: postFormProps) {
 
-    const history = useHistory();
-
-    const [ titulo, setTitulo ] = useState('');
-    const [ conteudo, setConteudo ] = useState('');
-    const [ images, setImages ] = useState<File[]>([]);
+    const [ tituloPost, setTituloPost ] = useState('');
+    const [ conteudoPost, setConteudoPost ] = useState('');
+    const [ imagesPost, setImagesPost ] = useState<File[]>([]);
     const [ previewImages, setPreviewImages ] = useState<string[]>([]);
 
     async function handleFilePromise(url: string){
@@ -27,12 +26,14 @@ export default function PostForm({ functionVoltar, postId }: postForm) {
 
     useEffect(() => {
         api.get(`/post/${postId}`).then(async res => {
-            setTitulo(res.data.titulo);
-            setConteudo(res.data.conteudo);
+            const { titulo, conteudo, imagens } = res.data;
 
-            await res.data.imagens.forEach(async (postImage: image) => {
+            setTituloPost(titulo);
+            setConteudoPost(conteudo);
+
+            await imagens.forEach(async (postImage: image) => {
                 const image = [await handleFilePromise(postImage.url)]
-                setImages(images.concat(image));
+                setImagesPost(imagesPost.concat(image));
             });
             
             const postImagesPreview = res.data.imagens.map((postImage: image) => new File([postImage.url.split('-', 2)[1]], postImage.url, {type: "image/png"}).name);
@@ -41,24 +42,24 @@ export default function PostForm({ functionVoltar, postId }: postForm) {
     }, [])
 
     useEffect(() => {
-        console.log(images);
-    }, [images])
+        console.log(imagesPost);
+    }, [imagesPost])
 
     async function handleSubmit(event: FormEvent){
         event.preventDefault();
 
         const data = new FormData();
 
-        data.append('titulo', titulo);
-        data.append('conteudo', conteudo);
-        images.forEach(image => {
+        data.append('titulo', tituloPost);
+        data.append('conteudo', conteudoPost);
+        imagesPost.forEach(image => {
             data.append('imagens', image);
         })
 
         await api.put(`post/${postId}`, data);
 
         alert('Cadastro realizado com sucesso!');
-        console.log(images);
+        console.log(imagesPost);
 
         functionVoltar('tabInicial');
     }
@@ -71,7 +72,7 @@ export default function PostForm({ functionVoltar, postId }: postForm) {
     
         const selectedImages= Array.from(event.target.files);
 
-        setImages(selectedImages.concat(images));
+        setImagesPost(selectedImages.concat(imagesPost));
     
         const selectedImagesPreview = selectedImages.map(image => {
             return URL.createObjectURL(image);
@@ -82,13 +83,13 @@ export default function PostForm({ functionVoltar, postId }: postForm) {
 
     function handleRemoveImage(indice: number) {
         const imageArray = Array.from(previewImages);
-        const imagesFileArray = Array.from(images);
+        const imagesFileArray = Array.from(imagesPost);
 
         imageArray.splice(indice, 1);
         imagesFileArray.splice(indice, 1);
         
         setPreviewImages(imageArray);
-        setImages(imagesFileArray);
+        setImagesPost(imagesFileArray);
     }
 
     return (
@@ -97,17 +98,17 @@ export default function PostForm({ functionVoltar, postId }: postForm) {
                 <h2>Alterar post</h2>
             </div>
 
-            <form className='form-primary' onSubmit={handleSubmit}>
+            <form className='postForm' onSubmit={handleSubmit}>
                 <fieldset>
                     <label htmlFor="Titulo">Titulo</label>
-                    <input type="text" id='Titulo' placeholder='Titulo' value={titulo} 
-                        name='Titulo' onChange={event => setTitulo(event.target.value)}/>
+                    <input type="text" id='Titulo' placeholder='Titulo' value={tituloPost} 
+                        name='Titulo' onChange={event => setTituloPost(event.target.value)}/>
                 </fieldset>
 
                 <fieldset>
                     <label htmlFor="Conteudo">Conteudo</label>
-                    <textarea name="Conteudo" placeholder='Conteudo' value={conteudo}
-                        id="Conteudo" onChange={event => setConteudo(event.target.value)}></textarea>
+                    <textarea name="Conteudo" placeholder='Conteudo' value={conteudoPost}
+                        id="Conteudo" onChange={event => setConteudoPost(event.target.value)}></textarea>
                 </fieldset>
 
                 <fieldset>

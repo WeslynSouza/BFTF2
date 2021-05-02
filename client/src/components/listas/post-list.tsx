@@ -5,6 +5,8 @@ import InputPesquisa from '../input-pesquisa';
 import Placeholder from '../placeholder';
 import api from '../../services/api';
 
+import '../../styles/pages/admPostLista.scss';
+
 type postTabela = {
     functionPostId: Function,
     functionAlterar: Function;
@@ -55,24 +57,26 @@ export default function PostTabela({ functionAlterar, functionPostId }: postTabe
     function renderTab() {
         if(posts.length !== 0) {
             return (
-                <ul>
-                    {posts.map(post => {
-                        return (
-                            <li key={post.id}>
-                                <h4>{post.titulo}</h4>
+                <div className='postLista'>
+                    <ul>
+                        {posts.map(post => {
+                            return (
+                                <li key={post.id}>
+                                    <h4>{post.titulo}</h4>
 
-                                <div className='lista-botoes'>
-                                    <button className='botao-alterar' onClick={() => [functionAlterar('postForm'), functionPostId(post.id)]}>
-                                        <FaPen/>
-                                    </button>
-                                    <button className='botao-excluir' onClick={() => [handleShow(), setIdPostModal(post.id), setTituloPostModal(post.titulo)]}>
-                                        <FaTrash/>
-                                    </button>
-                                </div>
-                            </li>
-                        )
-                    })}
-                </ul>
+                                    <div className='lista-botoes'>
+                                        <button className='botao-alterar' onClick={() => [functionAlterar('postForm'), functionPostId(post.id)]}>
+                                            <FaPen/>
+                                        </button>
+                                        <button className='botao-excluir' onClick={() => [handleShow(), setIdPostModal(post.id), setTituloPostModal(post.titulo)]}>
+                                            <FaTrash/>
+                                        </button>
+                                    </div>
+                                </li>
+                            )
+                        })}
+                    </ul>
+                </div>
             )
         }else {
             return (

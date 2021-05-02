@@ -1,0 +1,46 @@
+@import '../components/admForm';
+@import '../components/lista';
+
+.timeForm {
+    @extend %form;
+    flex-direction: column;
+
+    .form-time-area {
+        @include displayFlex(space-between, flex-start);
+        width: 100%;
+
+        .form-time-logo-nome {
+            @include displayFlex(space-between, center);
+            flex-direction: column;
+
+            .form-image {
+                @extend %form-image;
+            }
+
+            fieldset {
+                width: 100%;
+            }
+        }
+
+        .form-time-lista {
+            @extend %lista;
+
+            width: 60%;
+            height: 100%;
+
+            ul {
+                height: 42.5rem;
+                background: var(--color-background-input);
+                border: 1px solid var(--color-blue-secundary);
+                border-radius: .5rem;
+                overflow: auto;
+
+                li {
+                    &:first-child {
+                        border-bottom: 1px solid var(--color-blue-secundary);
+                    }
+                }
+            }
+        }
+    }
+}

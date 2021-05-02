@@ -1,35 +1,40 @@
 
 @import '../mixins';
 
-ul {
-    width: 100%;
-    background: var(--color-background-input);
-    border: 1px solid var(--color-blue-secundary);
+/* CSS base das listas */
 
-    li {
-        @include displayFlex(space-between, center);
-        padding: 1.5rem;
-        border-bottom: 1px solid var(--color-blue-primary);
-
-        h4 {
-            @include texto(2.6rem, var(--color-font-primary));
-            font-family: 400;
-        }
-
-        .lista-botoes {
-            @include displayFlex(center, center);
-
-            .botao-alterar {
-                @include button(var(--color-yellow-primary), 2.3rem, 4rem, 4rem, var(--color-yellow-secundary));
+%lista {
+    ul {
+        width: 100%;
+        background: var(--color-background-input);
+        border: 1px solid var(--color-blue-secundary);
+    
+        li {
+            @include displayFlex(space-between, center);
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--color-blue-primary);
+    
+            h4 {
+                @include texto(2.6rem, var(--color-font-primary));
+                font-family: 400;
             }
-
-            .botao-excluir {
-                @include button(var(--color-red-primary), 2.3rem, 4rem, 4rem, var(--color-red-secundary));
+    
+            .lista-botoes {
+                @include displayFlex(center, center);
+    
+                .botao-alterar {
+                    @include button(var(--color-yellow-primary), 2.3rem, 4rem, 4rem, var(--color-yellow-secundary));
+                }
+    
+                .botao-excluir {
+                    @include button(var(--color-red-primary), 2.3rem, 4rem, 4rem, var(--color-red-secundary));
+                }
             }
-        }
-
-        &:last-child {
-            border-bottom: 0;
+    
+            &:last-child {
+                border-bottom: 0;
+            }
         }
     }
 }
+

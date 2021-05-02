@@ -61,10 +61,10 @@ export default function Noticias() {
             return;
         }
 
-        data.append('autorId', '1teste');
+        data.append('autorId', 'steamTeste');
         data.append('titulo', titulo);
         data.append('conteudo', conteudo);
-        images.forEach(image => {
+        images.reverse().forEach(image => {
             data.append('imagens', image);
         })
 

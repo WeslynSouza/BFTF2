@@ -41,7 +41,7 @@ export default function Administracao() {
             case "usuarioForm":
                 return (
                     <Tabs className='administracao-tab' defaultActiveKey='usuario' id='administracao-tab'>
-                        <Tab className='administracao-tab-item' eventKey='usuario' title='Alterar'>
+                        <Tab className='administracao-tab-item' eventKey='usuario' title='Alterar Usuário'>
                             <UsuarioForm functionVoltar={setState} usuarioId={usuarioId}/>
                         </Tab>
                     </Tabs>
@@ -49,16 +49,16 @@ export default function Administracao() {
             case "postForm":
                 return (
                     <Tabs className='administracao-tab' defaultActiveKey='posts' id='administracao-tab'>
-                        <Tab className='administracao-tab-item' eventKey='posts' title='Alterar'>
+                        <Tab className='administracao-tab-item' eventKey='posts' title='Alterar Post'>
                             <PostForm functionVoltar={setState} postId={postId}/>
                         </Tab>
                     </Tabs>
                 );
-            case "postForm":
+            case "timeForm":
                 return (
-                    <Tabs className='administracao-tab' defaultActiveKey='time' id='administracao-tab'>
-                        <Tab className='administracao-tab-item' eventKey='time' title='Alterar'>
-                            <TimeForm functionVoltar={setState} postId={timeId}/>
+                    <Tabs className='administracao-tab' defaultActiveKey='times' id='administracao-tab'>
+                        <Tab className='administracao-tab-item' eventKey='times' title='Alterar Time'>
+                            <TimeForm functionVoltar={setState} timeId={timeId}/>
                         </Tab>
                     </Tabs>
                 );

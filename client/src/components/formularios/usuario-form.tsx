@@ -1,23 +1,22 @@
 import { useState, FormEvent, useEffect } from 'react';
 import { Modal } from 'react-bootstrap';
 import { FaTimes, FaUserCircle } from 'react-icons/fa';
-import { useHistory } from 'react-router-dom';
 import * as Classes from '../../assets/assets';
 import api from '../../services/api';
+
+import '../../styles/pages/admUsuarioForm.scss';
 
 interface Classe {
     id: number;
     nome: string
 }
 
-type usuarioForm = {
-    usuarioId: string,
-    functionVoltar: Function
+interface usuarioFormProps {
+    usuarioId: string;
+    functionVoltar: Function;
 }
 
-export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioForm) {
-
-    const history = useHistory();
+export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioFormProps) {
 
     const [ show, setShow ] = useState(false);
 
@@ -39,11 +38,13 @@ export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioForm) 
 
     useEffect(() => {
         api.get(`/usuario/${usuarioId}`).then(res => {
-            setNick(res.data.nick);
-            setSteamId(res.data.steamId);
-            setAvatar(res.data.avatar);
-            setElegivel(res.data.elegivel);
-            setClasses(res.data.classes);
+            const { nick, steamId, avatar, elegivel, classes } = res.data;
+
+            setNick(nick);
+            setSteamId(steamId);
+            setAvatar(avatar);
+            setElegivel(elegivel);
+            setClasses(classes);
         })
     }, []);
 
@@ -80,8 +81,6 @@ export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioForm) 
             }
         })
     }, [classes]);
-
-    console.log(avatar)
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -142,7 +141,7 @@ export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioForm) 
                 <h2>Alterar usuario</h2>
             </div>
 
-            <form className='form-secundary' onSubmit={handleSubmit}>
+            <form className='adm-form-usuario' onSubmit={handleSubmit}>
 
                 <div className='fieldset-group'>
                     <fieldset>
@@ -240,7 +239,7 @@ export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioForm) 
                 <Modal.Header>
                     <Modal.Title>Confirmar exclusão</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Deseja o avatar do usuário: {nick}?</Modal.Body>
+                <Modal.Body>Deseja excluir o avatar do usuário: {nick}?</Modal.Body>
                 <Modal.Footer>
                     <button className="botao-confirmar" onClick={() => [setAvatar(''), handleClose()]}>Confirmar</button>
                     <button className="botao-voltar" onClick={handleClose}>Voltar</button>

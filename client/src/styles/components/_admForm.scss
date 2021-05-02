@@ -1,0 +1,127 @@
+
+@import '../mixins';
+
+%form {
+    @include displayFlex(space-between, flex-start);
+
+    fieldset {
+        @include displayFlex(flex-start, flex-start);
+        flex-direction: column;
+
+        label {
+            @include texto(3rem, var(--color-font-primary));
+
+            i {
+                @include texto(3rem, var(--color-background-inputblock));
+            }
+        }
+    
+        %input-select-textarea {
+            width: 100%;
+            height: 5.5rem;
+            background: var(--color-background-third);
+            @include texto(3rem, var(--color-font-third));
+            padding: 1rem;
+            margin: 1rem 0 2.5rem;
+            border: 1px solid var(--color-blue-secundary);
+            border-radius: .5rem;
+
+            &::placeholder {
+                background: transparent;
+                color: var(--color-font-third);
+                opacity: .5;
+            }
+        }
+    
+        input {
+            @extend %input-select-textarea;
+    
+            &:read-only {
+                background: var(--color-background-inputblock);
+                color: var(--color-font-third);
+            }
+        }
+    
+        textarea {
+            @extend %input-select-textarea;
+            height: 22rem;
+            padding-top: .5rem
+        }
+    }
+
+    .botoes-container {
+        @include displayFlex(space-between, center);
+        width: 100%;
+        margin: 3rem 0 2rem;
+
+        .botao-alterar {
+            @include button(var(--color-yellow-primary), 3rem, 48.5%, 5.5rem, var(--color-yellow-secundary));
+        }
+
+        .botao-voltar {
+            @include button(var(--color-red-primary), 3rem, 48.5%, 5.5rem, var(--color-red-secundary));
+        }
+    }
+}
+
+%form-image {
+    position: relative;
+    @include displayFlex(center, center);
+
+    margin-bottom: 3rem;
+
+    .form-image-area {
+        height: 27vh;
+        width: 27vh;
+
+        position: relative;
+        background: var(--color-blue-fifth);
+
+        @include texto(26.9vh, #F5F8FA );
+        
+        border-radius: 9999px;
+        overflow: hidden;
+        @include displayFlex(center, center);
+
+        img {
+            height: 27vh;
+        }
+
+        .form-excluir-imagem {
+            height: 27vh;
+            width: 27vh;
+            position: absolute;  
+            cursor: pointer;
+
+            @include displayFlex(center, center);
+            flex-direction: column;
+
+            border: 2px solid var(--color-blue-secundary);
+            border-radius: 9999px;
+
+            h1, h3{
+                display: none;
+                text-align: center
+            }
+
+            h1 {
+                @include texto(9rem, var(--color-red-secundary));
+                margin-bottom: 1rem
+            }
+
+            h3 {
+                @include texto(1.8rem, #fff);
+            }
+
+            &:hover {
+                background: rgba($color: #000000, $alpha: 0.5);
+                border: 2px solid var(--color-red-primary);
+
+                h1, h3 {
+                    display: initial;
+                }
+            }
+        }
+    }    
+}
+
