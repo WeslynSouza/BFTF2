@@ -7,7 +7,7 @@ export default {
     render(time: Time){
 
         let divisao;
-        if(time.divisao === null){
+        if(time.divisao.id === 1){
             divisao = '';
         }else {
             divisao = time.divisao.nome;

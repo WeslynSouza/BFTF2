@@ -6,7 +6,7 @@ export default {
         const url = 'http://localhost:3333/uploads/';
         let time;
 
-        if(!usuario.time){
+        if(usuario.time.id == 1){
             time = '';
         } else {
             time = {nome: usuario.time.nome, logo: usuario.time.logo !== '' ? `${url}${usuario.time.logo}` : ''}
