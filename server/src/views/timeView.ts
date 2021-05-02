@@ -25,7 +25,7 @@ export default {
             logo: time.logo !== '' ? `${url}${time.logo}`: '',
             jogadores: time.jogadores.map(jogador => {
                 const jogadorObjeto = {
-                    steamId: time.lider.steamId,
+                    steamId: jogador.steamId,
                     nick: jogador.nick,
                     avatar: time.lider.avatar !== '' ? `${url}${time.lider.avatar}` : ''
                 }

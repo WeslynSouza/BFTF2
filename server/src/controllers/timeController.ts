@@ -251,5 +251,60 @@ export default {
         await timeRepository.remove(time);
 
         return res.status(200).json(time);
+    },
+
+    async addPlayer(req: Request, res: Response) {
+        const { id, steamId } = req.params;
+        
+        const timeRepository = getRepository(Time);
+        const usuarioRepository = getRepository(Usuario);
+
+        const time = await timeRepository.findOneOrFail(id, {
+            where: { id: Not(1) },
+            relations: ['lider', 'jogadores', 'divisao']
+        });
+
+        const jogador = await usuarioRepository.findOneOrFail(steamId, {
+            relations: ['time', 'classes']
+        });
+
+        const { nick, senha, classes, avatar, acesso, elegivel } = jogador;
+
+        const dataJogador = {
+            steamId,
+            nick,
+            senha,
+            classes,
+            avatar,
+            acesso,
+            time,
+            elegivel,
+        }
+
+        const schema = yup.object().shape({
+            steamId: yup.string().required(),
+            nick: yup.string().required(),
+            senha: yup.string().required(),
+            classes: yup.array(),
+            avatar: yup.string(),
+            acesso: yup.number(),
+            elegivel: yup.number(),
+            time: yup.object().required(),
+        });
+
+        await schema.validate(dataJogador, {
+            abortEarly: true,
+        });
+
+        const newUsuario = usuarioRepository.create(dataJogador);
+
+        await usuarioRepository.save(newUsuario);
+
+        const timeAtualizado = await timeRepository.findOneOrFail(id, {
+            where: { id: Not(1) },
+            relations: ['lider', 'jogadores', 'divisao']
+        });
+
+        return res.status(201).json(timeAtualizado);
     }
 }
