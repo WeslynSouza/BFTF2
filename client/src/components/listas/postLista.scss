@@ -1,0 +1,5 @@
+@import '../../styles/components/lista';
+
+.postLista {
+    @extend %lista;
+}

@@ -4,13 +4,13 @@ import Cabecalho from '../components/cabecalho';
 import Rodape from '../components/rodape';
 import { Tabs, Tab } from 'react-bootstrap';
 
-import UsuariosTabela from '../components/tabelas/usuario-tab';
-import UsuarioForm from '../components/formularios/usuario-form';
-import TimesTabela from '../components/tabelas/times-tab';
-import TimeForm from '../components/formularios/time-form';
+import UsuariosTabela from '../components/tabelas/usuarioTab';
+import UsuarioForm from '../components/formularios/usuarioForm';
+import TimesTabela from '../components/tabelas/timesTab';
+import TimeForm from '../components/formularios/timeForm';
 import DivisoesTabela from '../components/tabelas/divisao-tab';
-import PostList from '../components/listas/post-list';
-import PostForm from '../components/formularios/post-form';
+import PostList from '../components/listas/postLista';
+import PostForm from '../components/formularios/postForm';
 
 export default function Administracao() {
 

@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { FaTimes, FaTrash, FaUserCircle } from 'react-icons/fa';
 import api from '../../services/api';
 
-import '../../styles/pages/admTimeForm.scss';
+import './timeForm.scss';
 
 interface timeFormProps {
     timeId: string;

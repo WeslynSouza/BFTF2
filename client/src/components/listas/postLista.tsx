@@ -5,7 +5,7 @@ import InputPesquisa from '../input-pesquisa';
 import Placeholder from '../placeholder';
 import api from '../../services/api';
 
-import '../../styles/pages/admPostLista.scss';
+import './postLista.scss';
 
 type postTabela = {
     functionPostId: Function,

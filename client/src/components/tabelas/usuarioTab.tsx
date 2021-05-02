@@ -6,7 +6,7 @@ import { Table, Modal } from 'react-bootstrap';
 import * as Classes from '../../assets/assets';
 import api from '../../services/api';
 
-import '../../styles/pages/admUsuarioTabela.scss';
+import './usuarioTab.scss';
 
 interface usuaiosTabela {
     functionUsuarioId: Function,

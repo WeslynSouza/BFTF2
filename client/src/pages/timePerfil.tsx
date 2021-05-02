@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { FaPlus, FaTimes } from 'react-icons/fa';
+import { FaPlus, FaTimes, FaQuestion } from 'react-icons/fa';
 import { Table } from 'react-bootstrap';
 
 import Menu from '../components/menu';
@@ -46,7 +46,12 @@ export default function TimePerfil() {
                 return (
                     <tr key={jogador.nick}>
                         <td>
-                            <img src={jogador.avatar} alt="Avatar"/>
+                            {jogador.avatar == '' ? 
+                                <div className='imageless'>
+                                    <FaQuestion/>
+                                </div> : 
+                                <img src={jogador.avatar} alt="avatar"/>
+                            }
                             {jogador.nick}
                         </td>
                         <td>
@@ -96,18 +101,20 @@ export default function TimePerfil() {
                             </Link>
                         </div>
                         
-                        <Table>
-                            <thead>
-                                <tr>
-                                    <th>Nome</th>
-                                    <th>Classe</th>
-                                    <th>Ações</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {renderTabela()}
-                            </tbody>
-                        </Table>
+                        <div className="time-jogadores-tabela">
+                            <Table>
+                                <thead>
+                                    <tr>
+                                        <th>Nome</th>
+                                        <th>Classe</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {renderTabela()}
+                                </tbody>
+                            </Table>
+                        </div>
                     </div>
                 </div>
             </div>

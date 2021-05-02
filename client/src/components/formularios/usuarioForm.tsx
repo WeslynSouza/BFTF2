@@ -4,7 +4,7 @@ import { FaTimes, FaUserCircle } from 'react-icons/fa';
 import * as Classes from '../../assets/assets';
 import api from '../../services/api';
 
-import '../../styles/pages/admUsuarioForm.scss';
+import './usuarioForm.scss';
 
 interface Classe {
     id: number;

@@ -2,7 +2,7 @@ import { useState, FormEvent, ChangeEvent, useEffect } from 'react';
 import {FaTimes, FaPlus} from 'react-icons/fa';
 import api from '../../services/api';
 
-import '../../styles/pages/admPostForm.scss';
+import './postForm.scss';
 
 interface postFormProps {
     postId: string;

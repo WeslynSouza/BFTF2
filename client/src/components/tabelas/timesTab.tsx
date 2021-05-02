@@ -5,7 +5,7 @@ import InputPesquisa from '../input-pesquisa';
 import Placeholder from '../placeholder';
 import api from '../../services/api';
 
-import '../../styles/pages/admTimeTabela.scss';
+import './timesTab.scss';
 
 interface timesTabela {
     functionTimeId: Function,
