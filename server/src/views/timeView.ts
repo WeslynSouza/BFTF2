@@ -17,6 +17,7 @@ export default {
             id: time.id,
             nome: time.nome,
             lider: {
+                steamId: time.lider.steamId,
                 nick: time.lider.nick,
                 avatar: time.lider.avatar !== '' ? `${url}${time.lider.avatar}` : ''
             },
@@ -24,6 +25,7 @@ export default {
             logo: time.logo !== '' ? `${url}${time.logo}`: '',
             jogadores: time.jogadores.map(jogador => {
                 const jogadorObjeto = {
+                    steamId: time.lider.steamId,
                     nick: jogador.nick,
                     avatar: time.lider.avatar !== '' ? `${url}${time.lider.avatar}` : ''
                 }
