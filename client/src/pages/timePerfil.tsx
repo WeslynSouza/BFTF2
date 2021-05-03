@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { FaPlus, FaTimes, FaQuestion } from 'react-icons/fa';
+import { FaPlus, FaTimes, FaQuestion, FaFlag } from 'react-icons/fa';
 import { Table } from 'react-bootstrap';
 
 import Menu from '../components/menu';
@@ -47,7 +47,7 @@ export default function TimePerfil() {
                     <tr key={jogador.nick}>
                         <td>
                             {jogador.avatar == '' ? 
-                                <div className='imageless'>
+                                <div className='time-jogadores-imageless'>
                                     <FaQuestion/>
                                 </div> : 
                                 <img src={jogador.avatar} alt="avatar"/>
@@ -86,7 +86,12 @@ export default function TimePerfil() {
 
                 <div className="time-container">
                     <div className="time-infos">
-                        <img src={time.logo} alt="Logo"/>
+                        {time.logo == '' ?
+                        <div className='time-sem-imagem'>
+                            <FaFlag size={54} color="#15b6d6" />
+                        </div> :
+                        <img src={time.logo} alt="Logo"/>}
+                        
                         <h2>Nome: {time.nome}</h2>
                         <h2>{time.divisao === '' ? 'Sem divisao' : `Divisao: ${time.divisao}`}</h2>
                     </div>
@@ -94,7 +99,7 @@ export default function TimePerfil() {
                     <div className="time-conteudo">
                         <div className="time-conteudo-cabecalho">
                             <h2>Jogadores</h2>
-                            <Link to='/Jogadores'>                            
+                            <Link to={`/Jogadores/${params.id}`}>                            
                                 <button type='button'>
                                     Adicionar jogador <FaPlus/>
                                 </button>

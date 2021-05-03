@@ -6,14 +6,23 @@ import Rodape from '../components/rodape';
 import InputPesquisa from '../components/input-pesquisa';
 import Placeholder from '../components/placeholder';
 import api from '../services/api';
+import { useHistory, useParams } from 'react-router';
 
-type Usuario = {
-    steamId: number,
+interface Usuario {
+    steamId: string,
     nick: string, 
-    avatar: string
+    avatar: string,
+    time: {}
+}
+
+interface JogadoresParams {
+    timeId: string
 }
 
 export default function Jogadores() {
+
+    const params = useParams<JogadoresParams>();
+    const history = useHistory();
 
     const [ pesquisa, setPesquisa ] = useState('');
     const [ jogadores, setJogadores ] = useState<Usuario[]>([]);
@@ -24,11 +33,24 @@ export default function Jogadores() {
         });
     }, [pesquisa]);
 
+    async function handleAddingPlayer(steamId: string) {
+        await api.put(`/time/${params.timeId}/${steamId}`).then(() => {
+            alert('Jogador adicionado com sucesso!');
+
+            history.goBack();
+        })
+    }
+
     function renderLista() {
         if(jogadores.length !== 0) {
             return (
                 <ul className="jogadores-lista">
                     {jogadores.map(jogador => {
+
+                        if(jogador.time){
+                            return ''
+                        } 
+
                         return (
                             <li className="jogadores-lista-item" key={jogador.steamId}>
                                 <div className="jogador-info">
@@ -40,7 +62,7 @@ export default function Jogadores() {
                                     }
                                     <h2>{jogador.nick}</h2>
                                 </div>
-                                <button>
+                                <button onClick={() => handleAddingPlayer(jogador.steamId)}>
                                     <FaPlus/>
                                 </button>
                             </li>

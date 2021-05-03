@@ -18,7 +18,7 @@ function Routes() {
                 <Route path='/NoticiaPost/:id' component={NoticiaPost}/>
                 <Route path='/Times' component={Times}/>
                 <Route path='/TimePerfil/:id' component={TimePerfil}/>
-                <Route path='/Jogadores' component={Jogadores}/>
+                <Route path='/Jogadores/:timeId' component={Jogadores}/>
                 <Route path='/Divisoes' component={PageDivisao}/>
                 <Route path='/Administracao' component={Administracao}/>
             </Switch>
