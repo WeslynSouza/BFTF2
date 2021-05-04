@@ -39,6 +39,7 @@
             @include texto(2.8rem, var(--color-font-primary));
             font-weight: 400;
             margin-bottom: 1rem;
+            text-align: center;
 
             &:last-child {
                 @include texto(2.3rem, var(--color-font-primary));
@@ -48,7 +49,7 @@
     }
 
     .time-conteudo {
-        width: 76rem;
+        width: 77rem;
         min-height: 40rem;
         background: var(--color-background-secundary);
         @include displayFlex(none, center);
@@ -100,6 +101,7 @@
                 }
     
                 td {
+                    font-size: 2rem;
                     .time-jogadores-imageless { 
                         @extend %imageless;
 
@@ -107,9 +109,34 @@
                         height: 3rem;
                     }
 
+                    .time-jogador-lider {
+                        margin-left: 1rem;
+                    }
+
+                    .botao-desabilitado {
+                        background: var(--color-background-inputblock);
+
+                        &:hover {
+                            background: var(--color-background-inputblock);
+                        }
+                    }
+
                     img {
-                        width: 3rem;
+                        width: 3.2rem;
                         margin: 0;
+                    }
+
+                    .time-jogadores-info {
+                        @include displayFlex(flex-start, center);
+                    }
+
+                    &:nth-child(2) {
+                        width: 43rem;
+                    }
+
+                    &:last-child {
+                        width: 5rem;
+                        padding: 1rem 1.5rem;
                     }
                 }
             }

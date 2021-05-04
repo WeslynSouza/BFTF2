@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { FaPlus, FaTimes, FaQuestion, FaFlag } from 'react-icons/fa';
+import { Modal } from 'react-bootstrap';
+import { FaPlus, FaTimes, FaQuestion, FaFlag, FaCrown } from 'react-icons/fa';
 import { Table } from 'react-bootstrap';
 
 import Menu from '../components/menu';
@@ -10,16 +11,18 @@ import * as Classes from '../assets/assets';
 
 import api from '../services/api';
 
-type TimeParams = {
+interface TimeParams {
     id: string
 }
 
-type Jogador = {
+interface Jogador {
+    steamId: string,
     nick: string,
     avatar: string,
 }
 
-type Time = {
+interface Time {
+    lider: Jogador
     nome: string,
     logo: string,
     divisao: string,
@@ -30,12 +33,32 @@ export default function TimePerfil() {
 
     const params = useParams<TimeParams>();
     const [ time, setTime ] = useState<Time>(Object);
+    const [ isReloaded, setIsReloaded ] = useState(false);
+    const [ nickJogadorModal, setNickJogadorModal ] = useState('');
+    const [ steamIdJogadorModal, setSteamIdJogadorModal ] = useState('');
+
+    const [ show, setShow ] = useState(false);
 
     useEffect(() => {
         api.get(`/Time/${params.id}`).then(res => {
             setTime(res.data);
+        });
+
+        setIsReloaded(false);
+    }, [params.id, isReloaded]);
+
+    function handleRemovePlayer(steamId: string){
+        api.put(`/time/remove-player/${steamId}/${params.id}`).then(() => {
+            alert("O jogador foi excluído com sucesso!");
+
+            handleClose();
+
+            setIsReloaded(true);
         })
-    }, [params.id])
+    }
+
+    const handleClose = () => [setShow(false), setNickJogadorModal(''), setSteamIdJogadorModal('')];
+    const handleShow = () => setShow(true);
 
     function renderTabela() {
         if(time.nome === undefined){
@@ -43,16 +66,57 @@ export default function TimePerfil() {
         }
         return (
             time.jogadores.map(jogador => {
+
+                if(time.lider.steamId == jogador.steamId) {
+                    return (
+                        <tr key={jogador.nick}>
+                            <td>
+                                <div className='time-jogadores-info'>
+                                    {jogador.avatar == '' ? 
+                                        <div className='time-jogadores-imageless'>
+                                            <FaQuestion/>
+                                        </div> : 
+                                        <img src={jogador.avatar} alt="avatar"/>
+                                    }
+                                    {jogador.nick}
+
+                                    <FaCrown className="time-jogador-lider" size={22} color="#FFD700"/>
+                                </div>
+                            </td>
+                            <td>
+                                <div>
+                                    <img src={Classes.scout} alt="classe"/>
+                                    <img src={Classes.soldierBlue} alt="classe"/>
+                                    <img src={Classes.pyro} alt="classe"/>
+                                    <img src={Classes.demoman} alt="classe"/>
+                                    <img src={Classes.heavyBlue} alt="classe"/>
+                                    <img src={Classes.engieneer} alt="classe"/>
+                                    <img src={Classes.sniper} alt="classe"/>
+                                    <img src={Classes.medic} alt="classe"/>
+                                    <img src={Classes.spy} alt="classe"/>
+                                </div>
+                            </td>
+                            <td>
+                                <button disabled className='botao-excluir botao-desabilitado'>
+                                    <FaTimes/>
+                                </button>
+                            </td>
+                        </tr>
+                    )
+                }
+
                 return (
                     <tr key={jogador.nick}>
                         <td>
-                            {jogador.avatar == '' ? 
-                                <div className='time-jogadores-imageless'>
-                                    <FaQuestion/>
-                                </div> : 
-                                <img src={jogador.avatar} alt="avatar"/>
-                            }
-                            {jogador.nick}
+                            <div className='time-jogadores-info'>
+                                {jogador.avatar == '' ? 
+                                    <div className='time-jogadores-imageless'>
+                                        <FaQuestion/>
+                                    </div> : 
+                                    <img src={jogador.avatar} alt="avatar"/>
+                                }
+                                {jogador.nick}
+                            </div>
                         </td>
                         <td>
                             <div>
@@ -68,7 +132,13 @@ export default function TimePerfil() {
                             </div>
                         </td>
                         <td>
-                            <button className='botao-excluir'>
+                            <button 
+                                className='botao-excluir' 
+                                onClick={() => [
+                                    handleShow(), 
+                                    setNickJogadorModal(jogador.nick), 
+                                    setSteamIdJogadorModal(jogador.steamId)
+                                ]}>
                                 <FaTimes/>
                             </button>
                         </td>
@@ -124,6 +194,17 @@ export default function TimePerfil() {
                 </div>
             </div>
             <Rodape/>
+
+            <Modal show={show} onHide={handleClose} centered>
+                <Modal.Header>
+                    <Modal.Title>Confirmar exclusão</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Deseja excluir o jogador: {nickJogadorModal}?</Modal.Body>
+                <Modal.Footer>
+                    <button className="botao-confirmar" onClick={() => handleRemovePlayer(steamIdJogadorModal)}>Confirmar</button>
+                    <button className="botao-voltar" onClick={handleClose}>Voltar</button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }
