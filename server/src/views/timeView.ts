@@ -13,24 +13,31 @@ export default {
             divisao = time.divisao.nome;
         }
 
+        const lider = {
+            steamId: time.lider.steamId,
+            nick: time.lider.nick,
+            avatar: time.lider.avatar !== '' ? `${url}${time.lider.avatar}` : ''
+        }
+
+        const jogadores = time.jogadores.map(jogador => {
+            const jogadorObjeto = {
+                steamId: jogador.steamId,
+                nick: jogador.nick,
+                avatar: jogador.avatar !== '' ? `${url}${jogador.avatar}` : ''
+            }
+            return jogadorObjeto;
+        });
+
+        const liderIndice = jogadores.findIndex(jogadores => jogadores.steamId == lider.steamId);
+        jogadores.splice(liderIndice, 1);
+
         return {
             id: time.id,
             nome: time.nome,
-            lider: {
-                steamId: time.lider.steamId,
-                nick: time.lider.nick,
-                avatar: time.lider.avatar !== '' ? `${url}${time.lider.avatar}` : ''
-            },
+            lider: lider,
             divisao,
             logo: time.logo !== '' ? `${url}${time.logo}`: '',
-            jogadores: time.jogadores.map(jogador => {
-                const jogadorObjeto = {
-                    steamId: jogador.steamId,
-                    nick: jogador.nick,
-                    avatar: time.lider.avatar !== '' ? `${url}${time.lider.avatar}` : ''
-                }
-                return jogadorObjeto;
-            }),
+            jogadores: [ lider ].concat(jogadores),
             ativo: time.ativo
         }
     },
