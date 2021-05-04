@@ -123,7 +123,7 @@ export default {
     
             await timeRepository.save(time);
     
-            return res.status(201).json(time);
+            return res.status(201).json(TimeView.render(time));
         }
 
     },
@@ -203,7 +203,7 @@ export default {
 
         await timeRepository.save(newTime);
 
-        return res.status(201).json(newTime);
+        return res.status(201).json(TimeView.render(newTime));
     },
 
     async delete(req: Request, res: Response) {
@@ -250,7 +250,7 @@ export default {
 
         await timeRepository.remove(time);
 
-        return res.status(200).json(time);
+        return res.status(200).json(TimeView.render(time));
     },
 
     async addPlayer(req: Request, res: Response) {
@@ -305,6 +305,68 @@ export default {
             relations: ['lider', 'jogadores', 'divisao']
         });
 
-        return res.status(201).json(timeAtualizado);
+        return res.status(201).json(TimeView.render(timeAtualizado));
+    },
+
+    async removePlayer(req: Request, res: Response) {
+
+        const { steamId, id } = req.params;
+
+        const timeRepository = getRepository(Time);
+        const usuarioRepository = getRepository(Usuario);
+
+        const timePadrao = await timeRepository.findOneOrFail(1);
+
+        const time = await timeRepository.findOneOrFail(id, {
+            where: { id: Not(1) },
+            relations: ['lider']
+        });
+
+        const usuario = await usuarioRepository.findOneOrFail(steamId, {
+            where: { steamId: Not(0)},
+            relations: ['time', 'classes']
+        });
+
+        if(usuario.steamId == time.lider.steamId){
+            return res.status(500).send('O lider não pode ser excluído do time!');
+        }
+
+        const { nick, senha, classes, avatar, acesso, elegivel } = usuario;
+
+        const data = {
+            steamId,
+            nick,
+            senha,
+            classes,
+            avatar,
+            acesso,
+            time: timePadrao,
+            elegivel
+        };
+
+        const schema = yup.object().shape({
+            steamId: yup.string().required(),
+            nick: yup.string().required(),
+            senha: yup.string().required(),
+            classes: yup.array(),
+            avatar: yup.string(),
+            acesso: yup.number(),
+            elegivel: yup.number(),
+            time: yup.object().required(),
+        });
+
+        await schema.validate(data, {
+            abortEarly: true,
+        });
+
+        const newUsuario = usuarioRepository.create(data);
+        await usuarioRepository.save(newUsuario);
+
+        const timeAtualizado = await timeRepository.findOneOrFail(id, {
+            where: { id: Not(1) },
+            relations: ['lider', 'jogadores', 'divisao']
+        });
+
+        return res.status(200).json(TimeView.render(timeAtualizado));
     }
 }

@@ -41,6 +41,7 @@ routes.get("/times/:nome", TimeController.showMany);
 routes.put("/time/:id", upload.array('logo'), TimeController.update);
 routes.delete("/time/:id", TimeController.delete);
 routes.put("/time/:id/:steamId", TimeController.addPlayer);
+routes.put("/time/remove-player/:steamId/:id", TimeController.removePlayer);
 
 routes.post("/partida", PartidaController.create);
 routes.get("/partida", PartidaController.index);
