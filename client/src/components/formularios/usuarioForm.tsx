@@ -130,7 +130,7 @@ export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioFormPr
 
         await api.put(`usuario/${steamId}`, data);
 
-        alert('Cadastro realizado com sucesso!');
+        alert('Usuário alterado com sucesso!');
 
         functionVoltar('tabInicial');
     }

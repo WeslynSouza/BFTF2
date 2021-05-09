@@ -42,7 +42,7 @@ export default function Jogadores() {
     }
 
     function renderLista() {
-        if(jogadores.length !== 0) {
+        if(jogadores.find(jogador => jogador.time == '')) {
             return (
                 <ul className="jogadores-lista">
                     {jogadores.map(jogador => {
