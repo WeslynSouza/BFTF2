@@ -43,7 +43,9 @@ export default function Menu() {
 
                 <ul className="menu-icon">
                     <li className="menu-item">
-                        <FaUserCircle/>
+                        <Link to='/Login'>
+                            <FaUserCircle/>
+                        </Link>
                     </li>
                     <li className="menu-item">
                         <FaBell/>

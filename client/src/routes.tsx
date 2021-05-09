@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import Home from './pages/home';
+import LoginCadastro from './pages/loginCadastro';
 import Noticias from './pages/noticias';
 import NoticiaPost from './pages/noticiasPost';
 import Times from './pages/times';
@@ -14,6 +15,7 @@ function Routes() {
         <BrowserRouter>
             <Switch>
                 <Route path='/' exact component={Home}/>
+                <Route path='/Login' component={LoginCadastro}/>
                 <Route path='/Noticias' component={Noticias}/>
                 <Route path='/NoticiaPost/:id' component={NoticiaPost}/>
                 <Route path='/Times' component={Times}/>
