@@ -56,10 +56,9 @@ export default function PostForm({ functionVoltar, postId }: postFormProps) {
             data.append('imagens', image);
         })
 
-        await api.put(`post/${postId}`, data);
-
-        alert('Cadastro realizado com sucesso!');
-        console.log(imagesPost);
+        await api.put(`post/${postId}`, data).then(res => {
+            alert(res);
+        });
 
         functionVoltar('tabInicial');
     }

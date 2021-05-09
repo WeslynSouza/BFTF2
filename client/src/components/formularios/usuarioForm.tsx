@@ -128,9 +128,9 @@ export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioFormPr
             }
         })
 
-        await api.put(`usuario/${steamId}`, data);
-
-        alert('Usuário alterado com sucesso!');
+        await api.put(`usuario/${steamId}`, data).then(res => {
+            alert(res);
+        });
 
         functionVoltar('tabInicial');
     }

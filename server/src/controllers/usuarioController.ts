@@ -54,8 +54,6 @@ export default {
             steamId,
             nick,
             senha,
-            acesso,
-            classes
         } = req.body;
 
         const usuarioRepository = getRepository(Usuario);
@@ -65,18 +63,9 @@ export default {
 
             return res.status(400).send("O usuário já está cadastrado no sistema!");
         } catch {
-            const classeRepository = getRepository(Classe);
             const timeRepository = getRepository(Time);
 
             const timePadrao = await timeRepository.findOneOrFail(1);
-
-            const classeUsuario: Array<Classe> = [];
-    
-            for (const i in classes) {
-                if (Object.prototype.hasOwnProperty.call(classes, i)) {    
-                    classeUsuario.push( await classeRepository.findOneOrFail(classes[i]))
-                }
-            }
     
             const requestImages = req.files as Express.Multer.File[];
             let avatar = '';
@@ -89,9 +78,9 @@ export default {
                 steamId,
                 nick,
                 senha,
-                classes: classeUsuario,
+                classes: [],
                 avatar,
-                acesso,
+                acesso: 0,
                 elegivel: 0,
                 time: timePadrao
             }
@@ -115,7 +104,7 @@ export default {
     
             await usuarioRepository.save(usuario);
     
-            return res.status(201).json(usuario);
+            return res.status(201).send('O usuário foi cadastrado com sucesso!');
         }
     },
 
@@ -188,7 +177,7 @@ export default {
 
         await usuarioRepository.save(newUsuario);
 
-        return res.status(201).json(newUsuario);
+        return res.status(201).send('O usuário foi alterado com sucesso!');
     },
 
     async delete(req: Request, res: Response) {

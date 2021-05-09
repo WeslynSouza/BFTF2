@@ -44,9 +44,9 @@ export default function Times() {
         data.append('logo', logo[0]);
 
         try {
-            await api.post("/time", data);
-
-            alert('Time cadastrado com sucesso!');
+            await api.post("/time", data).then(res => {
+                alert(res);
+            });
 
             setLogo([]);
             setNome('');

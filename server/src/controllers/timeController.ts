@@ -123,7 +123,7 @@ export default {
     
             await timeRepository.save(time);
     
-            return res.status(201).json(TimeView.render(time));
+            return res.status(201).send('O time foi criado com sucesso!');
         }
 
     },
@@ -161,7 +161,7 @@ export default {
             divisao = await divisaoRepository.findOneOrFail(1);
         }
 
-        if(jogadoresIds.length){
+        if(jogadoresIds == []){
             jogadoresIds.forEach( async (jogador: Usuario) => {
                 jogadores.push(await usuarioRepository.findOneOrFail(jogador));
             })
@@ -203,7 +203,7 @@ export default {
 
         await timeRepository.save(newTime);
 
-        return res.status(201).json(TimeView.render(newTime));
+        return res.status(201).send('O time foi alterado com sucesso!');
     },
 
     async delete(req: Request, res: Response) {

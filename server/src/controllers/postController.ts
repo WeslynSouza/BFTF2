@@ -88,7 +88,7 @@ export default {
 
         await postRepository.save(post);
 
-        return res.status(201).json(post);
+        return res.status(201).send('O post foi criado com sucesso!');
     },
 
     async update(req: Request, res: Response) {
@@ -143,7 +143,7 @@ export default {
 
         await postRepository.save(newPost);
 
-        return res.status(201).json(newPost);
+        return res.status(201).send('O post foi alterado com sucesso!');
     },
 
     async delete(req: Request, res: Response) {

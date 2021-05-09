@@ -68,9 +68,9 @@ export default function Noticias() {
             data.append('imagens', image);
         })
 
-        await api.post("post", data);
-
-        alert('Post enviado com sucesso!');
+        await api.post("post", data).then(res => {
+            alert(res);
+        });
 
         setReSearchActive(true);
         handleClose();
