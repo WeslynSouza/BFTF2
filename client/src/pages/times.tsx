@@ -45,7 +45,7 @@ export default function Times() {
 
         try {
             await api.post("/time", data).then(res => {
-                alert(res);
+                alert(res.data);
             });
 
             setLogo([]);

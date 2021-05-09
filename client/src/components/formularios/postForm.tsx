@@ -57,7 +57,7 @@ export default function PostForm({ functionVoltar, postId }: postFormProps) {
         })
 
         await api.put(`post/${postId}`, data).then(res => {
-            alert(res);
+            alert(res.data);
         });
 
         functionVoltar('tabInicial');

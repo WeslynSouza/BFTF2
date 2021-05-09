@@ -129,7 +129,7 @@ export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioFormPr
         })
 
         await api.put(`usuario/${steamId}`, data).then(res => {
-            alert(res);
+            alert(res.data);
         });
 
         functionVoltar('tabInicial');

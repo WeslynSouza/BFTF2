@@ -69,7 +69,7 @@ export default function Noticias() {
         })
 
         await api.post("post", data).then(res => {
-            alert(res);
+            alert(res.data);
         });
 
         setReSearchActive(true);
