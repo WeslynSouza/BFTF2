@@ -15,18 +15,22 @@
         overflow: hidden;    
     
         .menu {
-            width: 68vh;
             list-style: none;
             margin-top: 1.5rem;
-            @include displayFlex(space-between, center);
+            @include displayFlex(flex-start, center);
         
             .menu-item {
                 @include texto(2.3vh, var(--color-blue-secundary));
                 font-weight: 400;
+                margin-left: 2.5rem;
             
                 a {
                     text-decoration: none;
                     color: var(--color-blue-secundary);
+                }
+
+                &:first-child {
+                    margin-left: 0;
                 }
             }
         

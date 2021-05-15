@@ -1,10 +1,15 @@
+import { useContext } from 'react';
 import { FaUserCircle, FaBell, FaCogs } from 'react-icons/fa';
+import { UsuarioContext } from '../../contexts/usuarioContext';
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/logo.svg';
 
 import './styles.scss';
 
 export default function Menu() {
+
+    const { usuarioLogado } = useContext(UsuarioContext);
+
     return (
         <div className='cabecalho'>
             <div className="cabecalho-area">
@@ -34,11 +39,13 @@ export default function Menu() {
                             Divisões
                         </Link>
                     </li>
-                    <li className="menu-item">
-                        <Link to='/Administracao'>
-                            Adiministração
-                        </Link>
-                    </li>
+                    {usuarioLogado.acesso !== 0 &&
+                        <li className="menu-item">
+                            <Link to='/Administracao'>
+                                Adiministração
+                            </Link>
+                        </li>
+                    }
                 </ul>
 
                 <ul className="menu-icon">

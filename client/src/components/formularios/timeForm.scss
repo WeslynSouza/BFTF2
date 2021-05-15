@@ -40,6 +40,18 @@
                         border-bottom: 1px solid var(--color-blue-secundary);
                     }
                 }
+
+                .jogador-inativo {
+                    background-color: var(--color-background-inputblock);
+
+                    h4 {
+                        color: var(--color-font-third);
+                    }                    
+
+                    button {
+                        display: none;
+                    }
+                }
             }
         }
     }

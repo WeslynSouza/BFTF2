@@ -65,13 +65,13 @@
         .botao-criar {
             @include button(var(--color-green-primary), 3rem, 27rem, 6.2rem, var(--color-green-secundary));
             border-radius: 1.5rem;
+            margin-bottom: 4rem;
         }
 
         .discord {
             width: 27rem;
             height: 36rem;
             border: 0;
-            margin-top: 4rem;
             border-radius: .5rem;
             @include sombra;
         }

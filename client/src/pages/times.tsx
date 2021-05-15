@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 import { FaTimes, FaQuestion, FaFlag } from 'react-icons/fa';
@@ -9,6 +9,7 @@ import Rodape from '../components/rodape';
 import InputPesquisa from '../components/input-pesquisa';
 import Placeholder from '../components/placeholder';
 import api from '../services/api';
+import { UsuarioContext } from '../contexts/usuarioContext';
 
 type Time = {
     id: number,
@@ -17,6 +18,8 @@ type Time = {
 }
 
 export default function Times() {
+
+    const { usuarioLogado } = useContext(UsuarioContext);
 
     const [ pesquisa, setPesquisa ] = useState('');
     const [ times, setTimes ] = useState<Time[]>([]);
@@ -36,10 +39,31 @@ export default function Times() {
 
     async function handleSubmit(event: FormEvent){
         event.preventDefault();
+        
+        let usuarioTime
+
+        await api.get(`/usuario/${usuarioLogado.steamId}`).then(res => {
+            usuarioTime = res.data.time
+        })
+
+        if(usuarioTime == ''){
+            alert('Não foi possível criar o time! O jogador já está participando de um time!');
+            setLogo([]);
+            setNome('');
+            setPreviewLogo('');
+            setReSearchActive(true);
+            handleClose();
+            return;
+        }
+
+        if(nome === ''){
+            alert('É preciso preencher o campo nome antes de realizar o envio!');
+            return;
+        }
 
         const data = new FormData();
 
-        data.append('liderId', 'steamTeste');
+        data.append('liderId', usuarioLogado.steamId);
         data.append('nome', nome);
         data.append('logo', logo[0]);
 
@@ -60,9 +84,7 @@ export default function Times() {
             setNome('');
             setPreviewLogo('');
             handleClose();
-            return;
         }
-
     }
 
     
@@ -132,7 +154,9 @@ export default function Times() {
                         buttonWidth='7rem' fontInput='2.5rem' fontButton='3.2rem'/>
 
                     <button className='butao-criar' onClick={handleShow}>
-                        Criar time +
+                        {usuarioLogado.steamId == '0' 
+                            ? <Link to='Login'>Criar time +</Link> 
+                            : 'Criar time +'}
                     </button>
                 </div>
 

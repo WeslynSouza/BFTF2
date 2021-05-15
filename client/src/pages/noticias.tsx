@@ -1,17 +1,16 @@
-import { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useContext, useEffect, useState, FormEvent, ChangeEvent  } from 'react';
+import { Link } from 'react-router-dom';
 import Iframe from 'react-iframe';
 import { FaTimes, FaPlus } from 'react-icons/fa';
 import { Modal } from 'react-bootstrap';
+
 import Menu from '../components/menu';
 import Cabecalho from '../components/cabecalho';
 import Rodape from '../components/rodape';
 import Placeholder from '../components/placeholder';
 import InputPesquisa from '../components/input-pesquisa';
 import api from '../services/api';
-
-import { FormEvent } from 'react';
-import { ChangeEvent } from 'react';
+import { UsuarioContext } from '../contexts/usuarioContext';
 
 type Post = {
     id: number;
@@ -23,6 +22,8 @@ type Post = {
 }
 
 export default function Noticias() {
+
+    const { usuarioLogado } = useContext(UsuarioContext);
 
     const [ pesquisa, setPesquisa ] = useState('');
     const [ posts, setPosts ] = useState<Post[]>([]);
@@ -44,36 +45,43 @@ export default function Noticias() {
     async function handleSubmit(event: FormEvent){
         event.preventDefault();
 
+        if(usuarioLogado.acesso === 0){
+            return;
+        }
+
         const data = new FormData();
 
         if(titulo === ''){
             alert('Você deve informar o titulo antes de realizar o envio.');
             return;
-        }
-
-        if(conteudo === ''){
+        }else if(conteudo === ''){
             alert('Você deve informar o conteudo antes de realizar o envio.');
             return;
-        }
-
-        if(images.length === 0){
+        }else if(images.length === 0){
             alert('Você deve informar pelo menos uma imagem para realizar o envio.');
             return;
         }
 
-        data.append('autorId', 'steamTeste');
+        data.append('autorId', usuarioLogado.steamId);
         data.append('titulo', titulo);
         data.append('conteudo', conteudo);
         images.reverse().forEach(image => {
             data.append('imagens', image);
         })
 
-        await api.post("post", data).then(res => {
-            alert(res.data);
-        });
+        try {
+            await api.post("post", data).then(res => {
+                alert(res.data);
+            });
+    
+            setReSearchActive(true);
+            handleClose();
+        } catch {
+            alert('Não foi possível criar o post!');
 
-        setReSearchActive(true);
-        handleClose();
+            setReSearchActive(true);
+            handleClose();
+        }
     }
 
     function handleSelectImage(event: ChangeEvent<HTMLInputElement>){
@@ -114,7 +122,10 @@ export default function Noticias() {
                     return(
                         <div className="post-caixa">
                             <Link to={`/NoticiaPost/${post.id}`}>
-                                <img className='post-img' src={post.imagens[0].url} alt='banner'/>
+                                <img 
+                                    className='post-img' 
+                                    src={post.imagens[0].url} 
+                                    alt='banner'/>
                             </Link>
                             <div className="post-conteudo">
                                 <Link to={`/NoticiaPost/${post.id}`}>
@@ -136,7 +147,10 @@ export default function Noticias() {
         <div>
             <Menu/>
             <div className='container'>
-                <Cabecalho titulo='Noticias' links={[{url: '/', titulo: 'Home'}, {url: '/Noticias', titulo: 'Noticias'}]}/>
+                <Cabecalho 
+                    titulo='Noticias' 
+                    links={[{url: '/', titulo: 'Home'}, 
+                    {url: '/Noticias', titulo: 'Noticias'}]}/>
 
                 <div className="conteudo">
                     <div className="conteudo-centro">
@@ -150,9 +164,19 @@ export default function Noticias() {
                     </div>
 
                     <div className="conteudo-lateral">
-                        <button type='button' className='botao-criar' onClick={() => handleShow()}>Criar post +</button>
+                        {usuarioLogado.acesso !== 0 &&
+                            <button 
+                                type='button' 
+                                className='botao-criar' 
+                                onClick={() => handleShow()}>
+                                Criar post +
+                            </button>
+                        }
 
-                        <Iframe src="https://discord.com/widget?id=649752881712332810&theme=dark" className='discord' url="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></Iframe>
+                        <Iframe 
+                            src="https://discord.com/widget?id=649752881712332810&theme=dark" 
+                            className='discord' 
+                            url="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></Iframe>
                     </div>
                 </div>
 
@@ -167,10 +191,19 @@ export default function Noticias() {
                     <div className="post-form">
                         <form>
                             <label htmlFor="titulo">Titulo</label>
-                            <input onChange={event => setTitulo(event.target.value)} type="text" name='titulo' id='titulo'/>
+                            <input 
+                                onChange={event => setTitulo(event.target.value)} 
+                                type="text" 
+                                name='titulo' 
+                                id='titulo'/>
 
                             <label htmlFor="conteudo">Conteudo</label>
-                            <textarea onChange={event => setConteudo(event.target.value)} name="conteudo" id="conteudo" cols={40} rows={10}></textarea>
+                            <textarea 
+                                onChange={event => setConteudo(event.target.value)} 
+                                name="conteudo" 
+                                id="conteudo" 
+                                cols={40} 
+                                rows={10}></textarea>
 
                             <label htmlFor="imagens">Imagens</label>
                             <div className="imagens">
@@ -178,7 +211,9 @@ export default function Noticias() {
                                     return (
                                         <div className="image-area" key={indice}>
                                             <img src={image} alt='imagem'/>
-                                            <button type='button' onClick={() => handleRemoveImage(indice)}>
+                                            <button 
+                                                type='button' 
+                                                onClick={() => handleRemoveImage(indice)}>
                                                 <FaTimes/>
                                             </button>
                                         </div>
@@ -189,7 +224,12 @@ export default function Noticias() {
                                     <FaPlus size={24} color="#15b6d6" />
                                 </label> 
                             </div>
-                            <input multiple onChange={handleSelectImage} accept="image/*" type="file" id="image[]"/>
+                            <input 
+                                multiple 
+                                onChange={handleSelectImage} 
+                                accept="image/*" 
+                                type="file" 
+                                id="image[]"/>
                         </form>
                     </div>
                 </Modal.Body>
