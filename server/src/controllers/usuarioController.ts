@@ -1,4 +1,4 @@
-import { Request, Response } from 'express';
+import { Request, response, Response } from 'express';
 import { getRepository, Like, Not } from 'typeorm';
 import * as yup from 'yup';
 import Classe from '../models/classe';
@@ -193,5 +193,26 @@ export default {
         await usuarioRepository.remove(usuario);
 
         return res.status(200).send('O usuário foi excluído com sucesso!');
+    },
+
+    async login(req: Request, res: Response) {
+
+        const nick = req.body.nick || '';
+        const senha = req.body.senha || '';
+
+        const usuarioRepository = getRepository(Usuario);
+
+        await usuarioRepository.findOneOrFail( nick, {
+            relations: [ 'time', 'posts', 'classes' ]
+        }).then(usuario => {
+            if(usuario){
+                if(senha != usuario.senha){
+                    return res.status(400).send({ errors: 'Senha incorreta!'});
+                }
+                return res.status(200).json(UsuarioView.render(usuario));
+            }
+        }).catch(() => {
+            return res.status(400).send({ errors: "Não foi possível realizar o login!"});
+        })
     }
 }

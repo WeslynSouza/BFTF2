@@ -1,10 +1,16 @@
-import { useEffect, useState } from 'react';
-import IndexedDb from '../utils/indexedDB';
+import { useContext, useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import { FaArrowRight, FaEyeSlash, FaSteam } from 'react-icons/fa';
+
+import { UsuarioContext } from '../contexts/usuarioContext';
+import IndexedDb from '../utils/indexedDB';
 import logo from '../assets/logo.svg';
 import api from '../services/api';
 
 export default function LoginCadastro() {
+
+    const { userLogin } = useContext(UsuarioContext);
+    const history = useHistory();
 
     const indexedDb = new IndexedDb('BrasilFortress');
     const $html = document.querySelector('html');
@@ -18,8 +24,6 @@ export default function LoginCadastro() {
     const [ senha, setSenha ] = useState('');
     const [ confirmarSenha, setConfirmarSenha ] = useState('');
 
-    const [ modoDark, setModoDark ] = useState('on');
-
     useEffect(() => {
         setIsLogin(true);
     },[]);
@@ -31,7 +35,6 @@ export default function LoginCadastro() {
             await indexedDb.putValue('config', {modoDark: 'on'}, 'theme');
         }else{
             if(retorno.modoDark === 'off'){
-                setModoDark('off');
                 $html?.classList.add('modo-dark');
             }
         }
@@ -44,6 +47,26 @@ export default function LoginCadastro() {
                 alert('Favor preencher todos os campos para realizar o login!');
                 return;
             }
+
+            const loginData = {
+                nick,
+                senha
+            }
+
+            await api.post("usuarioLogin", loginData)
+                .then(res => {
+                    userLogin(res.data.steamId);
+
+                    alert(`Bem vindo ${res.data.nick}!`);
+                    resetarLogin();
+                    history.goBack();
+                    return;
+                }).catch(err => {
+                    alert(err.response.data.errors);
+                    resetarLogin();
+                    return;
+                })
+
         }else{
             if(!steamId || !nick || !senha || !confirmarSenha){
                 alert('Favor preencher todos os campos para realizar o login!');
@@ -62,11 +85,11 @@ export default function LoginCadastro() {
                 alert(res.data);
             });
 
-            restarLogin();
+            resetarLogin();
         }
     }
 
-    function restarLogin() {
+    function resetarLogin() {
         setIsLogin(true);
         setSteamId('');
         setNick('');
@@ -90,7 +113,7 @@ export default function LoginCadastro() {
                         onChange={e => setSteamId(e.target.value)}/>
                 </fieldset>
 
-                <fieldset>
+                <fieldset >
                     <label htmlFor="nick">Nick:</label>
                     <input 
                         type="text" 

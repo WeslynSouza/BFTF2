@@ -25,7 +25,8 @@ export default {
                 return {
                     titulo: post.titulo
                 }
-            })
+            }),
+            acesso: usuario.acesso
         }
     },
 

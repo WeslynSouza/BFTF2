@@ -17,6 +17,7 @@ routes.get("/classe", ClasseController.index);
 routes.get("/classe/:id", ClasseController.show);
 
 routes.post("/usuario", upload.array('avatar'), UsuarioController.create);
+routes.post("/usuarioLogin", UsuarioController.login);
 routes.get("/usuarios", UsuarioController.index);
 routes.get("/usuarios/:nick", UsuarioController.showMany);
 routes.get("/usuario/:id", UsuarioController.show);
