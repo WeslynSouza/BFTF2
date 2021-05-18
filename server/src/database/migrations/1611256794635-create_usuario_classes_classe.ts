@@ -8,7 +8,7 @@ export class createUsuarioClassesClasse1611256794635 implements MigrationInterfa
             columns: [
                 {
                     name: 'usuarioSteamId',
-                    type: 'varchar',
+                    type: 'integer',
                     isPrimary: true,
                 },
                 {
@@ -22,7 +22,7 @@ export class createUsuarioClassesClasse1611256794635 implements MigrationInterfa
                     name: 'idUsuario',
                     columnNames: ['usuarioSteamId'],
                     referencedTableName: 'usuario',
-                    referencedColumnNames: ['steamId'],
+                    referencedColumnNames: ['id'],
                     onUpdate: 'CASCADE',
                     onDelete: 'CASCADE'
                 },

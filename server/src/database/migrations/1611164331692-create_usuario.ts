@@ -7,13 +7,23 @@ export class createUsuario1611164331692 implements MigrationInterface {
             name: "usuario",
             columns: [
                 {
-                    name: "steamId",
-                    type: "varchar",
+                    name: "id",
+                    type: "integer",
+                    unsigned: true,
                     isPrimary: true,
+                    isGenerated: true,
+                    generationStrategy: 'increment',
                 },
                 {
                     name: "nick",
                     type: "varchar",
+                    isUnique: true,
+                },
+                {
+                    name: "steamId",
+                    type: "varchar",
+                    isUnique: true,
+                    isNullable: true,
                 },
                 {
                     name: "senha",

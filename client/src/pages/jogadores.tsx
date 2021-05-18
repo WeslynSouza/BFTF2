@@ -9,7 +9,7 @@ import api from '../services/api';
 import { useHistory, useParams } from 'react-router';
 
 interface Usuario {
-    steamId: string,
+    id: number,
     nick: string, 
     avatar: string,
     time: {}
@@ -33,8 +33,8 @@ export default function Jogadores() {
         });
     }, [pesquisa]);
 
-    async function handleAddingPlayer(steamId: string) {
-        await api.put(`/time/${params.timeId}/${steamId}`).then(() => {
+    async function handleAddingPlayer(idJogador: number) {
+        await api.put(`/time/${params.timeId}/${idJogador}`).then(() => {
             alert('Jogador adicionado com sucesso!');
 
             history.goBack();
@@ -52,7 +52,7 @@ export default function Jogadores() {
                         } 
 
                         return (
-                            <li className="jogadores-lista-item" key={jogador.steamId}>
+                            <li className="jogadores-lista-item" key={jogador.id}>
                                 <div className="jogador-info">
                                     {jogador.avatar == '' ? 
                                         <div className='imageless'>
@@ -62,7 +62,7 @@ export default function Jogadores() {
                                     }
                                     <h2>{jogador.nick}</h2>
                                 </div>
-                                <button onClick={() => handleAddingPlayer(jogador.steamId)}>
+                                <button onClick={() => handleAddingPlayer(jogador.id)}>
                                     <FaPlus/>
                                 </button>
                             </li>

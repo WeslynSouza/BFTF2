@@ -42,7 +42,7 @@ export default function Times() {
         
         let usuarioTime
 
-        await api.get(`/usuario/${usuarioLogado.steamId}`).then(res => {
+        await api.get(`/usuario/${usuarioLogado.id}`).then(res => {
             usuarioTime = res.data.time
         })
 
@@ -63,7 +63,7 @@ export default function Times() {
 
         const data = new FormData();
 
-        data.append('liderId', usuarioLogado.steamId);
+        data.append('liderId', String(usuarioLogado.id));
         data.append('nome', nome);
         data.append('logo', logo[0]);
 
@@ -154,7 +154,7 @@ export default function Times() {
                         buttonWidth='7rem' fontInput='2.5rem' fontButton='3.2rem'/>
 
                     <button className='butao-criar' onClick={handleShow}>
-                        {usuarioLogado.steamId == '0' 
+                        {usuarioLogado.id == 1 
                             ? <Link to='Login'>Criar time +</Link> 
                             : 'Criar time +'}
                     </button>

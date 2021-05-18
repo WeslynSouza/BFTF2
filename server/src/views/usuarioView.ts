@@ -13,8 +13,9 @@ export default {
         }
 
         return {
-            steamId: usuario.steamId,
+            id: usuario.id,
             nick: usuario.nick,
+            steamId: usuario.steamId,
             avatar: usuario.avatar !== '' ? `${url}${usuario.avatar}` : '',
             time,
             elegivel: usuario.elegivel,

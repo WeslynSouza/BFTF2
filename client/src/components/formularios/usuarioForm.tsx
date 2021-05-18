@@ -152,7 +152,7 @@ export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioFormPr
                     
                     <fieldset>
                         <label htmlFor="steamId">SteamId</label>
-                        <input type="text" value={steamId} placeholder='SteamId' id='steamId' readOnly/>
+                        <input type="text" value={steamId} placeholder='SteamId' id='steamId'/>
                     </fieldset>
                 </div>
 

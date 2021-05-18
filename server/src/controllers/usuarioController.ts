@@ -1,5 +1,6 @@
-import { Request, response, Response } from 'express';
+import { Request, Response } from 'express';
 import { getRepository, Like, Not } from 'typeorm';
+import { compareSync, genSaltSync, hashSync } from 'bcrypt';
 import * as yup from 'yup';
 import Classe from '../models/classe';
 import Time from '../models/time';
@@ -14,7 +15,7 @@ export default {
         const usuarioRepository = getRepository(Usuario);
 
         const usuarios = await usuarioRepository.find({
-            where: { steamId: Not('0') },
+            where: { id: Not(1) },
             relations: ['time', 'classes', 'posts']
         });
 
@@ -28,7 +29,7 @@ export default {
         const usuarioRepository = getRepository(Usuario);
 
         const usuario = await usuarioRepository.findOneOrFail( id, {
-            where: { steamId: Not('0') },
+            where: { id: Not(1) },
             relations: ['time', 'classes', 'posts']
         });
 
@@ -42,7 +43,7 @@ export default {
         const usuarioRepository = getRepository(Usuario);
 
         const usuario = await usuarioRepository.find({
-           where:{ steamId: Not('0'), nick: Like(`${nick}%`) },
+           where:{ id: Not(1), nick: Like(`${nick}%`) },
             relations: ['time', 'classes', 'posts']
         });
 
@@ -50,20 +51,37 @@ export default {
     },
 
     async create(req: Request, res: Response){
+
+        const senhaRegex = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})/
+
         const {
-            steamId,
             nick,
             senha,
+            confirmarSenha
         } = req.body;
 
+        if(!senha.match(senhaRegex)){
+            return res.status(400).send({
+                errors: 'Senha precisa ter uma letra maiúscula, uma letra minúscula, um número, um caractere especial(@#$%) e tamanho entre 6-20.'
+            })
+        }
+
+        const salt = genSaltSync();
+        const senhaHash = hashSync(senha, salt);
+        if(!compareSync(String(confirmarSenha), senhaHash)){
+            return res.status(400).send({
+                errors: 'As senhas não conferem.'
+            })
+        }
+        
         const usuarioRepository = getRepository(Usuario);
+        const timeRepository = getRepository(Time);
         
         try {
-            await usuarioRepository.findOneOrFail(steamId);
+            await usuarioRepository.findOneOrFail(nick);
 
-            return res.status(400).send("O usuário já está cadastrado no sistema!");
+            return res.status(400).send("Esse usuário já está cadastrado no sistema!");
         } catch {
-            const timeRepository = getRepository(Time);
 
             const timePadrao = await timeRepository.findOneOrFail(1);
     
@@ -73,11 +91,10 @@ export default {
                 avatar = requestImages[0].filename;
             } 
             
-    
             const data = {
-                steamId,
                 nick,
-                senha,
+                steamId: '',
+                senha: senhaHash,
                 classes: [],
                 avatar,
                 acesso: 0,
@@ -86,8 +103,8 @@ export default {
             }
     
             const schema = yup.object().shape({
-                steamId: yup.string().required(),
                 nick: yup.string().required(),
+                steamId: yup.string(),
                 senha: yup.string().required(),
                 classes: yup.array(),
                 avatar: yup.string(),
@@ -108,12 +125,33 @@ export default {
         }
     },
 
+    async login(req: Request, res: Response) {
+
+        const nick = req.body.nick || '';
+        const senha = req.body.senha || '';
+
+        const usuarioRepository = getRepository(Usuario);
+
+        await usuarioRepository.findOneOrFail( nick, {
+            relations: [ 'time', 'posts', 'classes' ]
+        }).then(usuario => {
+            if(usuario && compareSync(senha, usuario.senha)){
+                return res.status(200).json(UsuarioView.render(usuario));
+            }else {
+                return res.status(400).send({ errors: 'Usuário/Senha inválidos!'});
+            }                
+        }).catch(() => {
+            return res.status(400).send({ errors: "Não foi possível realizar o login!"});
+        })
+    },
+
     async update(req: Request, res: Response) {
 
-        const { steamId } = req.params;
+        const { id } = req.params;
 
         const {
             nick,
+            steamId,
             acesso,
             avatar,
             classes,
@@ -123,8 +161,8 @@ export default {
         const usuarioRepository = getRepository(Usuario);
         const classeRepository = getRepository(Classe);
 
-        const usuario = await usuarioRepository.findOneOrFail( steamId, {
-            where: { steamId: Not('0') },
+        const usuario = await usuarioRepository.findOneOrFail( id, {
+            where: { id: Not(1) },
             relations: ['time', 'classes', 'posts']
         });
 
@@ -148,8 +186,9 @@ export default {
         }
 
         const data = {
-            steamId,
+            id: Number(id),
             nick: nick || usuario.nick,
+            steamId,
             senha: usuario.senha,
             acesso: acesso || usuario.acesso,
             avatar: newAvatar,
@@ -159,8 +198,9 @@ export default {
         }
 
         const schema = yup.object().shape({
-            steamId: yup.string().required(),
+            id: yup.number().required(),
             nick: yup.string().required(),
+            steamId: yup.string(),
             senha: yup.string().required(),
             classes: yup.array(),
             avatar: yup.string(),
@@ -182,37 +222,16 @@ export default {
 
     async delete(req: Request, res: Response) {
 
-        const { steamId } = req.params;
+        const { id } = req.params;
 
         const usuarioRepository = getRepository(Usuario);
 
-        const usuario = await usuarioRepository.findOneOrFail( steamId, {
-            where: { steamId: Not('0') },
+        const usuario = await usuarioRepository.findOneOrFail( id, {
+            where: { id: Not(1) },
         });
 
         await usuarioRepository.remove(usuario);
 
         return res.status(200).send('O usuário foi excluído com sucesso!');
-    },
-
-    async login(req: Request, res: Response) {
-
-        const nick = req.body.nick || '';
-        const senha = req.body.senha || '';
-
-        const usuarioRepository = getRepository(Usuario);
-
-        await usuarioRepository.findOneOrFail( nick, {
-            relations: [ 'time', 'posts', 'classes' ]
-        }).then(usuario => {
-            if(usuario){
-                if(senha != usuario.senha){
-                    return res.status(400).send({ errors: 'Senha incorreta!'});
-                }
-                return res.status(200).json(UsuarioView.render(usuario));
-            }
-        }).catch(() => {
-            return res.status(400).send({ errors: "Não foi possível realizar o login!"});
-        })
     }
 }

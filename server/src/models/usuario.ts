@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryColumn, ManyToMany, JoinTable, OneToMany, OneToOne, ManyToOne, JoinColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn, ManyToMany, JoinTable, OneToMany, OneToOne, ManyToOne, JoinColumn, PrimaryGeneratedColumn } from 'typeorm';
 import Classe from './classe';
 import Post from './post';
 import Time from './time';
@@ -6,15 +6,18 @@ import Time from './time';
 @Entity()
 export default class Usuario {
 
-    @PrimaryColumn()
-    steamId!: string;
-     
+    @PrimaryGeneratedColumn('increment')
+    id!: number;
+    
     @Column()
     nick!: string;
-
+    
     @Column()
     senha!: string;
 
+    @Column()
+    steamId!: string;
+    
     @ManyToMany(() => Classe)
     @JoinTable()
     classes!: Classe[];

@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { FaUserCircle, FaBell, FaCogs } from 'react-icons/fa';
+import { FaUserCircle, FaBell } from 'react-icons/fa';
 import { UsuarioContext } from '../../contexts/usuarioContext';
 import { Link } from 'react-router-dom';
 import Logo from '../../assets/logo.svg';

@@ -14,21 +14,21 @@ export default {
         }
 
         const lider = {
-            steamId: time.lider.steamId,
+            id: time.lider.id,
             nick: time.lider.nick,
             avatar: time.lider.avatar !== '' ? `${url}${time.lider.avatar}` : ''
         }
 
         const jogadores = time.jogadores.map(jogador => {
             const jogadorObjeto = {
-                steamId: jogador.steamId,
+                id: jogador.id,
                 nick: jogador.nick,
                 avatar: jogador.avatar !== '' ? `${url}${jogador.avatar}` : ''
             }
             return jogadorObjeto;
         });
 
-        const liderIndice = jogadores.findIndex(jogadores => jogadores.steamId == lider.steamId);
+        const liderIndice = jogadores.findIndex(jogadores => jogadores.id == lider.id);
         jogadores.splice(liderIndice, 1);
 
         return {

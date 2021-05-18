@@ -16,7 +16,7 @@ interface TimeParams {
 }
 
 interface Jogador {
-    steamId: string,
+    id: number,
     nick: string,
     avatar: string,
 }
@@ -35,7 +35,7 @@ export default function TimePerfil() {
     const [ time, setTime ] = useState<Time>(Object);
     const [ isReloaded, setIsReloaded ] = useState(false);
     const [ nickJogadorModal, setNickJogadorModal ] = useState('');
-    const [ steamIdJogadorModal, setSteamIdJogadorModal ] = useState('');
+    const [ idJogadorModal, setIdJogadorModal ] = useState(0);
 
     const [ show, setShow ] = useState(false);
 
@@ -47,8 +47,8 @@ export default function TimePerfil() {
         setIsReloaded(false);
     }, [params.id, isReloaded]);
 
-    function handleRemovePlayer(steamId: string){
-        api.put(`/time/remove-player/${steamId}/${params.id}`).then(() => {
+    function handleRemovePlayer(idJogador: number){
+        api.put(`/time/remove-player/${params.id}/${idJogador}`).then(() => {
             alert("O jogador foi excluído com sucesso!");
 
             handleClose();
@@ -57,7 +57,7 @@ export default function TimePerfil() {
         })
     }
 
-    const handleClose = () => [setShow(false), setNickJogadorModal(''), setSteamIdJogadorModal('')];
+    const handleClose = () => [setShow(false), setNickJogadorModal(''), setIdJogadorModal(0)];
     const handleShow = () => setShow(true);
 
     function renderTabela() {
@@ -67,7 +67,7 @@ export default function TimePerfil() {
         return (
             time.jogadores.map(jogador => {
 
-                if(time.lider.steamId == jogador.steamId) {
+                if(time.lider.id == jogador.id) {
                     return (
                         <tr key={jogador.nick}>
                             <td>
@@ -137,7 +137,7 @@ export default function TimePerfil() {
                                 onClick={() => [
                                     handleShow(), 
                                     setNickJogadorModal(jogador.nick), 
-                                    setSteamIdJogadorModal(jogador.steamId)
+                                    setIdJogadorModal(jogador.id)
                                 ]}>
                                 <FaTimes/>
                             </button>
@@ -201,7 +201,7 @@ export default function TimePerfil() {
                 </Modal.Header>
                 <Modal.Body>Deseja excluir o jogador: {nickJogadorModal}?</Modal.Body>
                 <Modal.Footer>
-                    <button className="botao-confirmar" onClick={() => handleRemovePlayer(steamIdJogadorModal)}>Confirmar</button>
+                    <button className="botao-confirmar" onClick={() => handleRemovePlayer(idJogadorModal)}>Confirmar</button>
                     <button className="botao-voltar" onClick={handleClose}>Voltar</button>
                 </Modal.Footer>
             </Modal>

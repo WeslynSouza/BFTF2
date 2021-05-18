@@ -16,7 +16,7 @@ export class createPost1611164388229 implements MigrationInterface {
                 },
                 {
                     name: 'autorSteamId',
-                    type: 'varchar',
+                    type: 'integer',
                 },
                 {
                     name: 'titulo',
@@ -32,7 +32,7 @@ export class createPost1611164388229 implements MigrationInterface {
                     name: 'idAutor',
                     columnNames: ['autorSteamId'],
                     referencedTableName: 'usuario',
-                    referencedColumnNames: ['steamId'],
+                    referencedColumnNames: ['id'],
                     onUpdate: 'CASCADE',
                     onDelete: 'CASCADE'
                 }

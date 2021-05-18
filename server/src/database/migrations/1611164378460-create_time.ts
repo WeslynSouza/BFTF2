@@ -15,8 +15,8 @@ export class createTime1611164378460 implements MigrationInterface {
                     generationStrategy: 'increment',
                 },
                 {
-                    name: 'liderSteamId',
-                    type: 'varchar',
+                    name: 'liderId',
+                    type: 'integer',
                 },
                 {
                     name: 'nome',
@@ -39,9 +39,9 @@ export class createTime1611164378460 implements MigrationInterface {
             foreignKeys: [
                 {
                     name: 'idLider',
-                    columnNames: ['liderSteamId'],
+                    columnNames: ['liderId'],
                     referencedTableName: 'usuario',
-                    referencedColumnNames: ['steamId'],
+                    referencedColumnNames: ['id'],
                 },
                 {
                     name: 'idDivisao',

@@ -1,8 +1,8 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { createContext, ReactNode, useState } from "react";
 import api from "../services/api";
 
 interface Usuario {
-    steamId: string,
+    id: number,
     nick: string,
     avatar: string,
     acesso: number
@@ -10,7 +10,7 @@ interface Usuario {
 
 interface UsuarioData {
     usuarioLogado: Usuario;
-    userLogin: (steamId: string) => void;
+    userLogin: (id: string) => void;
     userLogoff: () => void;
 }
 
@@ -23,7 +23,7 @@ export const UsuarioContext = createContext({} as UsuarioData);
 export function UsuarioProvider({children}: UsuarioProviderProps) {
 
     const usuarioPadrao = {
-        steamId: '0',
+        id: 1,
         nick: '',
         avatar: '',
         acesso: 0
@@ -31,8 +31,8 @@ export function UsuarioProvider({children}: UsuarioProviderProps) {
 
     const [ usuarioLogado, setUsuarioLogado ] = useState<Usuario>(usuarioPadrao);
 
-    function userLogin(steamId: string) {
-        api.get(`/usuario/${steamId}`).then(res => {
+    function userLogin(id: string) {
+        api.get(`/usuario/${id}`).then(res => {
             setUsuarioLogado(res.data);
         })
     }

@@ -72,6 +72,7 @@ export default {
             const divisao = await divisaoRepository.findOneOrFail(1);
 
             const lider = await usuarioRepository.findOneOrFail( liderId, {
+                where: { id: Not(1) },
                 relations: ['time']
             } );
     
@@ -231,8 +232,9 @@ export default {
                 })
 
                 const dataJogador: Usuario = {
-                    steamId: jogador.steamId,
+                    id: jogador.id,
                     nick: jogador.nick,
+                    steamId: jogador.steamId,
                     senha: jogador.senha,
                     classes: jogador.classes,
                     avatar: jogador.avatar,
@@ -254,7 +256,7 @@ export default {
     },
 
     async addPlayer(req: Request, res: Response) {
-        const { id, steamId } = req.params;
+        const { id, idJogador } = req.params;
         
         const timeRepository = getRepository(Time);
         const usuarioRepository = getRepository(Usuario);
@@ -264,15 +266,16 @@ export default {
             relations: ['lider', 'jogadores', 'divisao']
         });
 
-        const jogador = await usuarioRepository.findOneOrFail(steamId, {
+        const jogador = await usuarioRepository.findOneOrFail(idJogador, {
             relations: ['time', 'classes']
         });
 
-        const { nick, senha, classes, avatar, acesso, elegivel } = jogador;
+        const { nick, steamId, senha, classes, avatar, acesso, elegivel } = jogador;
 
         const dataJogador = {
-            steamId,
+            id: Number(idJogador),
             nick,
+            steamId,
             senha,
             classes,
             avatar,
@@ -282,8 +285,9 @@ export default {
         }
 
         const schema = yup.object().shape({
-            steamId: yup.string().required(),
+            id: yup.number().required(),
             nick: yup.string().required(),
+            steamId: yup.string(),
             senha: yup.string().required(),
             classes: yup.array(),
             avatar: yup.string(),
@@ -310,7 +314,7 @@ export default {
 
     async removePlayer(req: Request, res: Response) {
 
-        const { steamId, id } = req.params;
+        const { id, idJogador } = req.params;
 
         const timeRepository = getRepository(Time);
         const usuarioRepository = getRepository(Usuario);
@@ -322,8 +326,8 @@ export default {
             relations: ['lider']
         });
 
-        const usuario = await usuarioRepository.findOneOrFail(steamId, {
-            where: { steamId: Not(0)},
+        const usuario = await usuarioRepository.findOneOrFail(idJogador, {
+            where: { id: Not(1)},
             relations: ['time', 'classes']
         });
 
@@ -331,11 +335,12 @@ export default {
             return res.status(500).send('O lider não pode ser excluído do time!');
         }
 
-        const { nick, senha, classes, avatar, acesso, elegivel } = usuario;
+        const { nick, steamId, senha, classes, avatar, acesso, elegivel } = usuario;
 
         const data = {
-            steamId,
+            id: Number(idJogador),
             nick,
+            steamId,
             senha,
             classes,
             avatar,
@@ -345,8 +350,9 @@ export default {
         };
 
         const schema = yup.object().shape({
-            steamId: yup.string().required(),
+            id: yup.number().required(),
             nick: yup.string().required(),
+            steamId: yup.string(),
             senha: yup.string().required(),
             classes: yup.array(),
             avatar: yup.string(),

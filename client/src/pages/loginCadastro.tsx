@@ -19,7 +19,6 @@ export default function LoginCadastro() {
     const [ senhaVisivel, setSenhaVisivel ] = useState(false);
     const [ confirmarSenhaVisivel, setConfirmarSenhaVisivel ] = useState(false);
 
-    const [ steamId, setSteamId ] = useState('');
     const [ nick, setNick ] = useState('');
     const [ senha, setSenha ] = useState('');
     const [ confirmarSenha, setConfirmarSenha ] = useState('');
@@ -58,40 +57,40 @@ export default function LoginCadastro() {
                     userLogin(res.data.steamId);
 
                     alert(`Bem vindo ${res.data.nick}!`);
-                    resetarLogin();
+                    resetarForm();
                     history.goBack();
                     return;
                 }).catch(err => {
                     alert(err.response.data.errors);
-                    resetarLogin();
+                    resetarForm();
                     return;
                 })
 
         }else{
-            if(!steamId || !nick || !senha || !confirmarSenha){
+            if(!nick || !senha || !confirmarSenha){
                 alert('Favor preencher todos os campos para realizar o login!');
-                return;
-            } else if(senha !== confirmarSenha){
-                alert('As senhas não conferem!');
                 return;
             }
 
             const data = new FormData();
-            data.append('steamId', steamId);
             data.append('nick', nick);
             data.append('senha', senha);
+            data.append('confirmarSenha', confirmarSenha);
 
             await api.post('usuario', data).then(res => {
                 alert(res.data);
+            }).catch(err => {
+                alert(err.response.data.errors);
+                resetarForm();
+                return;
             });
 
-            resetarLogin();
+            resetarForm();
         }
     }
 
-    function resetarLogin() {
+    function resetarForm() {
         setIsLogin(true);
-        setSteamId('');
         setNick('');
         setSenha('');
         setConfirmarSenha('');
@@ -103,15 +102,6 @@ export default function LoginCadastro() {
 
             <div className="login-box">
                 <h2>{isLogin ? 'Login' : 'Cadastro'}</h2>
-
-                <fieldset className={`${isLogin && 'input-inativo'}`}>
-                    <label htmlFor="steamId">SteamId:</label>
-                    <input 
-                        type="text" 
-                        id="steamId" 
-                        value={steamId} 
-                        onChange={e => setSteamId(e.target.value)}/>
-                </fieldset>
 
                 <fieldset >
                     <label htmlFor="nick">Nick:</label>

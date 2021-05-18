@@ -62,7 +62,7 @@ export default function Noticias() {
             return;
         }
 
-        data.append('autorId', usuarioLogado.steamId);
+        data.append('autorId', String(usuarioLogado.id));
         data.append('titulo', titulo);
         data.append('conteudo', conteudo);
         images.reverse().forEach(image => {

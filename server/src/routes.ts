@@ -21,8 +21,8 @@ routes.post("/usuarioLogin", UsuarioController.login);
 routes.get("/usuarios", UsuarioController.index);
 routes.get("/usuarios/:nick", UsuarioController.showMany);
 routes.get("/usuario/:id", UsuarioController.show);
-routes.put("/usuario/:steamId", upload.array('avatar'), UsuarioController.update);
-routes.delete("/usuario/:steamId", UsuarioController.delete);
+routes.put("/usuario/:id", upload.array('avatar'), UsuarioController.update);
+routes.delete("/usuario/:id", UsuarioController.delete);
 
 routes.post("/post", upload.array('imagens'), PostController.create);
 routes.get("/posts", PostController.index);
@@ -40,9 +40,9 @@ routes.get("/times", TimeController.index);
 routes.get("/time/:id", TimeController.show);
 routes.get("/times/:nome", TimeController.showMany);
 routes.put("/time/:id", upload.array('logo'), TimeController.update);
-routes.delete("/time/:id", TimeController.delete);
-routes.put("/time/:id/:steamId", TimeController.addPlayer);
-routes.put("/time/remove-player/:steamId/:id", TimeController.removePlayer);
+routes.delete("/time/:idJogador", TimeController.delete);
+routes.put("/time/:id/:id", TimeController.addPlayer);
+routes.put("/time/remove-player/:id/:idJogador", TimeController.removePlayer);
 
 routes.post("/partida", PartidaController.create);
 routes.get("/partida", PartidaController.index);
