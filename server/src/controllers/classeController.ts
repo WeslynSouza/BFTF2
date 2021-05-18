@@ -11,9 +11,14 @@ export default {
 
         const classeRepository = getRepository(Classe);
 
-        const classes = await classeRepository.find();
+        try{
+            const classes = await classeRepository.find();
 
-        return res.status(200).json(ClasseView.renderMany(classes));
+            return res.status(200).json(ClasseView.renderMany(classes));
+        } catch {
+            return res.status(400).send("Nenhuma classe foi encontrada!");
+        }
+        
     },
 
     async show(req: Request, res: Response) {
@@ -22,9 +27,13 @@ export default {
 
         const classeRepository = getRepository(Classe);
 
-        const classe = await classeRepository.findOneOrFail( id );
+        try {
+            const classe = await classeRepository.findOneOrFail( id );
 
-        return res.status(200).json(ClasseView.render(classe));
+            return res.status(200).json(ClasseView.render(classe));
+        } catch {
+            res.status(400).send("Classe não encontrada!");
+        }
     },
 
     async create(req: Request, res: Response){
@@ -54,11 +63,15 @@ export default {
                 abortEarly: true
             });
     
-            const classe = classeRepository.create(data);
+            try{
+                const classe = classeRepository.create(data);
     
-            await classeRepository.save(classe);
-    
-            return res.status(201).json(classe);
+                await classeRepository.save(classe);
+        
+                return res.status(201).send("Classe criada com sucesso!");
+            } catch {
+                return res.status(400).send("Não foi possível realizar o cadastro!");
+            }
         }
     }
 }

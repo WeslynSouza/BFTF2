@@ -14,12 +14,16 @@ export default {
 
         const usuarioRepository = getRepository(Usuario);
 
-        const usuarios = await usuarioRepository.find({
-            where: { id: Not(1) },
-            relations: ['time', 'classes', 'posts']
-        });
-
-        return res.status(200).json(UsuarioView.renderMany(usuarios));
+        try {
+            const usuarios = await usuarioRepository.find({
+                where: { id: Not(1) },
+                relations: ['time', 'classes', 'posts']
+            });
+    
+            return res.status(200).json(UsuarioView.renderMany(usuarios));
+        } catch {
+            return res.status(400).send("Nenhum jogador foi encontrado!");
+        }
     },
 
     async show(req: Request, res: Response) {
@@ -28,12 +32,16 @@ export default {
 
         const usuarioRepository = getRepository(Usuario);
 
-        const usuario = await usuarioRepository.findOneOrFail( id, {
-            where: { id: Not(1) },
-            relations: ['time', 'classes', 'posts']
-        });
-
-        return res.status(200).json(UsuarioView.render(usuario));
+        try {
+            const usuario = await usuarioRepository.findOneOrFail( id, {
+                where: { id: Not(1) },
+                relations: ['time', 'classes', 'posts']
+            });
+    
+            return res.status(200).json(UsuarioView.render(usuario));
+        } catch {
+            return res.status(400).send("Jogador não encontrado!");
+        }
     },
 
     async showMany(req: Request, res: Response) {
@@ -117,11 +125,15 @@ export default {
                 abortEarly: true,
             })
     
-            const usuario = usuarioRepository.create(data);
+            try {
+                const usuario = usuarioRepository.create(data);
     
-            await usuarioRepository.save(usuario);
-    
-            return res.status(201).send('O usuário foi cadastrado com sucesso!');
+                await usuarioRepository.save(usuario);
+        
+                return res.status(201).send('O usuário foi cadastrado com sucesso!');
+            } catch {
+                return res.status(400).send("Não foi possível realizar o cadastro!");
+            }
         }
     },
 
@@ -213,11 +225,15 @@ export default {
             abortEarly: true,
         });
 
-        const newUsuario = usuarioRepository.create(data);
+        try {
+            const newUsuario = usuarioRepository.create(data);
 
-        await usuarioRepository.save(newUsuario);
-
-        return res.status(201).send('O usuário foi alterado com sucesso!');
+            await usuarioRepository.save(newUsuario);
+    
+            return res.status(201).send('O usuário foi alterado com sucesso!');
+        } catch {
+            return res.status(400).send("Não foi possível realizar a alteração!");
+        }
     },
 
     async delete(req: Request, res: Response) {
@@ -230,8 +246,12 @@ export default {
             where: { id: Not(1) },
         });
 
-        await usuarioRepository.remove(usuario);
+        try {
+            await usuarioRepository.remove(usuario);
 
-        return res.status(200).send('O usuário foi excluído com sucesso!');
+            return res.status(200).send('O usuário foi excluído com sucesso!');
+        } catch {
+            return res.status(400).send("Não foi possível realizar a exclusão!");
+        }
     }
 }

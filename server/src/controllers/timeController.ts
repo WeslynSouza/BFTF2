@@ -13,12 +13,18 @@ export default {
 
         const timeRepository = getRepository(Time);
 
-        const times = await timeRepository.find({
-            where: { id: Not(1) },
-            relations: ['lider', 'divisao', 'jogadores']
-        });
+        try {
+            const times = await timeRepository.find({
+                where: { id: Not(1) },
+                relations: ['lider', 'divisao', 'jogadores']
+            });
+    
+            return res.status(200).json(TimeView.renderMany(times));
+        } catch {
+            return res.status(400).send("Nenhum time foi encontrado!");
+        }
 
-        return res.status(200).json(TimeView.renderMany(times));
+
     },
 
     async show(req: Request, res: Response) {
@@ -27,12 +33,18 @@ export default {
 
         const timeRepository = getRepository(Time);
 
-        const time = await timeRepository.findOneOrFail( id , {
-            where: { id: Not(1) },
-            relations: ['lider', 'divisao', 'jogadores']
-        });
+        try {
+            const time = await timeRepository.findOneOrFail( id , {
+                where: { id: Not(1) },
+                relations: ['lider', 'divisao', 'jogadores']
+            });
+    
+            return res.status(200).json(TimeView.render(time));
+        } catch {
+            return res.status(400).send("Time não encontrado!");
+        }
 
-        return res.status(200).json(TimeView.render(time));
+
     },
 
     async showMany(req: Request, res: Response) {
@@ -119,14 +131,17 @@ export default {
             await schema.validate(data, {
                 abortEarly: true,
             })
-    
-            const time = timeRepository.create(data);
-    
-            await timeRepository.save(time);
-    
-            return res.status(201).send('O time foi criado com sucesso!');
-        }
 
+            try {
+                const time = timeRepository.create(data);
+    
+                await timeRepository.save(time);
+        
+                return res.status(201).send('O time foi criado com sucesso!');
+            } catch {
+                return res.status(400).send("Não foi possível realizar o cadastro!");
+            }
+        }
     },
 
     async update(req: Request, res: Response) {
@@ -200,11 +215,15 @@ export default {
             abortEarly: true,
         });
 
-        const newTime = timeRepository.create(data);
+        try {
+            const newTime = timeRepository.create(data);
 
-        await timeRepository.save(newTime);
-
-        return res.status(201).send('O time foi alterado com sucesso!');
+            await timeRepository.save(newTime);
+    
+            return res.status(201).send('O time foi alterado com sucesso!');
+        } catch {
+            return res.status(400).send("Não foi possível realizar a alteração!");
+        }
     },
 
     async delete(req: Request, res: Response) {
@@ -244,15 +263,23 @@ export default {
                     posts: jogador.posts
                 }
 
-                const newJogador = usuarioRepository.create(dataJogador);
+                try {
+                    const newJogador = usuarioRepository.create(dataJogador);
 
-                await usuarioRepository.save(newJogador);
+                    await usuarioRepository.save(newJogador);
+                } catch {
+                    return res.status(400).send("Ocorreu um erro ao realizar a exclusão!");
+                }
             }
         }
 
-        await timeRepository.remove(time);
+        try {
+            await timeRepository.remove(time);
 
-        return res.status(200).json(TimeView.render(time));
+            return res.status(200).json(TimeView.render(time));
+        } catch {
+            return res.status(400).send("Não foi possível realizar a exclusão!");
+        }
     },
 
     async addPlayer(req: Request, res: Response) {
@@ -269,6 +296,10 @@ export default {
         const jogador = await usuarioRepository.findOneOrFail(idJogador, {
             relations: ['time', 'classes']
         });
+
+        if(jogador.time.id == 1){
+            return res.status(400).send("O jogador faz parte de um time!");
+        }
 
         const { nick, steamId, senha, classes, avatar, acesso, elegivel } = jogador;
 
@@ -302,14 +333,18 @@ export default {
 
         const newUsuario = usuarioRepository.create(dataJogador);
 
-        await usuarioRepository.save(newUsuario);
+        try {
+            await usuarioRepository.save(newUsuario);
 
-        const timeAtualizado = await timeRepository.findOneOrFail(id, {
-            where: { id: Not(1) },
-            relations: ['lider', 'jogadores', 'divisao']
-        });
-
-        return res.status(201).json(TimeView.render(timeAtualizado));
+            const timeAtualizado = await timeRepository.findOneOrFail(id, {
+                where: { id: Not(1) },
+                relations: ['lider', 'jogadores', 'divisao']
+            });
+    
+            return res.status(201).json(TimeView.render(timeAtualizado));
+        } catch {
+            return res.status(400).send("Não foi possível adicionar o jogador ao time!");
+        }
     },
 
     async removePlayer(req: Request, res: Response) {
@@ -366,13 +401,18 @@ export default {
         });
 
         const newUsuario = usuarioRepository.create(data);
-        await usuarioRepository.save(newUsuario);
 
-        const timeAtualizado = await timeRepository.findOneOrFail(id, {
-            where: { id: Not(1) },
-            relations: ['lider', 'jogadores', 'divisao']
-        });
+        try {
+            await usuarioRepository.save(newUsuario);
 
-        return res.status(200).json(TimeView.render(timeAtualizado));
+            const timeAtualizado = await timeRepository.findOneOrFail(id, {
+                where: { id: Not(1) },
+                relations: ['lider', 'jogadores', 'divisao']
+            });
+    
+            return res.status(200).json(TimeView.render(timeAtualizado));
+        } catch {
+            return res.status(400).send("Não foi possível remover o jogador!");
+        }
     }
 }

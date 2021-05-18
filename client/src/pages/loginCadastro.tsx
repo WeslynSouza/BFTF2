@@ -61,7 +61,7 @@ export default function LoginCadastro() {
                     history.goBack();
                     return;
                 }).catch(err => {
-                    alert(err.response.data.errors);
+                    alert(err.response.data);
                     resetarForm();
                     return;
                 })
@@ -80,7 +80,7 @@ export default function LoginCadastro() {
             await api.post('usuario', data).then(res => {
                 alert(res.data);
             }).catch(err => {
-                alert(err.response.data.errors);
+                alert(err.response.data);
                 resetarForm();
                 return;
             });

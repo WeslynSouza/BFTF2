@@ -13,11 +13,15 @@ export default {
 
         const postRepository = getRepository(Post);
 
-        const posts = await postRepository.find({
-            relations: ['imagens', 'autor']
-        });
-
-        return res.status(200).json(PostView.renderMany(posts));
+        try {
+            const posts = await postRepository.find({
+                relations: ['imagens', 'autor']
+            });
+    
+            return res.status(200).json(PostView.renderMany(posts));
+        } catch {
+            return res.status(400).json("Nenhum post foi encontrato!");
+        }
     },
 
     async show(req: Request, res: Response) {
@@ -26,11 +30,15 @@ export default {
 
         const postRepository = getRepository(Post);
 
-        const post = await postRepository.findOneOrFail( id , {
-            relations: ['imagens', 'autor']
-        });
-
-        return res.status(200).json(PostView.render(post));
+        try {
+            const post = await postRepository.findOneOrFail( id , {
+                relations: ['imagens', 'autor']
+            });
+    
+            return res.status(200).json(PostView.render(post));
+        } catch {
+            return res.status(400).send("Post não encontrato!");
+        }
     },
 
     async showMany(req: Request, res: Response) {
@@ -84,11 +92,15 @@ export default {
             abortEarly: true,
         })
 
-        const post = postRepository.create(data);
+        try {
+            const post = postRepository.create(data);
 
-        await postRepository.save(post);
-
-        return res.status(201).send('O post foi criado com sucesso!');
+            await postRepository.save(post);
+    
+            return res.status(201).send('O post foi criado com sucesso!');
+        } catch {
+            return res.status(400).send("Não foi possível realizar o cadastro!");
+        }
     },
 
     async update(req: Request, res: Response) {
@@ -139,11 +151,15 @@ export default {
             abortEarly: true,
         })
 
-        const newPost = postRepository.create(data);
+        try {
+            const newPost = postRepository.create(data);
 
-        await postRepository.save(newPost);
-
-        return res.status(201).send('O post foi alterado com sucesso!');
+            await postRepository.save(newPost);
+    
+            return res.status(201).send('O post foi alterado com sucesso!');
+        } catch {
+            return res.status(400).send('Não foi possível realizar a alteração!');
+        }
     },
 
     async delete(req: Request, res: Response) {
@@ -152,11 +168,17 @@ export default {
 
         const postRepository = getRepository(Post);
 
-        const post = await postRepository.findOneOrFail( id );
+        try {
+            const post = await postRepository.findOneOrFail( id );
 
-        await postRepository.remove(post);
+            await postRepository.remove(post);
+    
+            return res.status(200).send("Post excluído com sucesso!");
+        } catch {
+            return res.status(400).send("Não foi possível realizar a exclusão!");
+        }
 
-        return res.status(200).send("Post excluído com sucesso!");
+
 
     }
 }
