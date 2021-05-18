@@ -7,7 +7,7 @@ export class createUsuarioClassesClasse1611256794635 implements MigrationInterfa
             name: 'usuario_classes_classe',
             columns: [
                 {
-                    name: 'usuarioSteamId',
+                    name: 'usuarioId',
                     type: 'integer',
                     isPrimary: true,
                 },
@@ -20,7 +20,7 @@ export class createUsuarioClassesClasse1611256794635 implements MigrationInterfa
             foreignKeys: [
                 {
                     name: 'idUsuario',
-                    columnNames: ['usuarioSteamId'],
+                    columnNames: ['usuarioId'],
                     referencedTableName: 'usuario',
                     referencedColumnNames: ['id'],
                     onUpdate: 'CASCADE',

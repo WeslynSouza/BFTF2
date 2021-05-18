@@ -15,7 +15,7 @@ export class createPost1611164388229 implements MigrationInterface {
                     generationStrategy: 'increment',
                 },
                 {
-                    name: 'autorSteamId',
+                    name: 'autorId',
                     type: 'integer',
                 },
                 {
@@ -30,7 +30,7 @@ export class createPost1611164388229 implements MigrationInterface {
             foreignKeys: [
                 {
                     name: 'idAutor',
-                    columnNames: ['autorSteamId'],
+                    columnNames: ['autorId'],
                     referencedTableName: 'usuario',
                     referencedColumnNames: ['id'],
                     onUpdate: 'CASCADE',
