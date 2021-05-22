@@ -288,62 +288,81 @@ export default {
         const timeRepository = getRepository(Time);
         const usuarioRepository = getRepository(Usuario);
 
-        const time = await timeRepository.findOneOrFail(id, {
-            where: { id: Not(1) },
-            relations: ['lider', 'jogadores', 'divisao']
-        });
-
-        const jogador = await usuarioRepository.findOneOrFail(idJogador, {
-            relations: ['time', 'classes']
-        });
-
-        if(jogador.time.id == 1){
-            return res.status(400).send("O jogador faz parte de um time!");
-        }
-
-        const { nick, steamId, senha, classes, avatar, acesso, elegivel } = jogador;
-
-        const dataJogador = {
-            id: Number(idJogador),
-            nick,
-            steamId,
-            senha,
-            classes,
-            avatar,
-            acesso,
-            time,
-            elegivel,
-        }
-
-        const schema = yup.object().shape({
-            id: yup.number().required(),
-            nick: yup.string().required(),
-            steamId: yup.string(),
-            senha: yup.string().required(),
-            classes: yup.array(),
-            avatar: yup.string(),
-            acesso: yup.number(),
-            elegivel: yup.number(),
-            time: yup.object().required(),
-        });
-
-        await schema.validate(dataJogador, {
-            abortEarly: true,
-        });
-
-        const newUsuario = usuarioRepository.create(dataJogador);
-
         try {
-            await usuarioRepository.save(newUsuario);
-
-            const timeAtualizado = await timeRepository.findOneOrFail(id, {
+            const time = await timeRepository.findOneOrFail(id, {
                 where: { id: Not(1) },
                 relations: ['lider', 'jogadores', 'divisao']
             });
-    
-            return res.status(201).json(TimeView.render(timeAtualizado));
+
+            const jogador = await usuarioRepository.findOneOrFail(idJogador, {
+                relations: ['time', 'classes']
+            });
+
+            if(jogador.time.id !== 1){
+                return res.status(400).send("O jogador faz parte de um time!");
+            }
+
+            const { nick, steamId, senha, classes, avatar, acesso, elegivel } = jogador;
+
+            let dataJogador
+
+            if(steamId == null) {
+                dataJogador = {
+                    id: Number(idJogador),
+                    nick,
+                    senha,
+                    classes,
+                    avatar,
+                    acesso,
+                    time,
+                    elegivel,
+                }
+            } else {
+                dataJogador = {
+                    id: Number(idJogador),
+                    nick,
+                    steamId,
+                    senha,
+                    classes,
+                    avatar,
+                    acesso,
+                    time,
+                    elegivel,
+                }
+            }
+
+            const schema = yup.object().shape({
+                id: yup.number().required(),
+                nick: yup.string().required(),
+                steamId: yup.string(),
+                senha: yup.string().required(),
+                classes: yup.array(),
+                avatar: yup.string(),
+                acesso: yup.number(),
+                elegivel: yup.number(),
+                time: yup.object().required(),
+            });
+
+            await schema.validate(dataJogador, {
+                abortEarly: true,
+            });
+
+            const newUsuario = usuarioRepository.create(dataJogador);
+
+            try {
+                await usuarioRepository.save(newUsuario);
+
+                const timeAtualizado = await timeRepository.findOneOrFail(id, {
+                    where: { id: Not(1) },
+                    relations: ['lider', 'jogadores', 'divisao']
+                });
+        
+                return res.status(201).json(TimeView.render(timeAtualizado));
+            } catch {
+                return res.status(400).send("Não foi possível adicionar o jogador ao time!");
+            }
         } catch {
-            return res.status(400).send("Não foi possível adicionar o jogador ao time!");
+            return res.status(400).send("Não foi possível adicionar o jogador ao time!")
         }
     },
 
@@ -372,17 +391,32 @@ export default {
 
         const { nick, steamId, senha, classes, avatar, acesso, elegivel } = usuario;
 
-        const data = {
-            id: Number(idJogador),
-            nick,
-            steamId,
-            senha,
-            classes,
-            avatar,
-            acesso,
-            time: timePadrao,
-            elegivel
-        };
+        let data;
+
+        if(steamId == null){
+            data = {
+                id: Number(idJogador),
+                nick,
+                senha,
+                classes,
+                avatar,
+                acesso,
+                time: timePadrao,
+                elegivel
+            }
+        } else {
+            data = {
+                id: Number(idJogador),
+                nick,
+                steamId,
+                senha,
+                classes,
+                avatar,
+                acesso,
+                time: timePadrao,
+                elegivel
+            }
+        }
 
         const schema = yup.object().shape({
             id: yup.number().required(),

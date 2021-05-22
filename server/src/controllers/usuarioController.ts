@@ -69,17 +69,15 @@ export default {
         } = req.body;
 
         if(!senha.match(senhaRegex)){
-            return res.status(400).send({
-                errors: 'Senha precisa ter uma letra maiúscula, uma letra minúscula, um número, um caractere especial(@#$%) e tamanho entre 6-20.'
-            })
+            return res.status(400).send( 
+                'Senha precisa ter uma letra maiúscula, uma letra minúscula, um número, um caractere especial(@#$%) e tamanho entre 6-20.'
+            )
         }
 
         const salt = genSaltSync();
         const senhaHash = hashSync(senha, salt);
         if(!compareSync(String(confirmarSenha), senhaHash)){
-            return res.status(400).send({
-                errors: 'As senhas não conferem.'
-            })
+            return res.status(400).send('As senhas não conferem.')
         }
         
         const usuarioRepository = getRepository(Usuario);
@@ -101,7 +99,7 @@ export default {
             
             const data = {
                 nick,
-                steamId: '',
+                //steamId: '',
                 senha: senhaHash,
                 classes: [],
                 avatar,
@@ -144,17 +142,20 @@ export default {
 
         const usuarioRepository = getRepository(Usuario);
 
-        await usuarioRepository.findOneOrFail( nick, {
-            relations: [ 'time', 'posts', 'classes' ]
-        }).then(usuario => {
+        try {
+            const usuario =  await usuarioRepository.findOne({
+                where: { nick },
+                relations: [ 'time', 'posts', 'classes' ]
+            })
+
             if(usuario && compareSync(senha, usuario.senha)){
                 return res.status(200).json(UsuarioView.render(usuario));
             }else {
-                return res.status(400).send({ errors: 'Usuário/Senha inválidos!'});
-            }                
-        }).catch(() => {
-            return res.status(400).send({ errors: "Não foi possível realizar o login!"});
-        })
+                return res.status(400).send('Usuário/Senha inválidos!');
+            } 
+        } catch {
+            return res.status(400).send("Não foi possível realizar o login!");
+        }
     },
 
     async update(req: Request, res: Response) {
