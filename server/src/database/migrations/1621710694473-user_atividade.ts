@@ -37,7 +37,9 @@ export class userAtividade1621710694473 implements MigrationInterface {
                     name: 'idUsuario',
                     columnNames: ['usuarioId'],
                     referencedTableName: 'usuario',
-                    referencedColumnNames: ['id']
+                    referencedColumnNames: ['id'],
+                    onUpdate: 'CASCADE',
+                    onDelete: 'CASCADE'
                 }
             ]
         }));

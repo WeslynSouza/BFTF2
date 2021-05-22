@@ -95,7 +95,14 @@ export default {
             let avatar = '';
             if(requestImages.length > 0) {
                 avatar = requestImages[0].filename;
-            } 
+            }
+
+            const dataDeCriacao = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
+
+            const atividades = [{
+                tipo: 1,
+                data: dataDeCriacao,
+            }]
             
             const data = {
                 nick,
@@ -105,7 +112,8 @@ export default {
                 avatar,
                 acesso: 0,
                 elegivel: 0,
-                time: timePadrao
+                time: timePadrao,
+                atividades
             }
     
             const schema = yup.object().shape({
@@ -116,12 +124,13 @@ export default {
                 avatar: yup.string(),
                 acesso: yup.number(),
                 elegivel: yup.number(),
-                time: yup.object().required()
+                time: yup.object().required(),
+                atividades: yup.array()
             })
     
             await schema.validate(data, {
                 abortEarly: true,
-            })
+            });
     
             try {
                 const usuario = usuarioRepository.create(data);
@@ -243,16 +252,172 @@ export default {
 
         const usuarioRepository = getRepository(Usuario);
 
-        const usuario = await usuarioRepository.findOneOrFail( id, {
-            where: { id: Not(1) },
-        });
-
         try {
+            const usuario = await usuarioRepository.findOneOrFail( id, {
+                where: { id: Not(1) },
+            });
+
             await usuarioRepository.remove(usuario);
 
             return res.status(200).send('O usuário foi excluído com sucesso!');
         } catch {
             return res.status(400).send("Não foi possível realizar a exclusão!");
+        }
+    },
+
+    async entrarNoTime(req: Request, res: Response) {
+        const { id, idTime } = req.params;
+        
+        const usuarioRepository = getRepository(Usuario);
+        const timeRepository = getRepository(Time);
+
+        try {
+            const jogador = await usuarioRepository.findOneOrFail(id, {
+                relations: ['time', 'classes', 'posts', 'atividades']
+            });
+
+            if(jogador.time.id !== 1){
+                return res.status(400).send("O jogador faz parte de um time!");
+            }
+            
+            const time = await timeRepository.findOneOrFail(idTime, {
+                where: { id: Not(1) },
+                relations: ['lider', 'jogadores', 'divisao']
+            });
+
+            const { nick, steamId, senha, classes, avatar, acesso, elegivel, posts, atividades } = jogador;
+
+            let data: Usuario
+
+            if(steamId == null) {
+                data = {
+                    id: Number(id),
+                    nick,
+                    senha,
+                    classes,
+                    avatar,
+                    acesso,
+                    time,
+                    elegivel,
+                    posts,
+                    atividades
+                }
+            } else {
+                data = {
+                    id: Number(id),
+                    nick,
+                    steamId,
+                    senha,
+                    classes,
+                    avatar,
+                    acesso,
+                    time,
+                    elegivel,
+                    posts,
+                    atividades
+                }
+            }
+
+            const schema = yup.object().shape({
+                id: yup.number().required(),
+                nick: yup.string().required(),
+                steamId: yup.string(),
+                senha: yup.string().required(),
+                classes: yup.array(),
+                avatar: yup.string(),
+                acesso: yup.number(),
+                elegivel: yup.number(),
+                time: yup.object().required(),
+                posts: yup.array(),
+                atividades: yup.array(),
+            });
+
+            await schema.validate(data, {
+                abortEarly: true,
+            });
+
+            const newUsuario = usuarioRepository.create(data);
+
+            await usuarioRepository.save(newUsuario);
+    
+            return res.status(201).send(`O jogador ${nick} foi adicionado ao time ${time.nome}.`);
+        } catch {
+            return res.status(400).send("Não foi possível adicionar o jogador ao time!")
+        }
+    },
+
+    async deixarTime(req: Request, res: Response){
+        const { id } = req.params;
+
+        const usuarioRepository = getRepository(Usuario);
+        const timeRepository = getRepository(Time);
+
+        const usuario = await usuarioRepository.findOneOrFail(id, {
+            where: { id: Not(1)},
+            relations: ['time', 'classes']
+        });
+
+        const timePadrao = await timeRepository.findOneOrFail(1);
+
+        const { nick, steamId, senha, classes, avatar, acesso, elegivel, posts, atividades } = usuario;
+
+        let dataJogador: Usuario;
+
+        if(steamId == null){
+            dataJogador = {
+                id: Number(id),
+                nick,
+                senha,
+                classes,
+                avatar,
+                acesso,
+                time: timePadrao,
+                elegivel,
+                posts,
+                atividades
+            }
+        } else {
+            dataJogador = {
+                id: Number(id),
+                nick,
+                steamId,
+                senha,
+                classes,
+                avatar,
+                acesso,
+                time: timePadrao,
+                elegivel,
+                posts,
+                atividades
+            }
+        }
+
+        const schema = yup.object().shape({
+            id: yup.number().required(),
+            nick: yup.string().required(),
+            steamId: yup.string(),
+            senha: yup.string().required(),
+            classes: yup.array(),
+            avatar: yup.string(),
+            acesso: yup.number(),
+            elegivel: yup.number(),
+            time: yup.object().required(),
+            posts: yup.array(),
+            atividades: yup.array()
+        });
+
+        await schema.validate(dataJogador, {
+            abortEarly: true,
+        });
+
+        const newUsuario = usuarioRepository.create(dataJogador);
+
+        try {
+            await usuarioRepository.save(newUsuario);
+    
+            return res.status(200).send(`O jogador ${nick} foi removido do time!`);
+        } catch {
+            return res.status(400).send("Não foi possível remover o jogador!");
         }
     }
 }

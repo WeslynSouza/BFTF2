@@ -17,7 +17,7 @@ export default class Usuario {
     senha!: string;
 
     @Column()
-    steamId!: string;
+    steamId?: string;
     
     @ManyToMany(() => Classe)
     @JoinTable()
@@ -38,10 +38,10 @@ export default class Usuario {
     @OneToMany(() => Post, post => post.autor, {
         cascade: ['update', 'remove']
     })
-    posts!: Post[];
+    posts?: Post[];
 
     @OneToMany(() => User_atividade, atividade => atividade.usuario, {
-        cascade: ['update', 'remove']
+        cascade: ['insert' ,'update', 'remove']
     })
     atividades!: User_atividade[];
 }
