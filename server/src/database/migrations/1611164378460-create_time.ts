@@ -19,6 +19,11 @@ export class createTime1611164378460 implements MigrationInterface {
                     type: 'integer',
                 },
                 {
+                    name: 'viceLiderId',
+                    type: 'integer',
+                    isNullable: true
+                },
+                {
                     name: 'nome',
                     type: 'varchar',
                 },
@@ -40,6 +45,12 @@ export class createTime1611164378460 implements MigrationInterface {
                 {
                     name: 'idLider',
                     columnNames: ['liderId'],
+                    referencedTableName: 'usuario',
+                    referencedColumnNames: ['id'],
+                },
+                {
+                    name: 'idViceLider',
+                    columnNames: ['viceLiderId'],
                     referencedTableName: 'usuario',
                     referencedColumnNames: ['id'],
                 },
