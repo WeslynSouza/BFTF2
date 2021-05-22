@@ -7,6 +7,7 @@ import Time from '../models/time';
 
 import Usuario from '../models/usuario';
 import UsuarioView from '../views/usuarioView';
+import User_atividade from '../models/user_atividade';
 
 export default {
 
@@ -272,20 +273,29 @@ export default {
         const timeRepository = getRepository(Time);
 
         try {
-            const jogador = await usuarioRepository.findOneOrFail(id, {
+            const usuario = await usuarioRepository.findOneOrFail(id, {
                 relations: ['time', 'classes', 'posts', 'atividades']
             });
 
-            if(jogador.time.id !== 1){
-                return res.status(400).send("O jogador faz parte de um time!");
+            if(usuario.time.id !== 1){
+                return res.status(400).send("O usuario faz parte de um time!");
             }
             
             const time = await timeRepository.findOneOrFail(idTime, {
                 where: { id: Not(1) },
-                relations: ['lider', 'jogadores', 'divisao']
+                relations: ['lider', 'usuarioes', 'divisao']
             });
 
-            const { nick, steamId, senha, classes, avatar, acesso, elegivel, posts, atividades } = jogador;
+            const dataAtividade = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
+
+            const novaAtividade: User_atividade = {
+                usuario,
+                tipo: 2,
+                data: dataAtividade,
+                nomeTime: time.nome,
+            }
+
+            const { nick, steamId, senha, classes, avatar, acesso, elegivel, posts, atividades } = usuario;
 
             let data: Usuario
 
@@ -300,7 +310,7 @@ export default {
                     time,
                     elegivel,
                     posts,
-                    atividades
+                    atividades: atividades.concat([novaAtividade])
                 }
             } else {
                 data = {
@@ -314,7 +324,7 @@ export default {
                     time,
                     elegivel,
                     posts,
-                    atividades
+                    atividades: atividades.concat([novaAtividade])
                 }
             }
 
@@ -354,17 +364,24 @@ export default {
 
         const usuario = await usuarioRepository.findOneOrFail(id, {
             where: { id: Not(1)},
-            relations: ['time', 'classes']
+            relations: ['time', 'classes', 'posts', 'atividades' ]
         });
 
         const timePadrao = await timeRepository.findOneOrFail(1);
 
+        const dataAtividade = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
+
+        const novaAtividade: User_atividade = {
+            usuario,
+            tipo: 3,
+            data: dataAtividade
+        }
         const { nick, steamId, senha, classes, avatar, acesso, elegivel, posts, atividades } = usuario;
 
-        let dataJogador: Usuario;
+        let dataUsuario: Usuario;
 
         if(steamId == null){
-            dataJogador = {
+            dataUsuario = {
                 id: Number(id),
                 nick,
                 senha,
@@ -374,10 +391,10 @@ export default {
                 time: timePadrao,
                 elegivel,
                 posts,
-                atividades
+                atividades: atividades.concat([novaAtividade])
             }
         } else {
-            dataJogador = {
+            dataUsuario = {
                 id: Number(id),
                 nick,
                 steamId,
@@ -388,7 +405,7 @@ export default {
                 time: timePadrao,
                 elegivel,
                 posts,
-                atividades
+                atividades: atividades.concat([novaAtividade])
             }
         }
 
@@ -406,11 +423,11 @@ export default {
             atividades: yup.array()
         });
 
-        await schema.validate(dataJogador, {
+        await schema.validate(dataUsuario, {
             abortEarly: true,
         });
 
-        const newUsuario = usuarioRepository.create(dataJogador);
+        const newUsuario = usuarioRepository.create(dataUsuario);
 
         try {
             await usuarioRepository.save(newUsuario);

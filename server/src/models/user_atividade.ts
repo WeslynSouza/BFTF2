@@ -5,7 +5,7 @@ import Usuario from './usuario';
 export default class User_atividade {
 
     @PrimaryGeneratedColumn('increment')
-    id!: number;
+    id?: number;
 
     @ManyToOne(() => Usuario, usuario => usuario.atividades)
     usuario!: Usuario;
