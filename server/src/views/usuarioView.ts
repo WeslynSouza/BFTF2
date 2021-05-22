@@ -27,7 +27,8 @@ export default {
                     titulo: post.titulo
                 }
             }),
-            acesso: usuario.acesso
+            acesso: usuario.acesso,
+            atividades: usuario.atividades
         }
     },
 

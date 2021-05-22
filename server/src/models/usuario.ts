@@ -1,7 +1,8 @@
-import { Column, Entity, PrimaryColumn, ManyToMany, JoinTable, OneToMany, OneToOne, ManyToOne, JoinColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToMany, JoinTable, OneToMany, OneToOne, ManyToOne, JoinColumn, PrimaryGeneratedColumn } from 'typeorm';
 import Classe from './classe';
 import Post from './post';
 import Time from './time';
+import User_atividade from './user_atividade';
 
 @Entity()
 export default class Usuario {
@@ -38,4 +39,9 @@ export default class Usuario {
         cascade: ['update', 'remove']
     })
     posts!: Post[];
+
+    @OneToMany(() => User_atividade, atividade => atividade.usuario, {
+        cascade: ['update', 'remove']
+    })
+    atividades!: User_atividade[];
 }
