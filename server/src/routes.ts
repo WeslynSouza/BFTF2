@@ -40,8 +40,8 @@ routes.get("/times", TimeController.index);
 routes.get("/time/:id", TimeController.show);
 routes.get("/times/:nome", TimeController.showMany);
 routes.put("/time/:id", upload.array('logo'), TimeController.update);
-routes.delete("/time/:idJogador", TimeController.delete);
-routes.put("/time/:id/:id", TimeController.addPlayer);
+routes.delete("/time/delete/:id", TimeController.delete);
+routes.put("/time/:id/:idJogador", TimeController.addPlayer);
 routes.put("/time/remove-player/:id/:idJogador", TimeController.removePlayer);
 
 routes.post("/partida", PartidaController.create);
