@@ -1,4 +1,4 @@
-import Imagem from '../models/imagens';
+import Imagem from '../models/imagem';
 
 export default {
     render(imagem: Imagem) {

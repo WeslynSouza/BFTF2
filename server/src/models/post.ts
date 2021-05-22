@@ -1,5 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
-import Imagens from './imagens';
+import Imagem from './imagem';
 import Usuario from './usuario';
 
 @Entity()
@@ -17,8 +17,8 @@ export default class Post {
     @Column()
     conteudo!: string;
 
-    @OneToMany(() => Imagens, imagens => imagens.post, {
+    @OneToMany(() => Imagem, imagem => imagem.post, {
         cascade: ['insert', 'update', 'remove']
     })
-    imagens!: Imagens[];
+    imagens!: Imagem[];
 }

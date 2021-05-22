@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { getRepository, Like } from 'typeorm';
 import * as yup from 'yup';
-import Imagens from '../models/imagens';
+import Imagem from '../models/imagem';
 
 import Post from '../models/post';
 import Usuario from '../models/usuario';
@@ -113,15 +113,15 @@ export default {
         } = req.body;
 
         const postRepository = getRepository(Post);
-        const imagesRepository = getRepository(Imagens);
+        const imagemRepository = getRepository(Imagem);
 
         const post = await postRepository.findOneOrFail( id, {
             relations: ['imagens', 'autor']
         });
 
         post.imagens.forEach(async image => {
-            const oldImage = await imagesRepository.findOneOrFail(image.id);
-            imagesRepository.delete(oldImage);
+            const oldImage = await imagemRepository.findOneOrFail(image.id);
+            imagemRepository.delete(oldImage);
         })
 
         const requestImages = req.files as Express.Multer.File[];
