@@ -97,6 +97,9 @@ export default function TimePerfil() {
                                 </div>
                             </td>
                             <td>
+                                <button disabled className='botao-passar-lideranca botao-desabilitado'>
+                                    <FaCrown/>
+                                </button>
                                 <button disabled className='botao-excluir botao-desabilitado'>
                                     <FaTimes/>
                                 </button>
@@ -132,13 +135,16 @@ export default function TimePerfil() {
                             </div>
                         </td>
                         <td>
+                            <button disabled className='botao-passar-lideranca'>
+                                <FaCrown/>
+                            </button>
                             <button 
-                                className='botao-excluir' 
-                                onClick={() => [
-                                    handleShow(), 
-                                    setNickJogadorModal(jogador.nick), 
-                                    setIdJogadorModal(jogador.id)
-                                ]}>
+                            className='botao-excluir' 
+                            onClick={() => [
+                                handleShow(), 
+                                setNickJogadorModal(jogador.nick), 
+                                setIdJogadorModal(jogador.id)
+                            ]}>
                                 <FaTimes/>
                             </button>
                         </td>
@@ -199,7 +205,7 @@ export default function TimePerfil() {
                 <Modal.Header>
                     <Modal.Title>Confirmar exclusão</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Deseja excluir o jogador: {nickJogadorModal}?</Modal.Body>
+                <Modal.Body style={{textAlign: "center"}}>Deseja excluir o jogador: {nickJogadorModal}?</Modal.Body>
                 <Modal.Footer>
                     <button className="botao-confirmar" onClick={() => handleRemovePlayer(idJogadorModal)}>Confirmar</button>
                     <button className="botao-voltar" onClick={handleClose}>Voltar</button>
