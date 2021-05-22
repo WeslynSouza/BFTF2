@@ -38,6 +38,8 @@ export default function Jogadores() {
             alert('Jogador adicionado com sucesso!');
 
             history.goBack();
+        }).catch(err => {
+            alert(err.response.data);
         })
     }
 

@@ -42,7 +42,7 @@ export default function Menu() {
                     {usuarioLogado.acesso !== 0 &&
                         <li className="menu-item">
                             <Link to='/Administracao'>
-                                Adiministração
+                                Administração
                             </Link>
                         </li>
                     }

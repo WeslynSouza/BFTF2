@@ -140,7 +140,7 @@ export default function Times({ functionTimeId, functionAlterar }: timesTabela) 
                 <Modal.Header>
                     <Modal.Title>Confirmar exclusão</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Deseja excluir o time: {nomeTimeModal}?</Modal.Body>
+                <Modal.Body style={{textAlign: "center"}}>Deseja excluir o time: {nomeTimeModal}?</Modal.Body>
                 <Modal.Footer>
                     <button className="botao-confirmar" onClick={() => handleDeleteTime(idTimeModal)}>Confirmar</button>
                     <button className="botao-voltar" onClick={handleClose}>Voltar</button>

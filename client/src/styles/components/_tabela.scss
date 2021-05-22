@@ -4,6 +4,7 @@
 /* CSS base das tabelas */
 
 %tabela {
+    overflow-x: scroll;
     table {
         width: 100%;
         background: var(--color-background-input);  
@@ -22,6 +23,7 @@
         }
     
         td  {
+            min-width: 13.5rem;
             @extend %border-and-align;
             padding-left: 1rem;
     

@@ -191,7 +191,7 @@ export default function UsuariosTabela({ functionUsuarioId, functionAlterar }: u
                 <Modal.Header>
                     <Modal.Title>Confirmar exclusão</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>Deseja excluir o usuario: {nickUsuarioModal}?</Modal.Body>
+                <Modal.Body style={{textAlign: "center"}}>Deseja excluir o usuario: {nickUsuarioModal}?</Modal.Body>
                 <Modal.Footer>
                     <button className="botao-confirmar" onClick={() => handleUsuarioDelete(idUsuarioModal)}>Confirmar</button>
                     <button className="botao-voltar" onClick={handleClose}>Voltar</button>

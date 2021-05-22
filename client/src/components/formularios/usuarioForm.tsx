@@ -152,7 +152,7 @@ export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioFormPr
                     
                     <fieldset>
                         <label htmlFor="steamId">SteamId</label>
-                        <input type="text" value={steamId} placeholder='SteamId' id='steamId'/>
+                        <input type="text" value={steamId} placeholder='SteamId' id='steamId' readOnly/>
                     </fieldset>
                 </div>
 
@@ -172,7 +172,7 @@ export default function UsuarioForm({ functionVoltar, usuarioId }: usuarioFormPr
 
                 <fieldset>
                     <label htmlFor="elegivel">Senha</label>
-                    <input type="text" value="***************" placeholder='SteamId' id='steamId' readOnly/>
+                    <input type="password" value="***************" placeholder='SteamId' id='steamId' readOnly/>
                 </fieldset>
 
                 <fieldset>

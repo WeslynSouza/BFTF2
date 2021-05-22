@@ -93,6 +93,7 @@
         .time-jogadores-tabela {
             @extend %tabela;
             width: 100%;
+            overflow-x: scroll;
 
             table {
                 
@@ -113,6 +114,10 @@
                         margin-left: 1rem;
                     }
 
+                    .botao-passar-lideranca {
+                        @include button(var(--color-green-primary), 2.3rem, 4rem, 4rem, var(--color-red-secundary));
+                    }
+
                     .botao-desabilitado {
                         background: var(--color-background-inputblock);
 
@@ -123,7 +128,7 @@
 
                     img {
                         width: 3.2rem;
-                        margin: 0;
+                        margin: 0 .5rem;
                     }
 
                     .time-jogadores-info {
