@@ -65,34 +65,34 @@ export default {
         const postRepository = getRepository(Post);
         const usuarioRepository = getRepository(Usuario);
 
-        const autor = await usuarioRepository.findOneOrFail( autorId );
-
-        const requestImages = req.files as Express.Multer.File[];
-        const imagens = requestImages.map(image => {
-            return {
-                path: image.filename
-            }
-        })
-
-        const data = {
-            autor,
-            titulo,
-            conteudo,
-            imagens
-        }
-
-        const schema = yup.object().shape({
-            autor: yup.object().required(),
-            titulo: yup.string().required(),
-            conteudo: yup.string().required(),
-            imagens: yup.array()
-        })
-
-        await schema.validate(data, {
-            abortEarly: true,
-        })
-
         try {
+            const autor = await usuarioRepository.findOneOrFail( autorId );
+
+            const requestImages = req.files as Express.Multer.File[];
+            const imagens = requestImages.map(image => {
+                return {
+                    path: image.filename
+                }
+            })
+
+            const data = {
+                autor,
+                titulo,
+                conteudo,
+                imagens
+            }
+
+            const schema = yup.object().shape({
+                autor: yup.object().required(),
+                titulo: yup.string().required(),
+                conteudo: yup.string().required(),
+                imagens: yup.array()
+            })
+
+            await schema.validate(data, {
+                abortEarly: true,
+            })
+
             const post = postRepository.create(data);
 
             await postRepository.save(post);
@@ -115,43 +115,43 @@ export default {
         const postRepository = getRepository(Post);
         const imagemRepository = getRepository(Imagem);
 
-        const post = await postRepository.findOneOrFail( id, {
-            relations: ['imagens', 'autor']
-        });
-
-        post.imagens.forEach(async image => {
-            const oldImage = await imagemRepository.findOneOrFail(image.id);
-            imagemRepository.delete(oldImage);
-        })
-
-        const requestImages = req.files as Express.Multer.File[];
-        const imagens = requestImages.map(image => {
-            return {
-                path: image.filename
-            }
-        })
-
-        const data = {
-            id: Number(id),
-            autor: post.autor,
-            titulo: titulo === "" ? post.titulo : titulo,
-            conteudo: conteudo === "" ? post.conteudo : conteudo,
-            imagens
-        }
-
-        const schema = yup.object().shape({
-            id: yup.number().required(),
-            autor: yup.object().required(),
-            titulo: yup.string().required(),
-            conteudo: yup.string().required(),
-            imagens: yup.array()
-        })
-
-        await schema.validate(data, {
-            abortEarly: true,
-        })
-
         try {
+            const post = await postRepository.findOneOrFail( id, {
+                relations: ['imagens', 'autor']
+            });
+
+            post.imagens.forEach(async image => {
+                const oldImage = await imagemRepository.findOneOrFail(image.id);
+                imagemRepository.delete(oldImage);
+            })
+
+            const requestImages = req.files as Express.Multer.File[];
+            const imagens = requestImages.map(image => {
+                return {
+                    path: image.filename
+                }
+            })
+
+            const data = {
+                id: Number(id),
+                autor: post.autor,
+                titulo: titulo === "" ? post.titulo : titulo,
+                conteudo: conteudo === "" ? post.conteudo : conteudo,
+                imagens
+            }
+
+            const schema = yup.object().shape({
+                id: yup.number().required(),
+                autor: yup.object().required(),
+                titulo: yup.string().required(),
+                conteudo: yup.string().required(),
+                imagens: yup.array()
+            })
+
+            await schema.validate(data, {
+                abortEarly: true,
+            })
+
             const newPost = postRepository.create(data);
 
             await postRepository.save(newPost);

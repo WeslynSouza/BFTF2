@@ -83,56 +83,56 @@ export default {
 
             const divisao = await divisaoRepository.findOneOrFail(1);
 
-            const lider = await usuarioRepository.findOneOrFail( liderId, {
-                where: { id: Not(1) },
-                relations: ['time']
-            } );
-    
-            if(lider.time && lider.time.id !== 1) {
-                return res.status(500).send('O jogador já está participando de outro, time e por isso não pode cadastrar outro time.');
-            }
-    
-            jogadores.push(lider);
-
-            if(jogadoresIds && jogadoresIds === []) {
-                for (const i in jogadoresIds) {
-                    if (Object.prototype.hasOwnProperty.call(jogadoresIds, i)) {  
-                        jogadores.push( await usuarioRepository.findOneOrFail(jogadoresIds[i]));
-                    }
-                }
-            } else if(jogadoresIds) {
-                jogadores.push( await usuarioRepository.findOneOrFail(jogadoresIds))
-            }
-    
-            const requestImages = req.files as Express.Multer.File[];
-            let logo = '';
-            if(requestImages.length > 0){
-                logo = requestImages[0].filename;
-            }
-    
-            const data = {
-                lider,
-                nome,
-                divisao,
-                logo,
-                ativo: false,
-                jogadores
-            }
-    
-            const schema = yup.object().shape({
-                lider: yup.object().required(),
-                nome: yup.string().required(),
-                divisao: yup.object().required(),
-                logo: yup.string(),
-                ativo: yup.boolean().required(),
-                jogadores: yup.array().required()
-            })
-    
-            await schema.validate(data, {
-                abortEarly: true,
-            })
-
             try {
+                const lider = await usuarioRepository.findOneOrFail( liderId, {
+                    where: { id: Not(1) },
+                    relations: ['time']
+                } );
+        
+                if(lider.time && lider.time.id !== 1) {
+                    return res.status(500).send('O jogador já está participando de outro, time e por isso não pode cadastrar outro time.');
+                }
+        
+                jogadores.push(lider);
+
+                if(jogadoresIds && jogadoresIds === []) {
+                    for (const i in jogadoresIds) {
+                        if (Object.prototype.hasOwnProperty.call(jogadoresIds, i)) {  
+                            jogadores.push( await usuarioRepository.findOneOrFail(jogadoresIds[i]));
+                        }
+                    }
+                } else if(jogadoresIds) {
+                    jogadores.push( await usuarioRepository.findOneOrFail(jogadoresIds))
+                }
+        
+                const requestImages = req.files as Express.Multer.File[];
+                let logo = '';
+                if(requestImages.length > 0){
+                    logo = requestImages[0].filename;
+                }
+        
+                const data = {
+                    lider,
+                    nome,
+                    divisao,
+                    logo,
+                    ativo: false,
+                    jogadores
+                }
+        
+                const schema = yup.object().shape({
+                    lider: yup.object().required(),
+                    nome: yup.string().required(),
+                    divisao: yup.object().required(),
+                    logo: yup.string(),
+                    ativo: yup.boolean().required(),
+                    jogadores: yup.array().required()
+                })
+        
+                await schema.validate(data, {
+                    abortEarly: true,
+                })
+
                 const time = timeRepository.create(data);
     
                 await timeRepository.save(time);
@@ -158,64 +158,64 @@ export default {
         const timeRepository = getRepository(Time);    
         const divisaoRepository = getRepository(Divisao);
 
-        const time = await timeRepository.findOneOrFail( id, {
-            where: { id: Not(1) },
-            relations: [ 'lider', 'divisao', 'jogadores']
-        })
-
-        if(time.ativo){
-            return res.status(400).send("O time já está participando ativamente de um campeonato, por isso não poder sofrer alterações!");
-        }
-
-        let lider = time.lider;
-        let divisao = time.divisao;
-        let jogadores = time.jogadores;
-
-        if(divisaoId && divisaoId !== time.divisao.id ) {
-            divisao = await divisaoRepository.findOneOrFail( divisaoId );
-        } else if(divisaoId === '' && time.divisao.id !== 1){
-            divisao = await divisaoRepository.findOneOrFail(1);
-        }
-
-        if(jogadoresIds == []){
-            jogadoresIds.forEach( async (jogador: Usuario) => {
-                jogadores.push(await usuarioRepository.findOneOrFail(jogador));
+        try{
+            const time = await timeRepository.findOneOrFail( id, {
+                where: { id: Not(1) },
+                relations: [ 'lider', 'divisao', 'jogadores']
             })
-        } else if(jogadoresIds) {
-            jogadores.push(await usuarioRepository.findOneOrFail(jogadoresIds));
-        }
-        
-        const requestImages = req.files as Express.Multer.File[];
-        let logo = time.logo;
-        if(requestImages.length !== 0) {
-            logo = requestImages[0].filename;
-        }
-        
-        const data = {
-                id: Number(id),
-                lider,
-                nome,
-                divisao,
-                logo,
-                ativo: false,
-                jogadores
+
+            if(time.ativo){
+                return res.status(400).send("O time já está participando ativamente de um campeonato, por isso não poder sofrer alterações!");
             }
 
-        const schema = yup.object().shape({
-            id: yup.number().required(),
-            lider: yup.object().required(),
-            nome: yup.string().required(),
-            divisao: yup.object().required(),
-            logo: yup.string(),
-            ativo: yup.boolean().required(),
-            jogadores: yup.array().required()
-        });
+            let lider = time.lider;
+            let divisao = time.divisao;
+            let jogadores = time.jogadores;
 
-        await schema.validate(data, {
-            abortEarly: true,
-        });
+            if(divisaoId && divisaoId !== time.divisao.id ) {
+                divisao = await divisaoRepository.findOneOrFail( divisaoId );
+            } else if(divisaoId === '' && time.divisao.id !== 1){
+                divisao = await divisaoRepository.findOneOrFail(1);
+            }
 
-        try {
+            if(jogadoresIds == []){
+                jogadoresIds.forEach( async (jogador: Usuario) => {
+                    jogadores.push(await usuarioRepository.findOneOrFail(jogador));
+                })
+            } else if(jogadoresIds) {
+                jogadores.push(await usuarioRepository.findOneOrFail(jogadoresIds));
+            }
+            
+            const requestImages = req.files as Express.Multer.File[];
+            let logo = time.logo;
+            if(requestImages.length !== 0) {
+                logo = requestImages[0].filename;
+            }
+            
+            const data = {
+                    id: Number(id),
+                    lider,
+                    nome,
+                    divisao,
+                    logo,
+                    ativo: false,
+                    jogadores
+                }
+
+            const schema = yup.object().shape({
+                id: yup.number().required(),
+                lider: yup.object().required(),
+                nome: yup.string().required(),
+                divisao: yup.object().required(),
+                logo: yup.string(),
+                ativo: yup.boolean().required(),
+                jogadores: yup.array().required()
+            });
+
+            await schema.validate(data, {
+                abortEarly: true,
+            });
+
             const newTime = timeRepository.create(data);
 
             await timeRepository.save(newTime);
@@ -233,48 +233,49 @@ export default {
         const timeRepository = getRepository(Time);
         const usuarioRepository = getRepository(Usuario);
 
-        const time = await timeRepository.findOneOrFail(id, {
-            where: { id: Not(1) },
-            relations: ['jogadores']
-        });
+        try {
 
-        if(time.ativo){
-            return res.status(400).send("O time já está participando ativamente de um campeonato, por isso não poder sofrer alterações!");
-        }
+            const time = await timeRepository.findOneOrFail(id, {
+                where: { id: Not(1) },
+                relations: ['jogadores']
+            });
 
-        const timePadrao = await timeRepository.findOneOrFail(1);
+            if(time.ativo){
+                return res.status(400).send("O time já está participando ativamente de um campeonato, por isso não poder sofrer alterações!");
+            }
 
-        for (const i in time.jogadores) {
-            if (Object.prototype.hasOwnProperty.call(time.jogadores, i)) {
-                const jogador =  await usuarioRepository.findOneOrFail(time.jogadores[i].steamId, {
-                    relations: ['time']
-                })
+            const timePadrao = await timeRepository.findOneOrFail(1);
 
-                const dataJogador: Usuario = {
-                    id: jogador.id,
-                    nick: jogador.nick,
-                    steamId: jogador.steamId,
-                    senha: jogador.senha,
-                    classes: jogador.classes,
-                    avatar: jogador.avatar,
-                    acesso: jogador.acesso,
-                    elegivel: jogador.elegivel,
-                    time: timePadrao,
-                    posts: jogador.posts,
-                    atividades: jogador.atividades
-                }
+            for (const i in time.jogadores) {
+                if (Object.prototype.hasOwnProperty.call(time.jogadores, i)) {
+                    const jogador =  await usuarioRepository.findOneOrFail(time.jogadores[i].steamId, {
+                        relations: ['time']
+                    })
 
-                try {
-                    const newJogador = usuarioRepository.create(dataJogador);
+                    const dataJogador: Usuario = {
+                        id: jogador.id,
+                        nick: jogador.nick,
+                        steamId: jogador.steamId,
+                        senha: jogador.senha,
+                        classes: jogador.classes,
+                        avatar: jogador.avatar,
+                        acesso: jogador.acesso,
+                        elegivel: jogador.elegivel,
+                        time: timePadrao,
+                        posts: jogador.posts,
+                        atividades: jogador.atividades
+                    }
 
-                    await usuarioRepository.save(newJogador);
-                } catch {
-                    return res.status(400).send("Ocorreu um erro ao realizar a exclusão!");
+                    try {
+                        const newJogador = usuarioRepository.create(dataJogador);
+
+                        await usuarioRepository.save(newJogador);
+                    } catch {
+                        return res.status(400).send("Ocorreu um erro ao realizar a exclusão!");
+                    }
                 }
             }
-        }
 
-        try {
             await timeRepository.remove(time);
 
             return res.status(200).json(TimeView.render(time));

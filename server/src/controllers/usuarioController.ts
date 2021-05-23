@@ -184,59 +184,59 @@ export default {
         const usuarioRepository = getRepository(Usuario);
         const classeRepository = getRepository(Classe);
 
-        const usuario = await usuarioRepository.findOneOrFail( id, {
-            where: { id: Not(1) },
-            relations: ['time', 'classes', 'posts']
-        });
+        try {
+            const usuario = await usuarioRepository.findOneOrFail( id, {
+                where: { id: Not(1) },
+                relations: ['time', 'classes', 'posts']
+            });
 
-        const classesAtualizadas: Array<Classe> = [];
+            const classesAtualizadas: Array<Classe> = [];
 
-        if(classes) {
-            for (const i in classes) {
-                if (Object.prototype.hasOwnProperty.call(classes, i)) {    
-                    classesAtualizadas.push( await classeRepository.findOneOrFail(Number(classes[i])))
+            if(classes) {
+                for (const i in classes) {
+                    if (Object.prototype.hasOwnProperty.call(classes, i)) {    
+                        classesAtualizadas.push( await classeRepository.findOneOrFail(Number(classes[i])))
+                    }
                 }
             }
-        }
 
-        let newAvatar = usuario.avatar;
-        const requestImages = req.files as Express.Multer.File[];
-        if(avatar == ''){
-            newAvatar = '';
-        }
-        if(requestImages.length !== 0){
-            newAvatar = requestImages[0].filename;
-        }
+            let newAvatar = usuario.avatar;
+            const requestImages = req.files as Express.Multer.File[];
+            if(avatar == ''){
+                newAvatar = '';
+            }
+            if(requestImages.length !== 0){
+                newAvatar = requestImages[0].filename;
+            }
 
-        const data = {
-            id: Number(id),
-            nick: nick || usuario.nick,
-            steamId,
-            senha: usuario.senha,
-            acesso: acesso || usuario.acesso,
-            avatar: newAvatar,
-            classes: classesAtualizadas.length == 0 ? usuario.classes : classesAtualizadas,
-            elegivel: elegivel == '' ? usuario.elegivel : elegivel,
-            time: usuario.time
-        }
+            const data = {
+                id: Number(id),
+                nick: nick || usuario.nick,
+                steamId,
+                senha: usuario.senha,
+                acesso: acesso || usuario.acesso,
+                avatar: newAvatar,
+                classes: classesAtualizadas.length == 0 ? usuario.classes : classesAtualizadas,
+                elegivel: elegivel == '' ? usuario.elegivel : elegivel,
+                time: usuario.time
+            }
 
-        const schema = yup.object().shape({
-            id: yup.number().required(),
-            nick: yup.string().required(),
-            steamId: yup.string(),
-            senha: yup.string().required(),
-            classes: yup.array(),
-            avatar: yup.string(),
-            acesso: yup.number(),
-            elegivel: yup.number(),
-            time: yup.object().required(),
-        });
+            const schema = yup.object().shape({
+                id: yup.number().required(),
+                nick: yup.string().required(),
+                steamId: yup.string(),
+                senha: yup.string().required(),
+                classes: yup.array(),
+                avatar: yup.string(),
+                acesso: yup.number(),
+                elegivel: yup.number(),
+                time: yup.object().required(),
+            });
 
-        await schema.validate(data, {
-            abortEarly: true,
-        });
+            await schema.validate(data, {
+                abortEarly: true,
+            });
 
-        try {
             const newUsuario = usuarioRepository.create(data);
 
             await usuarioRepository.save(newUsuario);
@@ -362,76 +362,75 @@ export default {
         const usuarioRepository = getRepository(Usuario);
         const timeRepository = getRepository(Time);
 
-        const usuario = await usuarioRepository.findOneOrFail(id, {
-            where: { id: Not(1)},
-            relations: ['time', 'classes', 'posts', 'atividades' ]
-        });
-
-        const timePadrao = await timeRepository.findOneOrFail(1);
-
-        const dataAtividade = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
-
-        const novaAtividade: User_atividade = {
-            usuario,
-            tipo: 3,
-            data: dataAtividade
-        }
-        const { nick, steamId, senha, classes, avatar, acesso, elegivel, posts, atividades } = usuario;
-
-        let dataUsuario: Usuario;
-
-        if(steamId == null){
-            dataUsuario = {
-                id: Number(id),
-                nick,
-                senha,
-                classes,
-                avatar,
-                acesso,
-                time: timePadrao,
-                elegivel,
-                posts,
-                atividades: atividades.concat([novaAtividade])
-            }
-        } else {
-            dataUsuario = {
-                id: Number(id),
-                nick,
-                steamId,
-                senha,
-                classes,
-                avatar,
-                acesso,
-                time: timePadrao,
-                elegivel,
-                posts,
-                atividades: atividades.concat([novaAtividade])
-            }
-        }
-
-        const schema = yup.object().shape({
-            id: yup.number().required(),
-            nick: yup.string().required(),
-            steamId: yup.string(),
-            senha: yup.string().required(),
-            classes: yup.array(),
-            avatar: yup.string(),
-            acesso: yup.number(),
-            elegivel: yup.number(),
-            time: yup.object().required(),
-            posts: yup.array(),
-            atividades: yup.array()
-        });
-
-        await schema.validate(dataUsuario, {
-            abortEarly: true,
-        });
-
-        const newUsuario = usuarioRepository.create(dataUsuario);
-
         try {
+            const usuario = await usuarioRepository.findOneOrFail(id, {
+                where: { id: Not(1)},
+                relations: ['time', 'classes', 'posts', 'atividades' ]
+            });
+
+            const timePadrao = await timeRepository.findOneOrFail(1);
+
+            const dataAtividade = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
+
+            const novaAtividade: User_atividade = {
+                usuario,
+                tipo: 3,
+                data: dataAtividade
+            }
+            const { nick, steamId, senha, classes, avatar, acesso, elegivel, posts, atividades } = usuario;
+
+            let dataUsuario: Usuario;
+
+            if(steamId == null){
+                dataUsuario = {
+                    id: Number(id),
+                    nick,
+                    senha,
+                    classes,
+                    avatar,
+                    acesso,
+                    time: timePadrao,
+                    elegivel,
+                    posts,
+                    atividades: atividades.concat([novaAtividade])
+                }
+            } else {
+                dataUsuario = {
+                    id: Number(id),
+                    nick,
+                    steamId,
+                    senha,
+                    classes,
+                    avatar,
+                    acesso,
+                    time: timePadrao,
+                    elegivel,
+                    posts,
+                    atividades: atividades.concat([novaAtividade])
+                }
+            }
+
+            const schema = yup.object().shape({
+                id: yup.number().required(),
+                nick: yup.string().required(),
+                steamId: yup.string(),
+                senha: yup.string().required(),
+                classes: yup.array(),
+                avatar: yup.string(),
+                acesso: yup.number(),
+                elegivel: yup.number(),
+                time: yup.object().required(),
+                posts: yup.array(),
+                atividades: yup.array()
+            });
+
+            await schema.validate(dataUsuario, {
+                abortEarly: true,
+            });
+
+            const newUsuario = usuarioRepository.create(dataUsuario);
             await usuarioRepository.save(newUsuario);
-    
+        
             return res.status(200).send(`O jogador ${nick} foi removido do time!`);
         } catch {
             return res.status(400).send("Não foi possível remover o jogador!");
