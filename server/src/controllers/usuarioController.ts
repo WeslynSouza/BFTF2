@@ -390,6 +390,11 @@ export default {
                 relations: ['time', 'classes', 'posts', 'atividades' ]
             });
 
+            const antigoTime = await timeRepository.findOneOrFail(usuario.time.id, {
+                where: { id: Not(1) },
+                relations: ['lider', 'viceLider', 'divisao', 'jogadores']
+            })
+
             const timePadrao = await timeRepository.findOneOrFail(1);
 
             const dataAtividade = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
@@ -451,6 +456,35 @@ export default {
             });
 
             const newUsuario = usuarioRepository.create(dataUsuario);
+
+            if(antigoTime.jogadores.length == 1){
+                
+                await usuarioRepository.save(newUsuario);
+
+                await timeRepository.remove(antigoTime);
+            }else if(usuario.id == antigoTime.lider.id && antigoTime.viceLider != undefined){
+
+                const liderIndice = antigoTime.jogadores.findIndex(jogadores => jogadores.id == antigoTime.lider.id);
+                antigoTime.jogadores.splice(liderIndice, 1);
+                const viceLiderIndice = antigoTime.jogadores.findIndex(jogadores => jogadores.id == antigoTime.viceLider?.id);
+                antigoTime.jogadores.splice(viceLiderIndice, 1);
+                
+                const dataTime: Time = {
+                    id: antigoTime.id,
+                    nome: antigoTime.nome,
+                    logo: antigoTime.logo,
+                    lider: antigoTime.viceLider,
+                    viceLider: antigoTime.jogadores.length == 2 ? antigoTime.viceLider : antigoTime.jogadores[0],
+                    divisao: antigoTime.divisao,
+                    ativo: antigoTime.ativo,
+                    jogadores: antigoTime.jogadores
+                };
+
+                const newTime = timeRepository.create(dataTime);
+                await timeRepository.save(newTime);
+
+                await usuarioRepository.save(newUsuario);
+            }
             await usuarioRepository.save(newUsuario);
         
             return res.status(200).send(`O jogador ${nick} foi removido do time!`);

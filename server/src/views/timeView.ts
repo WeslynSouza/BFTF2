@@ -20,9 +20,9 @@ export default {
         }
 
         const viceLider = {
-            id: time.viceLider.id,
-            nick: time.viceLider.nick,
-            avatar: time.viceLider.avatar !== '' ? `${url}${time.viceLider.avatar}` : ''
+            id: time.viceLider?.id || '',
+            nick: time.viceLider?.nick || '',
+            avatar: time.viceLider?.avatar !== undefined ? `${url}${time.viceLider?.avatar}` : ''
         }
 
         const jogadores = time.jogadores.map(jogador => {
@@ -34,17 +34,25 @@ export default {
             return jogadorObjeto;
         });
 
+        
+        console.log(jogadores);
+
         const liderIndice = jogadores.findIndex(jogadores => jogadores.id == lider.id);
         jogadores.splice(liderIndice, 1);
+
+        if(lider.id != viceLider.id){
+            const viceLiderIndice = jogadores.findIndex(jogadores => jogadores.id == viceLider.id);
+            jogadores.splice(viceLiderIndice, 1);
+        }
 
         return {
             id: time.id,
             nome: time.nome,
             lider: lider,
-            viceLider: viceLider,
+            viceLider: time.viceLider != undefined ? viceLider : "",
             divisao,
             logo: time.logo !== '' ? `${url}${time.logo}`: '',
-            jogadores: [ lider, viceLider ].concat(jogadores),
+            jogadores: lider.id != viceLider.id ? [ lider, viceLider ].concat(jogadores) : [ lider ].concat(jogadores),
             ativo: time.ativo
         }
     },
