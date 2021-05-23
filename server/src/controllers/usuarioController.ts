@@ -283,8 +283,30 @@ export default {
             
             const time = await timeRepository.findOneOrFail(idTime, {
                 where: { id: Not(1) },
-                relations: ['lider', 'usuarioes', 'divisao']
+                relations: ['lider', 'divisao', 'jogadores']
             });
+
+            if(time.jogadores.length == 1){
+                try {
+                    const dataTime: Time = {
+                        id: time.id,
+                        nome: time.nome,
+                        logo: time.logo,
+                        lider: time.lider,
+                        viceLider: usuario,
+                        jogadores: time.jogadores,
+                        divisao: time.divisao,
+                        ativo: time.ativo,
+                    }
+    
+                    const newTime = timeRepository.create(dataTime);
+    
+                    await timeRepository.save(newTime);
+                } catch {
+                    return res.status(400).send("Deu erro aqui!")
+                }
+
+            }
 
             const dataAtividade = new Date().toJSON().slice(0, 10).replace(/-/g, '/');
 

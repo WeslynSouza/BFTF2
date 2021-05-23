@@ -16,7 +16,7 @@ export default {
         try {
             const times = await timeRepository.find({
                 where: { id: Not(1) },
-                relations: ['lider', 'divisao', 'jogadores']
+                relations: ['lider', 'viceLider', 'divisao', 'jogadores']
             });
     
             return res.status(200).json(TimeView.renderMany(times));
@@ -36,7 +36,7 @@ export default {
         try {
             const time = await timeRepository.findOneOrFail( id , {
                 where: { id: Not(1) },
-                relations: ['lider', 'divisao', 'jogadores']
+                relations: ['lider', 'viceLider', 'divisao', 'jogadores']
             });
     
             return res.status(200).json(TimeView.render(time));
@@ -55,7 +55,7 @@ export default {
 
         const time = await timeRepository.find({
             where: { id: Not(1), nome: Like(`${nome}%`) },
-            relations: ['lider', 'divisao', 'jogadores']
+            relations: ['lider', 'viceLider', 'divisao', 'jogadores']
         });
 
         return res.status(200).json(TimeView.renderMany(time));

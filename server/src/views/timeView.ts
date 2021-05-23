@@ -19,6 +19,12 @@ export default {
             avatar: time.lider.avatar !== '' ? `${url}${time.lider.avatar}` : ''
         }
 
+        const viceLider = {
+            id: time.viceLider.id,
+            nick: time.viceLider.nick,
+            avatar: time.viceLider.avatar !== '' ? `${url}${time.viceLider.avatar}` : ''
+        }
+
         const jogadores = time.jogadores.map(jogador => {
             const jogadorObjeto = {
                 id: jogador.id,
@@ -35,9 +41,10 @@ export default {
             id: time.id,
             nome: time.nome,
             lider: lider,
+            viceLider: viceLider,
             divisao,
             logo: time.logo !== '' ? `${url}${time.logo}`: '',
-            jogadores: [ lider ].concat(jogadores),
+            jogadores: [ lider, viceLider ].concat(jogadores),
             ativo: time.ativo
         }
     },

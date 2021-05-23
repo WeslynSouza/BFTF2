@@ -15,11 +15,17 @@ export default class Time {
     @JoinColumn()
     lider!: Usuario;
 
+    @OneToOne(() => Usuario, {
+        cascade: ['update']
+    })
+    @JoinColumn()
+    viceLider?: Usuario;
+
     @Column()
     nome!: string;
 
     @Column()
-    logo!: string;
+    logo?: string;
 
     @Column()
     ativo!: boolean;
@@ -31,8 +37,8 @@ export default class Time {
     jogadores!: Usuario[];
 
     @OneToMany(() => Partida, partida => partida.time1)
-    partidas1!: Partida[];
+    partidas1?: Partida[];
 
     @OneToMany(() => Partida, partida => partida.time2)
-    partidas2!: Partida[];
+    partidas2?: Partida[];
 }
