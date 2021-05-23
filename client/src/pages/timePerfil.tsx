@@ -48,12 +48,16 @@ export default function TimePerfil() {
     }, [params.id, isReloaded]);
 
     function handleRemovePlayer(idJogador: number){
-        api.put(`/time/remove-player/${params.id}/${idJogador}`).then(() => {
+        api.put(`/usuario-deixarTim/${params.id}/${idJogador}`).then(() => {
             alert("O jogador foi excluído com sucesso!");
 
             handleClose();
 
             setIsReloaded(true);
+        }).catch(err => {
+            alert(err.response.data);
+
+            handleClose();
         })
     }
 

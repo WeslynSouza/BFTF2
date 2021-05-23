@@ -33,8 +33,8 @@ export default function Jogadores() {
         });
     }, [pesquisa]);
 
-    async function handleAddingPlayer(idJogador: number) {
-        await api.put(`/time/${params.timeId}/${idJogador}`).then(() => {
+    async function handleAddingPlayer(id: number) {
+        await api.put(`/usuario/${id}/${params.timeId}`).then(() => {
             alert('Jogador adicionado com sucesso!');
 
             history.goBack();
