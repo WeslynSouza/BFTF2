@@ -38,7 +38,7 @@ export default class Usuario {
     @OneToMany(() => Post, post => post.autor, {
         cascade: ['update', 'remove']
     })
-    posts?: Post[];
+    posts!: Post[];
 
     @OneToMany(() => User_atividade, atividade => atividade.usuario, {
         cascade: ['insert' ,'update', 'remove']

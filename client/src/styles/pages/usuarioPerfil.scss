@@ -1,0 +1,255 @@
+
+@import '../../styles/utils';
+
+.usuario-container {
+    @include displayFlex(space-between, flex-start);
+    width: 100%;
+    margin-top: 4rem;
+
+    .usuario-info {
+        @include displayFlex(center, center);
+        flex-direction: column;
+
+        width: 23%;
+        min-height: 32rem;
+        background-color: var(--color-background-secundary);
+
+        border-radius: .5rem;
+        padding: 0 2rem;
+
+        @include sombra();
+
+        img {
+            width: 17rem;
+            height: 17rem;
+
+            border-radius: 20px;
+            border-radius: 99990px;
+
+            margin-bottom: 3.5rem;
+        }
+
+        .usuario-sem-imagem { 
+            @include displayFlex(center, center);
+            width: 17rem;
+            height: 17rem;
+            background: var(--color-background-input);
+
+            border: 2px solid var(--color-blue-third);
+            border-radius: 20px;
+            border-radius: 99990px;
+
+            margin-bottom: 3.5rem;
+        }
+
+        h2 {
+            @include texto(3rem, var(--color-font-primary));
+            text-align: center;
+            font-weight: 500;
+        }
+    }
+
+    .usuario-conteudo {
+        @include displayFlex(flex-start, flex-start);
+        flex-direction: column;
+        position: relative;
+
+        width: 73%;
+        min-height: 50rem;
+        background-color: var(--color-background-secundary);
+        
+        padding: 2.5rem;
+        border-radius: .5rem;
+
+        @include sombra();
+
+        .alterar-infos {
+            @include displayFlex(space-between, center);
+            position: absolute;
+            top: 3rem;
+            right: 3rem;
+            background-color: var(--color-background-secundary);
+
+            font-size: 1.6rem;
+            color: var(--color-font-primary);
+
+            padding: 1rem 1rem;
+            border: 1px solid var(--color-font-primary);
+            border-radius: .5rem;
+
+            transition: .2s;
+
+            div {
+                margin-right: 1rem;
+            }
+
+            &:hover {
+                background: var(--color-background-input);
+            }
+        }
+
+        .usuario-conteudo-grupo {
+            @include displayFlex(space-between, flex-start);
+            flex-direction: column;
+            width: 100%;
+
+            margin-top: 2rem;
+        }
+
+        .usuario-conteudo-titulo {
+            @include texto(2.6rem, var(--color-blue-secundary));
+            font-weight: 500;
+
+            margin-bottom: 2rem;
+        }
+
+        %usuario-conteudo-container {
+            @include displayFlex(flex-start, flex-start);
+            width: 100%;
+            background-color: var(--color-background-input);
+            
+            border-radius: .5rem;
+
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+
+            @include sombra();
+        }
+
+        .usuario-time {
+            @extend %usuario-conteudo-container;
+            position: relative;
+
+            .imageless { 
+                @extend %imageless;
+    
+                width: 13rem;
+                height: 13rem;
+            }
+
+            h3 {
+                @include texto(1.8rem, var(--color-font-primary));
+                font-weight: 400;
+            }
+
+            img {
+                width: 15rem;
+                height: 15rem;
+
+                border: 1px solid var(--color-blue-third);
+            }
+
+            .usuario-time-info {
+                @include displayFlex(space-between, flex-start);
+                flex-direction: column;
+
+                margin-left: 1rem;
+
+                h1 {
+                    @include texto(3rem, var(--color-blue-fourth));
+                    margin: 1rem 0;
+                }
+
+                h2 {
+                    @include texto(2.5rem, var(--color-font-primary));
+                    font-weight: 400;
+                }
+            }
+
+            .deixar-time {
+                @include displayFlex(center, center);
+                position: absolute;
+                background-color: var(--color-background-input);
+
+                font-size: 1.7rem;
+                font-weight: 500;
+                color: var(--color-red-primary);
+
+                top: 1.5rem;
+                right: 1.5rem;
+
+                border: 1px solid var(--color-red-primary);
+                border-radius: .5rem;
+                padding: .5rem 1rem;
+
+                transition: .3s;
+
+                div {
+                    margin-right: .5rem;
+                }
+
+                &:hover {
+                    background-color: var(--color-background-secundary);
+                    border: 1px solid var(--color-red-secundary);
+                    color: var(--color-red-secundary);
+                }
+            }
+
+            .link-pagina-time {
+                @include displayFlex(center, center);
+                position: absolute;
+                background-color: var(--color-background-input);
+
+                font-size: 1.6rem;
+                color: var(--color-blue-secundary);
+
+                bottom: 1.5rem;
+                right: 1.5rem;
+
+                border: 0;
+
+                transition: .3s;
+
+                div {
+                    margin-right: 1rem;
+                }
+
+                &:hover {
+                    color: var(--color-blue-fourth);
+                }
+            }
+        }
+
+        .usuario-steam {
+            @extend %usuario-conteudo-container;
+            flex-direction: column;
+
+            h3 {
+                @include displayFlex(center, center);
+                @include texto(1.8rem, var(--color-font-primary));
+
+                .steam-icon {
+                    color: var(--color-blue-third);
+                }
+
+                a {
+                    color: var(--color-blue-third);
+                    margin: 0 .5rem;
+                    transition: .2s;
+
+                    &:hover {
+                        color: var(--color-blue-fourth);
+                        text-decoration: none;
+                    }
+                }
+
+                &:first-child {
+                    color: var(--color-blue-third);
+                    margin-bottom: 1rem;
+                }
+            }
+        }
+
+        .usuario-atividades {
+            @extend %usuario-conteudo-container;
+            max-height: 20rem;
+            overflow-y: scroll;
+            flex-direction: column;
+            margin-bottom: 1.5rem;
+
+            h3{
+                @include texto(1.8rem, var(--color-font-primary));
+            }
+        }
+    }
+}

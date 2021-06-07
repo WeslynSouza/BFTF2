@@ -18,7 +18,7 @@ export default {
         try {
             const usuarios = await usuarioRepository.find({
                 where: { id: Not(1) },
-                relations: ['time', 'classes', 'posts']
+                relations: ['time', 'classes', 'posts', 'atividades']
             });
     
             return res.status(200).json(UsuarioView.renderMany(usuarios));
@@ -36,7 +36,7 @@ export default {
         try {
             const usuario = await usuarioRepository.findOneOrFail( id, {
                 where: { id: Not(1) },
-                relations: ['time', 'classes', 'posts']
+                relations: ['time', 'classes', 'posts', 'atividades']
             });
     
             return res.status(200).json(UsuarioView.render(usuario));
@@ -53,7 +53,7 @@ export default {
 
         const usuario = await usuarioRepository.find({
            where:{ id: Not(1), nick: Like(`${nick}%`) },
-            relations: ['time', 'classes', 'posts']
+            relations: ['time', 'classes', 'posts', 'atividades']
         });
 
         return res.status(200).json(UsuarioView.renderMany(usuario));
@@ -402,7 +402,8 @@ export default {
             const novaAtividade: User_atividade = {
                 usuario,
                 tipo: 3,
-                data: dataAtividade
+                data: dataAtividade,
+                nomeTime: antigoTime.nome
             }
             const { nick, steamId, senha, classes, avatar, acesso, elegivel, posts, atividades } = usuario;
 

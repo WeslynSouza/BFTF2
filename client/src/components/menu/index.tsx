@@ -50,7 +50,7 @@ export default function Menu() {
 
                 <ul className="menu-icon">
                     <li className="menu-item">
-                        <Link to='/Login'>
+                        <Link to={usuarioLogado.id == 1 ? '/Login' : '/UsuarioPerfil'}>
                             <FaUserCircle/>
                         </Link>
                     </li>

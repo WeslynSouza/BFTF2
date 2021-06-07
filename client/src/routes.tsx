@@ -9,6 +9,7 @@ import TimePerfil from './pages/timePerfil';
 import Jogadores from './pages/jogadores';
 import PageDivisao from './pages/divisao';
 import Administracao from './pages/adiministracao';
+import UsuarioPerfil from './pages/usuarioPerfil';
 
 function Routes() {
     return (
@@ -16,6 +17,7 @@ function Routes() {
             <Switch>
                 <Route path='/' exact component={Home}/>
                 <Route path='/Login' component={LoginCadastro}/>
+                <Route path='/UsuarioPerfil' component={UsuarioPerfil}/>
                 <Route path='/Noticias' component={Noticias}/>
                 <Route path='/NoticiaPost/:id' component={NoticiaPost}/>
                 <Route path='/Times' component={Times}/>
