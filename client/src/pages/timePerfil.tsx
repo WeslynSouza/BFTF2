@@ -162,7 +162,7 @@ export default function TimePerfil() {
         <div>
             <Menu/>
             <div className="container">
-                <Cabecalho titulo="Time perfil" links={[{titulo: 'Home', url:'/'}, {titulo: 'Times', url: '/Times'}, {titulo: 'Perfil', url: '/TimePerfil'}]} />
+                <Cabecalho titulo="Time perfil" links={[{titulo: 'Home', url:'/'}, {titulo: 'Times', url: '/Times'}, {titulo: 'Perfil', url: `/TimePerfil/${params.id}`}]} />
 
                 <div className="time-container">
                     <div className="time-infos">

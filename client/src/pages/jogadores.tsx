@@ -86,7 +86,7 @@ export default function Jogadores() {
                 <Cabecalho titulo="Jogadores" links={[
                     {url: '/', titulo: 'Home'}, 
                     {url: '/Times', titulo: 'Times'}, 
-                    {url: '/TimePerfil', titulo: 'Perfil'}, 
+                    {url: `/TimePerfil/${params.timeId}`, titulo: 'Perfil'}, 
                     {url: '/Jogadores', titulo: 'Jogadores'}]} />
 
 
