@@ -34,9 +34,6 @@ export default {
             return jogadorObjeto;
         });
 
-        
-        console.log(jogadores);
-
         const liderIndice = jogadores.findIndex(jogadores => jogadores.id == lider.id);
         jogadores.splice(liderIndice, 1);
 
