@@ -112,7 +112,7 @@ export default function Noticias() {
         setImages(imagesFileArray);
     }
 
-    const handleClose = () => setShow(false);
+    const handleClose = () => [setShow(false), setPreviewImages([]), setImages([])];
     const handleShow = () => setShow(true);
 
     function renderPosts() {
