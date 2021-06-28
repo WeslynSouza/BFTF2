@@ -2,7 +2,7 @@ import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from 't
 import Post from './post';
 
 @Entity()
-export default class Imagens {
+export default class Imagem {
 
     @PrimaryGeneratedColumn('increment')
     id!: number;
