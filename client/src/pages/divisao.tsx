@@ -6,6 +6,8 @@ import Rodape from '../components/rodape';
 
 import chevronDown from '../assets/chevronDown.svg';
 
+import barreira from '../assets/barreira.svg';
+
 type Divisao = {
     nome: string, 
     times: Array<{
@@ -34,6 +36,23 @@ export default function PageDivisao() {
             })
         )
     }
+
+    return (
+        <div >
+            <Menu/>
+            <div className="container">
+                <Cabecalho titulo='Divisões' links={[{url: '/', titulo: 'Home'},{url: '/Divisoes', titulo: 'Divisões'}]} />
+
+                <div className='page-construcao'>
+                    <img src={barreira} alt="barreira" />
+
+                    <h1>Página em construção</h1>
+                </div>
+
+            </div>
+            <Rodape/>
+        </div>
+    )
 
     return (
         <div>
