@@ -115,7 +115,7 @@
                     }
 
                     .botao-passar-lideranca {
-                        @include button(var(--color-green-primary), 2.3rem, 4rem, 4rem, var(--color-red-secundary));
+                        @include button(var(--color-green-primary), 2.3rem, 4rem, 4rem, var(--color-green-secundary));
                     }
 
                     .botao-desabilitado {
