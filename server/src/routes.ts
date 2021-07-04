@@ -41,6 +41,7 @@ routes.post("/time", upload.array('logo'), TimeController.create);
 routes.get("/times", TimeController.index);
 routes.get("/time/:id", TimeController.show);
 routes.get("/times/:nome", TimeController.showMany);
+routes.put("/time/:id/:jogadorId", TimeController.passingLeadership);
 routes.put("/time/:id", upload.array('logo'), TimeController.update);
 routes.delete("/time/delete/:id", TimeController.delete);
 

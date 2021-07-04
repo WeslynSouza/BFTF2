@@ -164,13 +164,11 @@ export default {
                 relations: [ 'lider', 'divisao', 'jogadores']
             })
 
-            if(time.ativo){
+            let { lider, viceLider, divisao, jogadores, ativo } = time
+
+            if(ativo){
                 return res.status(400).send("O time já está participando ativamente de um campeonato, por isso não poder sofrer alterações!");
             }
-
-            let lider = time.lider;
-            let divisao = time.divisao;
-            let jogadores = time.jogadores;
 
             if(divisaoId && divisaoId !== time.divisao.id ) {
                 divisao = await divisaoRepository.findOneOrFail( divisaoId );
@@ -193,18 +191,20 @@ export default {
             }
             
             const data = {
-                    id: Number(id),
-                    lider,
-                    nome,
-                    divisao,
-                    logo,
-                    ativo: false,
-                    jogadores
-                }
+                id: Number(id),
+                lider,
+                viceLider,
+                nome,
+                divisao,
+                logo,
+                ativo: false,
+                jogadores
+            }
 
             const schema = yup.object().shape({
                 id: yup.number().required(),
                 lider: yup.object().required(),
+                viceLider: yup.object(),
                 nome: yup.string().required(),
                 divisao: yup.object().required(),
                 logo: yup.string(),
@@ -281,6 +281,86 @@ export default {
             return res.status(200).json(TimeView.render(time));
         } catch {
             return res.status(400).send("Não foi possível realizar a exclusão!");
+        }
+    },
+
+    async passingLeadership(req: Request, res: Response) {
+
+        const { id, jogadorId } = req.params;
+
+        const timeRepository = getRepository(Time);
+        const jogadorRepository = getRepository(Usuario);
+
+        try {
+            const time = await timeRepository.findOneOrFail( id, {
+                where: { id: Not(1) },
+                relations: ['lider', 'viceLider', 'divisao', 'jogadores']
+            });
+
+            const novoLider = await jogadorRepository.findOneOrFail( jogadorId, {
+                where: { id: Not(1) },
+                relations: ['time', 'classes', 'posts', 'atividades']
+            });
+
+            if(novoLider.time.id != time.id){
+                return res.status(400).send("O jogador não faz parte do time!");
+            }
+
+            const { lider, viceLider, nome, divisao, logo, ativo, jogadores } = time;
+
+            if(viceLider == undefined){
+                return res.status(400).send("Número insuficiente de jogadores no time!");
+            }
+
+            let data;
+
+            if(novoLider.id = viceLider.id) {
+                data = {
+                    id: Number(id),
+                    lider: novoLider,
+                    viceLider: lider,
+                    nome,
+                    divisao,
+                    logo,
+                    ativo,
+                    jogadores
+                }
+            } else {
+                data = {
+                    id: Number(id),
+                    lider: novoLider,
+                    viceLider,
+                    nome,
+                    divisao,
+                    logo,
+                    ativo,
+                    jogadores
+                }
+            }
+
+            const schema = yup.object().shape({
+                id: yup.number().required(),
+                lider: yup.object().required(),
+                viceLider: yup.object(),
+                nome: yup.string().required(),
+                divisao: yup.object().required(),
+                logo: yup.string(),
+                ativo: yup.boolean().required(),
+                jogadores: yup.array().required()
+            });
+
+            await schema.validate(data, {
+                abortEarly: true,
+            });
+
+            const newTime = timeRepository.create(data);
+
+            await timeRepository.save(newTime);
+
+            return res.status(200).json(TimeView.render(newTime))
+
+        } catch {
+            return res.status(400).send("Erro ao passar a liderança!");
         }
     }
 }
