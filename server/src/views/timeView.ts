@@ -22,7 +22,7 @@ export default {
         const viceLider = {
             id: time.viceLider?.id || '',
             nick: time.viceLider?.nick || '',
-            avatar: time.viceLider?.avatar !== undefined ? `${url}${time.viceLider?.avatar}` : ''
+            avatar: time.viceLider?.avatar !== '' ? `${url}${time.viceLider?.avatar}` : ''
         }
 
         const jogadores = time.jogadores.map(jogador => {
