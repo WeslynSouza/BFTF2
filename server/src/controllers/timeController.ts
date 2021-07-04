@@ -314,7 +314,7 @@ export default {
 
             let data;
 
-            if(novoLider.id = viceLider.id) {
+            if(novoLider.id == viceLider.id) {
                 data = {
                     id: Number(id),
                     lider: novoLider,
