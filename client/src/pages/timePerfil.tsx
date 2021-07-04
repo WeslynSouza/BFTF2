@@ -37,7 +37,8 @@ export default function TimePerfil() {
     const [ nickJogadorModal, setNickJogadorModal ] = useState('');
     const [ idJogadorModal, setIdJogadorModal ] = useState(0);
 
-    const [ show, setShow ] = useState(false);
+    const [ showModalLeadership, setShowModalLeadership ] = useState(false);
+    const [ showModalExclusion, setShowModalExclusion ] = useState(false);
 
     useEffect(() => {
         api.get(`/Time/${params.id}`).then(res => {
@@ -46,6 +47,20 @@ export default function TimePerfil() {
 
         setIsReloaded(false);
     }, [params.id, isReloaded]);
+
+    function handlePassLeadership(idJogador: number){
+        api.put(`/time/${params.id}/${idJogador}`).then(() => {
+            alert("A liderança foi passada com sucesso!");
+
+            handleClose();
+
+            setIsReloaded(true);
+        }).catch(err => {
+            alert(err.response.data);
+
+            handleClose();
+        })
+    }
 
     function handleRemovePlayer(idJogador: number){
         api.put(`/usuario-deixarTim/${params.id}/${idJogador}`).then(() => {
@@ -59,10 +74,11 @@ export default function TimePerfil() {
 
             handleClose();
         })
-    }
+    };
 
-    const handleClose = () => [setShow(false), setNickJogadorModal(''), setIdJogadorModal(0)];
-    const handleShow = () => setShow(true);
+    const handleClose = () => [setShowModalExclusion(false), setShowModalLeadership(false), setNickJogadorModal(''), setIdJogadorModal(0)];
+    const handleShowModalLeadership = () => setShowModalLeadership(true);
+    const handleShowModalExclusion = () => setShowModalExclusion(true);
 
     function renderTabela() {
         if(time.nome === undefined){
@@ -139,16 +155,24 @@ export default function TimePerfil() {
                             </div>
                         </td>
                         <td>
-                            <button disabled className='botao-passar-lideranca'>
+                            <button 
+                                className='botao-passar-lideranca'
+                                onClick={() => [
+                                    handleShowModalLeadership(), 
+                                    setNickJogadorModal(jogador.nick), 
+                                    setIdJogadorModal(jogador.id)
+                                ]}
+                            >
                                 <FaCrown/>
                             </button>
                             <button 
-                            className='botao-excluir' 
-                            onClick={() => [
-                                handleShow(), 
-                                setNickJogadorModal(jogador.nick), 
-                                setIdJogadorModal(jogador.id)
-                            ]}>
+                                className='botao-excluir' 
+                                onClick={() => [
+                                    handleShowModalExclusion(), 
+                                    setNickJogadorModal(jogador.nick), 
+                                    setIdJogadorModal(jogador.id)
+                                ]}
+                            >
                                 <FaTimes/>
                             </button>
                         </td>
@@ -205,7 +229,18 @@ export default function TimePerfil() {
             </div>
             <Rodape/>
 
-            <Modal show={show} onHide={handleClose} centered>
+            <Modal show={showModalLeadership} onHide={handleClose} centered>
+                <Modal.Header>
+                    <Modal.Title>Confirmar passagem <br/>de liderança</Modal.Title>
+                </Modal.Header>
+                <Modal.Body style={{textAlign: "center"}}>Deseja passar a liderança para <br/> o jogador: {nickJogadorModal}?</Modal.Body>
+                <Modal.Footer>
+                    <button className="botao-confirmar" onClick={() => handlePassLeadership(idJogadorModal)}>Confirmar</button>
+                    <button className="botao-voltar" onClick={handleClose}>Voltar</button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={showModalExclusion} onHide={handleClose} centered>
                 <Modal.Header>
                     <Modal.Title>Confirmar exclusão</Modal.Title>
                 </Modal.Header>
