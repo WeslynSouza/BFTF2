@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Modal } from 'react-bootstrap';
 import { FaPlus, FaTimes, FaQuestion, FaFlag, FaCrown } from 'react-icons/fa';
@@ -8,6 +8,7 @@ import Menu from '../components/menu';
 import Cabecalho from '../components/cabecalho';
 import Rodape from '../components/rodape';
 import * as Classes from '../assets/assets';
+import { UsuarioContext } from '../contexts/usuarioContext';
 
 import api from '../services/api';
 
@@ -32,6 +33,8 @@ interface Time {
 export default function TimePerfil() {
 
     const params = useParams<TimeParams>();
+    const { usuarioLogado } = useContext(UsuarioContext);
+
     const [ time, setTime ] = useState<Time>(Object);
     const [ isReloaded, setIsReloaded ] = useState(false);
     const [ nickJogadorModal, setNickJogadorModal ] = useState('');
@@ -156,7 +159,8 @@ export default function TimePerfil() {
                         </td>
                         <td>
                             <button 
-                                className='botao-passar-lideranca'
+                                className={`botao-passar-lideranca ${usuarioLogado.id == time.lider.id ? '' : 'botao-desabilitado' }`}
+                                disabled={usuarioLogado.id == time.lider.id ? false : true}
                                 onClick={() => [
                                     handleShowModalLeadership(), 
                                     setNickJogadorModal(jogador.nick), 
@@ -166,7 +170,8 @@ export default function TimePerfil() {
                                 <FaCrown/>
                             </button>
                             <button 
-                                className='botao-excluir' 
+                                className={`botao-passar-lideranca ${usuarioLogado.id == time.lider.id ? '' : 'botao-desabilitado' }`}
+                                disabled={usuarioLogado.id == time.lider.id ? false : true}
                                 onClick={() => [
                                     handleShowModalExclusion(), 
                                     setNickJogadorModal(jogador.nick), 
