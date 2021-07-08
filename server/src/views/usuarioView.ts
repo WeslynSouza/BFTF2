@@ -10,6 +10,7 @@ export default {
             time = '';
         } else {
             time = {
+                id: usuario.time.id,
                 nome: usuario.time.nome,
                 logo: usuario.time.logo !== '' ? `${url}${usuario.time.logo}` : '',
             }
