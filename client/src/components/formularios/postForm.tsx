@@ -31,10 +31,15 @@ export default function PostForm({ functionVoltar, postId }: postFormProps) {
             setTituloPost(titulo);
             setConteudoPost(conteudo);
 
+            const imageArray = imagesPost.splice(0, imagesPost.length);
+                
             await imagens.forEach(async (postImage: image) => {
-                const image = [await handleFilePromise(postImage.url)]
-                setImagesPost(imagesPost.concat(image));
+                imageArray.push(await handleFilePromise(postImage.url));
             });
+            
+            setImagesPost(imageArray);
+
+            console.log(imagesPost);
             
             const postImagesPreview = res.data.imagens.map((postImage: image) => new File([postImage.url.split('-', 2)[1]], postImage.url, {type: "image/png"}).name);
             setPreviewImages(postImagesPreview);
