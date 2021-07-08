@@ -102,9 +102,6 @@ export default function Times({ functionTimeId, functionAlterar }: timesTabela) 
                                             {time.divisao === '' ? 'Sem divisão' : time.divisao}
                                         </td>
                                         <td>
-                                            <button className='botao-alterar' onClick={() => [functionAlterar('timeForm'), functionTimeId(time.id)]}>
-                                                <FaPen/>
-                                            </button>
                                             <button className='botao-excluir' onClick={() => [handleShow(), setIdTimeModal(time.id), setNomeTimeModal(time.nome)]}>
                                                 <FaTrash/>
                                             </button>
