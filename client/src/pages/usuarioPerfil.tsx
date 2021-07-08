@@ -29,6 +29,8 @@ interface Usuario {
 export default function UsuarioPerfil() {
 
     const { usuarioLogado } = useContext(UsuarioContext);
+
+    const [ isReloaded, setIsReloaded ] = useState(false);
     const [usuario, setUsuario] = useState<Usuario>({
         id: 1,
         nick: '',
@@ -43,11 +45,24 @@ export default function UsuarioPerfil() {
     useEffect(() => {
         api.get(`usuario/${usuarioLogado.id}`).then(res => {
             setUsuario(res.data);
+        });
+
+        setIsReloaded(false);
+    }, [isReloaded])
+
+    function handleLeaveTeam(idJogador: number){
+        api.put(`/usuario-deixarTime/${idJogador}`).then(res => {
+            alert("O jogador deixou o time com sucesso!");
+
+            setIsReloaded(true);
+        }).catch( err => {
+            alert(err.response.data);
         })
-    }, [])
+    }
 
     function renderTime() {
         if(usuario.time){
+            console.log(usuario.time)
             return(
                 <div className="usuario-time">          
                     {usuario.time.logo == ''
@@ -63,7 +78,7 @@ export default function UsuarioPerfil() {
                         <h1>Nome: {usuario.time.nome}</h1>
                     </div>
 
-                    <button className="deixar-time">
+                    <button className="deixar-time" onClick={() => handleLeaveTeam(usuario.id)}>
                         <div>Deixar time</div> <FaTimes/>
                     </button>
 
