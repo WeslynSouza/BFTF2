@@ -38,8 +38,6 @@ export default function PostForm({ functionVoltar, postId }: postFormProps) {
             });
             
             setImagesPost(imageArray);
-
-            console.log(imagesPost);
             
             const postImagesPreview = res.data.imagens.map((postImage: image) => new File([postImage.url.split('-', 2)[1]], postImage.url, {type: "image/png"}).name);
             setPreviewImages(postImagesPreview);
